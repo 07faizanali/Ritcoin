@@ -1,0 +1,205 @@
+{% extends "zqapp/layouts/main.html" %}
+
+
+{% load static %}
+
+{% block 'headerContent' %} 
+      
+{% endblock  %}   
+      <!--Header Start -->
+    
+      <!--Header End-->
+{% block 'main'  %}
+      <!-- Content Section Start -->
+      <div class="midd-container">
+        <!-- Hero Section Start -->
+        <div
+          class="hero-main diamond-layout white-sec"
+          style="background: url({% static 'images/banner-4.jpg' %})"
+        >
+          <div class="container">
+            <div class="row align-items-center">
+              <div class="col-sm-12 col-md-6">
+                <div class="tab-section">
+                    <!-- Nav tabs -->
+                    <div class="hero-btns">
+                    <ul class="nav nav-tabs text-uppercase" role="tablist">
+                      
+
+
+                      <li class="nav-item">
+                        <span
+                          class="nav-link  text-white  {{logTab}}" id="mission-tab" data-toggle="tab" href="#mission" role="tab" aria-controls="mission" style="font-weight:800;font-size:16px;" aria-selected="{{aSelectedLog}}" >Login</span>
+                      </li>
+                     
+                      <li class="nav-item">
+                         <span class="nav-link text-white  {{regTab}}" id="guarantees-tab" data-toggle="tab" href="#guarantees" role="tab" aria-controls="guarantees" style="font-weight:800;font-size:16px;" aria-selected="{{aSelectedReg}}" >Registration</span>
+                      </li>
+
+
+
+                     
+
+
+                    </ul>
+                  </div>
+                    
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                      <div
+                       
+                        class="tab-pane {{logTab}}"
+                        id="mission"
+                        role="tabpanel"
+                        aria-labelledby="mission-tab"
+                      >
+                      <div class="loginBox">
+                      
+                        <h5>Log In Here</h5>
+                        <form method="POST" action="{% url "login" %}">
+
+                          {% csrf_token  %}
+                          <p>Email/Username</p>
+                          <input type="text" name="email_or_username" placeholder="enter email or username" required>
+                          <small class="form-text text-danger">{{ form.email.errors }}</small>
+                          <p>Password</p>
+                          <input type="password" name="password" placeholder="Enter Password"  required>
+                          <small class="form-text text-danger">{{ form.password.errors }}</small>
+                          <ul class='list-style-type:none; text-decoration:none '>
+                            {% for field, error in form.errors.items %}
+                                <li class='text-danger'>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                          <input type="hidden" name="next" value="{{ request.GET.next }}">
+                          <input type="submit" name="sign-in" value="Login">
+                          <a href="{% url 'passwordReset' %}">Forgot Password</a>
+                          
+                        </form>
+                      </div>
+                      </div>
+
+                      
+                   
+                      <div
+                      
+                        class="tab-pane {{regTab}} "
+
+                        id="guarantees"
+                        role="tabpanel"
+                        aria-labelledby="guarantees-tab"
+                      >
+                      <div class="loginBox">
+                      
+                     
+                        <form method="POST" action="{% url 'register' %}">
+                         {% csrf_token %} 
+                          
+                          <p>Username</p>
+                          <input type="name" name="username" placeholder="Enter username"   value="{{form.cleaned_data.username}}" required>
+                          {% comment %} <small class="form-text text-danger">{{ form.username.errors }}</small> {% endcomment %}
+                          <small class="form-text text-danger">{{ form.username.errors }}</small>
+                          
+                          
+                          {% comment %} {% endfor %} {% endcomment %}
+                          <p>Email</p>
+                          <input type="email" name="email" value="{{form.cleaned_data.email}}" placeholder="Enter Email" required>
+                          <small class="form-text text-danger">{{ form.email.errors }}</small>
+                          
+                        
+                          
+                          
+                          <p>Password</p>
+                          <input type="password" name="password1"  placeholder="Enter Password"  required>
+
+                          <small class="form-text text-danger">{{ form.password1.errors }}</small>
+                          <p> Confirm Password</p>
+                          <input type="password" name="password2" placeholder="Enter Confirm password"  required>
+                          <small class="form-text text-danger">{{ form.password2.errors }}</small>
+                          <p>Introducer id</p>
+                          {% if refferalid   %}
+                          <input  type="text" name="introducerid" placeholder="Enter Introducer id" id="user_id_input" style="color:green;"  value="{{refferalid}}" readonly >
+                          
+                          <div id="refMsg"></div>
+                          
+                          {% else  %}
+                          <input type="text" name="introducerid" value="{{form.cleaned_data.introducerid}}"  id="user_id_input"  placeholder="Enter Introducer id">
+                          {% comment %} <small class="form-text text-danger"></small> {% endcomment %}
+                          <div id="refMsg"></div>
+                          {% endif  %}
+                         
+                          <input type="submit" name="submit" value="Register"  >
+
+                        
+
+                         
+                        </form>
+                      </div>
+                      </div>
+                    </div>
+
+                  
+                    
+                  </div>
+              
+
+
+
+
+
+
+              </div>
+              <div class="col-sm-12 col-md-6" data-wow-delay="0.5s">
+                <div class="diamond-animation mobile-hidden">
+                  <div class="diamond-grid"></div>
+                  <div class="diamond-grid-2"></div>
+                  <div class="outer-Orbit">
+                    <div class="Orbit">
+                      <div class="rotate">
+                        <div class="OrbitSquare">
+                          <div class="inner">A</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="main">
+                    <div class="top-coin"><span></span></div>
+                    <div class="lines">
+                      <span class="l-1"></span>
+                      <span class="l-2"></span>
+                      <span class="l-3"></span>
+                      <span class="l-4"></span>
+                      <span class="l-5"></span>
+                      <span class="l-6"></span>
+                      <span class="l-7"></span>
+                      <span class="l-8"></span>
+                      <span class="l-9"></span>
+                      <span class="l-10"></span>
+                      <span class="l-11"></span>
+                      <span class="l-12"></span>
+                      <span class="l-13"></span>
+                      <span class="l-14"></span>
+                      <span class="l-15"></span>
+                    </div>
+                    <div class="inside-bitcoin"></div>
+                    <div class="gris2"></div>
+                    <div class="square-1"></div>
+                  </div>
+                  <div class="base"></div>
+                </div>
+                <div class="mobile-visible text-center">
+                  <img src="{% static 'images/diamond-animation-mobile.png' %}" alt="" />
+                </div>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+
+        </div>
+
+
+
+        
+    
+      <!-- Content Section End -->
+{% endblock 'main'  %}

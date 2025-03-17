@@ -1,0 +1,138 @@
+{% extends 'zqAdmin/admin/layout/main.html' %}
+{% load customFilters  %}
+{% block 'content' %}
+    <div class="app-main__outer">
+        <div class="app-main__inner"
+             style="background-color: rgba(255, 255, 255, 0.775)">
+            <div class="app-page-title">
+                <div class="page-title-wrapper">
+                    <div class="page-title-heading">
+                        <div class="page-title-icon">
+                            <i class="pe-7s-wallet icon-gradient bg-plum-plate"> </i>
+                        </div>
+                        <div>
+                           {{tableName}}
+                            <div class="page-title-subheading"></div>
+                        </div>
+                    </div>
+
+
+                
+                </div>
+            </div>
+            {% comment %} {% if allMems %} {% endcomment %}
+                <div class="row shadow"style="overflow-x:auto; height:auto;">
+                    <div class="col-lg-12">
+                        <div class="main-card mb-3 ">
+                            <div class="">
+                                <table id="myTable"  class="display"  >
+                                    <thead>
+                                        <tr class="text-center">
+
+
+                                            {% for tdb in tableHeadings %}
+                                                {{tdb}}
+                                            {% endfor %}
+                                            
+                                            {% comment %} <th>MemberId</th>
+                                            <th>Introducer</th>
+                                            <th>email</th>
+                                            <th>RegistrationDate</th>
+                                            <th>Password</th>
+                                            <th>ActivationDate</th>
+                                            <th>TotalDirectTeam</th>
+                                            <th>TotalLevelTeam</th> {% endcomment %}
+
+
+                                            {% comment %} <th>TotalDeposits</th>
+                                            <th>AdminDeposits</th>
+                                            <th>SelfDeposits</th>
+                                            <th>TotalPackages</th>
+                                            <th>SelfActivatedPackages</th>
+                                            <th>PackageActivationsByPeers</th>
+                                            <th>DirectIncome</th>
+                                            <th>LevelIncome</th>
+                                            <th>CommunityBonus</th>
+                                            <th>MagicBonus</th>
+                                            <th>SocialMediaBonus</th>
+                                            <th>ClubBonus</th>
+                                            <th>TotalAllBonus</th>
+                                            <th>SocialMediaWalletBalance</th>
+                                            <th>TotalActivationsForPeers</th>
+                                            <th>TotalWithdrawals</th>
+                                            <th>TotalAdminWithdrawals</th>
+                                            <th>TotalSelfWithdrawals</th>
+                                            <th>TotalWalletBalance</th>
+                                            <th>TotalWithdrawableFund</th> {% endcomment %}
+                            
+                                        </tr>
+                                    </thead>
+                   
+                                    
+                                    {% comment %} <tbody hx-post="{% url 'paginated_table_data_real' %}" hx-trigger="load" hx-target="#myTable tbody" class="text-center"  hx-params='{"data_type": "{{ data_type }}"}' >
+                                    </tbody> {% endcomment %}
+                                    
+                            </table>
+                        </div>
+                    </div>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock 'content' %}
+
+
+
+{% block 'footerScripts' %}
+
+
+
+
+<script>
+   
+
+    $(document).ready(function() {
+       
+        var table= $('#myTable').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: {
+                url: '{% url 'paginated_table_data_real' %}',
+                type: 'POST',
+               
+                dataSrc: function(json) {
+                 
+                    return json.data;
+                }
+
+            },
+           
+            columns: [
+               
+
+                {% for field in fields %}
+                { data: {{field}} },
+                {% endfor %}
+               
+            ]
+        });
+
+      
+
+});
+
+   
+</script>
+    {% comment %} </script> {% endcomment %}
+  {% comment %} <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.6.1-rc.0/web3.min.js"></script> {% endcomment %}
+  
+
+
+{% endblock %}
+
+
+

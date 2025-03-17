@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Email Template</title>
+  </head>
+  <body>
+
+    <div style="border: 5px solid blue;text-align:center" >
+        {% comment %} <h2> ZAAN QUERIL</h2> {% endcomment %}
+        <h2><p style="font-size:28px;font-weight:700;font-family:fangsong;color:#00ABF0;margin-top:18px;padding-left:17px;"><span style="font-size:28px;font-weight:900;font-family:fangsong;color:#d92550;">SH</span><span class="shifra">IFRA</span></p>
+
+        {% comment %} <h1>Welcome to ZAAN QUERIL</h1> {% endcomment %}
+
+        <p>Your OTP to witdraw from SHIFRA is: <b>{{OTP}}</b>. Please don't share with anyone.</p>
+        <br>
+        <h5>This OTP is valid for 10 minutes. <h4>
+
+        <span>Copyright © 2023 SHIFRA!. All right reserved.<span>
+    </div>
+    {% comment %} <p>
+      Your otp to verify email is: <b><small>{{OTP}}</small></b>
+    </p>
+    <h1>Hello, {{ recipient_name }}!</h1> {% endcomment %}
+    {% comment %}
+    <p>This is a test email.</p>
+    {% endcomment %}
+  </body>
+</html>

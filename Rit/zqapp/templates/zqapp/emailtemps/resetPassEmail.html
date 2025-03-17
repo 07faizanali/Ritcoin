@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ritcoin Registration</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<style>
+    #button {
+      background-color: #28a745;
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 10px 2px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+  </style>
+  </head>
+  <body>
+
+    <div style="border: 5px solid blue;text-align:center" >
+      <h2><span style="font-size:28px;font-weight:900;font-family:fangsong;color:#d92550;">R</span><span style="font-size:28px;font-weight:900;font-family:fangsong;color:blue;" class="shifra">ITCOIN</span>
+        </h2>
+        <h1>Welcome to Ritcoin</h1>
+        {% autoescape off %} 
+        Dear member you have requested to reset your password for Ritcoin.Please verify your email by clicking the link given below
+        <!-- Please click on the link below to reset your password: -->
+        <a  href="https://{{ domain }}{% url 'resetPassConf' uidb64=uid token=token %}"  >https://{{ domain }}{% url 'resetPassConf' uidb64=uid token=token %}</a>
+
+
+        If password reset action is not taken by you,please ignore this email.
+
+        Regards,
+        Ritcoin
+
+        <span>Copyright © 2023 Ritcoin!. All right reserved.<span>
+      {% endautoescape %} 
+    </div>
+
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>

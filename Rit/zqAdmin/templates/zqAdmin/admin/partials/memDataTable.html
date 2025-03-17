@@ -1,0 +1,68 @@
+<!-- templates/partials/table_data.html -->
+<table id="example" class="display">
+    <thead>
+        <tr>
+            {% if type == 'Investment' %}
+                <th>Name</th>
+                <th>Amount</th>
+                <th>Date</th>
+            {% elif type == 'Withdrawal' %}
+                <th>Name</th>
+                <th>Amount</th>
+                <th>Date</th>
+            {% elif type == 'Deposit' %}
+                <th>Name</th>
+                <th>Amount</th>
+                <th>Date</th>
+            {% endif %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in page_obj %}
+            <tr>
+                <td>{{ item.name }}</td>
+                <td>{{ item.amount }}</td>
+                <td>{{ item.date }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+    <tfoot>
+        <tr>
+            <td>Total</td>
+            <td id="total-amount"></td>
+            <td></td>
+        </tr>
+    </tfoot>
+</table>
+
+<div id="pagination-controls">
+    {% if page_obj.has_previous %}
+        <button hx-get="{% url 'paginated_table_data' type|lower %}?page={{ page_obj.previous_page_number }}" hx-target="#data-container" hx-swap="innerHTML">Previous</button>
+    {% endif %}
+    <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+    {% if page_obj.has_next %}
+        <button hx-get="{% url 'paginated_table_data' type|lower %}?page={{ page_obj.next_page_number }}" hx-target="#data-container" hx-swap="innerHTML">Next</button>
+    {% endif %}
+</div>
+
+<script>
+    $(document).ready(function() {
+        var table = $('#example').DataTable({
+            "paging": false,  // Disable DataTables built-in pagination
+            "footerCallback": function(row, data, start, end, display) {
+                var api = this.api();
+
+                // Calculate the total for the "Amount" column
+                var total = api
+                    .column(1)
+                    .data()
+                    .reduce(function(a, b) {
+                        return parseFloat(a) + parseFloat(b);
+                    }, 0);
+
+                // Update footer
+                $(api.column(1).footer()).html(total.toFixed(2));
+            }
+        });
+    });
+</script>

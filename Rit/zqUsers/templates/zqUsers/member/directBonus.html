@@ -1,0 +1,137 @@
+{% extends 'zqUsers/member/layout/main.html' %}
+
+{% load static %}
+{% load customFilters %}
+
+
+{% block 'addHeaderScripts' %}
+
+
+<link href="{% static 'surveyapp/vendor/bootstrap-datepicker-master/css/bootstrap-datepicker.min.css'  %}" rel="stylesheet">
+
+{% endblock  %}
+{% block 'content' %}
+
+
+{% comment %} <div class="content-body"> {% endcomment %}
+	<div class="container-fluid">
+	   
+		<!-- row -->
+
+		<div class="row">
+		
+			<div class="col-lg-12">
+				<div class="card">
+					<div class="card-header">
+						<h4 class="card-title">Direct Income Rewards</h4>
+					</div>
+					<div class="card-body">
+						<div class="table-responsive">
+							<table class="table table-responsive-md text-center">
+								<thead>
+									<tr>
+										
+										<th>#</th>
+										<th>Referal Requirement</th>
+										<th>Reward</th>
+										<th>Reward($)</th>
+
+										<th>Received By</th>
+										{% comment %} <th>Acheived Directs</th> {% endcomment %}
+										{% comment %} <th>member</th> {% endcomment %}
+										{% comment %} <th>Date</th> {% endcomment %}
+										<th>Status</th>
+										{% comment %} <th></th> {% endcomment %}
+									</tr>
+								</thead>
+								<tbody>
+
+									
+									{% for index,reward in  allRefRewards %}
+										
+									
+										
+									<tr>
+										
+										<td><strong>{{index|add:1}}</strong></td>
+										<td><strong>{{reward.ref_requirement}} Directs</strong></td>
+										<td>
+											{% comment %} <div class="d-flex align-items-center"> {% endcomment %}
+												
+												{% if reward.ref_image %}
+												<img src="/static/images/ritcoin/{{reward.ref_image}}" class="rounded me-2" style="width:80px; height:80px;" alt="">
+												<span class="w-space-no"></span>
+												{% else %}
+													&nbsp;
+												{% endif %}
+													
+											{% comment %} </div> {% endcomment %}
+										</td>
+										<td>
+											{% comment %} <div class="d-flex align-items-center"> {% endcomment %}
+											
+												${{reward.ref_reward}}
+											{% comment %} </div> {% endcomment %}
+										</td>
+										
+										<td>
+											{% comment %} <div class="d-flex align-items-center"> {% endcomment %}
+												{{request.user.username}}
+											{% comment %} </div> {% endcomment %}
+										</td>
+									
+										<td>
+											{% comment %} <div class="d-flex align-items-center"> {% endcomment %}
+												
+												{% if allDirectBonus >= reward.ref_reward %}
+													
+												{% comment %} <a href="#" class="btn btn-primary shadow btn-lg sharp me-1">Acheived</a> {% endcomment %}
+												<span class="badge badge-pill badge-success">Acheived</span>
+												{% else %}
+												<span class="badge badge-pill badge-danger">Yet to be Acheived</span>
+												{% comment %} <a href="#" class="btn btn-primary shadow btn-lg sharp me-1">Yet to be acheived</a> {% endcomment %}
+
+												{% endif %}
+													
+												{% comment %} <a href="#" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a> {% endcomment %}
+											{% comment %} </div> {% endcomment %}
+										</td>
+									</tr>
+
+									{% endfor %}
+									
+								</tbody>
+								
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		
+		
+			
+		</div>
+	</div>
+{% comment %} </div> {% endcomment %}
+
+{% endblock  %}
+
+{% block 'addFooterScripts' %}
+
+    <!-- Required vendors -->
+    {% comment %} <script src="{% static 'surveyapp/vendor/global/global.min.js'  %}"></script>
+	<script src="{% static 'surveyapp/vendor/bootstrap-select/dist/js/bootstrap-select.min.js'  %}"></script>
+	<script src="{% static 'surveyapp/vendor/bootstrap-datepicker-master/js/bootstrap-datepicker.min.js'  %}"></script>
+    <script src="{% static 'surveyapp/js/custom.min.js'  %}"></script>
+	<script src="{% static 'surveyapp/js/dlabnav-init.js'  %}"></script>
+	<script src="{% static 'surveyapp/js/demo.js'  %}"></script>
+    <script src="{% static 'surveyapp/js/styleSwitcher.js'  %}"></script> {% endcomment %}
+
+{% endblock  %}
+
+
+
+
+
+{% comment %} =========== {% endcomment %}
+

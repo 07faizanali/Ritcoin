@@ -1,0 +1,400 @@
+{% extends 'zqUsers/member/layout/main.html' %}
+{% load customFilters %}
+{% load static %}
+{% block 'addHeaderScripts' %}
+
+<style>
+	@media (max-width: 575.98px) { 
+    #cd{
+		height:15vh !important;
+	}
+  .cu {
+    font-size: 1em;
+  }
+
+  .cu span {
+    font-size: 1.2rem;
+  }
+  .card card-box{
+ height:45vh !important;
+  }
+  
+	}
+  .bt{
+    margin-left:40px !important;
+  }
+
+  @media only screen and (max-width: 35.9375rem) {
+    .card {
+        margin-bottom: 0.938rem;
+        height: 20vh;
+    }   
+  .cu {
+    font-size: 10px !important;
+    
+  }
+  .cu span {
+    font-size: 10px !important;
+    
+  }
+}
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+ body{
+ 
+ }
+
+
+  h1 {
+    font-weight: normal;
+    font-size: 5em;
+  }
+
+  .cu {
+    display: inline-block;
+    font-size: 1em;
+    list-style-type: none;
+    padding: 10px;
+    text-transform: uppercase;
+    color:black;
+  }
+
+  .cu span {
+    display: block;
+    font-size: 1.2rem;
+    color:black;
+  
+  }
+</style>
+
+
+{% endblock %}
+
+{% block 'content' %}
+	<!-- row -->
+		<div class="container-fluid" >
+		<!-- Row -->
+			<div class="row">
+
+				
+				{% comment %} {% if subscriptions %} {% endcomment %}
+						<div class=" position-relative overflow-hidden">
+              {% comment %} <form method="post" action="{% url 'socialmedia' %}"> {% endcomment %}
+              
+							<div class="row p-2">
+
+                {% for package in subscriptions %}
+								<div class="col-md-4 text-center">
+									<div class="card card-box  shadow p-4 " id="cardElement{{package.id}}" style="background-color:{% if package.package_id.amount == 550.0 %} #B1CAFF {% elif package.package_id.amount == 1100 %} #FFDE9D {% elif package.package_id.amount == 2750 %} #BFB1FF {% else %} lightpink {% endif %}  ;height:200px">
+										<div class="card-header border-0 pb-3">
+											<div  class="chart-num">
+                        <ul id='elemCountId{{package.id}}'>
+                          <li class="cu"><span id="days{{package.id}}">00</span>days</li>
+                          <li class="cu"> <span id="hours{{package.id}}">00</span>Hours</li>
+                          <li class="cu"><span id="minutes{{package.id}}">02</span>Minutes</li>
+                          <li class="cu"><span id="seconds{{package.id}}">60</span>Seconds</li>
+                        </ul>
+                         <div class="mt-3 text-center " id="btnplace{{package.social_job_id.id}}">
+                         
+                          <input type="hidden" name="socialJobId" value="{{package.social_job_id.id}}">
+                          <input type="hidden" name="packageId" value="{{package.package_id.id}}">
+                          <input type="hidden" name="assignedTaskId" value="{{package.id}}">
+                          {% comment %} <button type="submit" style="padding:0px;" class="btn btn-success btn-disabled" id="viewSocialJob{{ package.id }}" disabled>
+                            <ul style="">
+                            
+                              <li style="font-size:10px;" class="cu"><span style="font-size:10px;" id="minutes{{package.id}}">02</span>Minutes</li>
+                              <li style="font-size:10px;" class="cu"><span style="font-size:10px;" id="seconds{{package.id}}">60</span>Seconds</li>
+                            </ul>
+                          </button> {% endcomment %}
+                          <button type="submit" class="btn btn-success btn-disabled" class="bt" id="viewSocialJob{{ package.id }}" disabled>
+                            time left for your next social Job
+                         
+                          </button>
+                        </div>
+                        
+												
+											</div>
+										
+											
+										</div>
+										
+									</div>
+								</div>
+
+
+                {% endfor %}
+                
+							</div>
+            {% comment %} </form> {% endcomment %}
+   
+
+				
+				    </div>
+   
+			</div>
+			<div class="row">
+
+				
+        <div class="col-lg-12">
+          <div class="card transaction-table">
+            <div class="card-header border-0 flex-wrap pb-0">
+              <div class="mb-2">
+                <h3 class="card-title">Submitted/Pending Surveys</h3>
+              
+              </div>
+              
+            </div>
+            <div class="card-body p-0">
+              <div class="table-responsive">
+                <table class="table table-responsive-md">
+                  <thead>
+                    <tr>
+                      <th>
+                        Sr No
+                      </th>
+                      <th>Attempted By</th>
+                      <th>Job Starts</th>
+                      <th>Job Ends</th>
+                      <th>Bonus($)</th>
+                      {% comment %} <th>Registered Date</th> {% endcomment %}
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for index,d in allSubmittedSurveys %}
+                    <tr>
+                  
+                      <td>{{index|add:1 }}</td>
+                      <td>{{ d.userid.username }}</td>
+                      {% comment %} <td>{{ d.valid_from }}</td> {% endcomment %}
+                      <td>{{ d.assigned_job_id.valid_upto|add_days:2 }}</td>
+                      <td>{{ d.assigned_job_id.valid_upto }}</td>
+                      <td class="text-success">+5$</td>
+                      {% if d.job_status %}
+                      <td> <button class="btn btn-success">Completed</button></td>
+                      {% else %}
+                      <td> <button class="btn btn-warning" >In Process</button> </td>
+                      {% endif %}
+                      {% comment %} <td><div class="d-flex align-items-center"><img src="images/avatar/1.jpg" class=" me-2" width="24" alt=""> <span class="w-space-no">Dr. Jackson</span></div></td>
+                      <td><div class="d-flex align-items-center"><img src="images/svg/btc.svg" alt="" class="me-2 img-btc">Bitcoin</div></td>
+                      <td>+$5,553</td>
+                      <td  class="text-end"><div class="badge badge-sm badge-success">COMPLETED</div></td> {% endcomment %}
+                    </tr>
+                    {% endfor %}
+                    {% comment %} <tr>
+                      <td>
+                        <svg class="arrow style-1 svg-main-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                          <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <polygon points="0 0 24 0 24 24 0 24"/>
+                            <rect fill="#fff" opacity="0.3" transform="translate(11.646447, 12.853553) rotate(-315.000000) translate(-11.646447, -12.853553) " x="10.6464466" y="5.85355339" width="2" height="14" rx="1"/>
+                            <path d="M8.1109127,8.90380592 C7.55862795,8.90380592 7.1109127,8.45609067 7.1109127,7.90380592 C7.1109127,7.35152117 7.55862795,6.90380592 8.1109127,6.90380592 L16.5961941,6.90380592 C17.1315855,6.90380592 17.5719943,7.32548256 17.5952502,7.8603687 L17.9488036,15.9920967 C17.9727933,16.5438602 17.5449482,17.0106003 16.9931847,17.0345901 C16.4414212,17.0585798 15.974681,16.6307346 15.9506913,16.0789711 L15.6387276,8.90380592 L8.1109127,8.90380592 Z" fill="#fff" fill-rule="nonzero"/>
+                          </g>
+                        </svg>
+                      </td>
+                      <td>#12415346563475</td>
+                      <td>01 August 2020</td>
+                      <td>Thomas</td>
+                      <td><div class="d-flex align-items-center"><img src="images/avatar/2.jpg" class=" me-2" width="24" alt=""> <span class="w-space-no">Dr. Jackson</span></div></td>
+                      <td><div class="d-flex align-items-center"><img src="images/svg/btc.svg" alt="" class="me-2 img-btc">Bitcoin</div></td>
+                      <td>+$5,553</td>
+                      <td class="text-end"><div class="badge badge-sm badge-warning">PENDING</div></td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <svg class="arrow style-2 svg-main-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                          <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <polygon points="0 0 24 0 24 24 0 24"/>
+                            <rect fill="#fff" opacity="0.3" transform="translate(11.646447, 12.853553) rotate(-315.000000) translate(-11.646447, -12.853553) " x="10.6464466" y="5.85355339" width="2" height="14" rx="1"/>
+                            <path d="M8.1109127,8.90380592 C7.55862795,8.90380592 7.1109127,8.45609067 7.1109127,7.90380592 C7.1109127,7.35152117 7.55862795,6.90380592 8.1109127,6.90380592 L16.5961941,6.90380592 C17.1315855,6.90380592 17.5719943,7.32548256 17.5952502,7.8603687 L17.9488036,15.9920967 C17.9727933,16.5438602 17.5449482,17.0106003 16.9931847,17.0345901 C16.4414212,17.0585798 15.974681,16.6307346 15.9506913,16.0789711 L15.6387276,8.90380592 L8.1109127,8.90380592 Z" fill="#fff" fill-rule="nonzero"/>
+                          </g>
+                        </svg>
+                      </td>
+                      <td>#12415346563475</td>
+                      <td>01 August 2020</td>
+                      <td>Thomas</td>
+                      <td><div class="d-flex align-items-center"><img src="images/avatar/3.jpg" class=" me-2" width="24" alt=""> <span class="w-space-no">Dr. Jackson</span></div></td>
+                      <td><div class="d-flex align-items-center"><img src="images/svg/btc.svg"  alt="" class="me-2 img-btc">Bitcoin</div></td>
+                      <td>+$5,553</td>
+                      <td class="text-end"><div class="badge badge-sm badge-danger">CANCEL</div></td>
+                    </tr> {% endcomment %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+          
+			</div>
+		</div>
+
+{% endblock  %}
+
+
+{% block 'addFooterScripts' %}
+
+<script src="/static/dist/yscountdown.min.js"></script>
+{% if subscriptions %}
+
+{% for package in subscriptions %}
+ 
+<script>
+  (function() {
+    var daysElement = document.querySelector("#days{{package.id}}");
+    var hoursElement = document.querySelector("#hours{{package.id}}");
+    var minutesElement = document.querySelector("#minutes{{package.id}}");
+    var secondsElement = document.querySelector("#seconds{{package.id}}");
+    var btnElemId = document.querySelector("#viewSocialJob{{package.id}}");
+    var cardElement = document.querySelector("#cardElement{{package.id}}"); // Card element
+    var listElems = document.querySelector("#elemCountId{{package.id}}"); // Card element
+    var btnplace = document.querySelector("#btnplace{{package.id}}"); // Card element
+
+
+    var txnDate = new Date("{{ package.valid_upto|date:'Y-m-d H:i:s' }}");
+    {% comment %} var endDate = new Date(txnDate.getTime() - 0.5 * 60 * 60 * 1000); {% endcomment %}
+    var endDate = new Date(txnDate.getTime() -2 * 24 * 60 * 60 * 1000);
+    
+
+
+
+    var myCountDown = new ysCountDown(endDate, function(remaining, finished) {
+      if (finished) {
+
+
+        {% comment %} console.log("came here"); {% endcomment %}
+        listElems.innerHTML='';
+        {% if not package.status  %}
+
+        listElems.innerHTML=`<li class="text-black text-center " ><span style="font-size:15px;" >A link for your social job has been sent to your email.Please click on it to complete your social job. </span> <span id="timeLeft{{package.id}}" style="font-size:15px;"> </span>  </li>`;
+        
+        {% else %}
+        listElems.innerHTML=`<li class="text-black text-center " ><span style="font-size:15px;" >Your response for this social job has been submitted successfully. </span> <span id="timeLeft{{package.id}}" style="font-size:15px;"> </span>  </li>`;
+
+        {% endif %}
+        cardElement.style.backgroundColor = "lightgreen"; // Change background color to green 
+
+        var newEndDate = new Date(endDate.getTime() + 2 * 24 * 60 * 60 * 1000);
+
+        {% if not package.status  %}
+    
+      
+
+        btnElemId.outerHTML=
+                            `
+                          <button  class="btn btn-success mb-5 " id="viewSocialJob{{ package.id }}" onclick="sendSocialMail({{package.id}})" >
+                              Send Job to your email
+                          </button>
+                          
+                        
+                      `;
+
+          {% else %}
+          {% comment %} btnElemId.disabled = true;  {% endcomment %}
+          {% comment %} btnElemId.classList.add('btn-disabled'); {% endcomment %}
+          {% comment %} btnElemId.classList.add('text-center'); {% endcomment %}
+          btnElemId.style.display = 'block';
+          {% comment %} btnElemId.textContent = 'COMPLETED'; {% endcomment %}
+          btnElemId.outerHTML=
+          `
+        <button  class="btn btn-success btn-disabled mb-5 " id="viewSocialJob{{ package.id }}"  >
+           COMPLETED
+        </button>
+        
+      
+    `;
+
+        {% endif %}
+
+        var btnCountDown = new ysCountDown(newEndDate, function(remaining, finished) {
+          if (finished) {
+           location.reload();
+            return;
+          }
+          var spanElem = document.querySelector("#timeLeft{{package.id}}");
+          spanElem.style.color = "red";
+          {% if not package.status %}
+          spanElem.innerHTML = `Valid Till: ${remaining.totalDays} days ${remaining.hours.toString().padStart(2, '0')}:${remaining.minutes.toString().padStart(2, '0')}:${remaining.seconds.toString().padStart(2, '0')}`;
+          {% else %}
+          {% comment %} spanElem.innerHTML = `Next Job will appear in: ${remaining.totalDays} days ${remaining.hours.toString().padStart(2, '0')}:${remaining.minutes.toString().padStart(2, '0')}:${remaining.seconds.toString().padStart(2, '0')}`; {% endcomment %}
+          spanElem.innerHTML = `Your 5$ will be credited into your main wallet within ${remaining.totalDays} days ${remaining.hours.toString().padStart(2, '0')}:${remaining.minutes.toString().padStart(2, '0')}:${remaining.seconds.toString().padStart(2, '0')}`;
+
+          {% endif %}
+       
+        });
+
+       // minutesElement.textContent = remaining.minutes;
+       // secondsElement.textContent = remaining.seconds;
+       // window.location.href = "https://www.ritcoin.exchange/member/kycPage/";
+        return;
+      }
+
+      daysElement.textContent = remaining.totalDays;
+      hoursElement.textContent = remaining.hours;
+      minutesElement.textContent = remaining.minutes;
+      secondsElement.textContent = remaining.seconds;
+
+
+
+    });
+  })();
+
+
+
+
+  function sendSocialMail(id) {
+
+    console.log(id);
+    fetch('{% url 'sendAssignedJobToUserMail' %}', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            //'X-CSRFToken': getCookie('csrftoken')
+            'X-CSRFToken': `{{csrf_token}}`
+        },
+        body: JSON.stringify({ socialJobId: id })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('social job sent to your mail successfuly');
+            location.reload(); // Reload the page
+        } else {
+            alert(data.msg);
+            location.reload();
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
+
+</script>
+{% endfor %}
+
+
+
+
+
+{% endif %}
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<!-- counter -->
+<script src="{% static 'surveyapp/vendor/counter/counter.min.js' %} "></script>
+<script src="{% static 'surveyapp/vendor/counter/waypoint.min.js' %} "></script>
+<script src="{% static 'surveyapp/vendor/peity/jquery.peity.min.js' %} "></script>
+<script src="{% static 'surveyapp/js/dashboard/dashboard-1.js' %} "></script>
+
+
+
+
+
+
+
+{% endblock %}

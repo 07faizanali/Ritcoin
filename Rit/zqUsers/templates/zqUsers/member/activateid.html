@@ -1,0 +1,272 @@
+{% extends 'zqUsers/member/layout/main.html' %}
+
+{% load static %}
+{% load customFilters %}
+{% block 'addHeaderScripts' %}
+<style>
+
+    .htmx-indicator{
+        opacity:0;
+        transition: opacity 500ms ease-in;
+    }
+    .htmx-request .htmx-indicator{
+        opacity:1
+    }
+    .htmx-request.htmx-indicator{
+        opacity:1
+    }
+</style>
+{% endblock %}
+
+{% block 'content' %}
+<div class="container-fluid"style="">
+    <div class="row" >
+
+        <div class="col-xl-12 col-lg-12">
+            <div class="row" >
+                <div class="col-xl-12">
+                    <div class="card p-5">
+               
+
+                        <div class="row ">
+                            <div class="col-md-2 mt-4"> 
+                                {% comment %} <h3 style="color:black;" class="mt-1">Activation</h3> {% endcomment %}
+                                <h3  class="mt-1">Activation</h3>
+                            </div>
+                          
+                            <div class="col-md-6">
+                                <div class="input-group mt-4">
+                                   
+                                    <select id="package" name='package' class="form-control">
+                                        <option value="">Select Package</option>
+
+                                        {% for package in allPs %}
+
+                                        
+                                        <option value="{{package.package_price}}" {% if forloop.counter  == 1 %} selected {% endif %}>{{package.package_price}} $</option>
+                                        
+                                        
+                                        {% endfor %}
+                      
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3 text-center mt-4">
+                                <button 
+                                class="btn-wide btn btn-success btngenrate" 
+                                id="ActivateId" 
+                                hx-post="{% url 'NewActivation' %}"
+                                hx-include="#package"
+                                hx-indicator="#spinner"
+                                hx-trigger="click"
+                                hx-target="this"
+                                hx-swap="none"
+                                hx-on:htmx:after-request= 'handleResponse'
+                                hx-headers="{ 'X-CSRFToken': '{{ csrf_token }}' }"
+                                hx-data="{ package: document.querySelector('#package').value }">
+                                Activate Id
+
+                                <img  id="spinner" class="htmx-indicator" src="https://htmx.org/img/bars.svg"/>
+                            </button>
+
+                          
+                            
+                            </div>
+                            
+                            
+                        </div>
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+ 
+  
+    <div class="col-lg-12">
+        <div class="card transaction-table">
+            <div class="card-header border-0 flex-wrap pb-0">
+                <div class="mb-2">
+                    <h4 class="card-title">Recent Transactions</h4>
+                    <p class="mb-sm-3 mb-0">All active Packages</p>
+                </div>
+               
+            </div>
+
+           
+            <div class="card-body p-0">
+                <div class="tab-content" id="myTabContent1">
+                    <div class="tab-pane fade show active" id="Week" role="tabpanel" aria-labelledby="Week-tab">
+                        <div class="table-responsive">
+                            <table class="table table-responsive-md">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            #
+                                        </th>
+                                        <th>Package($)</th>
+                                        
+                                        <th>Activated by</th>
+                                        <th>Activation Date</th>
+                                        <th class="text-end">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                  
+                                    {% with allInvs=request.user.investmentwallet_member.all %}
+                                    {% if allInvs.count > 0 %}
+                                    {% for inv in  allInvs %}
+
+
+                                    <tr>
+                                        <td>
+                                            <svg class="arrow svg-main-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                    <polygon points="0 0 24 0 24 24 0 24"/>
+                                                    <rect fill="#fff" opacity="0.3" transform="translate(11.646447, 12.853553) rotate(-315.000000) translate(-11.646447, -12.853553) " x="10.6464466" y="5.85355339" width="2" height="14" rx="1"/>
+                                                    <path d="M8.1109127,8.90380592 C7.55862795,8.90380592 7.1109127,8.45609067 7.1109127,7.90380592 C7.1109127,7.35152117 7.55862795,6.90380592 8.1109127,6.90380592 L16.5961941,6.90380592 C17.1315855,6.90380592 17.5719943,7.32548256 17.5952502,7.8603687 L17.9488036,15.9920967 C17.9727933,16.5438602 17.5449482,17.0106003 16.9931847,17.0345901 C16.4414212,17.0585798 15.974681,16.6307346 15.9506913,16.0789711 L15.6387276,8.90380592 L8.1109127,8.90380592 Z" fill="#fff" fill-rule="nonzero"/>
+                                                </g>
+                                            </svg>
+                                        </td>
+                                       
+                                        
+                                        <td>{{inv.amount}}</td>
+
+                                        {% if inv.activated_by == request.user %}
+                                        <td>self</td>
+                                        {% else %}
+                                        <td>{{inv.activated_by}}</td>
+                                        {% endif %}
+
+                                     
+                                        <td> {{inv.txn_date}}</td>
+                                      
+                                        <td  class="text-end"><div class="badge badge-sm badge-success">Active</div></td>
+                                    </tr>
+
+                                    {% endfor %}
+                                    {% endif %}
+                                    {% endwith %}
+
+                           
+
+                                    
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+
+
+          
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+
+
+{% endblock  %}
+
+
+{% block 'addFooterScripts' %}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.6.1-rc.0/web3.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        let CSRF_TOKEN = '{{ csrf_token }}';
+        document.body.addEventListener('htmx:configRequest', (event) => {
+            event.detail.headers['X-CSRFToken'] = CSRF_TOKEN;
+        })
+        const packageSelect = document.getElementById('package');
+        const activateButton = document.getElementById('ActivateId');
+        const totalWalletBalance = parseFloat(`{{ request.user.totalWalletBalance }}`);
+
+        packageSelect.addEventListener('change', function () {
+            const selectedPackage = parseFloat(packageSelect.value);
+            if (!isNaN(selectedPackage) && selectedPackage <= totalWalletBalance) {
+                activateButton.disabled = false;
+            } else {
+                activateButton.disabled = true;
+            }
+        });
+
+
+        {% comment %} window.handleResponse = function(event) {
+            
+        }; {% endcomment %}
+
+        document.addEventListener('htmx:afterRequest', function(evt) {
+            // Put the JS code that you want to execute here
+            console.log('Handling response...');
+            const response = event.detail.xhr.response;
+            const data = JSON.parse(response);
+            alert(data.msg);
+            if (data.success) {
+                location.reload();
+            }
+        });
+    });
+</script>
+<script>
+
+    {% comment %} function ActivateUserId() {
+
+       // console.log("came here");
+
+       const totalWalletBalance = parseFloat(`{{ request.user.totalWalletBalance }}`);
+
+        bt = $(`#ActivateId`);
+        bt.attr("disabled", "").html("<i class='fa fa-spin fa-spinner'></i>&nbsp;&nbsp;Please wait...");
+
+        const amount = parseFloat($('#amount').val());
+
+        if (isNaN(amount) || !(amount <= totalWalletBalance)) {
+            alert("Insufficient Wallet Balance");
+            location.reload();
+            return;  // Exit the function early
+        }
+
+
+
+        fetch('/member/activate-id/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                //'X-CSRFToken': getCookie('csrftoken')
+                'X-CSRFToken': `{{csrf_token}}`
+            },
+            body: JSON.stringify({Package:amount })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert(data.msg);
+                location.reload(); // Reload the page
+            } else {
+                alert(data.msg);
+                location.reload();
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    } {% endcomment %}
+
+
+
+
+</script> 
+	 
+
+
+{% endblock %}
+
+
+

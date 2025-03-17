@@ -1,0 +1,479 @@
+{% extends 'zqUsers/member/layout/main.html' %}
+{% load static %}
+{% block 'content' %}
+<style>
+    @media (max-width: 575.98px) { 
+    #qrCodeINR{
+        height:18vh!important;
+        width:5vw!important;
+    }
+
+     }
+</style>
+    <div class="app-main__outer">
+        <div class="app-main__inner">
+            <div class="app-page-title">
+                <div class="page-title-wrapper">
+                    <div class="page-title-heading">
+                        <div class="page-title-icon">
+                            <i class="pe-7s-wallet icon-gradient bg-tempting-azure">
+                            </i>
+                        </div>
+                        <div>
+                               Wallet address
+                            <div class="page-title-subheading">You can generate your own wallet address for receive and send coin.</div>
+                        </div>
+                    </div>
+                    <div class="page-title-actions">
+                        <input type="hidden" id="tronwalletaddress" />
+                        <input type="hidden" id="tronlink_wallet_bal" value="0" />
+                        <div class="d-inline-block dropdown">
+                         
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="">
+                <div class="main-card mb-3 card">
+                    <div class="">
+                        
+                        <div class="tabs-lg-alternate ">
+                        <ul class="nav nav-tabs nav-justified mt-5 ">
+                            <li class="nav-item">
+                                <a data-toggle="tab" href="#tab-eg11-0" class="active nav-link">
+                                    
+                                        <img src="{% static "zqUsers/assets/images/rup.png" %}" alt=" " id="im1" style="height:59px;">
+                                    
+                                    <div><span >&nbsp;INR </span></div>
+                            </a>
+                            </li>
+                            <li class="nav-item">
+                                <a data-toggle="tab" href="#tab-eg11-2" class=" nav-link">
+                                    
+                                        <img src="{% static "zqUsers/assets/images/zq.png" %}" alt=" " id="im1" style="height:55px;">
+                                    
+                                    <div><span >&nbsp;Zaan </span></div>
+                            </a>
+                            </li>
+                            <li class="nav-item">
+                                <a data-toggle="tab" href="#tab-eg11-1" class="nav-link">
+                                    <img src="{% static "zqUsers/assets/images/2.png" %}" alt=" " id="im1" style="height:55px;">
+                                    <div >
+                                &nbsp;Tron
+                                    </div></a>
+                            </li>
+
+                       
+
+                            <li class="nav-item">
+                                <a data-toggle="tab" href="#tab-eg10-0" class=" nav-link">
+                                    <img src="{% static "zqUsers/assets/images/4.png" %}" alt="" style="height:55px;" >
+                                    <div >
+                                &nbsp;Ethereum
+                                    </div></a>
+                            </li>
+                            <li class="nav-item">
+                                <a data-toggle="tab" href="#tab-eg10-1" class="nav-link">
+                                    <img src="{% static "zqUsers/assets/images/5.png" %}" alt="" style="height:55px;" >
+                                    <div >
+                                &nbsp;USDT
+                                    </div></a>
+                            </li>
+                            <li class="nav-item">
+                                <a data-toggle="tab" href="#tab-eg10-2" class="nav-link">
+                                    <img src="{% static "zqUsers/assets/images/6.png" %}" alt="" style="height:55px;" >
+                                    <div>
+                                &nbsp;BNB
+                                    </div></a>
+                            </li>
+                        </ul>
+                    </div>
+                        {% comment %} ------------------------------------------------INR---------------------------------- {% endcomment %}
+
+                        <div class="tab-content p-3">
+                           
+
+                                {% comment %} {{csrf_token}} {% endcomment %}
+                            <div class="tab-pane active " id="tab-eg11-0" role="tabpanel">
+                                
+                                <div class="row ">
+                                   
+                                    <div class="col-md-4">
+                                        <h6 class="mt-4 text-center" style="color:gray;font-weight:700;">INR</h6>
+                                    </div>
+                                    {% comment %} <form action="#" method="post" > {% endcomment %}
+                                    <div class="col-md-6">
+                                        <div class="input-group mt-4">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Enter Amount: </span>
+                                            </div>
+                                            <input placeholder=""
+                                                   type="text"
+                                                   class="form-control" name='amountInput' id="amountInput" >
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <button  type="button"   class="btn-wide mb-2 mr-2 btn btn-primary btngenrate btn-lg  mt-4"  onclick="makePayment(event)">Make Payment</button>
+                                    </div>
+                                {% comment %} </form> {% endcomment %}
+                                   
+                                </div>
+
+                                {% comment %} <div class="row mt-4 "  id='inrQrGen' style="display:block">
+                                    <div class="col-md-2 text-center ">
+                                       <img src="https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl={{ res.zqCoin }}&choe=UTF-8"
+                                             alt=""
+                                             style="height:80%;
+                                                    width:59%"
+                                             id="qrCodeINR">
+
+
+                                    </div>
+                                    <div class="col-md-  text-center p-5">
+                                        <h1 style="color:rgb(90, 87, 87);font-weight:700;">JUST SCAN THE WALLET ADDRESS</h1>
+                                        <p class="mt-4">Private & Secure</p>
+                                        <p style="margin-top: -8px ;">Only you can access your wallet. We don’t collect any personal data.</p>
+                                        <button onclick="window.location.href='{% url 'addNVerify' %}'"  class="btn-wide mb-2 mr-2 btn btn-success btngenrate btn-lg  mt-4">Receive</button>
+                                        <button class="btn-wide mb-2 mr-2 btn btn-success btngenrate btn-lg disabled mt-4">Send</button>
+
+                                        <iframe src="" style="height: 500px; width: 59%; border: none;" id="qrCodeINR"> </iframe>
+
+                                    </div>
+                                    <div class="col-md-2"></div>
+                                </div>  {% endcomment %}
+
+                                <div class='row'></div>
+
+                                
+                            
+                            </div>
+                           
+
+
+                            <div class="tab-pane  " id="tab-eg11-2" role="tabpanel">
+                                <div class="row ">
+                                    <div class="col-md-4">
+                                        <h6 class="mt-4 text-center" style="color:gray;font-weight:700;">Zaan Queril WALLET ADDRESS</h6>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="input-group mt-4">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">@</span>
+                                            </div>
+                                            <input placeholder="{{res.zqCoin}}"
+                                                   type="text"
+                                                   class="form-control" readonly disabled>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <button class="btn-wide mb-2 mr-2 btn btn-primary btngenrate btn-lg  mt-4">Generate now</button>
+                                    </div>
+                                </div>
+                                <div class="row mt-4">
+                                    <div class="col-md-4 text-center ">
+                                       <img src="https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl={{ res.zqCoin }}&choe=UTF-8"
+                                             alt=""
+                                             style="height:80%;
+                                                    width:59%"
+                                             id="qr">
+                                    </div>
+                                    <div class="col-md-6  ">
+                                        <h1 style="color:rgb(90, 87, 87);font-weight:700;">JUST SCAN THE WALLET ADDRESS</h1>
+                                        <p class="mt-4">Private & Secure</p>
+                                        <p style="margin-top: -8px ;">Only you can access your wallet. We don’t collect any personal data.</p>
+                                        <button onclick="window.location.href='{% url 'addNVerify' %}'"  class="btn-wide mb-2 mr-2 btn btn-success btngenrate btn-lg  mt-4">Receive</button>
+                                        <button class="btn-wide mb-2 mr-2 btn btn-success btngenrate btn-lg disabled mt-4">Send</button>
+                                    </div>
+                                    <div class="col-md-2"></div>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane" id="tab-eg11-1" role="tabpanel">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <h6 class="mt-4 text-center" style="color:gray;font-weight:700;">TRON WALLET ADDRESS</h6>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="input-group mt-4">
+                                            <div class="input-group-prepend"></div>
+                                            <input value="{{ res.TRX }}" type="text" class="form-control" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <button class="btn-wide mb-2 mr-2 btn btn-primary btngenrate btn-lg disabled mt-4">Generate now</button>
+                                    </div>
+                                </div>
+                                <div class="row mt-4">
+                                    <div class="col-md-4 text-center">
+                                        <img src="https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl={{ res.TRX }}&choe=UTF-8"
+                                             alt=""
+                                             style="height:70%;
+                                                    width:59%"
+                                             id="qr">
+                                    </div>
+                                    <div class="col-md-6 ">
+                                        <h1 style="color:rgb(90, 87, 87);font-weight:700;">JUST SCAN THE WALLET ADDRESS</h1>
+                                        <p class="mt-4">Private & Secure</p>
+                                        <p style="margin-top: -8px ;">Only you can access your wallet. We don’t collect any personal data.</p>
+                                        <button class="btn-wide mb-2 mr-2 btn btn-success btngenrate btn-lg disabled mt-4">Receive</button>
+                                        <button class="btn-wide mb-2 mr-2 btn btn-success btngenrate btn-lg disabled mt-4">Send</button>
+                                    </div>
+                                    <div class="col-md-2"></div>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane " id="tab-eg10-0" role="tabpanel">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <h6 class="mt-4 text-center" style="color:gray;font-weight:700;">ETHEREUM WALLET ADDRESS</h6>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="input-group mt-4">
+                                            <div class="input-group-prepend"></div>
+                                            <input value="{{ res.ETH }}"
+                                                   placeholder="{{ res.ETH }}"
+                                                   type="text"
+                                                   class="form-control"
+                                                   readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <button class="btn-wide mb-2 mr-2 btn btn-primary btngenrate btn-lg disabled mt-4">Generate now</button>
+                                    </div>
+                                </div>
+                                <div class="row mt-4">
+                                    <div class="col-md-4 text-center">
+                                        <img src="https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl={{ res.ETH }}&choe=UTF-8"
+                                             alt=""
+                                             style="height:70%;
+                                                    width:59%"
+                                             id="qr">
+                                    </div>
+                                    <div class="col-md-6 ">
+                                        <h1 style="color:rgb(90, 87, 87);font-weight:700;">JUST SCAN THE WALLET ADDRESS</h1>
+                                        <p class="mt-4">Private & Secure</p>
+                                        <p style="margin-top: -6px ;">Only you can access your wallet. We don’t collect any personal data.</p>
+                                        <button class="btn-wide mb-2 mr-2 btn btn-success btngenrate btn-lg disabled mt-4">Receive</button>
+                                        <button class="btn-wide mb-2 mr-2 btn btn-success btngenrate btn-lg disabled mt-4">Send</button>
+                                    </div>
+                                    <div class="col-md-2"></div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="tab-eg10-1" role="tabpanel">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <h6 class="mt-4 text-center" style="color:gray;font-weight:700;">USDT WALLET ADDRESS</h6>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="input-group mt-4">
+                                            <div class="input-group-prepend"></div>
+                                            <input value="{{ res.USDT }}"
+                                                   placeholder="{{ res.USDT }}"
+                                                   type="text"
+                                                   class="form-control"
+                                                   readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <button class="btn-wide mb-2 mr-2 btn btn-primary btngenrate btn-lg disabled mt-4">Generate now</button>
+                                    </div>
+                                </div>
+                                <div class="row mt-4">
+                                    <div class="col-md-4 text-center">
+                                        <img src="https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl={{ res.USDT }}&choe=UTF-8"
+                                             alt=""
+                                             style="height:70%;
+                                                    width:59%"
+                                             id="qr">
+                                    </div>
+                                    <div class="col-md-6 ">
+                                        <h1 style="color:rgb(90, 87, 87);font-weight:700;">JUST SCAN THE WALLET ADDRESS</h1>
+                                        <p class="mt-4">Private & Secure</p>
+                                        <p style="margin-top: -6px ;">Only you can access your wallet. We don’t collect any personal data.</p>
+                                        <button class="btn-wide mb-2 mr-2 btn btn-success btngenrate btn-lg disabled mt-4">Receive</button>
+                                        <button class="btn-wide mb-2 mr-2 btn btn-success btngenrate btn-lg disabled mt-4">Send</button>
+                                    </div>
+                                    <div class="col-md-2"></div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="tab-eg10-2" role="tabpanel">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <h6 class="mt-4 text-center" style="color:gray;font-weight:700;">BNB WALLET ADDRESS</h6>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="input-group mt-4">
+                                            <div class="input-group-prepend"></div>
+                                            <input value="{{ res.BNB }}"
+                                                   placeholder="{{ res.BNB }}"
+                                                   type="text"
+                                                   class="form-control"
+                                                   readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <button class="btn-wide mb-2 mr-2 btn btn-primary btngenrate btn-lg disabled mt-4">Generate now</button>
+                                    </div>
+                                </div>
+                                <div class="row mt-4">
+                                    <div class="col-md-4 text-center">
+                                        <img src="https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl={{ res.BNB }}&choe=UTF-8"
+                                             alt=""
+                                             style="height:70%;
+                                                    width:59%"
+                                             id="qr">
+                                    </div>
+                                    <div class="col-md-6 ">
+                                        <h1 style="color:rgb(90, 87, 87);font-weight:700;">JUST SCAN THE WALLET ADDRESS</h1>
+                                        <p class="mt-4">Private & Secure</p>
+                                        <p style="margin-top: -6px ;">Only you can access your wallet. We don’t collect any personal data.</p>
+                                        <button class="btn-wide mb-2 mr-2 btn btn-success btngenrate btn-lg disabled mt-4">Receive</button>
+                                        <button class="btn-wide mb-2 mr-2 btn btn-success btngenrate btn-lg disabled mt-4">Send</button>
+                                    </div>
+                                    <div class="col-md-2"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script>
+    function conncetwallet() {
+        //{% comment %} debugger; {% endcomment %}
+        window.localStorage["walletsts"]=1;
+        var address = "";
+        if (window.tronWeb && window.tronWeb.defaultAddress.base58) {
+            // address = window.tronWeb.defaultAddress.base58;
+            $("#tronwalletaddress").val(window.tronWeb.defaultAddress.base58);
+        
+            window.tronWeb.trx.getUnconfirmedBalance().then(function(r){ 
+                console.log(r);
+                var bal= (r/1e6).toFixed(2); 
+                $("#tronlink_wallet_bal").val(bal);
+            })
+        }
+        address= $("#tronwalletaddress").val();
+        conncetsadd(address);
+    }
+    function conncetsadd(address) {
+        //debugger;
+    
+        if (address != "") {
+  
+            $("#SBG_address").val(address);
+            var img="https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl="+address+"&choe=UTF-8";
+            document.getElementById('imgwallet').setAttribute("src",img);
+            document.getElementById('SBG_address').setAttribute("disabled","disabled");
+            document.getElementById('btnadd').setAttribute("disabled","disabled");
+           
+            $("#btnmenu").html('');
+            $("#btnmenu").text('Connected');
+            $("#btnmenu").css("display", "block");
+            
+            gettronaddress_data(address)
+        }
+        else {
+            $("#txtstrong").html('');
+
+            $("#txtstrong").append('Please connect your tronlink wallet and login ');
+            $("#txtstrong").append('<a href="https://chrome.google.com/webstore/detail/tronlink/ibnejdfjmmkpcnlpebklmnkoeoihofec" target="_blank">Tronlink install.</a>')
+            $("#alerts").css("display", "block");
+            //alert('<div>Please connect your tronlink and login wallet</');
+        }
+    }
+
+    function openCenteredPopup(url, width, height) {
+        // Calculate the position of the popup window to center it on the screen
+        var left = (window.innerWidth - width) / 2;
+        var top = (window.innerHeight - height) / 2;
+
+        // Open the popup window with the specified URL and size, centered on the screen
+        var popupWindow = window.open(url, "_blank", "width=" + width + ",height=" + height + ",left=" + left + ",top=" + top);
+
+        // Check if the popup window was blocked by the browser
+        if (!popupWindow || popupWindow.closed || typeof popupWindow.closed == 'undefined') {
+            alert("Popup window was blocked by the browser. Click on the button again to open the URL in a new tab.");
+        } else {
+            // Popup window successfully opened
+            console.log("Popup window opened successfully.");
+        }
+    }
+
+    function makePayment(event) {
+ 
+        $.ajax({
+            url: "/member/make-payment/",
+            type: "post",
+            data: {
+                amount: $("#amountInput").val(),
+                //types: $("#cointypes").val(),
+                csrfmiddlewaretoken: '{{ csrf_token }}'
+            },
+            success: function (resultdata) {
+
+                var status = resultdata.status;
+                if (parseInt(status) == 1) {
+
+                    var paymentUrl=resultdata.url;
+                    // Function to open a popup window centered on the screen
+                  
+
+                    // Example usage:
+                    //var url = resultdata.url;
+                    //var width = 600;
+                    //var height = 400;
+                    //openCenteredPopup(paymentUrl, width, height);
+                    window.location.href = paymentUrl;
+
+
+                    //window.location.href = resultdata.url;
+                    // Open a popup window with the redirected URL
+                    //var popupWindow = window.open(resultdata.url, "_blank", "width=600,height=400");
+
+                    // Check if the popup window was blocked by the browser
+                    //if (!popupWindow || popupWindow.closed || typeof popupWindow.closed == 'undefined') {
+                       // alert("Popup window was blocked by the browser. Click on the button again to open the URL in a new tab.");
+                    //} else {
+                        // Popup window successfully opened
+                       //alert console.log("Popup window opened successfully.");
+                    //}
+
+                    //console.log('came here')
+
+                    //$("#qrCodeINR").attr("src", paymentUrl);
+                    //$("#inrQrGen").css("display", "block");
+
+
+                    //("#qrCodeINR").css("display", "block");
+                    
+
+                    //alert(resultdata.message);
+                    //location.reload();
+                }
+                else {
+
+                    alert(resultdata.message);
+                   // $("#otp").val('');
+                }
+  
+                //console.log(resultdata.url)
+
+                //alert(resultdata.message);
+                //location.reload();
+  
+            },
+            error: function (er) {
+                alert("Something went wrong. Please try again later");
+                $("#btnsubmit").text('Verify');
+                $("#btnsubmit").removeAttr("disabled");
+              
+            }
+        }
+        );
+    }
+
+</script>
+{% endblock 'content' %}

@@ -1,0 +1,205 @@
+{% extends 'zqAdmin/admin/layout/main.html' %}
+{% load static %}
+{% block 'content' %}
+    <div class="app-main__outer">
+        <div class="app-main__inner">
+            <div class="app-page-title">
+                <div class="page-title-wrapper">
+                    <div class="page-title-heading">
+                        <div class="page-title-icon">
+                            <i class="pe-7s-display1 icon-gradient bg-premium-dark">
+                            </i>
+                        </div>
+                        <div>
+                            Invite / Refer a friend
+                            <div class="page-title-subheading">More invite more earn (Your each invitation extend your market.)</div>
+                        </div>
+                    </div>
+
+                  
+
+
+                </div>
+            </div>
+            <div class="shadow p-3">
+                <form action="" method="POST">
+                    {% csrf_token %}
+                <div class="row ">
+                    <div class="col-md-2 text-center">
+                        <img src="/static/images/youtubelogo.png"
+                             alt=""
+                             style="height:85%;
+                                    width:40%">
+                    </div>
+                    <div class="col-md-8">
+                       
+                        <div class="input-group mt-6">
+                            {% comment %} <div class="input-group-prepend">
+                                <p class="mt-2" style="font-weight: 600;">MEMBERID &nbsp;&nbsp;&nbsp;</p>
+                            </div> {% endcomment %}
+                            <input 
+                                   type="text"
+                                   class="form-control"
+                                   name="ytube"
+                                   value="{{ytUrl}}">
+                        </div>
+                        
+                    </div>
+                 
+           
+                </div>
+                <div class="row ">
+                    <div class="col-md-2 text-center">
+                        <img src="/static/images/facebook.png"
+                             alt=""
+                             style="height:85%;
+                                    width:40%">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="input-group mt-6">
+                           
+                            <input 
+                                   type="text"
+                                   class="form-control"
+                                   name="facebook"
+                                   value="{{facebook}}">
+                        </div>
+                        
+                    </div>
+                 
+               
+           
+                </div>
+                <div class="row ">
+                    <div class="col-md-2 text-center">
+                        <img src="/static/images/instagram.png"
+                             alt=""
+                             style="height:85%;
+                                    width:40%">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="input-group mt-6">
+                           
+                            <input 
+                                   type="text"
+                                   class="form-control"
+                                   name="instagram"
+                                   value="{{instagram}}"
+                                   >
+                        </div>
+                        
+                    </div>
+                
+             
+           
+                </div>
+                <div class="row ">
+                    <div class="col-md-2 text-center">
+                        <img src="/static/images/twitter_5968830.png"
+                             alt=""
+                             style="height:85%;
+                                    width:40%">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="input-group mt-6">
+                          
+                            <input 
+                                   type="text"
+                                   class="form-control"
+                                   name="twitter"
+                                   value="{{twitter}}">
+                        </div>
+                        
+                    </div>
+                   
+           
+                </div>
+                
+                <div class="row ">
+                    <div class="col-md-2 text-center">
+                        <img src="/static/images/greviews.jpg"
+                             alt=""
+                             style="height:85%;
+                                    width:40%">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="input-group mt-6">
+                            
+                            <input 
+                                   type="text"
+                                   class="form-control"
+                                   name="greviews"
+                                   value="{{greviews}}">
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="row ">
+                    <div class="col-md-3 text-center">
+                        
+                    </div>
+                    <div class="col-md-6">
+                        {% comment %} <div class="input-group mt-6"> {% endcomment %}
+                            
+                           <button type="submit" class="btn btn-success">Add job</button>
+                        {% comment %} </div> {% endcomment %}
+                        
+                    </div>
+                    <div class="col-md-3 text-center">
+                    
+                </div>
+
+            </form>
+           
+           
+            </div>
+    </div>
+</div>
+</div>
+</div>
+<script>
+    function saveUrl(dt) {
+       
+       
+        const entvalue=$(`#${dt}`).val();
+
+        if (entvalue) {
+            $(`#${dt}`).text('Please wait...');
+            $(`#${dt}`).attr("disabled", "disabled");
+            $.ajax({
+                url: "{% url 'addsocialjob' %}",
+                type: "post",
+                data: {
+                    entUrl: entvalue,
+                    name: dt,
+                   
+                    csrfmiddlewaretoken: '{{ csrf_token }}'
+                },
+                success: function (resultdata) {
+                    var status = resultdata.status;
+                    if (parseInt(status) == 1) {
+                        alert(resultdata.message);
+                        location.reload();
+                    }
+                    else {
+
+                        alert(resultdata.message);
+                        location.reload();
+                        
+                    }
+
+                },
+                error: function (er) {
+                    alert("Something went wrong. Please try again later");
+                   location.reload();
+
+                }
+            });
+        }
+        else {
+            alert("Invalid value");
+        }
+    }
+</script>
+{% endblock 'content' %}

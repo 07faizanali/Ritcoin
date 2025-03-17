@@ -1,0 +1,93 @@
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RITCOIN Registration</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.lordicon.com/lordicon.js"></script>
+    <style>
+        .btn-custom {
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            background-color: #28a745;
+            border: none;
+            border-radius: 5px;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-custom:hover {
+            background-color: #218838;
+        }
+
+        .container-custom {
+            border: 5px solid blue;
+            text-align: center;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            margin-top: 20px;
+            border-radius: 10px;
+            background-color: #f8f9fa;
+        }
+
+        .header-title {
+            font-size: 28px;
+            font-weight: 900;
+            font-family: fangsong;
+        }
+
+        .header-title-red {
+            color: #d92550;
+        }
+
+        .header-title-blue {
+            color: blue;
+        }
+
+        .footer-text {
+            font-size: 12px;
+            color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container container-custom">
+    <h2>
+        <span class="header-title header-title-red">R</span>
+        <span class="header-title header-title-blue">IMBERIO</span>
+    </h2>
+    <h3>Welcome to RITCOIN</h3>
+    {% autoescape off %}
+   <p>Hi {{ user.username }},</p>
+    {% comment %} <p>Please click on the link below to confirm your registration:</p> {% endcomment %}
+    {% comment %} <a href="https://www.RITCOIN.world" class="btn btn-custom">
+        <i class="fas fa-check-circle"></i> Activate Account
+    </a> {% endcomment %}
+    <p>Your OTP is: <span style="color:green"><b>{{OTP}}</b></span>  for member wallet topup. Please don't share with anyone.</p>
+    <br>
+    <h5>This OTP is valid for 10 minutes.</h5>
+    <p>If you have not initiated this request, no further action is required.</p>
+    <p>Regards,</p>
+    <p>The RITCOIN Team</p>
+    <p class="footer-text">&copy; 2023 RITCOIN. All rights reserved.</p>
+    {% endautoescape %}
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+</body>
+</html>

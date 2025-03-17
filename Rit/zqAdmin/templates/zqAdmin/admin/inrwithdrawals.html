@@ -1,0 +1,273 @@
+{% extends 'zqAdmin/admin/layout/main.html' %}
+{% load customFilters  %}
+
+{% block 'content' %}
+    <div class="app-main__outer">
+        <div class="app-main__inner"
+             style="background-color: rgba(255, 255, 255, 0.775)">
+            <div class="app-page-title">
+                <div class="page-title-wrapper">
+                    <div class="page-title-heading">
+                        <div class="page-title-icon">
+                            <i class="pe-7s-wallet icon-gradient bg-plum-plate"> </i>
+                        </div>
+                        <div>
+                          RITCOIN Withdrawals
+                            <div class="page-title-subheading"></div>
+                        </div>
+                    </div>
+                   
+                </div>
+            </div>
+            {% if allWithdrawals %}
+                <div class="row shadow"style="overflow-x:auto; height:auto;">
+                    <div class="col-lg-12">
+                        <div class="main-card mb-3 ">
+                            <div class="">
+                                <table id="myTable"  class="display" >
+                                    <thead>
+                                        <tr>
+                                            <th>Sr No.</th>
+                                            <th>Username</th>
+                                            <th>Address</th>
+                                            {% comment %} <th>Zaan Queril Coin</th> {% endcomment %}
+                                            <th>COIN</th>
+                                            {% comment %} <th>Date</th> {% endcomment %}
+                                            <th>Received Date</th>
+                                            {% comment %} <th>Remark</th> {% endcomment %}
+                                            <th>Action</th>
+                                            <th>TXNHASH</th>
+                                            {% comment %} <th>Edit</th> {% endcomment %}
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for index,item in allWithdrawals %}
+                                            <tr>
+                                                <th scope="row">{{ index|add:1 }}</th>
+                                                <td>{{ item.tran_by.username }}</td>
+                                                {% if item.address %}
+                                                <td>{{item.address}}</td>
+                                                {% else %}
+                                                <td>NA</td>
+                                                {% endif %}
+                                                
+                                                {% comment %} <td>{{ item.total_value_zaan }}(zaan)</td> {% endcomment %}
+                                                <td>{{ item.amount }}(RT)</td>
+                                                {% comment %} <td>{{ item.approved_date }}</td> {% endcomment %}
+                                                {% if item.trans_date %}
+                                                    <td class="">{{ item.trans_date }}</td>
+                                                {% else %}
+                                                    <td class="">NA</td>
+                                                {% endif %}
+
+
+
+                                              
+
+                                                <td>
+
+                                                    {% if not item.status %}
+                    
+                                                                                
+                    
+                    
+                                                        <div class="btn-group">
+                                                            <button 
+                                                            id="markDoneButton{{item.id}}"
+                                                            class="btn btn-primary" 
+                                                            hx-post="/zqadmin/verifyhelp/" 
+                                                            hx-trigger="click"
+                                                            hx-vals='{"srno": "{{ item.id }}", "status": "1"}'
+                                                            hx-target="#rescontainer2"
+                                                        
+                                                            
+                                                            
+                                                            >Approve
+                    
+                                                        
+                                                        
+                                                        </button>
+                                                        <button 
+                                                        id="appbtn"
+                                                        class="btn btn-danger" 
+                                                        hx-post="/zqadmin/verifyhelp/"
+                                                        hx-trigger="click"
+                                                        hx-vals='{"srno": "{{ item.id }}", "status": "2" }'                                                        hx-target="#rescontainer2"
+                                                        
+                                                        
+                                                        >Reject
+                    
+                                                    
+                                                        
+                                                    </button>
+                                                        </div>
+                    
+                    
+                                                    {% elif item.status == 1 %}
+                    
+                                                        <button 
+                                                        class="btn btn-success" 
+                                                        
+                                                        disabled
+                                                        >Confirmed
+                    
+                                                    
+                                                        
+                                                    </button>
+                    
+                                                    {% elif status == 2  %}
+                    
+                                                    <button 
+                                                    class="btn btn-danger" 
+                                                    
+                                                    disabled
+                                                    >Rejected
+
+
+                                                    
+                                    
+                    
+                                                    {% endif %}
+                    
+                                                </td>
+
+
+                                                <td>
+
+                                                                
+
+
+                                                    <div class="d-flex flex-column flex-sm-row align-items-stretch gap-2" style="max-width: 100%;">
+
+
+                                                    {% if not item.remark %}  
+                                                    
+                                                    
+                                                    <input 
+                                                    type="text" 
+                                                    class="form-control text-fix flex-grow-1" 
+                                                    placeholder="Enter Transaction Number" 
+                                                    id="transactionNumber{{ item.id }}" 
+                                                    name="transaction_number{{ item.id }}"
+                                                    style="width: 100%;"
+                                                    onblur="updateHxVals('{{ item.id }}', '0')"
+                                                    value=" {% if item.remark %} {{item.remark}}   {% endif %}"
+
+                                                    {% if item.remark %} disabled   {% endif %}
+                                                >
+                                                    
+                                                    
+                                                    
+                                                    {% endif %}
+
+                                                    
+                                        
+
+                                                    
+                                                  
+                                                </div>
+
+
+                                                </td>
+
+                                                {% comment %} <td>Paid</td>
+                                                <td><button class="btn-wide mb-2 mr-2 btn btn-success btngenrate btn-lg disabled mt-4">Paid</button></td> {% endcomment %}
+                                            </tr>
+                                        {% endfor %}
+                                    {% endif %}
+                                    </tbody>
+                                </table>
+                            </div>
+
+
+                            <div id="rescontainer2" style="display: none;"></div>
+                    </div>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock 'content' %}
+{% block 'footerScripts' %}
+
+<script>
+    $(document).ready(function() {
+        $('#myTable').DataTable();
+    });
+    
+
+
+
+</script>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        let CSRF_TOKEN = '{{ csrf_token }}';
+        document.body.addEventListener('htmx:configRequest', (event) => {
+            event.detail.headers['X-CSRFToken'] = CSRF_TOKEN;
+        })
+       
+
+  
+
+        document.addEventListener('htmx:afterRequest', function(evt) {
+            // Put the JS code that you want to execute here
+            console.log('Handling response...');
+
+           // const getbtn=document.getElementById('#appbtn')
+           // getbtn.innerHTML=`<i id="spinner" class="fas fa-spinner fa-spin" ></i>`
+            
+
+            const response = event.detail.xhr.response;
+            const data = JSON.parse(response);
+            //alert(data.msg);
+            console.log(data);
+
+            if (data.success) {
+                alert(data.msg);
+                //console.log(data.memid);
+               // htmx.ajax('GET', '/zqadmin/fetch_member_upper_hierchy/', '#mainTable');
+
+            
+            }else{
+                alert(data.msg);
+               // location.reload();
+
+            }
+            location.reload();
+        });
+
+
+
+
+
+    });
+
+
+
+
+
+    
+</script>
+
+
+<script>
+    // Function to update hx-vals when input field loses focus
+    function updateHxVals(id) {
+        const transactionNumber = document.getElementById("transactionNumber" + id).value;
+        const button = document.getElementById("markDoneButton" + id);
+
+        // Update the hx-vals attribute dynamically
+        button.setAttribute('hx-vals', JSON.stringify({
+            "srno": id, 
+            "status": 1, 
+            "transaction_number": transactionNumber
+        }));
+    }
+</script>
+
+
+{% endblock %}

@@ -1,0 +1,590 @@
+{% extends 'zqUsers/member/layout/main.html' %}
+{% load static %}
+
+{% block 'addHeaderScripts' %}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+  .card.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+    filter: grayscale(100%);
+  }
+</style>
+
+
+<style>
+  #connectWalletButton.disabled {
+    background-color: green;
+    cursor: not-allowed;
+  }
+</style>
+
+{% endblock %}
+
+
+{% block 'content' %}
+<!-- row -->
+<div class="container-fluid">
+  <!-- Row -->
+  <div class="row">
+
+
+    <div class="col-xl-12">
+
+
+
+
+    
+
+    <div class="row">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-xl-12">
+            <div id="imagePreviewContainer" style="text-align: center; margin-bottom: 20px;">
+              <div class="text-center d-flex justify-content-center align-items-center" style="height: 400px;">
+                <!-- The image will be centered horizontally and vertically within this div -->
+                <img src="/static/images/uploadedimage.png" width="200" height="200" alt="User Image">
+              </div>
+              <!-- Selected image will be shown here -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+
+
+          <div class="row mt-3">
+            <div class="col-md-4"></div>
+
+            <div class="col-md-4 text-center" id="cnbtn">
+
+
+
+
+
+
+
+
+              <form action="" enctype="multipart/form-data" method="post">
+                {% csrf_token %}
+                <input type="file"  name="youtube_image" id="qrInput"
+                  class="form-control mb-3" accept="image/*" placeholder="Upload QR code"  onchange="previewImage(event)" required>
+                  <small class="form-text text-danger">{{ form.youtube_image.errors }}</small>
+
+                <input type="number"  name="billAmount" id="billAmount"
+                  class="form-control mb-3" placeholder="Enter bill amount" >
+
+                <button type="submit" class="btn btn-primary ">
+
+
+
+                  Redeem
+
+                </button>
+              </form>
+
+
+            </div>
+            <div class="col-md-4">
+            </div>
+          </div>
+
+
+          <div class="col-lg-12 mt-5">
+            <div class="card transaction-table">
+              <div class="card-header border-0 flex-wrap pb-0">
+                <div class="mb-2">
+                  <h4 class="card-title">Recent Redemption History</h4>
+                  {% comment %} <p class="mb-sm-3 mb-0">wallet history</p> {% endcomment %}
+                </div>
+                {% comment %} <ul class="float-end nav nav-pills mb-2">
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="dep-tab" data-bs-toggle="tab" data-bs-target="#dep"
+                      type="button" role="tab" aria-controls="month"
+                      aria-selected="true">Deposits</button>
+                  </li>
+                 
+                </ul> {% endcomment %}
+              </div>
+    
+    
+    
+    
+    
+              <div class="card-body p-0">
+                <div class="tab-content" id="myTabContent1">
+                  <div class="tab-pane fade show active" id="dep" role="tabpanel" aria-labelledby="dep-tab">
+                    <div class="table-responsive">
+                      <table class="table table-responsive-md">
+                        <thead>
+                          <tr>
+                            <th>
+                              #
+                            </th>
+                            <th>Redeemed By</th>
+                            <th>Bill image</th>
+                            <th>Bill amount</th>
+                            <th>given_discount</th>
+                            <th>ritcoin_worth</th>
+                            {% comment %} <th>status</th> {% endcomment %}
+                            <th>upload_date</th>
+                            {% comment %} <th>Total Coins</th> {% endcomment %}
+                            <th>approve_date</th>
+                            {% comment %} <th>Txn Hash</th> {% endcomment %}
+                            <th class="text-end">Status</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+    
+                          {% if getallhistory %}
+                          {% for inv in getallhistory %}
+                          <tr>
+    
+    
+                            <td>
+                              <svg class="arrow svg-main-icon" xmlns="http://www.w3.org/2000/svg"
+                                xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+                                height="24px" viewBox="0 0 24 24" version="1.1">
+                                <g stroke="none" stroke-width="1" fill="none"
+                                  fill-rule="evenodd">
+                                  <polygon points="0 0 24 0 24 24 0 24" />
+                                  <rect fill="#fff" opacity="0.3"
+                                    transform="translate(11.646447, 12.853553) rotate(-315.000000) translate(-11.646447, -12.853553) "
+                                    x="10.6464466" y="5.85355339" width="2" height="14"
+                                    rx="1" />
+                                  <path
+                                    d="M8.1109127,8.90380592 C7.55862795,8.90380592 7.1109127,8.45609067 7.1109127,7.90380592 C7.1109127,7.35152117 7.55862795,6.90380592 8.1109127,6.90380592 L16.5961941,6.90380592 C17.1315855,6.90380592 17.5719943,7.32548256 17.5952502,7.8603687 L17.9488036,15.9920967 C17.9727933,16.5438602 17.5449482,17.0106003 16.9931847,17.0345901 C16.4414212,17.0585798 15.974681,16.6307346 15.9506913,16.0789711 L15.6387276,8.90380592 L8.1109127,8.90380592 Z"
+                                    fill="#fff" fill-rule="nonzero" />
+                                </g>
+                              </svg>
+                            </td>
+                            <td>{{inv.redeemed_by.username}}</td>
+                            <td>
+                              <!-- Small Image (Clickable) -->
+                              <img src="/media/{{ inv.image }}" 
+                                   class="rounded me-2 img-thumbnail" 
+                                   style="width:80px; height:80px; cursor:pointer;" 
+                                   alt="Invoice Image"
+                                   data-bs-toggle="modal" 
+                                   data-bs-target="#imageModal"
+                                   onclick="setModalImage('/media/{{ inv.image }}')">
+                            
+                              <!-- Bootstrap Modal -->
+                              <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title">Enlarged Image</h5>
+                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body text-center">
+                                      <img id="modalImage" src="" class="img-fluid rounded" alt="Enlarged Image">
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </td>
+                            
+                            {% comment %} <td>USDT</td> {% endcomment %}
+                            <td>{{inv.amount}}</td>
+                            {% comment %} <td>{{inv.amivolume}}</td> {% endcomment %}
+                            
+                            
+                              
+                            <td>
+                              {% if inv.given_discount %}
+                              <span class="text-danger">pending</span>
+                              {% else %}
+                              <span class="text-danger">yet to be distributed</span>
+
+                              {% endif %}
+                            </td>
+                            <td>
+                              {% if inv.ritcoin_worth %}
+                              <span class="text-danger">pending</span>
+                              {% else %}
+                              <span class="text-danger">yet to be distributed</span>
+
+                              {% endif %}
+                              
+                              {% comment %} {{inv.ritcoin_worth}} {% endcomment %}
+                            </td>
+                            <td>{{inv.upload_date}}</td>
+                            
+                            {% if inv.approve_date %}
+                            <td>{{inv.approve_date}}</td>
+                            {% else %}
+                            <td><span class="text-danger">yet to be approved</span></td>
+                            {% endif %}
+                              
+    
+                            
+                            <td class="text-end">
+                            {% if inv.status  %}
+                            <div class="badge badge-sm badge-danger">SUCCESS</div>
+                            
+                            {% comment %} {% elif inv.status == 'rejected' %} {% endcomment %}
+                            
+                            {% else %}
+                            <div class="badge badge-sm badge-warning">PENDING</div>
+                            {% comment %} <div class="badge badge-sm badge-success">SUCCESS</div> {% endcomment %}
+    
+                            {% endif %}
+                              
+                              {% comment %} <div class="badge badge-sm badge-success">SUCCESS</div> {% endcomment %}
+                            </td>
+                          </tr>
+    
+                          {% endfor %}
+                          {% endif %}
+    
+    
+    
+    
+    
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <div class="tab-pane fade show" id="wtd" role="tabpanel" aria-labelledby="wtd-tab">
+                    <div class="table-responsive">
+                      <table class="table table-responsive-md">
+                        <thead>
+                          <tr>
+                            <th>
+                              #
+                            </th>
+                            <th>Withdrawal Address</th>
+    
+                            <th>Requested Amount($)</th>
+                            <th>Admin charge($)</th>
+                            <th>Total Transferred($)</th>
+                            <th>Coin</th>
+                            <th>Coin Rate(USDT)</th>
+                            <th>Trasferred value</th>
+                            <th>Transaction Hash</th>
+                            <th>Date</th>
+                            {% comment %} <th>To</th> {% endcomment %}
+                            <th class="text-end">Status</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {% with  allWds=request.user.walletAMICoinMember_zquser.all %}
+                          {% if allWds.count > 0 %}
+                          {% for inv in allWds %}
+    
+                          <tr>
+                            <td>
+                              <svg class="arrow style-2 svg-main-icon"
+                                xmlns="http://www.w3.org/2000/svg"
+                                xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+                                height="24px" viewBox="0 0 24 24" version="1.1">
+                                <g stroke="none" stroke-width="1" fill="none"
+                                  fill-rule="evenodd">
+                                  <polygon points="0 0 24 0 24 24 0 24" />
+                                  <rect fill="#fff" opacity="0.3"
+                                    transform="translate(11.646447, 12.853553) rotate(-315.000000) translate(-11.646447, -12.853553) "
+                                    x="10.6464466" y="5.85355339" width="2" height="14"
+                                    rx="1" />
+                                  <path
+                                    d="M8.1109127,8.90380592 C7.55862795,8.90380592 7.1109127,8.45609067 7.1109127,7.90380592 C7.1109127,7.35152117 7.55862795,6.90380592 8.1109127,6.90380592 L16.5961941,6.90380592 C17.1315855,6.90380592 17.5719943,7.32548256 17.5952502,7.8603687 L17.9488036,15.9920967 C17.9727933,16.5438602 17.5449482,17.0106003 16.9931847,17.0345901 C16.4414212,17.0585798 15.974681,16.6307346 15.9506913,16.0789711 L15.6387276,8.90380592 L8.1109127,8.90380592 Z"
+                                    fill="#fff" fill-rule="nonzero" />
+                                </g>
+                              </svg>
+                            </td>
+                            <td>{{inv.withrawal_add}}</td>
+                            {% comment %} <td>{{inv.transactionId.hashtrxn}}</td> {% endcomment %}
+                            <td>{{inv.requested_amount}}</td>
+                            <td class="text-danger font-w600">-{{inv.admin_charge}}</td>
+                            <td class="text-success font-w600">+{{inv.total_value}}</td>
+                            {% comment %} <td>{{inv.admin_charge}}</td> {% endcomment %}
+                            {% comment %} <td>{{inv.total_value}}</td> {% endcomment %}
+                            {% comment %} <td class="text-danger font-w600">
+                              -{{inv.transactionId.amivolume}}</td> {% endcomment %}
+    
+                            {% comment %} <td>{{inv.withrawal_add}}</td> {% endcomment %}
+    
+                            {% comment %} <td>
+                              <div class="d-flex align-items-center"><img
+                                  src="images/avatar/1.jpg" class=" me-2" width="30" alt="">
+                                <span class="w-space-no">{{inv.cointype}}</span></div>
+                            </td> {% endcomment %}
+                            <td> {{inv.transactionId.cointype}}</td>
+                            <td>
+                              <div class="d-flex align-items-center"><img src="images/svg/btc.svg"
+                                  alt="" class="me-2 img-btc">{{inv.transactionId.coinvalue}}
+                              </div>
+                            </td>
+                            <td class="text-success font-w600">{{inv.transactionId.amivolume}}</td>
+    
+                            <td>{{inv.transactionId.hashtrxn}}</td>
+                            <td class="font-w600">{{inv.transactionId.trxndate}}</td>
+                            {% comment %} <td></td> {% endcomment %}
+                            {% comment %} <td class="text-success font-w600">{{inv.amivolume}}</td>
+                            {% endcomment %}
+                            <td class="text-end">
+                              <div class="badge badge-sm badge-success">SUCCESS</div>
+                            </td>
+                          </tr>
+                          {% endfor %}
+                          {% endif %}
+                          {% endwith %}
+    
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+
+        <!-- </div> -->
+    </div>
+
+      <!-- </form> -->
+
+
+
+
+
+
+  </div>
+</div>
+<!-- </div> -->
+
+
+
+
+{% endblock  %}
+
+
+{% block 'addFooterScripts' %}
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<!-- counter -->
+<script src="{% static 'surveyapp/vendor/counter/counter.min.js' %} "></script>
+<script src="{% static 'surveyapp/vendor/counter/waypoint.min.js' %} "></script>
+<script src="{% static 'surveyapp/vendor/peity/jquery.peity.min.js' %} "></script>
+<script src="{% static 'surveyapp/js/dashboard/dashboard-1.js' %} "></script>
+
+<script>
+  const csrftoken = '{{ csrf_token }}';
+
+</script>
+
+
+{% comment %} <script src="{% static 'dist/bundle.js' %}"></script> <!-- Adjust path as needed --> {% endcomment %}
+
+<script>
+  function setModalImage(imageSrc) {
+    document.getElementById("modalImage").src = imageSrc;
+  }
+</script>
+<script>
+  document.getElementById("viewQrBtn").addEventListener("click", function () {
+    const qrContainer = document.querySelector(".row.text-center"); // Locate QR container
+    const qrButton = this;
+    const amount = 0;
+    if (true) {
+
+
+      fetch('/member/walletHistory/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': getCookie('csrftoken')
+        },
+        body: JSON.stringify({ type: 'sendotp', amount: amount, what_for: 'sendOTPQR' })
+      })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+
+
+            // Replace QR code with file input and OTP input
+            qrContainer.innerHTML = `
+						 <input type="file" name="youtube_image" id="qrInput" class="form-control mb-3" accept="image/*" placeholder="Upload QR code">
+						 <input type="text" name="emailOtp" class="form-control mb-3" placeholder="Enter Email OTP">
+						 <small class="text-success">eneter otp sent to your email</small>
+					 `;
+
+            // Change button text and functionality
+            qrButton.textContent = "Save QR";
+            qrButton.type = "submit";
+            qrButton.name = "QRCODEBTN";
+            qrButton.value = "QRCODE";
+            qrButton.removeAttribute("id");
+
+            //qrButton.addEventListener("click", saveQrDetails);
+
+
+
+
+          } else {
+            alert(data.msg);
+
+            location.reload();
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+
+    }
+
+
+  });
+
+  function saveQrDetails() {
+    const qrInput = document.getElementById("qrInput");
+    const otpInput = document.getElementById("emailOtp");
+
+    if (qrInput.files.length > 0 && otpInput.value.trim() !== "") {
+      const file = qrInput.files[0];
+      const otp = otpInput.value;
+      alert(`File "${file.name}" and OTP "${otp}" received!`); // Replace with your save logic
+    } else {
+      alert("Please upload a QR file and enter the OTP.");
+    }
+  }
+
+
+
+
+</script>
+
+
+<script>
+  function previewImage(event, id) {
+    const file = event.target.files[0];
+    const previewDiv = document.getElementById(id);
+
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        const img = document.createElement('img');
+        img.src = e.target.result;
+        img.alt = "Selected Image";
+        img.style.width = "100%";
+        img.style.maxWidth = "300px";
+        img.style.maxHeight = "300px";
+
+        //alt="Snow" style="width:100%;max-width:300px"
+        previewDiv.innerHTML = '';
+        previewDiv.appendChild(img);
+      }
+      reader.readAsDataURL(file);
+    } else {
+      previewDiv.innerHTML = '<p>No image selected</p>';
+    }
+  }
+</script>
+
+
+<script>
+  function sendOTPWithdrawal() {
+
+    console.log('came here');
+
+
+    const amount = document.getElementById('Wdamount').value;
+    {% comment %} const walletAdd = document.getElementById('walletAdd').value; {% endcomment %}
+    const sendotpwithdrawalbutton = document.getElementById('sendotpwithdarwal');
+    const withdrawButton = document.getElementById('withdrawButtonINR');
+    //const totalBal=`{{request.user.totalWalletBalance}}`;
+    //console.log(amount);
+    if (!amount || !(amount > 0)) {
+      alert('Please enter a  valid amount.');
+      return;
+    }
+
+
+
+
+    if (true) {
+
+      bt = $(`#sendotpwithdarwal`);
+      bt.attr("disabled", "").html("<i class='fa fa-spin fa-spinner'></i>&nbsp;&nbsp;Please wait...");
+      $('#amount').prop('readonly', true);
+      $('#walletAdd').prop('readonly', true);
+      fetch('/member/withdraw/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': getCookie('csrftoken')
+        },
+        body: JSON.stringify({ wdamount: amount, type: 'INR', amount: amount, what_for: 'sendOTPWalletWd' })
+      })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+
+
+            $('#sendotpwithdarwal').css('display', 'none');
+            $('#wdotp').css('display', 'block');
+            {% comment %} $('#wdotp').css('display', 'block'); {% endcomment %}
+            $('#withdrawButtonINR').css('display', 'block');
+
+            return
+
+
+
+
+          } else {
+            alert(data.msg);
+
+            location.reload();
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+
+    }
+  }
+
+</script>
+
+
+<script>
+  function setModalImage(imageSrc) {
+    document.getElementById("modalImage").src = imageSrc;
+  }
+</script>
+<script>
+  function previewImage(event) {
+    const file = event.target.files[0]; // Get the selected file
+    const previewDiv = document.getElementById("imagePreviewContainer"); // Get the container to display the image
+
+    if (file) {
+        const reader = new FileReader(); // Create a FileReader instance
+        reader.onload = function(e) {
+            // Create an img element and set the src to the loaded image
+            const img = document.createElement('img');
+            img.src = e.target.result;
+            img.alt = "Selected Image";
+            img.style.width = "100%";
+            img.style.maxWidth = "300px"; // Limit the max size of the image
+            img.style.maxHeight = "300px"; // Limit the max size of the image
+
+            // Clear any previous preview and append the new image
+            previewDiv.innerHTML = '';
+            previewDiv.appendChild(img);
+        }
+        reader.readAsDataURL(file); // Read the file as a data URL
+    } else {
+        previewDiv.innerHTML = '<p>No image selected</p>'; // Display message if no file is selected
+    }
+}
+
+</script>
+
+
+
+{% endblock %}

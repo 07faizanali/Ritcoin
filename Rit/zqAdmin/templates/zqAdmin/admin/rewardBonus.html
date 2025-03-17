@@ -1,0 +1,192 @@
+{% extends 'zqUsers/member/layout/main.html' %}
+{% block 'content' %}
+    <div class="app-main__outer">
+        <div class="app-main__inner">
+            <div class="app-page-title">
+                <div class="page-title-wrapper">
+                    <div class="page-title-heading">
+                        <div class="page-title-icon">
+                            <i class="pe-7s-glasses icon-gradient bg-love-kiss">
+                            </i>
+                        </div>
+                        <div>
+                            Reward Bonus
+                            <div class="page-title-subheading"></div>
+                        </div>
+                    </div>
+                    {% comment %} <div class="page-title-actions">
+                        <button type="button"
+                                data-toggle="tooltip"
+                                title="Example Tooltip"
+                                data-placement="bottom"
+                                class="btn-shadow mr-3 btn btn-dark">
+                            <i class="fa fa-star"></i>
+                        </button>
+                        <div class="d-inline-block dropdown">
+                            <button type="button"
+                                    data-toggle="dropdown"
+                                    aria-haspopup="true"
+                                    aria-expanded="false"
+                                    class="btn-shadow dropdown-toggle btn btn-info">
+                                <span class="btn-icon-wrapper pr-2 opacity-7">
+                                    <i class="fa fa-business-time fa-w-20"></i>
+                                </span>
+                                Buttons
+                            </button>
+                            <div tabindex="-1"
+                                 role="menu"
+                                 aria-hidden="true"
+                                 class="dropdown-menu dropdown-menu-right">
+                                <ul class="nav flex-column">
+                                    <li class="nav-item">
+                                        <a href="javascript:void(0);" class="nav-link">
+                                            <i class="nav-link-icon lnr-inbox"></i>
+                                            <span>Inbox</span>
+                                            <div class="ml-auto badge badge-pill badge-secondary">86</div>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="javascript:void(0);" class="nav-link">
+                                            <i class="nav-link-icon lnr-book"></i>
+                                            <span>Book</span>
+                                            <div class="ml-auto badge badge-pill badge-danger">5</div>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="javascript:void(0);" class="nav-link">
+                                            <i class="nav-link-icon lnr-picture"></i>
+                                            <span>Picture</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a disabled href="javascript:void(0);" class="nav-link disabled">
+                                            <i class="nav-link-icon lnr-file-empty"></i>
+                                            <span>File Disabled</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div> {% endcomment %}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="main- mb-3 ">
+                        {% if listTxn  %}
+                        <div class="">
+
+                          
+                            <table class="mb-0 table">
+                                <thead>
+                                    <tr>
+                                        <th>Sr No.</th>
+                                        <th>Date</th>
+                                        <th>Investment</th>
+                                        {% comment %} <th>ROI</th> {% endcomment %}
+                                        <th>Roi Amount</th>
+                                        <th>ROI Days</th>
+                                        <th>Remark</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    
+                                    
+                                 
+                                {% for index,txn in  listTxn %}
+                                <tr>
+                                    <th scope="row">{{index|add:1}}</th>
+                                    <td>{{txn.roi_date|date:"d-m-y"}}</td>
+                                    <td>{{txn.total_sbg}}</td>
+                                    <td>{{txn.roi_sbg}}</td>
+                                    <td>{{txn.roi_days}}</td>
+                                    <td>{{txn.remark}}</td>
+                                </tr>
+
+                                {% endfor  %}
+
+
+                                    {% comment %} <tr>
+                                        <th scope="row">1</th>
+                                        <td>18-09-2022</td>
+                                        <td>10000620.98</td>
+                                        <td>200012.42</td>
+                                        <td>240</td>
+                                        <td>Roi for 1.00006e+007 ZQL Coin is 2%</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">2</th>
+                                        <td>18-09-2022</td>
+                                        <td>10000620.98</td>
+                                        <td>200012.42</td>
+                                        <td>240</td>
+                                        <td>Roi for 1.00006e+007 ZQL Coin is 2%</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">3</th>
+                                        <td>18-09-2022</td>
+                                        <td>10000620.98</td>
+                                        <td>200012.42</td>
+                                        <td>240</td>
+                                        <td>Roi for 1.00006e+007 ZQL Coin is 2%</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">4</th>
+                                        <td>18-09-2022</td>
+                                        <td>10000620.98</td>
+                                        <td>200012.42</td>
+                                        <td>240</td>
+                                        <td>Roi for 1.00006e+007 ZQL Coin is 2%</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">5</th>
+                                        <td>18-09-2022</td>
+                                        <td>10000620.98</td>
+                                        <td>200012.42</td>
+                                        <td>240</td>
+                                        <td>Roi for 1.00006e+007 ZQL Coin is 2%</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">6</th>
+                                        <td>18-09-2022</td>
+                                        <td>10000620.98</td>
+                                        <td>200012.42</td>
+                                        <td>240</td>
+                                        <td>Roi for 1.00006e+007 ZQL Coin is 2%</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">7</th>
+                                        <td>18-09-2022</td>
+                                        <td>10000620.98</td>
+                                        <td>200012.42</td>
+                                        <td>240</td>
+                                        <td>Roi for 1.00006e+007 ZQL Coin is 2%</td>
+                                    </tr> {% endcomment %}
+
+
+                                </tbody>
+                            </table>
+
+                           
+                        </div>
+                        {% else  %}
+
+                        <div class="row">
+                            <div class="col-md-12 ">
+                                <div class=" mb-3  ">
+                                    <div class="card-body mt-5 mb-5 text-center bg-white">
+                                        <span style="color:red;">No Records found</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {% endif   %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock 'content' %}

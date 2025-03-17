@@ -1,0 +1,656 @@
+{% extends 'zqUsers/member/layout/main.html' %}
+
+{% load static %}
+{% load customFilters %}
+
+
+{% block 'content' %}
+
+<div class="container mt-5">
+  <div class="row">
+	  <div class="col-md-3"></div>
+	  <div class="col-xl-6 p-5">
+		  <div class="filter cm-content-box box-primary ">
+			  
+			  
+				  <div class="card-body p-5"style="background-color:white;color:black;">
+					  <p style="font-size:17px;line-height:24px;"> <i>You email has been verified successfuly</i></p>
+					  <div class="row">
+					  <div class="col-lg-4"></div>
+					  <div class="col-lg-5">
+					  {% comment %} <button type="btn" class="btn btn-primary " id="reSendMail"  onclick="resendMailActivation()">Login</button> {% endcomment %}
+
+                      {% comment %} <a  href="{% url 'index' %}" role="button"  class="btn btn-primary ">Login</a> {% endcomment %}
+                    
+                    
+                    </div>
+					  <div class="col-lg-3"></div>
+					  </div>
+				  </div>
+			  
+		  </div>
+	  
+		  
+	  </div>
+	  <div class="col-md-3"></div>
+  </div>
+</div>
+
+
+
+{% endblock  %}
+
+
+{% block 'addFooterScripts' %}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.6.1-rc.0/web3.min.js"></script>
+
+
+<script>
+	function resendMailActivation(){
+
+			
+		var bt = $("#reSendMail");
+		bt.attr("disabled", true).html("<i class='fa fa-spin fa-spinner'></i>&nbsp;&nbsp;please wait...");
+	
+
+
+			$.ajax({
+				url: "/resendactivationemail/",
+				type: "post",
+				data: {
+					
+					type:'reset',
+					csrfmiddlewaretoken: `{{ csrf_token }}`
+				},
+			   // processData: false,
+			   // contentType: false,
+				success: function (resultdata) {
+					var status = resultdata.status;
+					if (parseInt(status) !== 0) {
+						alert(resultdata.msg);
+						location.reload();
+					} else {
+						alert(resultdata.msg);
+						location.reload();
+					}
+				},
+				error: function () {
+					alert("Something went wrong. Please try again later");
+					location.reload();
+				},
+				complete: function () {
+					// Reset button state
+					bt.attr("disabled", false).html("Verify Bank");
+				}
+			});
+		
+		
+		
+	
+
+}
+</script>
+
+
+{% comment %} <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> {% endcomment %}
+
+{% comment %} <script>
+    let account;
+    let web3;
+
+    async function connectMetaMask() {
+        if (typeof window.ethereum !== 'undefined') {
+            try {
+                const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+                account = accounts[0];
+                document.getElementById('account').innerText = 'Connected Account: ' + account;
+
+                web3 = new Web3(window.ethereum);
+                const chainId = await web3.eth.getChainId();
+                let networkName;
+                let nativeCurrency;
+
+                switch (chainId) {
+                    case 1:
+                        networkName = 'Ethereum Mainnet';
+                        nativeCurrency = 'ETH';
+                        break;
+                    case 3:
+                        networkName = 'Ropsten Testnet';
+                        nativeCurrency = 'ETH';
+                        break;
+                    case 4:
+                        networkName = 'Rinkeby Testnet';
+                        nativeCurrency = 'ETH';
+                        break;
+                    case 5:
+                        networkName = 'Goerli Testnet';
+                        nativeCurrency = 'ETH';
+                        break;
+                    case 42:
+                        networkName = 'Kovan Testnet';
+                        nativeCurrency = 'ETH';
+                        break;
+                    case 56:
+                        networkName = 'Binance Smart Chain Mainnet';
+                        nativeCurrency = 'BNB';
+                        break;
+                    case 97:
+                        networkName = 'Binance Smart Chain Testnet';
+                        nativeCurrency = 'tBNB';
+                        break;
+                    // Add other networks here as needed
+                    default:
+                        networkName = 'Unknown Network';
+                        nativeCurrency = 'Unknown';
+                }
+
+                document.getElementById('network').innerText = 'Connected Network: ' + networkName;
+
+                const balance = await web3.eth.getBalance(account);
+                const balanceInNativeCurrency = web3.utils.fromWei(balance, 'ether');
+                document.getElementById('balance').innerText = 'Balance: ' + balanceInNativeCurrency + ' ' + nativeCurrency;
+
+            } catch (error) {
+                console.error('User denied account access or error occurred', error);
+            }
+        } else {
+            alert('MetaMask is not installed. Please install it to use this feature.');
+        }
+    }
+
+    async function sendTransaction() {
+        if (typeof window.ethereum !== 'undefined' && account) {
+            try {
+                const recipient = '0xRecipientAddressHere';  // Replace with the recipient's address
+                const amount = web3.utils.toWei('0.1', 'ether');  // Replace with the amount to send
+
+                await web3.eth.sendTransaction({
+                    from: account,
+                    to: recipient,
+                    value: amount
+                })
+                .on('transactionHash', (hash) => {
+                    console.log('Transaction Hash:', hash);
+                })
+                .on('receipt', (receipt) => {
+                    console.log('Receipt:', receipt);
+                })
+                .on('error', (error) => {
+                    console.error('Transaction failed:', error);
+                });
+
+            } catch (error) {
+                console.error('Error sending transaction:', error);
+            }
+        } else {
+            alert('MetaMask is not connected. Please connect it first.');
+        }
+    }
+
+    document.getElementById('connectButton').onclick = connectMetaMask;
+    document.getElementById('sendButton').onclick = sendTransaction;
+</script> {% endcomment %}
+
+
+{% comment %} <script>
+
+    let web3;
+    let account;
+
+    async function connectMetaMask() {
+        if (typeof window.ethereum !== 'undefined') {
+            web3 = new Web3(window.ethereum);
+            await window.ethereum.request({ method: 'eth_requestAccounts' });
+            const accounts = await web3.eth.getAccounts();
+            account = accounts[0];
+        
+       
+
+            const chainId = await web3.eth.getChainId();
+            let networkName;
+            let nativeCurrency;
+
+            switch (chainId) {
+                case 1:
+                    networkName = 'Ethereum Mainnet';
+                    nativeCurrency = 'ETH';
+                    break;
+                case 56:
+                    networkName = 'Binance Smart Chain Mainnet';
+                    nativeCurrency = 'BNB';
+                    break;
+                case 97:
+                    networkName = 'Binance Smart Chain Testnet';
+                    nativeCurrency = 'tBNB';
+                    break;
+                default:
+                    networkName = 'Unknown Network';
+                    nativeCurrency = 'Unknown';
+            }
+
+            //document.getElementById('network').innerText = 'Connected Network: ' + networkName;
+
+            if (chainId == 97) { // Check if the connected network is BSC Testnet
+
+                var totalBal=await getBalance(account);
+                if(totalBal){
+
+                    document.getElementById('cnbtn').innerHTML = `<button type="button" class="btn btn-success"><i class="fas fa-wallet"></i>${totalBal}tBNB</button> `;
+                }
+
+
+            } 
+            if (chainId !== 97) {
+                try {
+                    await window.ethereum.request({
+                        method: 'wallet_switchEthereumChain',
+                        params: [{ chainId: '0x61' }], // Chain ID 97 in hexadecimal (0x61)
+                    });
+                } catch (switchError) {
+                    if (switchError.code === 4902) {
+                        try {
+                            await window.ethereum.request({
+                                method: 'wallet_addEthereumChain',
+                                params: [
+                                    {
+                                        chainId: '0x61',
+                                        chainName: 'BSC Testnet',
+                                        rpcUrls: ['https://data-seed-prebsc-1-s1.binance.org:8545/'],
+                                        nativeCurrency: {
+                                            name: 'tBNB',
+                                            symbol: 'tBNB',
+                                            decimals: 18,
+                                        },
+                                        blockExplorerUrls: ['https://testnet.bscscan.com'],
+                                    },
+                                ],
+                            });
+                        } catch (addError) {
+                            console.error(addError);
+                        }
+                    }
+                }
+            }
+
+        } else {
+            alert('MetaMask is not installed. Please install MetaMask to proceed.');
+        }
+    }
+    async function getBalance(account) {
+        try {
+            const balance = await web3.eth.getBalance(account);
+            const balanceInBNB = web3.utils.fromWei(balance, 'ether');
+
+            return balanceInBNB
+           // document.getElementById('balance').innerText = 'Balance: ' + balanceInBNB + ' tBNB';
+        } catch (error) {
+            console.error('Error getting balance:', error);
+            return false
+        }
+    }
+    async function payWithMetaMask() {
+
+        //console.log("came here");
+        bt = $(`#pay-button`);
+        bt.attr("disabled", "").html("<i class='fa fa-spin fa-spinner'></i>&nbsp;&nbsp;Please wait...");
+
+        var amnt=document.getElementById('amount').value;
+        const response = await fetch(`/member/get-busd-price/`);
+        const data = await response.json();
+        const priceInUsd = data.price;
+        console.log(priceInUsd);
+        const cryptoAmount = (amnt / priceInUsd).toFixed(18); // Calculate crypto amount for $55
+
+        console.log(cryptoAmount);
+        if (!account) {
+            alert('Please connect to MetaMask first.');
+            location.reload();
+            return;
+        }
+
+        web3.eth.sendTransaction({
+            from: account,
+            to: '0xe749438B8CEBC367869ADAAf7D1B108d3c77A856', // Replace with your testnet receiving address
+            //value: web3.utils.toWei('1', 'ether') // Amount in tBNB
+            value: web3.utils.toWei(cryptoAmount, 'ether') // Amount in tBNB
+        })
+        .on('transactionHash', function(hash) {
+            console.log('Transaction Hash:', hash);
+            sendTransactionHashToDjango(hash,priceInUsd,'tBNB',cryptoAmount);
+            //location.reload();
+        }).on('error', console.error);
+        /*.on('confirmation', function(hash,confirmationNumber, receipt) {
+            console.log(hash);
+            console.log('Confirmation Number:', confirmationNumber);
+            console.log('Receipt:', receipt);
+        })*/
+        
+    }
+
+    function ActivateUserId() {
+
+       // console.log("came here");
+
+       const totalWalletBalance = parseFloat(`{{ request.user.totalWalletBalance }}`);
+
+        bt = $(`#ActivateId`);
+        bt.attr("disabled", "").html("<i class='fa fa-spin fa-spinner'></i>&nbsp;&nbsp;Please wait...");
+
+        const amount = parseFloat($('#amount').val());
+
+        if (isNaN(amount) || !(amount <= totalWalletBalance)) {
+            alert("Insufficient Wallet Balance");
+            location.reload();
+            return;  // Exit the function early
+        }
+
+
+
+        fetch('/member/activate-id/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                //'X-CSRFToken': getCookie('csrftoken')
+                'X-CSRFToken': `{{csrf_token}}`
+            },
+            body: JSON.stringify({Package:amount })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert(data.msg);
+                location.reload(); // Reload the page
+            } else {
+                alert(data.msg);
+                location.reload();
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+    function sendTransactionHashToDjango(transactionHash,tranTimeCoinValue,coinName,cryptoAmount) {
+        fetch('/member/verify-transaction/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                //'X-CSRFToken': getCookie('csrftoken')
+                'X-CSRFToken': `{{csrf_token}}`
+            },
+            body: JSON.stringify({ transactionHash: transactionHash,tranTimeCoinValue:tranTimeCoinValue,coinName:coinName,cryptoAmount:cryptoAmount })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Transaction verified and funds added to your wallet.');
+                location.reload(); // Reload the page
+            } else {
+                alert('Transaction verification failed.');
+                location.reload();
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
+
+    document.getElementById('connect-button').addEventListener('click', connectMetaMask);
+    document.getElementById('pay-button').addEventListener('click', payWithMetaMask);
+
+</script> 
+	 {% endcomment %}
+
+{% comment %} <script type="text/javascript">
+    let web3;
+    let account;
+
+    async function connectMetaMask() {
+        if (typeof window.ethereum !== 'undefined') {
+            web3 = new Web3(window.ethereum);
+            await window.ethereum.request({ method: 'eth_requestAccounts' });
+            const accounts = await web3.eth.getAccounts();
+            account = accounts[0];
+        
+           // console.log(accounts);
+            //document.getElementById('account').innerText = 'Connected Account: ' + account;
+            //document.getElementById('connect-button').innerText = 'Connected';
+            
+            //document.getElementById('cnbtn').innerHTML = `<button type="button" id="connect-button" class="btn btn-success">Connected</button>`;
+           
+            //$('#metaAdd').attr('type', 'text');
+            //$('#metaAdd').val(account);
+           // const chainId = await web3.eth.getChainId();
+            //web3 = new Web3(window.ethereum);
+
+            const chainId = await web3.eth.getChainId();
+            let networkName;
+            let nativeCurrency;
+
+            switch (chainId) {
+                case 1:
+                    networkName = 'Ethereum Mainnet';
+                    nativeCurrency = 'ETH';
+                    break;
+                case 56:
+                    networkName = 'Binance Smart Chain Mainnet';
+                    nativeCurrency = 'BNB';
+                    break;
+                case 97:
+                    networkName = 'Binance Smart Chain Testnet';
+                    nativeCurrency = 'tBNB';
+                    break;
+                default:
+                    networkName = 'Unknown Network';
+                    nativeCurrency = 'Unknown';
+            }
+
+            //document.getElementById('network').innerText = 'Connected Network: ' + networkName;
+
+            if (chainId == 97) { // Check if the connected network is BSC Testnet
+
+                var totalBal=await getBalance(account);
+                if(totalBal){
+
+                    document.getElementById('cnbtn').innerHTML = `
+            <button type="button" class="btn btn-success"><i class="fas fa-wallet"></i>     ${totalBal}tBNB</button> `;
+                }
+
+
+            } 
+            if (chainId !== 97) {
+                try {
+                    await window.ethereum.request({
+                        method: 'wallet_switchEthereumChain',
+                        params: [{ chainId: '0x61' }], // Chain ID 97 in hexadecimal (0x61)
+                    });
+                } catch (switchError) {
+                    if (switchError.code === 4902) {
+                        try {
+                            await window.ethereum.request({
+                                method: 'wallet_addEthereumChain',
+                                params: [
+                                    {
+                                        chainId: '0x61',
+                                        chainName: 'BSC Testnet',
+                                        rpcUrls: ['https://data-seed-prebsc-1-s1.binance.org:8545/'],
+                                        nativeCurrency: {
+                                            name: 'tBNB',
+                                            symbol: 'tBNB',
+                                            decimals: 18,
+                                        },
+                                        blockExplorerUrls: ['https://testnet.bscscan.com'],
+                                    },
+                                ],
+                            });
+                        } catch (addError) {
+                            console.error(addError);
+                        }
+                    }
+                }
+            }
+
+        } else {
+            alert('MetaMask is not installed. Please install MetaMask to proceed.');
+        }
+    }
+    async function getBalance(account) {
+        try {
+            const balance = await web3.eth.getBalance(account);
+            const balanceInBNB = web3.utils.fromWei(balance, 'ether');
+
+            return balanceInBNB
+           // document.getElementById('balance').innerText = 'Balance: ' + balanceInBNB + ' tBNB';
+        } catch (error) {
+            console.error('Error getting balance:', error);
+            return false
+        }
+    }
+    async function payWithMetaMask() {
+
+        //console.log("came here");
+        bt = $(`#pay-button`)
+        bt.attr("disabled", "").html("<i class='fa fa-spin fa-spinner'></i>&nbsp;&nbsp;Please wait...");
+
+        var amnt=document.getElementById('amount').value
+        const response = await fetch(`/member/get-busd-price/`);
+        const data = await response.json();
+        const priceInUsd = data.price;
+        console.log(priceInUsd);
+        const cryptoAmount = (amnt / priceInUsd).toFixed(18); // Calculate crypto amount for $55
+
+        console.log(cryptoAmount);
+        if (!account) {
+            alert('Please connect to MetaMask first.');
+            location.reload();
+            return;
+        }
+
+        web3.eth.sendTransaction({
+            from: account,
+            to: '0xe749438B8CEBC367869ADAAf7D1B108d3c77A856', // Replace with your testnet receiving address
+            //value: web3.utils.toWei('1', 'ether') // Amount in tBNB
+            value: web3.utils.toWei(cryptoAmount, 'ether') // Amount in tBNB
+        })
+        .on('transactionHash', function(hash) {
+            console.log('Transaction Hash:', hash);
+            sendTransactionHashToDjango(hash,priceInUsd,'tBNB',cryptoAmount);
+            //location.reload();
+        }).on('error', console.error);
+        /*.on('confirmation', function(hash,confirmationNumber, receipt) {
+            console.log(hash);
+            console.log('Confirmation Number:', confirmationNumber);
+            console.log('Receipt:', receipt);
+        })*/
+        
+    }
+
+    function ActivateUserId() {
+
+       // console.log("came here");
+
+       const totalWalletBalance = parseFloat(`{{ request.user.totalWalletBalance }}`);
+
+        bt = $(`#ActivateId`)
+        bt.attr("disabled", "").html("<i class='fa fa-spin fa-spinner'></i>&nbsp;&nbsp;Please wait...");
+
+        const amount = parseFloat($('#amount').val());
+
+        if (isNaN(amount) || !(amount <= totalWalletBalance)) {
+            alert("Insufficient Wallet Balance");
+            location.reload();
+            return;  // Exit the function early
+        }
+
+
+
+        fetch('/member/activate-id/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                //'X-CSRFToken': getCookie('csrftoken')
+                'X-CSRFToken': `{{csrf_token}}`
+            },
+            body: JSON.stringify({Package:amount })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert(data.msg);
+                location.reload(); // Reload the page
+            } else {
+                alert(data.msg);
+                location.reload();
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+    function sendTransactionHashToDjango(transactionHash,tranTimeCoinValue,coinName,cryptoAmount) {
+        fetch('/member/verify-transaction/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                //'X-CSRFToken': getCookie('csrftoken')
+                'X-CSRFToken': `{{csrf_token}}`
+            },
+            body: JSON.stringify({ transactionHash: transactionHash,tranTimeCoinValue:tranTimeCoinValue,coinName:coinName,cryptoAmount:cryptoAmount })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Transaction verified and funds added to your wallet.');
+                location.reload(); // Reload the page
+            } else {
+                alert('Transaction verification failed.');
+                location.reload();
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
+
+    document.getElementById('connect-button').addEventListener('click', connectMetaMask);
+    document.getElementById('pay-button').addEventListener('click', payWithMetaMask);
+</script>
+ {% endcomment %}
+
+{% endblock %}
+
+
+

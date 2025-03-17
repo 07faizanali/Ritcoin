@@ -1,0 +1,206 @@
+{% comment %} <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bar Chart</title>
+    <style>
+        .bar-chart {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-end;
+            height: 300px;
+            width: 80%;
+            margin: 50px auto;
+            background-color: #f4f4f4;
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .bar {
+            width: 20%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            text-align: center;
+        }
+
+        .bar div {
+            height: 0;
+            transition: height 0.5s;
+        }
+
+        .bar-chart:hover .bar div {
+            height: 100%;
+        }
+
+        .bar .referral {
+            background-color: #4CAF50;
+        }
+
+        .bar .weekly {
+            background-color: #FF9800;
+        }
+
+        .bar .promotions {
+            background-color: #2196F3;
+        }
+
+        .bar .bonuses {
+            background-color: #f44336;
+        }
+
+        .bar span {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .bar .referral span {
+            color: #4CAF50;
+        }
+
+        .bar .weekly span {
+            color: #FF9800;
+        }
+
+        .bar .promotions span {
+            color: #2196F3;
+        }
+
+        .bar .bonuses span {
+            color: #f44336;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bar-chart">
+        <div class="bar">
+            <div class="referral" style="height: 25%;"></div>
+            <span>25%<br>Referral Bonuses</span>
+        </div>
+        <div class="bar">
+            <div class="weekly" style="height: 25%;"></div>
+            <span>25%<br>Weekly Rewards</span>
+        </div>
+        <div class="bar">
+            <div class="promotions" style="height: 20%;"></div>
+            <span>20%<br>Special Promotions</span>
+        </div>
+        <div class="bar">
+            <div class="bonuses" style="height: 15%;"></div>
+            <span>15%<br>Extra Bonuses</span>
+        </div>
+    </div>
+
+</body>
+</html> {% endcomment %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Styled Bar Chart</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .chart-container {
+            width: 80%;
+            height: 500px; /* Increased height */
+            margin: 50px auto;
+        }
+        body {
+            background-color: #013220; /* Dark green background to match the image */
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        .chartjs-render-monitor {
+            background: #013220; /* Dark green background for the chart */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="chart-container">
+        <canvas id="myBarChart"></canvas>
+    </div>
+
+    <script>
+        var ctx = document.getElementById('myBarChart').getContext('2d');
+
+        var myBarChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Referral Bonuses', 'Weekly Rewards', 'Special Promotions', 'Extra Bonuses'],
+                datasets: [{
+                    label: 'Rewards Distribution',
+                    data: [25, 25, 20, 15],
+                    backgroundColor: [
+                        '#1f77b4', // Blue
+                        '#2ca02c', // Green
+                        '#ff7f0e', // Orange
+                        '#d62728'  // Red
+                    ],
+                    borderColor: [
+                        '#1f77b4',
+                        '#2ca02c',
+                        '#ff7f0e',
+                        '#d62728'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    x: {
+                        grid: {
+                            display: false,
+                            color: "#013220",
+                        },
+                        ticks: {
+                            color: 'white', // X-axis labels color
+                        }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        max: 30,
+                        grid: {
+                            color: "#9acd32", // Light green grid color
+                        },
+                        ticks: {
+                            color: 'white', // Y-axis labels color
+                            stepSize: 5,
+                            callback: function(value) { return value + "%"; }
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false // Hiding the legend
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.raw + '%';
+                            }
+                        }
+                    },
+                    datalabels: {
+                        anchor: 'end',
+                        align: 'end',
+                        color: 'white',
+                        formatter: function(value) {
+                            return value + '%';
+                        }
+                    }
+                },
+                responsive: true,
+                maintainAspectRatio: false
+            },
+            plugins: [ChartDataLabels]
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+
+</body>
+</html>

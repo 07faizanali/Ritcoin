@@ -1,0 +1,90 @@
+{% extends 'zqAdmin/admin/layout/main.html' %}
+{% load customFilters  %}
+{% block 'content' %}
+    <div class="app-main__outer">
+        <div class="app-main__inner"
+             style="background-color: rgba(255, 255, 255, 0.775)">
+            <div class="app-page-title">
+                <div class="page-title-wrapper">
+                    <div class="page-title-heading">
+                        <div class="page-title-icon">
+                            <i class="pe-7s-wallet icon-gradient bg-plum-plate"> </i>
+                        </div>
+                        <div>
+                        {{headerNote}}
+                            <div class="page-title-subheading"></div>
+                        </div>
+                    </div>
+
+                
+
+                </div>
+            </div>
+            {% if allClubMems %}
+                <div class="row shadow"style="overflow-x:auto; height:auto;">
+                    <div class="col-lg-12">
+                        <div class="main-card mb-3 ">
+                            <div class="">
+                                <table id="myTable"  class="display"  data-page-length='25' >
+                                    <thead  >
+                                        <tr>
+                                           <!-- <th>Sr No.</th> -->
+                                            <th>Memberid</th>
+                                            <th>Club</th>
+                                            <th>Entered date</th>
+                                            <!-- <th>Amount</th> -->
+                                            <!-- <th data-class-name="priority">Transaction date</th> -->
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for mem in allClubMems %}
+                                            <tr>
+                                                <!-- <th scope="row">{{ index|add:1 }}</th> -->
+                                                <td>{{ mem.memberid.username }}</td>
+                                                <td>{{ mem.club.club_newname }}</td>
+                                                <!-- <td>{{ item.txn_by.username }}</td>
+                                                <td>{{item.amount}}</td> -->
+                                                <td>{{mem.club_added_date}}</td>
+                                              
+                                                {% comment %} <td><button class="btn-wide mb-2 mr-2 btn btn-success btngenrate btn-lg disabled mt-4">Paid</button></td>  {% endcomment %}
+                                            </tr>
+                                        {% endfor %}
+                                    {% endif %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock 'content' %}
+
+
+{% block 'footerScripts' %}
+
+
+
+
+
+
+<script>
+
+
+    $(document).ready(function() {
+        $('#myTable').DataTable();
+    });
+
+
+
+</script>
+
+{% endblock %}
+
+
+

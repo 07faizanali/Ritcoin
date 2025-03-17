@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Editable Organization Chart</title>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jqtree/1.6.1/jqtree.css">
+    <style>
+        .orgChart {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="orgChartContainer"></div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqtree/1.6.1/tree.jquery.js"></script>
+    <script>
+        $(function() {
+            var data = [
+                { label: 'CEO', id: 1, children: [
+                    { label: 'Manager 1', id: 2, children: [
+                        { label: 'Employee 1', id: 3 },
+                        { label: 'Employee 2', id: 4 }
+                    ]},
+                    { label: 'Manager 2', id: 5, children: [
+                        { label: 'Employee 3', id: 6 }
+                    ]}
+                ]}
+            ];
+
+            $('#orgChartContainer').tree({
+                data: data,
+                dragAndDrop: true
+            });
+        });
+    </script>
+</body>
+</html>

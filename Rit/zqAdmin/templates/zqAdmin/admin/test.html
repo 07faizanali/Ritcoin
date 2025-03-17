@@ -1,0 +1,421 @@
+@using SWISSBURG_Web.Models;
+@{
+    ViewBag.Title = "topupaccount";
+    Layout = "~/Views/Shared/_member_new_layout.cshtml.cshtml";
+
+
+    UsersContext db = new UsersContext();
+    double totalamount = 0;
+    double _totalamount = 0;
+    int srno = 0;
+    var credit = db.Database.SqlQuery<double>("select ISNULL(SUM(amount),0) from wallettab where UserId='" + User.Identity.Name + "' and txntype='CREDIT'").FirstOrDefault();
+    var debit = db.Database.SqlQuery<double>("select ISNULL(SUM(amount),0) from wallettab where UserId='" + User.Identity.Name + "' and txntype='DEBIT'").FirstOrDefault();
+    totalamount = Math.Round((credit - debit), 2);
+
+    var user = db.userinformations.Single(x => x.memberid == User.Identity.Name);
+
+    var countlist = db.wallettabs.Where(x => x.UserId == User.Identity.Name && x.col3 != "LEVEL INCOME" && x.col3 != "DIRECT INCOME").Count();
+}
+
+
+
+<style>
+    @@media screen and (min-width: 768px) {
+   td {display:block !important;}
+  th {display:block !important;}
+  
+}
+      @@media screen and (min-width: 480px) {
+   td {display:block !important;}
+  th {display:block !important;}
+  
+}
+        @@media screen and (min-width: 360px) {
+   td {display:block !important;}
+  th {display:block !important;}
+}
+@@media only screen and (min-width: 600px) {
+  /* For tablets: */
+  .col-s-1 {width: 8.33%;}
+  .col-s-2 {width: 16.66%;}
+  .col-s-3 {width: 25%;}
+  .col-s-4 {width: 33.33%;}
+  .col-s-5 {width: 41.66%;}
+  .col-s-6 {width: 50%;}
+  .col-s-7 {width: 58.33%;}
+  .col-s-8 {width: 66.66%;}
+  .col-s-9 {width: 75%;}
+  .col-s-10 {width: 83.33%;}
+  .col-s-11 {width: 91.66%;}
+  .col-s-12 {width: 100%;}
+}
+@@media only screen and (min-width: 768px) {
+  /* For desktop: */
+  .col-1 {width: 8.33%;}
+  .col-2 {width: 16.66%;}
+  .col-3 {width: 25%;}
+  .col-4 {width: 33.33%;}
+  .col-5 {width: 41.66%;}
+  .col-6 {width: 50%;}
+  .col-7 {width: 58.33%;}
+  .col-8 {width: 66.66%;}
+  .col-9 {width: 75%;}
+  .col-10 {width: 83.33%;}
+  .col-11 {width: 91.66%;}
+  .col-12 {width: 100%;}
+}
+</style>
+
+
+
+<div class="app-main__outer">
+    <div class="app-main__inner">
+        <div class="app-page-title" style="padding-top: 10px; padding-bottom: 10px">
+            <div class="page-title-wrapper">
+                <div class="page-title-heading">
+                    <div class="page-title-icon">
+                        <i class="fa fa-list pe-7s-drawer icon-gradient bg-happy-itmeo"></i>
+                    </div>
+                    <div>
+                        Topup Here
+                                        <div class="page-title-subheading">You need to minimum 200 SBG Coin to activate your SwissBurg Account. </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="tab-content">
+            <div class="tab-pane tabs-animation fade active show" id="tab-content-0" role="tabpanel">
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <div class="main-card mb-3 card">
+
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-12 mt-4 mb-4 text-center">
+                                        <h5 class="card-title text-danger">Balance : <span style="color: green">&nbsp;@totalamount (SBG Coin)</span></h5>
+                                    </div>
+                                </div>
+                                <input type="hidden" id="useremail" value="@user.email" />
+                                @if (totalamount > 0)
+                                {
+                                
+                                    <div class="card-body">
+                                        <div class="row mb-4">
+                                            <div class="col-sm-2 text-center ml-4 mt-4 ">
+                                                <input type="hidden"  value="@totalamount" id="totalamnt" />
+                                                <h5 class="card-title pt-2">Enter Email</h5>
+                                            </div>
+                                            <div class="col-sm-6 mt-4">
+
+                                                <div class="input-group">
+                                                    <input type="email" id="email" class="form-control" value="@user.email " readonly="readonly" placeholder="Enter SBG Coin">
+                                                    <div class="input-group-append">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-4">
+                                            <div class="col-sm-2 text-center ml-4 mt-4 ">
+                                                <h5 class="card-title pt-2">Enter SBG Coin</h5>
+                                            </div>
+                                            <div class="col-sm-6 mt-4">
+
+                                                <div class="input-group">
+                                                    <input type="number" class="form-control" id="amount" value="" placeholder="Enter SBG Coin">
+                                                    <div class="input-group-append">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-11 text-center ml-5 mt-5 mb-5 ">
+                                                <button class="mb-2 mr-2 btn btn-outline-primary btn-lg btn-block" id="btnsubmit" onclick="sendotphere()" style="letter-spacing: 1px; font-size: 15px;">Send OTP</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-body" id="tblotp" style="display: none">
+                                        <div class="row mb-4">
+                                            <div class="col-sm-2 text-center ml-5 mt-4 ">
+                                                <h5 class="card-title pt-2">Enter OTP here </h5>
+                                            </div>
+                                            <div class="col-sm-6 mt-4">
+
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" id="otp" value="" placeholder="Enter OTP">
+                                                    <div class="input-group-append">
+                                                    </div>
+                                                </div>
+                                                <br />
+                                                <span id="otptxt" style="color: red;"></span>
+                                            </div>
+                                            <div class="col-sm-3 mt-4 pt-2">
+                                                <a href="" id="btrenotp" onclick="resendotp()" style="display: none;"><span>Resend OTP</span></a>
+
+                                            </div>
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-11 text-center ml-5 mt-4 mb-5 ">
+
+                                                <button class="mb-2 mr-2 btn btn-outline-primary btn-lg btn-block" id="btnotp" onclick="confirmedotp()" style="letter-spacing: 1px; font-size: 15px;">Proceed</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    if (countlist > 0)
+                                    {
+                                        var listtxn = db.wallettabs.Where(x => x.UserId == User.Identity.Name && x.col3 != "LEVEL INCOME" && x.col3 != "DIRECT INCOME").ToList();
+                    
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                <table style="width: 100%;" id="example" class="table table-hover table-striped table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th>Email</th>
+                                        <th>Type</th>
+                                        <th>SBG Coin</th>
+                                        <th>Date</th>
+                                        <th>Remark</th>
+                                        <th>Transaction Type</th>
+                                        <th>Status</th>
+                                    </tr>
+                                    </thead>
+                                   <tbody>
+                                       @foreach(var item in listtxn)
+                                       {
+                                           var emial = db.userinformations.Single(x => x.memberid == item.UserId).email;
+                                           _totalamount = _totalamount + item.amount;
+                                           <tr>
+                                           <td>@user.email</td>
+                                           <td>@item.col3</td>
+                                           <td>@item.amount</td>
+                                           <td>@item.txn_date.ToString("dd-MM-yyyy")</td>
+                                           <td>@item.col4</td>
+                                           <td>@item.txntype</td>
+                                           <td>Success</td>
+                                            </tr>
+                                   
+                                       }
+                                       </tbody>
+                                    <tfoot>
+                                    <tr>
+                                        <th rowspan="1" colspan="2" style="text-align:right;">Total</th>
+                                        <th rowspan="1" colspan="5">$ @_totalamount</th>
+                                       
+                                    </tr>
+                                    </tfoot>
+                                </table>
+                                            </div>
+                            </div>
+
+                                    }
+                                }
+                                else
+                                {
+                                    <center><span style="color:red;">You don't have any SBG Coin</span></center>
+                                }
+                            </div>
+
+
+
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+
+
+
+
+    function sendotphere() {
+        debugger;
+        var email = $("#email").val();
+        var amount = $("#amount").val();
+        var volumes = $("#totalamnt").val();
+        var useremail = $("#useremail").val();
+
+        if (parseFloat(amount) <= parseFloat(volumes)) {
+            $("#btnsubmit").text('Please wait...');
+            $("#btnsubmit").attr("disabled", "disabled");
+            $.ajax({
+                url: "/Member/sendotpfortopup",
+                type: "post",
+                data: {
+                    email: email,
+                    amount: amount
+                },
+                success: function (resultdata) {
+                    var status = resultdata.status;
+                    if (parseInt(status) == 1) {
+                        $("#tbltopup").css("display", "none");
+                        $("#tblotp").css("display", "block");
+                        $("#otptxt").text('Your OTP will expire within 5 minutes.');
+                        alert(resultdata.message);
+                        setTimeout(showresendotp, 300000);
+                    }
+                    else {
+                        $("#email").val('');
+                        $("#amount").val('');
+                        $("#btnsubmit").text('Proceed');
+                        $("#btnsubmit").removeAttr("disabled");
+                        alert(resultdata.message);
+
+                    }
+
+                },
+                error: function (er) {
+                    alert("Something went wrong. Please try again later");
+                    $("#btnsubmit").text('Proceed');
+                    $("#btnsubmit").removeAttr("disabled");
+
+                }
+            });
+        }
+        else {
+            alert("Please enter correct volume");
+            $("#amount").val('');
+        }
+
+    }
+
+    function showresendotp() {
+        debugger;
+
+        var email = $("#email").val();
+        $.ajax({
+            url: "/Member/expiredotpfortopup",
+            type: "post",
+            data: {
+                email: email
+            },
+            success: function (resultdata) {
+                var status = resultdata.status;
+                if (parseInt(status) == 1) {
+                    $("#btnotp").css("display", "none");
+                    $("#btrenotp").css("display", "block");
+                    $("#otptxt").text('Your OTP is expired');
+                    alert(resultdata.message);
+                }
+                else {
+                    alert(resultdata.message);
+                    $("#btnsubmit").text('Proceed');
+                    $("#btnsubmit").removeAttr("disabled");
+                }
+
+            },
+            error: function (er) {
+                alert("Something went wrong. Please try again later");
+                $("#btnsubmit").text('Proceed');
+                $("#btnsubmit").removeAttr("disabled");
+
+            }
+        });
+    }
+
+    function resendotp() {
+        debugger;
+
+        var email = $("#email").val();
+        $.ajax({
+            url: "/Member/resendotp",
+            type: "post",
+            data: {
+                email: email
+            },
+            success: function (resultdata) {
+                var status = resultdata.status;
+                if (parseInt(status) == 1) {
+                    $("#btnotp").css("display", "block");
+                    $("#btrenotp").css("display", "none");
+                    $("#otptxt").text('Your OTP will expire within 5 minutes.');
+                    $("#otp").val('');
+                    alert(resultdata.message);
+                    setTimeout(showresendotp, 300000);
+                }
+                else {
+                    alert(resultdata.message);
+                }
+
+            },
+            error: function (er) {
+                alert("Something went wrong. Please try again later");
+                $("#btnsubmit").text('Proceed');
+                $("#btnsubmit").removeAttr("disabled");
+
+            }
+        });
+    }
+
+    function confirmedotp() {
+        var email = $("#email").val();
+        var amount = $("#amount").val();
+        var volumes = $("#totalamnt").val();
+        var otp = $("#otp").val();
+        if (parseFloat(amount) <= parseFloat(volumes)) {
+            $("#btnsubmit").text('Please wait...');
+            $("#btnsubmit").attr("disabled", "disabled");
+            $.ajax({
+                url: "/Member/confirmotp",
+                type: "post",
+                data: {
+                    email: email,
+                    amount: amount,
+                    otp: otp
+                },
+                success: function (resultdata) {
+                    var status = resultdata.status;
+                    if (parseInt(status) == 1) {
+                        alert(resultdata.message);
+                        location.reload();
+                    }
+                    else {
+
+                        alert(resultdata.message);
+                        $("#otp").val('');
+                    }
+
+                },
+                error: function (er) {
+                    alert("Something went wrong. Please try again later");
+                    $("#btnsubmit").text('Proceed');
+                    $("#btnsubmit").removeAttr("disabled");
+
+                }
+            });
+        }
+        else {
+            alert("Please enter correct volume");
+        }
+    }
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

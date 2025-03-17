@@ -1,0 +1,759 @@
+{% load static  %}
+
+
+<!DOCTYPE html>
+<html lang="en" xml:lang="en">
+ 
+  <head>
+    <meta charset="UTF-8" />
+    <!-- Responsive Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <!-- favicon & bookmark -->
+    <link
+      rel="apple-touch-icon-precomposed"
+      sizes="144x144"
+      href="{% static "images/shifra.png" %}"
+      type="image/x-icon"
+    />
+
+
+
+        <link
+      href="https://fonts.googleapis.com/css?family=PT+Sans:400,700"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800"
+      rel="stylesheet"
+    />
+    <!-- Website Title -->
+    <title>Shifra</title>
+  
+
+    <link rel="stylesheet" href="{% static 'css/fontawesome.min.css' %}" type="text/css" />
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" type="text/css"/>
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}" type="text/css" />
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}" type="text/css" />
+    <link rel="stylesheet" href="{% static 'main.css'  %}" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}" type="text/css" />
+   
+    <script src="{% static 'js/script.js' %}"></script>
+
+     
+  <style>
+
+    #flash-messages {
+      position: fixed; 
+      top: 30px;
+      width: 25%; 
+      height:60px;
+      {% comment %} background-color:rgba(0, 217, 255, 0.693); {% endcomment %}
+      font-size: 17px;
+      font-weight: 700;
+    
+      left:40%;
+      {% comment %} right:70px; {% endcomment %}
+     
+      z-index: 1; 
+      text-align:center;
+      
+     }
+
+       
+@media (max-width: 576px) { 
+  #flash-messages {
+    
+    top: 30px;
+    width: auto; 
+    height:auto;
+    {% comment %} background-color:rgba(0, 217, 255, 0.693); {% endcomment %}
+    font-size: 17px;
+    font-weight: 700;
+   padding:20px;
+    {% comment %} right:70px; {% endcomment %}
+    z-index: 1; 
+   left:13%;
+  
+
+  }
+ }
+
+
+</style>
+ <style>
+  .loginBox input[type="submit"] {
+  border: none;
+  outline: none;
+  height: 40px;
+  color: #eee;
+  font-size: 16px;
+  background-color: #ffa332;
+  cursor: pointer;
+  border-radius: 20px;
+  margin: 12px 0 18px;
+}
+.loginBox input[type="submit"]:hover {
+  background-color: #ffa332;
+  color: #fff;
+}
+
+.loginBox a {
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+  text-decoration: none;
+}
+.loginBox p {
+  margin: 0;
+  padding: 0;
+  font-weight: bold;
+  color: #fff;
+}
+
+.loginBox input {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.loginBox input[type="email"],
+.loginBox input[type="text"],
+.loginBox input[type="password"] ,
+.loginBox input[type="password"] ,
+.loginBox input[type="text"] 
+{
+  border: none;
+  border-bottom: 1px solid #fff;
+  background: transparent;
+  outline: none;
+  height: 30px;
+  color: #fff;
+  font-size: 16px;
+}
+
+::placeholder
+{
+  color: rgba(255, 255, 255, 0.5);
+}
+.loginBox {
+ 
+
+  width: 420px;
+  height: 560px;
+  padding: 40px 30px;
+  box-sizing: border-box;
+ 
+  background: rgba(0, 0, 0, 0.5);
+}
+@media (max-width: 575.98px) { 
+  .loginBox{
+    width:93%;
+
+  }
+
+ }
+
+ </style>
+
+ 
+    <!-- Stylesheets End -->
+    <!--[if lt IE 9
+      ]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script
+    ><![endif]-->
+    <!--[if lt IE 9]><script src="js/respond.js"></script><![endif]-->
+  
+  
+  </head>
+  <body>
+    {% if messages %}
+
+    <div id="flash-messages"    style="display:block;">
+   {% for message in messages %}
+      <div class="alert alert-{{message.tags}}">
+          {{ message }}
+      </div>
+  {% endfor %} 
+  </div>
+{% endif %}
+
+
+{% comment %} {% block debug_toolbar %}
+        {% if debug %}
+            {% debug_toolbar %}
+        {% endif %}
+    {% endblock %} {% endcomment %}
+    <!--Main Wrapper Start-->
+    <div class="wrapper" id="top">
+      <!--Header Start -->
+      <header class="shadow">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-4 logo">
+              <a href="{% url 'index'  %}" title="index"
+                >
+                <a href="{% url 'index'   %}" title=""
+                      >
+                      <h3>SHIFRA</h3>  
+                    </a>
+                <!-- <img
+                  class="light"
+                  src="images/CN.png"
+                  alt="Cp diamond"
+                  style="height: 12vh"
+                />
+
+                <img
+                  class="dark"
+                  src="images/CN.png"
+                  alt="Cp diamond"
+                  style="height: 12vh"
+                /> -->
+              </a>
+            </div>
+            <div class="col-sm-8 main-menu">
+              <div class="menu-icon" style="margin-top:-39px;">
+                <span class="top"></span>
+                <span class="middle"></span>
+                <span class="bottom"></span>
+              </div>
+              <nav class="onepage">
+                <ul >
+                  <li class="active" style="color:black;"><a href="{% url 'index' %}" style="color:black;cursor:pointer !importance;margin-left:-10px;">Home</a></li>
+                  <li ><a href="{% url 'about' %}" style="color:black;cursor:pointer !importance;margin-left:-10px;">About ico</a></li>
+                  <li><a href="{% url 'token' %}" style="color:black;cursor:pointer !importance;margin-left:-10px;">token</a></li>
+                  <li><a href="{% url 'termsCondition' %}"style="color:black;cursor:pointer !importance;margin-left:-10px;">Terms & conditions</a></li>
+                  <li><a href="{% url 'mining' %}" style="color:black;cursor:pointer !importance;margin-left:-10px;">minning</a></li>
+                  <li><a href="{% url 'roadmap' %}" style="color:black;cursor:pointer !importance;margin-left:-10px;">roadmap</a></li>
+                  <!-- <li><a href="#team">team</a></li>
+                  <li><a href="#press">press</a></li> -->
+                  <li class="nav-btn"><a href="{% url 'login'  %}">LogIn</a></li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!--Header End-->
+
+      <!-- Content Section Start -->
+
+         <!-- Our Mission Start -->
+         <div id="convertor" class="currency-convertor p-t p-tb c-l">
+          <div class="container mt-5">
+            <div class="text-center">
+              <h2 class="section-heading">Currency Convertor</h2>
+            </div>
+            <div class="sub-txt text-center">
+              <p>
+                You receive those signals every few hours with precise Stop Loss and Take Profit levels. The forecast accuracy is 70%.
+              </p>
+            </div>
+            <div class="convertor-content">
+              <div class="current-prices">
+                <div class="item">
+                  <div class="current-ico">
+                    <img src="{% static 'images/bitcoin-icon.png'    %}" alt="" />
+                  </div>
+                  <div class="currency-price">
+                    <h4>Bitcoin (BTC)</h4>
+                    <span>$9,360.41 (0.32%)</span>
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="current-ico">
+                    <img src="{% static 'images/ethereum-icon.png'   %}" alt="" />
+                  </div>
+                  <div class="currency-price">
+                    <h4>Ethereum (ETH)</h4>
+                    <span>$182.53 (4.32%)</span>
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="current-ico">
+                    <img src="{% static 'images/litecoin-icon.png'   %}" alt="" />
+                  </div>
+                  <div class="currency-price">
+                    <h4>Litecoin (LTC)</h4>
+                    <span>$68.48 (11.64%)</span>
+                  </div>
+                </div>
+              </div>
+              <div class="convertor-widget">
+                <div class="current-ico">
+                  <img src="{% static 'images/convert-icon.png'   %}" alt="" />
+                </div>
+                <div class="currency-calulator">
+                  <script type="text/javascript">
+                    crypt_calc_border_width = 0;
+                    crypt_calc_border_color = "#ffffff";
+                    crypt_calc_border_corners = "square";
+                    crypt_calc_font_family = "Open sans";
+                  </script>
+                  <script
+                    type="text/javascript"
+                    src="../www.cryptonator.com/ui/js/widget/calc_widget.html"
+                  ></script>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Our Mission End -->
+        <!-- Token Sale start -->
+        <div class="token-sale p-tb light-gray-bg diamond-layout" id="token">
+          <div class="container">
+            <div class="text-center">
+              <h2 class="section-heading">Token Allocation</h2>
+            </div>
+            <div class="sub-txt mw-650 text-center">
+              <p>
+                Token allocation are derivative contracts whose value corresponds to the value of the specific underlying asset. When the price of the underlying commodity rises or falls, the same happens with the price of its derivative contract.
+              </p>
+            </div>
+            <div class="row">
+              <div class="col-lg-5 col-md-12">
+                <div class="token-allocation-box style-3">
+                  <div class="token-sale-left">
+                    <h3>Pre-Sale <span>will end in</span></h3>
+                    <div id="clock" data-date="2020/06/31"></div>
+                    <div class="hero-right-btn">
+                      <a class="btn btn4" href="#">Register & Buy Tokens Now</a>
+                    </div>
+                  </div>
+                  <div class="token-sale-right">
+                    <div class="row">
+                      <div class="sale-list col">
+                        <h4>PRIVATE SALE</h4>
+                        <div class="price-tag">
+                          <span>1 BCT = $32.21</span>
+                          Bonus 65%(0.068)
+                        </div>
+                      </div>
+                      <div class="sale-list col">
+                        <h4>PRIVATE SALE</h4>
+                        <div class="price-tag">
+                          <span>1 BCT = $25.09</span>
+                          Bonus 65%(0.068)
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="sale-list col">
+                        <h4>PRIVATE SALE</h4>
+                        <div class="price-tag">
+                          <span>1 BCT = $25.09</span>
+                          Bonus 65%(0.068)
+                        </div>
+                      </div>
+                      <div class="sale-list col">
+                        <h4>PRIVATE (S)</h4>
+                        <div class="price-tag">
+                          <span>$1.32548</span>
+                          Completion: 35%
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="sale-list">
+                        <h4>LIVE FEED</h4>
+                        <ul class="livefeed-list">
+                          <li><span>USA</span> 1500 BCT sold in</li>
+                          <li><span>UK</span> 1225 BCT sold in</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="button-wrapper">
+                  <a class="btn btn4" href="#">WhitePaper</a>
+                  <a class="btn btn4" href="#">Privacy Policy</a>
+                </div>
+              </div>
+              <div class="col-lg-7 col-md-12">
+                <div class="sale-chart-view">
+                  <div class="doughnut">
+                    <div class="doughnutChartContainer">
+                      <canvas id="doughnutChart" height="270"></canvas>
+                    </div>
+                    <div id="legend" class="chart-legend"></div>
+                  </div>
+                </div>
+                <div class="sale-chart-view">
+                  <div class="doughnut">
+                    <div class="doughnutChartContainer">
+                      <canvas id="layout2doughnutChart1" height="270"></canvas>
+                    </div>
+                    <div id="layout2legend1" class="chart-legend"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Token Sale end -->
+
+
+
+
+
+
+
+      
+        <div id="counter" class="milestone-section p-tb c-l">
+          <div class="container">
+            <div class="row">
+              <div class="col">
+                <div class="counter">
+                  <div class="counter-icon">
+                    <img src="{% static 'images/transactions-icon.png'   %}" alt="" />
+                  </div>
+                  <div class="counter-value" data-count="1594">0</div>
+                  <h4 class="count-text">Transactions</h4>
+                </div>
+              </div>
+              <div class="col">
+                <div class="counter">
+                  <div class="counter-icon">
+                    <img src="{% static 'images/support-icon.png'   %}" alt="" />
+                  </div>
+                  <div class="counter-value" data-count="649">0</div>
+                  <h4 class="count-text">Operator</h4>
+                </div>
+              </div>
+              <div class="col">
+                <div class="counter">
+                  <div class="counter-icon">
+                    <img src="{% static 'images/wallets-icon.png'   %}" alt="" />
+                  </div>
+                  <div class="counter-value" data-count="852">0</div>
+                  <h4 class="count-text">Bitcoin Wallets</h4>
+                </div>
+              </div>
+              <div class="col">
+                <div class="counter">
+                  <div class="counter-icon">
+                    <img src="{% static 'images/countries-icon.png'   %}" alt="" />
+                  </div>
+                  <div class="counter-value" data-count="198">0</div>
+                  <h4 class="count-text">Countries</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+     
+      
+      <!-- Content Section End -->
+      <div class="clear"></div>
+      <!--footer Start-->
+      {% comment %} <footer class="diamond-footer">
+        <div class="footer-widget-area">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-3 col-md-4 widget-area">
+                <div class="widget widget-html">
+                  <div class="footer-logo">
+                    <a href="#" title=""
+                      ><img src="images/logo.png" alt="Cp Diamond"
+                    /></a>
+                  </div>
+                  <div class="contact-info">
+                    <ul>
+                      <li class="email"><a href="#">hello@coinpool.com</a></li>
+                      <li class="phone"><a href="#">+1 800 123 45 67</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-4 widget-area">
+                <div class="widget widget-html text-center">
+                  <h2 class="widget-title">Stay connected</h2>
+                  <div class="socials">
+                    <ul>
+                      <li>
+                        <a href="https://facebook.com/"
+                          ><i class="fab fa-facebook-f"></i
+                        ></a>
+                      </li>
+                      <li>
+                        <a href="https://twitter.com/"
+                          ><i class="fab fa-twitter"></i
+                        ></a>
+                      </li>
+                      <li>
+                        <a href="https://telegram.org/"
+                          ><i class="fab fa-telegram-plane"></i
+                        ></a>
+                      </li>
+                      <li>
+                        <a href="https://bitcoin.com/"
+                          ><i class="fab fa-btc"></i
+                        ></a>
+                      </li>
+                      <li>
+                        <a href="https://www.youtube.com/"
+                          ><i class="fab fa-youtube"></i
+                        ></a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-4 widget-area">
+                <div class="widget widget-html">
+                  <h2 class="widget-title">Subscribe</h2>
+                  <div class="newsletter">
+                    <form method="post">
+                      <input
+                        type="email"
+                        name="Email"
+                        placeholder="Your email address"
+                      />
+                      <button class="btn" name="subscribe">subscribe</button>
+                      <label
+                        ><input type="radio" name="privacy-policy" />I agree to
+                        the <a href="#">Privacy Policy</a>.</label
+                      >
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="copyright-area">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-6">
+                <ul class="footer-menu horizontal-menu onepage">
+                  <li><a href="#about">About ICO</a></li>
+                  <li><a href="#mission">Mission</a></li>
+                  <li><a href="#token">Token</a></li>
+                  <li><a href="#roadmap">Roadmap</a></li>
+                  <li><a href="#team">Team</a></li>
+                  <li><a href="#press">Media</a></li>
+                </ul>
+              </div>
+              <div class="col-lg-6">
+                <div class="copy-text">
+                  © 2022 Coinpool. Design & Developed by
+                  <a href="#">SacredThemes</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer> {% endcomment %}
+         <footer class="diamond-footer">
+        <div class="footer-widget-area">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-3 col-md-4 widget-area">
+                <div class="widget widget-html">
+                  <div class="footer-logo">
+                    <a href="#" title=""
+                      >
+                      <h3>SHIFRA</h3>  
+                    </a>
+                  </div>
+                  <div class="contact-info">
+                    <ul>
+                      <li class="email"><a href="#">hello@shifra.in</a></li>
+                      <h5>Our Support</h5>
+                      <li class=""><a href="#"> Ind: 02269621371</a></li>
+                      <li class=""><a href="#"> Us:+16823412132</a></li>
+                      <li class=""><a href="#"> Canada:+12268236776</a></li>
+                      <li class=""><a href="#"> Sweden:+46651863235</a></li>
+                      <li class=""><a href="#"> Australia:+61361488345</a></li>
+                    </ul>
+
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-4 widget-area">
+                <div class="widget widget-html text-center">
+                  <h2 class="widget-title">Stay connected</h2>
+                  <div class="socials">
+                    <ul>
+                      <li>
+                        <a href="https://www.facebook.com/profile.php?id=61556471111696&mibextid=ZbWKwL"
+                          ><i class="fab fa-facebook-f"></i
+                        ></a>
+                      </li>
+                      <li>
+                        <a href="https://x.com/ZQueril?t=t2zSt5EfxkGQ5kVEI0yzoA&s=09"
+                          ><i class="fab fa-twitter"></i
+                        ></a>
+                      </li>
+                      <li>
+                        <a href="https://www.instagram.com/zaan.queril?igsh=MW9ja20xNmN1bG11Ng=="
+                          ><i class="fab fa-instagram"></i
+                        ></a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-4 widget-area">
+                <div class="widget widget-html">
+                  <h2 class="widget-title">Subscribe</h2>
+                  <div class="newsletter">
+                    <form method="post">
+                      <input
+                        type="email"
+                        name="Email"
+                        placeholder="Your email address"
+                      />
+                      <button class="btn" name="subscribe">subscribe</button>
+                      <label
+                        ><input type="radio" name="privacy-policy" />I agree to
+                        the <a href="#">Privacy Policy</a>.</label
+                      >
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="copyright-area">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-6">
+                <ul class="footer-menu horizontal-menu onepage">
+                  <li><a href="#about">About ICO</a></li>
+                  <li><a href="#mission">Mission</a></li>
+                  <li><a href="#token">Token</a></li>
+                  <li><a href="#roadmap">Roadmap</a></li>
+                  <li><a href="#team">Team</a></li>
+                  <li><a href="#press">Media</a></li>
+                </ul>
+              </div>
+              <!-- <div class="col-lg-6">
+                <div class="copy-text">
+                  © 2022 Coinpool. Design & Developed by
+                  <a href="#">SacredThemes</a>
+                </div>
+              </div> -->
+            </div>
+          </div>
+        </div>
+      </footer>
+      <!--footer end-->
+    </div>
+    <!--Main Wrapper End-->
+ <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/onpagescroll.js' %}"></script>
+    <script src="{% static 'js/wow.min.js' %}"></script>
+    <script src="{% static 'js/jquery.countdown.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.js' %}"></script>
+    <script src="{% static 'js/Chart.js' %}"></script>
+    <script src="{% static 'js/chart-function.js' %}"></script>
+    <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/particles.js' %}"></script>
+    <script src="{% static 'js/gold-app.js' %}"></script>
+    <script type="text/javascript">
+      jQuery(document).ready(function () {
+        setTimeout(function () {
+          jQuery(".diamond-animation").addClass("done");
+        }, 6000);
+        setTimeout(function () {
+          jQuery(".diamond-animation .main").addClass("active");
+        }, 1000);
+        setTimeout(function () {
+          jQuery(".inside-bitcoin").addClass("active");
+        }, 3000);
+        setTimeout(function () {
+          jQuery(".inside-bitcoin").addClass("spincoin");
+        }, 5000);
+        setTimeout(function () {
+          jQuery(".diamond-animation .lines").addClass("active");
+        }, 6000);
+        setTimeout(function () {
+          jQuery(".diamond-animation .top-coin").addClass("active");
+        }, 3000);
+        setTimeout(function () {
+          jQuery(".diamond-animation .outer-Orbit").addClass("active");
+        }, 5000);
+      });
+    </script>
+    <script>
+      // Hide flash messages after 5 seconds
+      setTimeout(function() {
+          document.getElementById('flash-messages').style.display = 'none';
+      }, 5000);
+  </script>
+ 
+<script>
+  
+  {% comment %} $(document).ready(function() {
+    $('#user_id_input').on('blur', function() {
+        var userId = $(this).val();
+       // console.log(userId);
+        $.ajax({
+            url: '/get_member_name/',
+            type:'post',
+            data: {
+              memberid: userId,
+                csrfmiddlewaretoken: '{{ csrf_token }}'
+            },
+            dataType: 'json',
+            success: function(data) {
+
+              if(data.status===1){
+
+                console.log(data.memberName);
+                //const resmsg='<small class="form-text text-success">'+data.memberName +'</small>';
+               
+                $('#refMsg').html(`<span class="form-text text-success" id="inRefMsg" >${data.memberName}</span>`);
+
+                //$('#refMsg').append(resmsg);
+
+
+              }else{
+
+                $('#refMsg').html('<span class="form-text text-danger">'+data.msg +'</span>');
+
+              }
+                
+            },
+            error: function(xhr, status, error) {
+                console.error('Error:', error);
+            }
+        });
+    });
+}); {% endcomment %}
+
+
+
+ 
+  
+
+
+
+</script>
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+  var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+  (function(){
+  var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+  s1.async=true;
+  s1.src='https://embed.tawk.to/65ec22f79131ed19d9773ed3/1hoh6h6a2';
+  s1.charset='UTF-8';
+  s1.setAttribute('crossorigin','*');
+  s0.parentNode.insertBefore(s1,s0);
+  })();
+  </script>
+  <!--End of Tawk.to Script-->
+  </body>
+
+
+</html>

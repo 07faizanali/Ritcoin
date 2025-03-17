@@ -1,0 +1,103 @@
+
+
+{% extends 'zqUsers/member/layout/main.html' %}
+
+{% load static %}
+{% load customFilters %}
+
+{% block 'addHeaderScripts' %}
+
+<style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+   body{
+    background-color: #ffd54f;
+   }
+
+    .container {
+      color: #333;
+      text-align: center;
+      height: 100%;
+    }
+
+    h1 {
+      font-weight: normal;
+      font-size: 5em;
+    }
+
+    .cu {
+      display: inline-block;
+      font-size: 1.5em;
+      list-style-type: none;
+      padding: 1em;
+      text-transform: uppercase;
+    }
+
+    .cu span {
+      display: block;
+      font-size: 4.5rem;
+      background-color:white;
+      width:12vw;
+      border:1px solid black;
+      box-shadow: 10px 10px lightgray;
+    }
+</style>
+
+{% endblock  %}
+
+{% block 'content' %}
+<div class="container-fluid" >
+        <div class="container">
+        <h1>Coming Soon</h1>
+        <ul>
+          <li class="cu"><span id="days">00</span>days</li>
+          <li class="cu"> <span id="hours">00</span>Hours</li>
+          <li class="cu"><span id="minutes">02</span>Minutes</li>
+          <li class="cu"><span id="seconds">60</span>Seconds</li>
+        </ul>
+    </div>
+   
+  </div>
+
+
+
+{% endblock  %}
+
+
+{% block 'addFooterScripts' %}
+
+
+
+
+<script src="/static/dist/yscountdown.min.js"></script>
+<script>
+
+  var daysElement = document.querySelector("#days");
+  var hoursElement = document.querySelector("#hours");
+  var minutesElement = document.querySelector("#minutes");
+  var secondsElement = document.querySelector("#seconds");
+  var containerElement = document.querySelector(".container");
+  //var endDate = (new Date().getFullYear() - 1) + "/01/01";
+  var endDate = new Date(new Date().getTime() + 0.5 * 120 * 3000);
+
+  var myCountDown = new ysCountDown(endDate, function (remaining, finished) {
+
+    if (finished) {
+      window.location.href = "https://www.ritcoin.exchange/member/kycPage/";
+      return;
+    }
+
+    daysElement.textContent = remaining.totalDays;
+    hoursElement.textContent = remaining.hours;
+    minutesElement.textContent = remaining.minutes;
+    secondsElement.textContent = remaining.seconds;
+
+  });
+
+</script>
+
+{% endblock %}
+

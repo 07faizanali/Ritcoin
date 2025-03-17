@@ -1,0 +1,193 @@
+{% extends 'zqUsers/member/layout/main.html' %}
+{% block 'content' %}
+    <div class="app-main__outer">
+        <div class="app-main__inner"
+             style="background-color: rgba(255, 255, 255, 0.775)">
+            <div class="app-page-title">
+                <div class="page-title-wrapper">
+                    <div class="page-title-heading">
+                        <div class="page-title-icon">
+                            <i class="pe-7s-wallet icon-gradient bg-plum-plate"> </i>
+                        </div>
+                        <div>
+                            Wallet Withdrawal Transaction
+                            <div class="page-title-subheading"></div>
+                        </div>
+                    </div>
+                    {% comment %} <div class="page-title-actions">
+                        <button type="button"
+                                data-toggle="tooltip"
+                                title="Example Tooltip"
+                                data-placement="bottom"
+                                class="btn-shadow mr-3 btn btn-dark">
+                            <i class="fa fa-star"></i>
+                        </button>
+                        <div class="d-inline-block dropdown">
+                            <button type="button"
+                                    data-toggle="dropdown"
+                                    aria-haspopup="true"
+                                    aria-expanded="false"
+                                    class="btn-shadow dropdown-toggle btn btn-info">
+                                <span class="btn-icon-wrapper pr-2 opacity-7">
+                                    <i class="fa fa-business-time fa-w-20"></i>
+                                </span>
+                                Buttons
+                            </button>
+                            <div tabindex="-1"
+                                 role="menu"
+                                 aria-hidden="true"
+                                 class="dropdown-menu dropdown-menu-right">
+                                <ul class="nav flex-column">
+                                    <li class="nav-item">
+                                        <a href="javascript:void(0);" class="nav-link">
+                                            <i class="nav-link-icon lnr-inbox"></i>
+                                            <span>Inbox</span>
+                                            <div class="ml-auto badge badge-pill badge-secondary">86</div>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="javascript:void(0);" class="nav-link">
+                                            <i class="nav-link-icon lnr-book"></i>
+                                            <span>Book</span>
+                                            <div class="ml-auto badge badge-pill badge-danger">5</div>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="javascript:void(0);" class="nav-link">
+                                            <i class="nav-link-icon lnr-picture"></i>
+                                            <span>Picture</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a disabled href="javascript:void(0);" class="nav-link disabled">
+                                            <i class="nav-link-icon lnr-file-empty"></i>
+                                            <span>File Disabled</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div> {% endcomment %}
+                </div>
+            </div>
+            {% if listtxn %}
+                <div class="row shadow"style="overflow-x:auto; height:auto;">
+                    <div class="col-lg-12">
+                        <div class="main-card mb-3 ">
+                            <div class="">
+                                <table id="myTable"  class="display" >
+                                    <thead>
+                                        <tr>
+                                            <th>Sr No.</th>
+                                            <th>Email</th>
+                                            <th>Address</th>
+                                            <th>Zaan Queril Coin</th>
+                                            <th>USDT</th>
+                                            {% comment %} <th>Date</th> {% endcomment %}
+                                            <th>Received Date</th>
+                                            <th>Remark</th>
+                                            <th>Status</th>
+                                            {% comment %} <th>Edit</th> {% endcomment %}
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for index,item in listtxn %}
+                                            <tr>
+                                                <th scope="row">{{ index|add:1 }}</th>
+                                                <td>{{ item.email }}</td>
+                                                {% if item.withrawal_add %}
+                                                {% else %}
+                                                <td>NA</td>
+                                                {% endif %}
+                                                
+                                                <td>{{ item.total_value_zaan }}(zaan)</td>
+                                                <td>{{ item.requested_amount }}(USDT)</td>
+                                                {% comment %} <td>{{ item.approved_date }}</td> {% endcomment %}
+                                                {% if item.approve_date %}
+                                                    <td class="">{{ item.approve_date }}</td>
+                                                {% else %}
+                                                    <td class="">NA</td>
+                                                {% endif %}
+
+
+                                                {% comment %} <td>	25-11-2021 04:23:26</td> {% endcomment %}
+
+                                                {% if item.remark %}
+                                                <td>{{ item.remark }}</td>
+                                                {% else %}
+                                                <td>NA</td>
+                                                {% endif %}
+
+                                                {% if item.status %}
+                                                    {% comment %} <td style="color:green;">PAID</td> {% endcomment %}
+                                                    <td class="">
+                                                        <button type="button"
+                                                                class="btn btn-success"
+                                                                disabled="disabled"
+                                                                style="width: 71px">Paid</button>
+                                                    </td>
+                                                {% else %}
+                                                    {% comment %} <td style="color:red;">PENDING</td> {% endcomment %}
+                                                    <td class="">
+                                                        <button type="button"
+                                                                class="btn btn-danger"
+                                                                id="{{item.id}}"
+                                                                onclick="cancelWithdrawl(this.id)">PENDING</button>
+                                                    </td>
+                                                {% endif %}
+                                                {% comment %} <td>Paid</td>
+                                                <td><button class="btn-wide mb-2 mr-2 btn btn-success btngenrate btn-lg disabled mt-4">Paid</button></td> {% endcomment %}
+                                            </tr>
+                                        {% endfor %}
+                                    {% endif %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+
+{% comment %} function cancelWithdrawl(id) {
+
+    //console.log(id)
+    const response = confirm('Are you sure you want to cancel this withdrawal?');
+    //console.log(response)
+    //console.log(id)
+    if (response) {
+
+        $.ajax({
+            type: "POST",
+            url: "{% url 'cancelWithdrawl' %}",
+            data: {
+                transId: id,
+                csrfmiddlewaretoken: '{{ csrf_token }}'
+            }, success: function (result) {
+                // debugger;
+                var status = result.status;
+                if (parseInt(status) == 1) {
+                    alert(result.message);
+                    $("#sucessmsg").text(result.message);
+                    location.reload();
+                }
+                else {
+                    alert(result.message);
+                }
+            },
+            error: function (er) {
+                alert(er);
+            }
+        });
+       
+    }
+   
+} {% endcomment %}
+
+</script>
+
+{% endblock 'content' %}

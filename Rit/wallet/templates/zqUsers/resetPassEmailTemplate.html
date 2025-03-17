@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Email Template</title>
+  </head>
+  <body>
+
+    <div style="border: 5px solid blue;text-align:center" >
+        <h2> ZAAN QUERIL</h2>
+        {% comment %} <h1>Welcome to ZAAN QUERIL</h1> {% endcomment %}
+
+        <p>Your OTP to reset password is: <span><b>{{OTP}}</b></span>. Please don't share it with anyone.</p>
+        <br>
+        <h5>This OTP is valid for 10 minutes. <h4>
+
+        <span>Copyright © 2023 ZAAN QUERIL!. All right reserved.<span>
+    </div>
+    {% comment %} <p>
+      Your otp to verify email is: <b><small>{{OTP}}</small></b>
+    </p>
+    <h1>Hello, {{ recipient_name }}!</h1> {% endcomment %}
+    {% comment %}
+    <p>This is a test email.</p>
+    {% endcomment %}
+  </body>
+</html>

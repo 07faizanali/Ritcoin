@@ -1,0 +1,179 @@
+{% extends 'zqAdmin/admin/layout/main.html' %}
+{% load customFilters  %}
+{% block 'content' %}
+    <div class="app-main__outer">
+        <div class="app-main__inner"
+             style="background-color: rgba(255, 255, 255, 0.775)">
+            <div class="app-page-title">
+                <div class="page-title-wrapper">
+                    <div class="page-title-heading">
+                        <div class="page-title-icon">
+                            <i class="pe-7s-wallet icon-gradient bg-plum-plate"> </i>
+                        </div>
+                        <div>
+                           All Members
+                            <div class="page-title-subheading"></div>
+                        </div>
+                    </div>
+
+
+                
+                </div>
+            </div>
+            {% comment %} {% if allMems %} {% endcomment %}
+                <div class="row shadow"style="overflow-x:auto; height:auto;">
+                    <div class="col-lg-12">
+                        <div class="main-card mb-3 ">
+                            <div class="">
+                                <table id="myTable"  class="display"  >
+                                    <thead>
+                                        <tr class="text-center">
+                                            
+                                            <th>MemberId</th>
+                                            <th>Introducer</th>
+                                            <th>email</th>
+                                            <th>RegistrationDate</th>
+                                            <th>Password</th>
+                                            <th>ActivationDate</th>
+                                            <th>TotalDirectTeam</th>
+                                            <th>TotalLevelTeam</th>
+
+
+                                            <th>TotalDeposits</th>
+                                            <th>AdminDeposits</th>
+                                            <th>SelfDeposits</th>
+                                            <th>TotalPackages</th>
+                                            <th>SelfActivatedPackages</th>
+                                            <th>PackageActivationsByPeers</th>
+                                            <th>DirectIncome</th>
+                                            <th>LevelIncome</th>
+                                            <th>CommunityBonus</th>
+                                            <th>MagicBonus</th>
+                                            <th>SocialMediaBonus</th>
+                                            <th>ClubBonus</th>
+                                            <th>TotalAllBonus</th>
+                                            <th>SocialMediaWalletBalance</th>
+                                            <th>TotalActivationsForPeers</th>
+                                            <th>TotalWithdrawals</th>
+                                            <th>TotalAdminWithdrawals</th>
+                                            <th>TotalSelfWithdrawals</th>
+                                            <th>TotalWalletBalance</th>
+                                            <th>TotalWithdrawableFund</th>
+                            
+                                        </tr>
+                                    </thead>
+                   
+                                    
+                                    <tbody hx-post="{% url 'meminfodata' %}" hx-trigger="load" hx-target="#myTable tbody" class="text-center" >
+                                    </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock 'content' %}
+
+
+
+{% block 'footerScripts' %}
+
+
+
+
+<script>
+   
+
+    $(document).ready(function() {
+       
+        var table= $('#myTable').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: {
+                url: '{% url 'meminfodata' %}',
+                type: 'POST',
+               
+                dataSrc: function(json) {
+                 
+                    return json.data;
+                }
+
+            },
+           
+            columns: [
+                { data: 'username' },
+                { data: 'introducername' },
+                { data: 'email' },
+                { data: 'joindate' },
+                { data: 'password' },
+                { data: 'activationDate' },
+                { data: 'totalDirectTeam' },
+                { data: 'totalLevelTeam' },
+                { data: 'totalDeposits' },
+                { data: 'adminDeposits' },
+                { data: 'selfDeposits' },
+                { data: 'packages' },
+                { data: 'selfActivatedPackages' },
+                { data: 'peerActivatedPackages' },
+                { data: 'directincome' },
+                { data: 'levelincome' },
+                { data: 'communitybonus' },
+                { data: 'magicbonus' },
+                { data: 'socialmediabonus' },
+                { data: 'clubbonus' },
+                { data: 'totalallbonus' },
+                { data: 'socialmediwalletbalance' },
+                { data: 'totalActivationsForPeers' },
+                { data: 'totalWithdrawals' },
+                { data: 'totalAdminWithdrawals' },
+                { data: 'totalSelfWithdrawals' },
+                { data: 'totalWalletBalance' },
+                { data: 'totalwithdrawablefund' },
+              
+            ]
+        });
+
+      
+    {% comment %} $('#myTable').on('click', '.introducer-link', function(event) {
+        event.preventDefault();
+        var introducerUsername = $(this).data('username');
+
+        table.ajax.url('{% url 'meminfodata' %}');
+        table.ajax.data = function(d) {
+            d.introducer = introducerUsername;
+            return d;
+        };
+        table.ajax.reload();
+    });
+
+    $('#myTable').on('click', '.mem-link', function(event) {
+        event.preventDefault();
+        var memUsername = $(this).data('mem');
+
+        table.ajax.url('{% url 'meminfodata' %}');
+        table.ajax.data = function(d) {
+            d.mem = memUsername;
+            return d;
+        };
+        table.ajax.reload();
+    }); {% endcomment %}
+    
+
+});
+
+   
+</script>
+    {% comment %} </script> {% endcomment %}
+  {% comment %} <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.6.1-rc.0/web3.min.js"></script> {% endcomment %}
+  
+
+
+{% endblock %}
+
+
+

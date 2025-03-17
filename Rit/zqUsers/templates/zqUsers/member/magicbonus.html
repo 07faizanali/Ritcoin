@@ -1,0 +1,277 @@
+
+
+{% extends 'zqUsers/member/layout/main.html' %}
+
+{% load static %}
+{% load customFilters %}
+
+{% block 'addHeaderScripts' %}
+{% comment %} <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"> {% endcomment %}
+
+{% comment %} <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" rel="stylesheet"> {% endcomment %}
+
+<script src="https://unpkg.com/htmx.org@2.0.0" integrity="sha384-wS5l5IKJBvK6sPTKa2WZ1js3d947pvWXbPJ1OmWfEuxLgeHcEbjUUA5i9V5ZkpCw" crossorigin="anonymous"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+{% comment %} <link href="{% static 'surveyapp/vendor/bootstrap-datepicker-master/css/bootstrap-datepicker.min.css' %}" rel="stylesheet"> {% endcomment %}
+<link href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.css" rel="stylesheet">
+<link href="https://cdn.datatables.net/datetime/1.5.2/css/dataTables.dateTime.min.css" rel="stylesheet">
+
+ <style>
+    @media (max-width: 575.98px) { 
+#min{
+    width:40vw !important;
+}
+#max{
+    width:40vw !important;
+}
+ }
+</style>
+
+{% comment %} <style>
+    @media (max-width: 575.98px) { 
+        #min, #max {
+            width: 40vw !important;
+        }
+    }
+    .custom-input {
+        background-color: #f8f9fa;
+        border: 1px solid #ced4da;
+        padding: .375rem .75rem;
+        border-radius: .25rem;
+        color: #495057;
+    }
+    .custom-input:focus {
+        background-color: #e9ecef;
+        border-color: #80bdff;
+        outline: 0;
+        box-shadow: 0 0 0 .2rem rgba(0,123,255,.25);
+    }
+</style> {% endcomment %}
+
+{% endblock %}
+{% block 'content' %}
+<div class="container-fluid">
+    <!-- Row -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card transaction-table" class="display">
+                {% comment %} <h3 class="ms-5 my-3">Magical Bonus</h3> {% endcomment %}
+                <div class="d-flex justify-content-between align-items-center ms-5 my-3">
+                    <h3>Magical Bonus</h3>
+                    <span class="badge bg-primary" style="margin-right: 20px;">Total Directs: {{ total_direct_members }}</span>
+                </div>
+                       <div  class="row">    
+                        {% comment %} <div class="col-lg-8 col-6 ">
+                            <p>Minimum date:</p>
+                            <input type="text" id="min" name="min">
+                        </div> {% endcomment %}
+                        {% comment %} <div class="col-md-6"></div> {% endcomment %}
+                         {% comment %} <div class="col-lg-3 col-6">
+                            <p>Maximum date:</p>
+                            <input type="text" id="max" name="max">
+                         </div> {% endcomment %}
+
+                         {% comment %} <div class="col-lg-4 col-6">
+                            <p>Minimum date:</p>
+                            <div class="input-group date" id="minDatePicker">
+                                <input type="text" placeholder="start date" class="form-control" id="min" name="min">
+                                <span class="input-group-append">
+                                    <span class="input-group-text">
+                                        <i class="fa fa-calendar"></i>
+                                    </span>
+                                </span> 
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-6">
+                            <p>Maximum date:</p>
+                            <div class="input-group date" id="maxDatePicker">
+                                <input type="text"  placeholder="end date" class="form-control" id="max" name="max">
+                                <span class="input-group-append">
+                                    <span class="input-group-text">
+                                        <i class="fa fa-calendar"></i>
+                                    </span>
+                                </span> 
+                            </div>
+                        </div> {% endcomment %}
+                       </div>
+                <div class="card-header border-0 pb-0">
+
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive" >
+                        <table border="0" cellspacing="5" cellpadding="5">
+                            <tr>
+                                <td>Start date:</td>
+                                <td><input type="text" class="form-control" placeholder="start date"  id="min" name="min"  data-provide="datepicker"></td>
+                            </tr>
+                            <tr>
+                                <td>End date:</td>
+                                <td><input type="text"  class="form-control" placeholder="end date" id="max" name="max"  data-provide="datepicker"></td>
+                            </tr>
+                            </table>
+                        <table class="table table-responsive-md" id="bonusTable" class="display nowrap" style="width:100%" >
+                            <thead>
+								{% comment %} <thead> {% endcomment %}
+									<tr>
+										 <th>
+											Sr No
+										</th> 
+										<th>Username</th>
+										<th>Activation Date</th>
+										<th>Level</th>
+										<th>%</th>
+										<th>Magic Bonus</th>
+										<th>View Details</th>
+										{% comment %} <th>status</th> {% endcomment %}
+									
+									</tr>
+								{% comment %} </thead> {% endcomment %}
+                            </thead>
+                            <tbody id="bonusTableBody">
+                                    
+                               
+                                {% comment %} {% for inv in allTrans %} {% endcomment %}
+								{% for user,level,mb,rate in lt %}
+                                <tr>
+                                    <td>
+                                        <svg class="arrow svg-main-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                <polygon points="0 0 24 0 24 24 0 24" />
+                                                <rect fill="#fff" opacity="0.3" transform="translate(11.646447, 12.853553) rotate(-315.000000) translate(-11.646447, -12.853553)" x="10.6464466" y="5.85355339" width="2" height="14" rx="1" />
+                                                <path d="M8.1109127,8.90380592 C7.55862795,8.90380592 7.1109127,8.45609067 7.1109127,7.90380592 C7.1109127,7.35152117 7.55862795,6.90380592 8.1109127,6.90380592 L16.5961941,6.90380592 C17.1315855,6.90380592 17.5719943,7.32548256 17.5952502,7.8603687 L17.9488036,15.9920967 C17.9727933,16.5438602 17.5449482,17.0106003 16.9931847,17.0345901 C16.4414212,17.0585798 15.974681,16.6307346 15.9506913,16.0789711 L15.6387276,8.90380592 L8.1109127,8.90380592 Z" fill="#fff" fill-rule="nonzero" />
+                                            </g>
+                                        </svg>
+                                    </td>
+									<td>{{ user.username }}</td>
+									<td>{{user.activationdate|date:"Y-m-d" }}</td>
+									{% comment %} <td>{{ user.joindate }}</td> {% endcomment %}
+									<td>{{ level }}</td>
+									<td>{{ rate }}%</td>
+									{% comment %} <td>{{ level }}</td> {% endcomment %}
+									<td>${{ mb|floatformat:2 }}</td>
+									<td>
+                                        
+                                        {% comment %} <button type="button"  onclick="approveIt('actionBtn{{user.id}}')" id="actionBtn{{user.id}}" value="{{user.id}}" class="btn btn-primary">View more</button> {% endcomment %}
+                                        {% comment %} <button type="button"  class="btn btn-primary" >View more</button> {% endcomment %}
+                                        <button type="button" class="btn btn-primary" hx-get="{% url 'viewMagicBonusDetails' user.id %}" hx-target="#modalContent" hx-trigger="click" data-bs-toggle="modal" data-bs-target="#detailsModal">View more</button>
+
+
+                                    
+                                    </td>
+                                    
+                                    {% comment %} <td><a href="" data-toggle="modal" data-target="#exampleModal"  style="color: blue;background-color:white;">View more</a></td>{% endcomment %}
+                                    {% comment %} <td><button type="button"  onclick="approveIt('actionBtn{{item.id}}')" id="actionBtn{{item.id}}" value="{{item.id}}" class="btn btn-primary">View more</button>  {% endcomment %}
+
+                                </tr>
+                                {% endfor %} 
+
+                            </tbody>
+                            <tfoot>
+                                
+                                <tr>
+                                    <th></th>
+                                    <td ><strong>Total</strong></td>
+                                    <td></td>
+                                    <td ></td>
+                                    
+                                    <td><strong>${{ total|floatformat:2 }}</strong></td>
+                                </tr>
+                               
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="detailsModal" tabindex="-1" role="dialog" aria-labelledby="detailsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="detailsModalLabel">Magic Bonus</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="modalContent">
+                {% include 'partials/magicincpartial.html' %}
+                <!-- Content will be loaded here -->
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block 'addFooterScripts' %}
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script>
+<script src="https://cdn.datatables.net/datetime/1.5.2/js/dataTables.dateTime.min.js"></script>
+
+
+<script>
+
+    
+
+
+
+    
+        var minDate, maxDate;
+     
+        // Custom filtering function which will search data in column four between two values
+        DataTable.ext.search.push(function (settings, data, dataIndex) {
+            var min = minDate.val();
+            var max = maxDate.val();
+            var date = new Date(data[2]);
+         
+            if (
+                (min === null && max === null) ||
+                (min === null && date <= max) ||
+                (min <= date && max === null) ||
+                (min <= date && date <= max)
+            ) {
+                return true;
+            }
+            return false;
+        });
+         
+        // Create date inputs
+        minDate = new DateTime('#min', {
+            format: 'MMMM Do YYYY'
+        });
+        maxDate = new DateTime('#max', {
+            format: 'MMMM Do YYYY'
+        });
+         
+        // DataTables initialisation
+        var table = $('#bonusTable').DataTable(
+          {
+            'paging':false
+          }
+        );
+         
+        // Refilter the table
+        $('#min, #max').on('change', function () {
+            table.draw();
+        }); 
+    
+    
+    
+    
+    
+    
+    
+        
+    </script>
+
+
+
+
+
+{% comment %} <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> {% endcomment %}
+{% comment %} <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script> {% endcomment %}
+
+{% endblock %}

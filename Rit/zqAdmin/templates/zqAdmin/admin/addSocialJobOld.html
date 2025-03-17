@@ -1,0 +1,215 @@
+{% extends 'zqAdmin/admin/layout/main.html' %} 
+{% load customFilters  %}
+
+{% block headerScripts %}
+
+<style>
+    .modal-backdrop.show{
+        opacity: 0;
+    }
+</style>
+
+{% endblock  %}
+
+
+{% block 'content' %}
+    <div class="app-main__outer" >
+        <div class="app-main__inner" style="background-color: rgba(255, 255, 255, 0.775);">
+            <div class="app-page-title">
+                <div class="page-title-wrapper">
+                    <div class="page-title-heading">
+                        <div class="page-title-icon">
+                            <i class="pe-7s-drawer icon-gradient bg-happy-itmeo">
+                            </i>
+                        </div>
+
+                    
+                        <div>
+
+                            Distribute Mining
+                        </div> 
+                    </div>
+                    <div class="page-title-actions">
+
+
+              
+
+
+                        <div class="d-inline-block dropdown">
+          
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class=" p-5 shadow" >
+            
+               
+                <div class="row mt-3">
+                
+                      
+
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-4 text-center mt-2">
+                            <h6 class="mt-4" style="font-weight: 600;">Enter Social Link</h6>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="input-group mt-4">
+                                <div class="input-group-prepend"></div>
+                                <input placeholder="Enter link"
+                                       type="text"
+                                       class="form-control"
+                                       id="enterdLink"
+                                       >
+                            </div>
+                        </div>
+                    </div>
+                    {% comment %} <div class="row mt-3">
+                        <div class="col-md-4 text-center mt-2">
+                            <h6 class="mt-4" style="font-weight: 600;">Enter ROI Rate</h6>
+                        </div>
+                        <div class="col-md-5">
+                 
+                            <div class="input-group mt-4">
+                                <div class="input-group-prepend"></div>
+                                <input placeholder="Enter roi rate"
+                                       type="datetime-local"
+                                       class="form-control"
+                                       id="rateSetDate"
+                                       value="{{setDate|date:"Y-m-d" }}T{{ setDate|time:'H:i:s'}}">
+                            </div>
+                         
+                        </div>
+                    </div> {% endcomment %}
+                    {% comment %} <button class="mb-2 mt-5 mr-2 btn btn-primary btn-lg btn-block"
+                            style="font-weight: 700"
+                            id="confirmBtn"
+                            onclick="#confirmModal"
+                           
+                           >Distribute ROI</button> {% endcomment %}
+
+                           {% comment %} <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#customModal">
+                            Open Modal
+                          </button> {% endcomment %}
+                    <button class="mb-2 mt-5 mr-2 btn btn-primary btn-lg btn-block"
+                            style="font-weight: 700"
+                            id="socialIdBtn"
+                           
+                            onclick="addsocialjob()">Save Link</button>
+
+
+                </div>
+
+                  {% comment %} ============================ {% endcomment %}
+
+                  
+                  
+                  <!-- Modal -->
+                  {% comment %} <div class="modal fade mt-5" id="customModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Confirm Action</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          Are you sure you want to proceed with this action?
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          <button type="button" class="btn btn-primary">Confirm</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div> {% endcomment %}
+
+
+
+                   {% comment %} ============================ {% endcomment %}
+
+
+              
+            
+            </div>
+
+         
+            
+        </div>
+      
+    </div>
+</div>
+</div>
+
+
+
+<script>
+
+
+    function addsocialjob() {
+        //debugger;
+        var enterdLink = $("#enterdLink").val();
+        //var rateSetDate = $("#rateSetDate").val();
+        //var confirmation = window.confirm(`Are you sure you want to distribute ROI for rate ${rate} for date ${rateSetDate} ?`);
+    
+  
+
+        //return;
+        //var volumes = $("#totalamnt").val();
+        //var useremail = $("#useremail").val();
+       // return;
+        if (enterdLink) {
+            $("#socialIdBtn").text('Please wait...');
+            $("#socialIdBtn").attr("disabled", "disabled");
+            $.ajax({
+                url: "/zqadmin/addsocialjob/",
+                type: "post",
+                data: {
+                    enterdLink: enterdLink,
+                    //setDate: rateSetDate,
+                    csrfmiddlewaretoken: '{{ csrf_token }}'
+                },
+                success: function (resultdata) {
+                    var status = resultdata.status;
+                    if (parseInt(status) == 1) {
+                      
+                        alert(resultdata.message);
+                       
+                    }
+                    else {
+                        $("#enterdLink").val('');
+                       
+                        $("#socialIdBtn").text('Save Link');
+                        $("#socialIdBtn").removeAttr("disabled");
+                        alert(resultdata.message);
+
+                    }
+
+                },
+                error: function (er) {
+                    alert("Something went wrong. Please try again later");
+                    $("#btnsubmit").text('Proceed');
+                    $("#btnsubmit").removeAttr("disabled");
+
+                }
+            });
+        }
+        else {
+            alert("Please enter correct rate");
+            $("#amount").val('');
+        }
+
+    }
+
+  
+
+
+</script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+{% endblock %}

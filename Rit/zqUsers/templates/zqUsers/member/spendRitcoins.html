@@ -1,0 +1,244 @@
+{% extends 'zqUsers/member/layout/main.html' %}
+{% load static %}
+
+{% block 'addHeaderScripts' %}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="/static/surveyapp/{% static 'dist/bundle.js' %}"></script>  <!-- Adjust path as needed -->
+<script src="/static/surveyapp/https://unpkg.com/react/umd/react.development.js" crossorigin></script>
+<script src="/static/surveyapp/https://unpkg.com/react-dom/umd/react-dom.development.js" crossorigin></script>
+<!-- Babel for JSX support -->
+<script src="/static/surveyapp/https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<style>
+	.card.disabled {
+		opacity: 0.6;
+		cursor: not-allowed;
+		pointer-events: none;
+		filter: grayscale(100%);
+	}
+</style>
+
+
+<style>
+	#connectWalletButton.disabled {
+	  background-color: green;
+	  cursor: not-allowed;
+	}
+  </style>
+
+{% endblock %}
+
+
+{% block 'content' %}
+	<!-- row -->
+	
+        <div class="container-fluid">
+            <!-- Row -->
+            <div class="row">
+                <div class="col-xl-12">
+                     <!-- Row -->
+                    <div class="row">
+                        <!-- column -->
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
+                            <div class="card pull-up">
+                                <div class="card-body align-items-center flex-wrap">
+                                    <div class="d-flex align-items-center mb-4">
+                                        <a href="javascript:void(0)" class="ico-icon">
+                                            <img src="https://www.planetsera.com/images/logo/logo.webp" alt="">
+                                        </a>
+                                        <div class="ms-3">
+                                            <a href="javascript:void(0)"><h4 class="card-title mb-0">planetsera</h4></a>
+                                            <span><a href="https://www.planetsera.com">www.planetsera.com</a></span>
+                                        </div>
+                                    </div>	
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <div>
+                                            <p class="mb-0 fs-14 text-dark font-w600"><a href="https://www.planetsera.com" class="color:blue">Visit Now</a></P>
+                                            {% comment %} <span class="fs-12"></span> {% endcomment %}
+                                        </div>
+                                        <div class=" align-items-center">
+                                            <p class="mb-0 fs-14 text-success font-w600">REDEEM  (5% - 50%)</P>
+                                            {% comment %} <span class="fs-12">Ended 12 Oct</span> {% endcomment %}
+                                        </div>
+                                    </div>
+                                </div>	
+                            </div>
+                        </div>
+                        <!-- /column -->
+
+                        <!-- column -->
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
+                            <div class="card pull-up">
+                                <div class="card-body align-items-center flex-wrap">
+                                    <div class="d-flex align-items-center mb-4">
+                                        <a href="javascript:void(0)" class="ico-icon">
+                                            <img src="https://www.hednor.com/image/cache/catalog/Hednor%20Logo%2022%20updated-5721x3627.png" alt="">
+                                        </a>
+                                        <div class="ms-3">
+                                            <a href="javascript:void(0)"><h4 class="card-title mb-0">HEDNOR</h4></a>
+                                            <span><a href="https://www.hednor.com">www.hednor.com</a></span>
+
+                                       </div>
+                                    </div>	
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <div>
+                                            <p class="mb-0 fs-14 text-dark font-w600"><a href="https://www.hednor.com" class="color:blue">Visit Now</a></P>
+                                            {% comment %} <span class="fs-12"></span> {% endcomment %}
+                                        </div>
+                                        <div class=" align-items-center">
+                                            <p class="mb-0 fs-14 text-success font-w600">REDEEM (5% to 50%)</P>
+                                            {% comment %} <span class="fs-12">Ended 12 Oct</span> {% endcomment %}
+                                        </div>
+                                    </div>
+                                </div>	
+                            </div>
+                        </div>
+
+
+
+                        
+                     
+
+                        {% for i in "1234567890"|make_list %}
+                        <div class=" col-xl-3 col-lg-4 col-md-6 col-sm-6">
+                            <div class="card pull-up disabled">
+                                <div class="card-body align-items-center flex-wrap">
+                                    <div class="d-flex align-items-center mb-4">
+                                        <a href="javascript:void(0)" class="ico-icon">
+                                            <img src="/static/zqUsers/assets/images/comingSoon.png" alt="">
+                                        </a>
+                                        <div class="ms-3">
+                                            <a href="javascript:void(0)"><h4 class="card-title mb-0">Coming Soon</h4></a>
+                                            <span><a href="https://www.hednor.com"></a></span>
+
+                                       </div>
+                                    </div>	
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <div>
+                                            <p class="mb-0 fs-14 text-dark font-w600"><a href="https://www.hednor.com" class="color:blue">Visit Now</a></P>
+                                            {% comment %} <span class="fs-12"></span> {% endcomment %}
+                                        </div>
+                                        <div class=" align-items-center">
+                                            <p class="mb-0 fs-14 text-success font-w600"></P>
+                                            {% comment %} <span class="fs-12">Ended 12 Oct</span> {% endcomment %}
+                                        </div>
+                                    </div>
+                                </div>	
+                            </div>
+                        </div>                        {% endfor %}
+                            
+                        <!-- /column -->
+                       
+                       
+                       
+                       
+                    </div>	
+                </div>
+            </div>
+        </div>
+
+
+{% endblock  %}
+
+
+{% block 'addFooterScripts' %}
+
+<script src="/static/surveyapp/https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<!-- counter -->
+<script src="/static/surveyapp/{% static 'surveyapp/vendor/counter/counter.min.js' %} "></script>
+<script src="/static/surveyapp/{% static 'surveyapp/vendor/counter/waypoint.min.js' %} "></script>
+<script src="/static/surveyapp/{% static 'surveyapp/vendor/peity/jquery.peity.min.js' %} "></script>
+<script src="/static/surveyapp/{% static 'surveyapp/js/dashboard/dashboard-1.js' %} "></script>
+
+<script>
+	const csrftoken = '{{ csrf_token }}';
+
+</script>
+
+
+<script src="/static/surveyapp/{% static 'dist/bundle.js' %}"></script>  <!-- Adjust path as needed -->
+
+
+
+
+
+
+
+<script>
+
+
+
+
+
+
+
+
+	function makePaymentQr() {
+           
+    
+		const entAmnt=$('#amount').val();
+	console.log(entAmnt);
+		if(!entAmnt){
+			 alert('Please enter correct transaction amount');
+	   return
+	   
+		}
+	
+		const amount = parseFloat(entAmnt);
+
+		if(amount<=0){
+
+			alert('amount should be greater than 0');
+		   return // Reload the page
+		  //  bt.attr("disabled", false).html("");
+
+
+		}
+	bt = $(`#viewQrBtn`);
+		bt.attr("disabled", "").html("<i class='fa fa-spin fa-spinner'></i>&nbsp;&nbsp;Please wait...");
+
+	$.ajax({
+	url: "/member/makePayment/",
+	type: "post",
+	data: {
+			amount: amount,
+			csrfmiddlewaretoken: '{{ csrf_token }}'
+		},
+	
+	success: function (resultdata) {
+	  var status = resultdata.status;
+	  if (parseInt(status) == 1) {
+		var paymentUrl=resultdata.url;
+		window.location.href = paymentUrl;
+
+		
+
+
+	  } else {
+		alert(resultdata.msg);
+		location.reload();
+		
+		
+	  }
+	},
+	error: function () {
+	  alert("Something went wrong. Please try again later");
+	  location.reload();
+	},
+	complete: function () {
+	  // Reset button state
+	  bt.attr("disabled", false).html("submit");
+	}
+  });
+
+}
+
+document.getElementById('viewQrBtn').addEventListener('click', makePaymentQr);
+
+</script>
+
+
+
+
+{% endblock %}

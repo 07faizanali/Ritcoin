@@ -1,0 +1,259 @@
+{% extends 'zqAdmin/admin/layout/main.html' %}
+{% load customFilters  %}
+{% block 'content' %}
+<style>
+  
+</style>
+
+    <div class="app-main__outer">
+        <div class="app-main__inner"
+             style="background-color: rgba(255, 255, 255, 0.775)">
+            <div class="app-page-title">
+                <div class="page-title-wrapper">
+                    <div class="page-title-heading">
+                        <div class="page-title-icon">
+                            <i class="pe-7s-wallet icon-gradient bg-plum-plate"> </i>
+                        </div>
+                        <div>
+                           All Members
+                            <div class="page-title-subheading"></div>
+                        </div>
+                    </div>
+                    {% comment %} <div class="page-title-actions">
+                        <button type="button"
+                                data-toggle="tooltip"
+                                title="Example Tooltip"
+                                data-placement="bottom"
+                                class="btn-shadow mr-3 btn btn-dark">
+                            <i class="fa fa-star"></i>
+                        </button>
+                        <div class="d-inline-block dropdown">
+                            <button type="button"
+                                    data-toggle="dropdown"
+                                    aria-haspopup="true"
+                                    aria-expanded="false"
+                                    class="btn-shadow dropdown-toggle btn btn-info">
+                                <span class="btn-icon-wrapper pr-2 opacity-7">
+                                    <i class="fa fa-business-time fa-w-20"></i>
+                                </span>
+                                Buttons
+                            </button>
+                            <div tabindex="-1"
+                                 role="menu"
+                                 aria-hidden="true"
+                                 class="dropdown-menu dropdown-menu-right">
+                                <ul class="nav flex-column">
+                                    <li class="nav-item">
+                                        <a href="javascript:void(0);" class="nav-link">
+                                            <i class="nav-link-icon lnr-inbox"></i>
+                                            <span>Inbox</span>
+                                            <div class="ml-auto badge badge-pill badge-secondary">86</div>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="javascript:void(0);" class="nav-link">
+                                            <i class="nav-link-icon lnr-book"></i>
+                                            <span>Book</span>
+                                            <div class="ml-auto badge badge-pill badge-danger">5</div>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="javascript:void(0);" class="nav-link">
+                                            <i class="nav-link-icon lnr-picture"></i>
+                                            <span>Picture</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a disabled href="javascript:void(0);" class="nav-link disabled">
+                                            <i class="nav-link-icon lnr-file-empty"></i>
+                                            <span>File Disabled</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div> {% endcomment %}
+                </div>
+            </div>
+            {% comment %} {% if allMems %} {% endcomment %}
+                <div class="row shadow"style="overflow-x:auto; height:auto;">
+                    <div class="col-lg-12">
+                        <div class="main-card mb-3 ">
+                            <div class="">
+                                <table id="myTable"  class="display" >
+                                    <thead>
+                                        <tr>
+                                           {% comment %} <th>Sr No.</th> {% endcomment %}
+                                           <th>Uploaded By</th>
+                                           <th>Upload date</th>
+                                           <th>Social Job ID</th>
+                                            <th>Instagram</th>
+                                            <th>Facebook</th>
+                                            <th>Twitter</th>
+                                            <th>Youtube</th>
+                                            <th>Google Review</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for item in allSubmittedTaskImages %}
+                                            <tr>
+                                                {% comment %} <th scope="row">{{ index|add:1 }}</th> {% endcomment %}
+                                                <td>{{ item.uploadedby }}</td>
+                                                <td>{{ item.uploaddate }}</td>
+                                               
+                                                <td>{{item.social_job_id}}</td>
+                                                <td><img src="{{item.insta_image.url}}" height="200" width="200"  class="zoomable" ></td>
+                                                <td><img src="{{item.facebook_image.url}}" height="200" width="200"  class="zoomable"></td>
+                                                <td><img src="{{item.twitter_image.url}}" height="200" width="200"  class="zoomable"></td>
+                                                <td><img src="{{item.youtube_image.url}}" height="200" width="200"  class="zoomable"></td>
+                                                <td><img src="{{item.greview_image.url}}" height="200" width="200"  class="zoomable"></td> 
+                                                <td><button type="button"  onclick="approveIt('actionBtn{{item.id}}')" id="actionBtn{{item.id}}" value="{{item.id}}" class="btn btn-primary">Approve</button>
+                                                </td> 
+                                            </tr>
+                                        {% endfor %}
+                                    {% comment %} {% endif %} {% endcomment %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="imageModalLabel">Image Preview</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center">
+                <img id="modalImage" src="" alt="Image Preview" style="width: 100%;">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+
+
+function approveIt(btnId){
+     //debugger;
+                //var email = $("#email").val();
+                var taskId = $(`#${btnId}`).val();
+                //console.log(taskId);
+              
+                if (taskId ) {
+        
+                    $(`#${btnId}`).text('Please wait...');
+                    $(`#${btnId}`).attr("disabled", "disabled");
+                   // amount=parseFloat(amount)/({{ZQLRate}});
+                    $.ajax({
+                        url: "{% url 'verifysocialjobdata' %}",
+                        type: "post",
+                        data: {
+                            taskId: taskId,
+                          
+                            csrfmiddlewaretoken: `{{ csrf_token }}`
+                        },
+                        success: function (resultdata) {
+                            var status = resultdata.status;
+                            if (parseInt(status) == 1) {
+                             
+                                alert(resultdata.msg);
+                                location.reload();
+                                //setTimeout(showresendotp, 300000);
+                            }
+                            else {
+                             
+                                alert(resultdata.msg);
+                                location.reload();
+        
+                            }
+        
+                        },
+                        error: function (er) {
+                            alert("Something went wrong. Please try again later");
+                           
+                           alert(resultdata.msg);
+        
+                        }
+                    });
+                }
+}
+
+</script>
+
+
+
+{% endblock 'content' %}
+
+{% block 'footerScripts' %}
+
+
+
+
+ <script>
+
+    $(document).ready(function() {
+        $('#actionBtn').on('click', function() {
+                //debugger;
+                //var email = $("#email").val();
+                var taskId = $("#actionBtn").val();
+                console.log(taskId);
+                if (taskId ) {
+                    $("#actionBtn").text('Please wait...');
+                    $("#actionBtn").attr("disabled", "disabled");
+                   // amount=parseFloat(amount)/({{ZQLRate}});
+                    $.ajax({
+                        url: "{% url 'verifysocialjobdata' %}",
+                        type: "post",
+                        data: {
+                            taskId: taskId,
+                          
+                            csrfmiddlewaretoken: '{{ csrf_token }}'
+                        },
+                        success: function (resultdata) {
+                            var status = resultdata.status;
+                            if (parseInt(status) == 1) {
+                             
+                                alert(resultdata.msg);
+                                location.reload();
+                                //setTimeout(showresendotp, 300000);
+                            }
+                            else {
+                             
+                                alert(resultdata.msg);
+                                location.reload();
+        
+                            }
+        
+                        },
+                        error: function (er) {
+                            alert("Something went wrong. Please try again later");
+                           
+                           alert(resultdata.msg);
+        
+                        }
+                    });
+                }
+                
+         
+        
+        });
+
+    });
+  
+</script>
+
+
+{% endblock 'footerScripts' %}

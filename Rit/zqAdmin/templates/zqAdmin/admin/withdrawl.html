@@ -1,0 +1,318 @@
+{% extends 'zqUsers/member/layout/main.html' %}
+{% load customFilters  %}
+{% block 'content' %}
+    <div class="app-main__outer">
+        <div class="app-main__inner">
+            <div class="app-page-title">
+                <div class="page-title-wrapper">
+                    <div class="page-title-heading">
+                        <div class="page-title-icon">
+                            <i class="pe-7s-phone icon-gradient bg-night-fade">
+                            </i>
+                        </div>
+                        <div>
+                            Withdrawal Fund
+                            <div class="page-title-subheading">
+                                {% comment %} Wide icons selection including from flag icons to FontAwesome and other icons libraries. {% endcomment %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="page-title-actions">
+                        {% comment %} <button type="button"
+                                data-toggle="tooltip"
+                                title="Example Tooltip"
+                                data-placement="bottom"
+                                class="btn-shadow mr-3 btn btn-dark">
+                            <i class="fa fa-star"></i>
+                        </button> {% endcomment %}
+                        <div class="d-inline-block dropdown">
+                            {% comment %} <button type="button"
+                                    data-toggle="dropdown"
+                                    aria-haspopup="true"
+                                    aria-expanded="false"
+                                    class="btn-shadow dropdown-toggle btn btn-info">
+                                <span class="btn-icon-wrapper pr-2 opacity-7">
+                                    <i class="fa fa-business-time fa-w-20"></i>
+                                </span>
+                                Buttons
+                            </button> {% endcomment %}
+                            {% comment %} <div tabindex="-1"
+                                 role="menu"
+                                 aria-hidden="true"
+                                 class="dropdown-menu dropdown-menu-right">
+                                <ul class="nav flex-column">
+                                    <li class="nav-item">
+                                        <a href="javascript:void(0);" class="nav-link">
+                                            <i class="nav-link-icon lnr-inbox"></i>
+                                            <span>Inbox</span>
+                                            <div class="ml-auto badge badge-pill badge-secondary">86</div>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="javascript:void(0);" class="nav-link">
+                                            <i class="nav-link-icon lnr-book"></i>
+                                            <span>Book</span>
+                                            <div class="ml-auto badge badge-pill badge-danger">5</div>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="javascript:void(0);" class="nav-link">
+                                            <i class="nav-link-icon lnr-picture"></i>
+                                            <span>Picture</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a disabled href="javascript:void(0);" class="nav-link disabled">
+                                            <i class="nav-link-icon lnr-file-empty"></i>
+                                            <span>File Disabled</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div> {% endcomment %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% comment %} Code to be edited {% endcomment %}
+            <div class="card p-5">
+                <span style="color:green;" id="sucessmsg"></span>
+                <input type="hidden" value="{{total_income_unfreeze}}" id="totalamnt" />
+                {% comment %} <h5 style="font-weight: 600;color: green;text-align: center;">BALANCE : 48071320.86 (Zaan Queril COIN)</h5> {% endcomment %}
+                <h5 class="card-title text-danger text-center" >Balance : <span style="color:green"> &nbsp;{{total_income_unfreeze}} (Zaan Coin)/${% mul total_income_unfreeze ZQLRate   %}(USDT)</span></h5>
+                <div class="row mt-3">
+                    <h6 style="font-weight: 600;" class="mt-4 text-center">Zaan Queril Receive wallet Address </h6>
+                    <div class="col-md-7">
+                        <div class="input-group mt-4">
+                            {% comment %} <div class="input-group-prepend"></div> {% endcomment %}
+                            {% comment %} <input placeholder="Paste Your receive wallet address code"
+                                   type="text"
+                                   class="form-control"> {% endcomment %}
+
+                            <input type="text" class="form-control" id="withdrawal_coin_address" value="{{u1.withdrawal_zqcoin_address}}" placeholder="Paste Your Zaan Address" required="">
+
+                        </div>
+                        <span class="text-success mt-2" id="span_withdrawal_coin_address"></span>
+                    </div>
+                    <div class="col-md-1">
+                        {% if coin_status == 0  %}
+                        {% comment %} <button class="btn-wide mb-2 mr-2 btn btn-gradient-primary btn-lg" style="white-space: nowrap;font-size: 15px;" {{btc_disable}} onclick="verify_withdrawal_address(this,'withdrawal_coin_address')">Send OTP</button> {% endcomment %}
+
+                        <button class="mt-4 btn btn-primary btn-wide mb-2 btngenrate btn-lg " {{btc_disable}} onclick="verify_withdrawal_address(this,'withdrawal_coin_address')">Send OTP</button>
+                        {% else %}
+                        <button class="mt-4 btn btn-primary btn-wide mb-2 btngenrate btn-lg " id="btnchange" onclick="changewithdrawaladd()">Update</button>
+
+                        {% endif  %}
+                    </div>
+
+
+
+                    <div class="col-md-4"></div>
+                </div>
+           
+               <div id="otp_w" style="display:none;">
+                <div class="row mb-4" >
+               
+                  <div class="col-sm-6 text-center mt-4 ml-5 ">
+                      
+                      <div class="input-group">
+                          <input type="text" class="form-control" id="withdrawal_coin_address_otp" value="" placeholder="Enter Your OTP">
+                      </div>
+                      <span class="text-success float-left mt-2" id="otp_withdrawal_coin_address"></span> 
+                  </div>
+                  <div class="col-sm-3 text-center mt-4 ">
+
+                      <button class="btn-wide mb-2 mr-2 btn btn-gradient-primary btn-lg" style="white-space: nowrap;font-size: 15px;"onclick="otp_verify_withdrawal_address(this,'withdrawal_coin_address')">Verify OTP</button>
+                  </div>
+
+
+              </div>
+              </div>
+
+                <div class="row mt-3">
+                    
+                    {% if coin_status != 0 %}
+                    
+                    <div class="col-md-4 text-center mt-2">
+                        <h6 class="mt-4" style="font-weight: 600;">Enter Zaan Queril Coin</h6>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="input-group mt-4">
+                            <div class="input-group-prepend"></div>
+                            <input type="number" class="form-control" id="SBGcoin" required="" placeholder="Enter Zaan Coin">
+
+                            {% comment %} <input placeholder="Enter Coin" type="number" class="form-control"> {% endcomment %}
+                        </div>
+                    </div>
+
+                    {% endif   %}
+                </div>
+                <button class="mt-5 mb-2 mr-2 btn btn-outline-primary btn-lg btn-block" {{withdrawal_btn}} onclick="withdrawal()" style="letter-spacing: 1px;">Withdrawal</button>
+
+               
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% comment %} <script type="text/javascript" src="assets/scripts/main.js"></script>
+{% endcomment %}
+{% comment %} Code to be edited {% endcomment %}
+<script type="text/javascript">
+    
+    function verify_withdrawal_address(el, el_id) {
+        $("#sucessmsg").text("");
+        //debugger;
+        var c = $("#" + el_id), v = c.val(), bt = $(el);
+        if (v.length == 0) {
+            alert(c.attr("title"));
+        } else {
+            c.attr("readonly", "");
+            bt.attr("disabled", "").html("<i class='fa fa-spin fa-spinner'></i>&nbsp;&nbsp;Processing...");
+            $.ajax({
+                type: "post", url: "/member/send_otp_receive_wallet_address/", data: {
+                    type: el_id, receive_address: v,csrfmiddlewaretoken: '{{ csrf_token }}'
+                }, success: function (d) {
+                    debugger;
+                    if (d) {
+                        if (d.indexOf("success") > -1) {
+                            $("#span_" + el_id).attr("class", "text-success").html(d);
+                            //$(".div_" + el_id).removeClass("hidden"); otp_w
+                            $("#otp_w").css("display", "block");
+                            bt.html("Send OTP");
+                        } else {
+                            $("#span_" + el_id).attr("class", "text-danger").html(d);
+                        }
+                    }
+                },
+                error: function (er) {
+                    $("#span_" + el_id).attr("class", "text-danger").html("Something went wrong.");
+                    c.removeAttr("readonly");
+                    bt.removeAttr("disabled").html("Send OTP");
+                }
+            });
+  
+        }
+    }
+  
+    function otp_verify_withdrawal_address(el, el_id) {
+        //debugger;
+        var c = $("#" + el_id + "_otp"), v = c.val(), bt = $(el);
+        if (v.length == 0) {
+            alert(c.attr("title"));
+        } else {
+            c.attr("readonly", "");
+            bt.attr("disabled", "").html("<i class='fa fa-spin fa-spinner'></i>&nbsp;&nbsp;Processing...");
+            $.ajax({
+                type: "post", url: "/member/verify-withdrawl-otp/", data: {
+                    type: el_id, otp: v,csrfmiddlewaretoken: '{{ csrf_token }}'
+                }, success: function (d) {
+                    //debugger;
+                    if (d) {
+                        if (d.indexOf("success") > -1) {
+                            $("#otp_" + el_id).attr("class", "text-success").html(d);
+                            //$(".div_" + el_id).removeClass("hidden");
+                            $("#otp_w").css("display", "none");
+                            bt.html("Verified");
+                            location.reload();
+                        } else {
+                            $("#otp_" + el_id).attr("class", "text-danger").html(d);
+                            c.removeAttr("readonly");
+                            bt.removeAttr("disabled").html("Verify OTP");
+                        }
+                    }
+                },
+                error: function (er) {
+                    $("#otp_" + el_id).attr("class", "text-danger").html("Something went wrong.");
+                    c.removeAttr("readonly");
+                    bt.removeAttr("disabled").html("Verify OTP");
+                }
+            });
+        }
+    }
+    
+    function changewithdrawaladd() {
+        if (confirm('Are you sure for change address')) {
+            
+            var address = $("#withdrawal_coin_address").val();
+            $("#btnchange").text("Please wait...");
+            $("#btnchange").attr("disabled", "disabled");
+            if (address != "") {
+                $.ajax({
+                    type: "post",
+                    url: "/member/changeWithdrawlAddress/",
+                    data: {
+                        address_withdrl: address,
+                        csrfmiddlewaretoken: '{{ csrf_token }}'
+                    }, success: function (result) {
+                        //debugger;
+                        var status = result.status;
+                        if (parseInt(status) == 1) {
+                            alert(result.message);
+                            location.reload();
+                        }
+                        else {
+                            alert(result.message);
+                        }
+                        $("#btnchange").text("Change");
+                        $("#btnchange").removeAttr("disabled");
+                    },
+                    error: function (er) {
+  
+                        alert(er);
+                        $("#btnchange").text("Change");
+                        $("#btnchange").removeAttr("disabled");
+                    }
+                });
+            }
+            else {
+                alert("Please enter valid address");
+                $("#btnchange").text("Change");
+                $("#btnchange").removeAttr("disabled");
+            }
+        }
+    }
+  
+    function withdrawal() {
+        // debugger;
+        $("#sucessmsg").text("");
+        var totalSBGcoin = $("#totalamnt").val();
+        var SBGcoin = $("#SBGcoin").val();
+        console.log(SBGcoin);
+        if (parseFloat(SBGcoin) > 0) {
+            if (parseFloat(SBGcoin) <= parseFloat(totalSBGcoin)) {
+                $.ajax({
+                    type: "post",
+                    url: "/member/sendpayment_withdrawal/",
+                    data: {
+                        coin_amnt: SBGcoin,
+                        csrfmiddlewaretoken: '{{ csrf_token }}'
+                    }, success: function (result) {
+                        // debugger;
+                        var status = result.status;
+                        if (parseInt(status) == 1) {
+                            alert(result.message);
+                            $("#sucessmsg").text(result.message);
+                            location.reload();
+                        }
+                        else {
+                            alert(result.message);
+                        }
+                    },
+                    error: function (er) {
+                        alert(er);
+                    }
+                });
+            }
+            else {
+                $("#SBGcoin").val('');
+                alert('Please enter valid SBG coin');
+            }
+        }
+        else {
+            $("#SBGcoin").val('');
+            alert('Please enter SBG coin more then 0');
+        }
+    }
+  
+</script>
+{% endblock 'content' %}

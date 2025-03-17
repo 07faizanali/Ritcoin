@@ -1,0 +1,121 @@
+{% extends 'zqUsers/member/layout/main.html' %}
+
+{% load static %}
+{% load customFilters %}
+
+
+{% block 'addHeaderScripts' %}
+
+<script src="https://unpkg.com/htmx.org@2.0.0" integrity="sha384-wS5l5IKJBvK6sPTKa2WZ1js3d947pvWXbPJ1OmWfEuxLgeHcEbjUUA5i9V5ZkpCw" crossorigin="anonymous"></script>
+
+<link href="{% static 'surveyapp/vendor/bootstrap-datepicker-master/css/bootstrap-datepicker.min.css'  %}" rel="stylesheet">
+
+{% endblock  %}
+{% block 'content' %}
+
+
+			<div class="container-fluid">
+				<!-- Row -->
+						<div class="row">
+					{% comment %} <div class="col-xl-12">
+						<div class="filter cm-content-box box-primary">
+							
+							<div class="cm-content-body form excerpt">
+								<div class="card-body">
+									<div class="row">
+										<div class="col-lg-12">
+											<div class="main- mb-3 ">
+											<div class=""><h5 class="card-title">Direct Bonus</h5>
+											<table class="mb-0 table">
+											<thead>
+											<tr>
+											<th>Sr No.</th>
+											<th>Member</th>
+											<th>Date of registration</th>
+											<th>Package($)</th>
+											<th>Bonus($)</th>
+											
+											<th>Status</th>
+											</tr>
+											</thead>
+											<tbody>
+
+											{% if allDirectBonus %}
+											{% for index,inv in  allDirectBonus %}
+											<tr>
+											<th scope="row">{{index|add:1}}</th>
+											<th scope="row">{{inv.members.username}}</th>
+											<td>{{inv.members.date_joined}}</td>
+											<td>${{inv.package}}</td>
+											<td>${{inv.rs}}</td>
+											
+											<td> success</td>
+											</tr>
+											{% endfor %}
+											{% endif %}
+												
+											</tbody>
+											</table>
+											</div>
+											</div>
+											</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					
+						
+					</div> {% endcomment %}
+					<div class="col-lg-12">
+						<div class="card transaction-table">
+							{% comment %} <h3 class="ms-5 my-3">Level Bonus</h3> {% endcomment %}
+							<div class="d-flex justify-content-between align-items-center ms-5 my-3">
+								<h3>Level Bonus</h3>
+								<span class="badge bg-primary" style="margin-right: 20px;">Total Directs: {{ total_direct_members }}</span>
+							</div>
+							{% comment %} <div class="card-header border-0 flex-wrap pb-0 d-flex"> {% endcomment %}
+							<div class="card-header border-0  pb-0 ">
+								<div class="mb-2 mx-auto">
+									<select id="levelFilter" name='level' class="form-select" hx-get="{% url 'fiterlevelincome' %}" hx-target="#bonusTableBody" hx-trigger="change">
+										{% comment %} <i class="fa fa-filter"></i> {% endcomment %}
+										<option  value="all">Filter</option>
+										<option  value="all">All</option>
+										{% for level in 15|to_range %}
+										<option value="{{ level }}">Level {{ level }}</option>
+										{% endfor %}
+									</select>
+								</div>
+								{% comment %} <div class="mb-2 mx-auto">
+									<input type="date" id="dateFilter" name="date" class="form-control" hx-get="" hx-target="" hx-trigger="">
+								</div {% endcomment %}
+								
+								{% comment %} <div class="mb-2 mx-auto">
+                                  <button type="button" class="btn btn-success">search</button>
+								</div> {% endcomment %}
+
+							</div>
+							<div class="card-body p-0">
+								<div class="table-responsive" id="bonusTableBody">
+									{% include 'partials/levelIncPartial.html' %}
+									
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+{% endblock  %}
+
+{% block 'addFooterScripts' %}
+
+    <!-- Required vendors -->
+    {% comment %} <script src="{% static 'surveyapp/vendor/global/global.min.js'  %}"></script>
+	<script src="{% static 'surveyapp/vendor/bootstrap-select/dist/js/bootstrap-select.min.js'  %}"></script>
+	<script src="{% static 'surveyapp/vendor/bootstrap-datepicker-master/js/bootstrap-datepicker.min.js'  %}"></script>
+    <script src="{% static 'surveyapp/js/custom.min.js'  %}"></script>
+	<script src="{% static 'surveyapp/js/dlabnav-init.js'  %}"></script>
+	<script src="{% static 'surveyapp/js/demo.js'  %}"></script>
+    <script src="{% static 'surveyapp/js/styleSwitcher.js'  %}"></script> {% endcomment %}
+
+{% endblock  %}

@@ -1,0 +1,1458 @@
+{% load static %}
+<!doctype html>
+<html>
+
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<head>
+	<!-- Meta Tags -->
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="author" content="ThemeMarch">
+	<!-- Page Title -->
+	<title>Ritcoin</title>
+    <!-- Favicon Icon -->
+  	<!-- <link rel="icon" href="assets/img/favicon.png"> -->
+	<!-- Stylesheets -->
+    <link rel="stylesheet" type="text/css" href="{% static 'homePage/assets/css/plugins.css' %}">
+    <link rel="stylesheet" href="{% static 'homePage/assets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'homePage/assets/css/animate.min.css' %}">
+    <link rel="stylesheet" href="{% static 'homePage/assets/css/icofont.css' %}">
+    <link rel="stylesheet" href="{% static 'homePage/assets/css/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'homePage/assets/css/fontawesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'homePage/assets/css/slick.min.css' %}">
+    <link rel="stylesheet" href="{% static 'homePage/assets/css/modal.video.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'homePage/assets/css/style.css' %}">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="assets/vendor/backward/html5shiv.js"></script>
+    <script type="text/javascript" src="assets/vendor/backward/respond.min.js"></script>
+    <![endif]-->
+
+	<style>
+	
+		#flash-messages {
+			position: fixed; 
+			top: 30px;
+			width: 25%; 
+			height:60px;
+			{% comment %} background-color:rgba(0, 217, 255, 0.693); {% endcomment %}
+			font-size: 17px;
+			font-weight: 700;
+		  
+			left:40%;
+			{% comment %} right:70px; {% endcomment %}
+			
+			z-index: 1000; 
+			text-align:center;
+		  
+		  }
+		  
+	
+			@media (max-width: 575.98px),@media (max-width: 360.98px), @media (max-width: 430.98px){ 
+				.modal-content{
+					height:60vh !important;
+					width:60vw !important;
+				}
+				.tm-modal {
+				width: 375px;
+				padding: 45px 60px;
+			}
+			.close {
+				position: absolute;
+				right: 38px;
+			   
+			}
+			@media screen and (max-width: 991px) {
+				.tm-mobile-logo {
+					max-height: 75px;
+					margin-top:-6px;
+					
+				}
+			}
+			 }
+			 .toggle-password {
+				float: right;
+				cursor: pointer;
+				
+				margin-top: -25px;
+			} 
+			 
+	</style>
+
+</head>
+<body data-spy="scroll" data-target=".tm-section-active" class="tm-green-color">
+    <!-- Start Preloader -->
+	{% comment %} <div id="tm-preloader">
+		<div class="tm-preloader-in">
+	        <div class="bar bar-top"></div>
+	        <div class="bar bar-right"></div>
+	        <div class="bar bar-bottom"></div>
+	        <div class="bar bar-left"></div>
+	    </div>
+	</div> {% endcomment %}
+    <!-- End Preloader -->
+    <!-- Start Site Header Wrap -->
+    <header class="tm-site-header">
+        <div class="tm-header-menu">
+            <div class="container tm-header-menu-container">
+                <div class="tm-site-branding">
+                    <!-- For Image Logo -->
+                    <a href="index.html" class="tm-logo-link">
+                        <img src="{% static 'homePage/assets/img/rimnew.png' %}" alt="" class="tm-logo" style="height:18vh;">
+                        <img src="{% static 'homePage/assets/img/rimnew.png' %}" alt="" class="tm-mobile-logo" style="height:45vh;">
+                    </a>
+                    <!-- For Site Title -->
+                    <!-- <span class="tm-site-title">
+                    	<a href="index.html">Ocher</a>
+                    </span> -->
+                </div>
+                <nav class="tm-primary-nav tm-section-active">
+                    <ul class="tm-primary-nav-list">
+                        <li class="menu-item"><a href="#about" class="nav-link">About</a></li>
+                        <li class="menu-item"><a href="#howitworks" class="nav-link">How It Works</a></li>
+                        <li class="menu-item"><a href="#tokensale" class="nav-link">Earn</a></li>
+                        <li class="menu-item"><a href="#bounty" class="nav-link">Bounty</a></li>
+                        <li class="menu-item"><a href="#roadmap" class="nav-link">Roadmap</a></li>
+                        <li class="menu-item"><a href="#team" class="nav-link">Team</a></li>
+                        <li class="menu-item"><a href="#faq" class="nav-link">Faq</a></li>
+                    </ul>
+                   <!-- .tm-language -->
+                    <div class="tm-menu-meta">
+                    	<button class="tm-btn tm-style1 tm-with-border" data-toggle="modal" data-target="#tm-login">LOGIN</button>
+                    	<button class="tm-btn tm-style1 tm-with-border" data-toggle="modal" data-target="#tm-signup">SIGNUP</button>
+                    </div>
+                </nav>
+            </div><!-- .tm-header-menu-container -->
+        </div><!-- .tm-header-menu -->
+    </header><!-- .tm-site-header -->
+
+	{% if messages %}
+
+          <div id="flash-messages"  style="display:block;">
+        {% for message in messages %}
+            <div class="alert alert-{{message.tags}}">
+                {{ message }}
+            </div>
+        {% endfor %}
+        </div>
+      {% endif %}
+    <!-- End Site Header Wrap -->
+	<div class="tm-section-active tm-fix-bar">
+		<ul class="wow fadeInRight" data-wow-duration="0.8s" data-wow-delay="0.5s">
+		    <li><a href="#home" class="nav-link"></a></li>
+		    <li><a href="#about" class="nav-link"></a></li>
+		    <li><a href="#video" class="nav-link"></a></li>
+		    <li><a href="#howitworks" class="nav-link"></a></li>
+		    <li><a href="#tokensale" class="nav-link"></a></li>
+		    <li><a href="#bounty" class="nav-link"></a></li>
+		    <li><a href="#roadmap" class="nav-link"></a></li>
+		    <li><a href="#team" class="nav-link"></a></li>
+		  
+		    <li><a href="#faq" class="nav-link"></a></li>
+		    <li><a href="#tm-subscribe" class="nav-link"></a></li>
+		    <li><a href="#footer" class="nav-link"></a></li>
+		</ul>
+	</div>
+	<!-- Start Hero Section -->
+	<section class="tm-hero-section tm-style1 tm-bg" id="home" style="background-image: url({% static 'homePage/assets/img/hero-bg-v2.jpg' %});">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="tm-hero-text">
+						<div class="tm-overflow-hidden">
+							<h1 class="tm-hero-title tm-white-c tm-f42 tm-lg-f38 tm-fw-medium tm-m0 tm-lh60 col-xs-t-14 tm-md-f30 tm-md-lh40 wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.7s">Ritcoin: Premier Data Collection & Market Research Services - 
+						</h1>
+						</div>
+						<div class="empty-space col-xs-b10"></div>
+						<div class="tm-overflow-hidden">
+							<h2 class="tm-hero-sub-title tm-white-c tm-f24 tm-m0 tm-lh36 tm-md-f18 tm-md-lh26 wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.9s"> Cryptocurrency
+								Training &
+								development Platform
+							</h2>
+						</div>
+						<div class="empty-space col-xs-b25"></div>
+						<div class="tm-overflow-hidden">
+							<div class="tm-btn-group wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="1.15s">
+								{% comment %} <a href="#" class="tm-btn tm-style1">Buy Token</a>
+								<a href="#" class="tm-btn tm-style1 tm-with-border">Buy Token</a> {% endcomment %}
+							</div>
+						</div>
+					</div>
+				</div><!-- .col -->
+				<div class="col-lg-6 wow zoomIn" data-wow-duration="1.25s" data-wow-delay="1.25s">
+					<div class="tm-countdown-outer">
+					<div class="tm-countdown-wrap tm-style1 text-center">
+						<div class="tm-countdown-bg"></div>
+							<div class="tm-countdown-box">
+								<div class="tm-countdown-heading tm-f20 tm-white-c tm-lh16 mb-4">Be part of Ritcoin</div>
+								 {% comment %} <div id="tm-if-expired" class="tm-countdown tm-if-expired">
+			                        <div class="countdown-element">
+			                            <div id="tm-count-days" class="tm-f50 tm-md-f50 tm-green-c tm-fw-medium tm-lh62 tm-oswald-fonts"></div>
+			                            <span class="tm-white-c">Days</span>
+			                        </div>
+			                        <span class="tm-sep tm-f60 tm-green-c">:</span>
+			                        <div class="countdown-element">
+			                            <div id="tm-count-hours" class="tm-f50 tm-md-f50 tm-green-c tm-fw-medium tm-lh62 tm-oswald-fonts"></div>
+			                            <span class="tm-white-c">Hours</span>
+			                        </div>
+			                        <span class="tm-sep tm-f60 tm-green-c">:</span>
+			                        <div class="countdown-element">
+			                            <div id="tm-count-minutes" class="tm-f50 tm-md-f50 tm-green-c tm-fw-medium tm-lh62 tm-oswald-fonts"></div>
+			                            <span class="tm-white-c">Minutes</span>
+			                        </div>
+			                        <span class="tm-sep tm-f60 tm-green-c">:</span>
+			                        <div class="countdown-element">
+			                            <div id="tm-count-seconds" class="tm-f50 tm-md-f50 tm-green-c tm-fw-medium tm-lh62 tm-oswald-fonts"></div>
+			                            <span class="tm-white-c">Seconds</span>
+			                        </div>
+			                    </div><!-- .tm-countdown --> {% endcomment %}
+			                    <div class="tm-token-status-bar tm-f13 tm-white-c">
+			                    	<span class="tm-token-start">Learn</span> 
+			                    	{% comment %} <span class="tm-token-softcap"></span> {% endcomment %}
+			                    	<span class="tm-token-softcap">social job</span>
+			                    	<span class="tm-token-hardcap">Earn</span>
+			                    	<div class="tm-token-status-bar-out">
+			                    		<div class="tm-token-status-bar-in" style="width: 80%;"></div>
+			                    	</div>
+			                    </div><!-- .tm-token-status-bar -->
+			                    <div class="empty-space col-xs-b35"></div>
+			                    <div class="text-center">
+		                    		{% comment %} <a href="#" class="tm-btn">Contribute Now</a> {% endcomment %}
+									<a class="tm-btn "  href="{% static 'surveyapp/images/Ritcoin.pdf' %}">Plan PPt</a>
+									{% comment %} <a class="tm-btn "  href="/static/homePage/assets/img/Ritcoin.pdf">Plan PPt</a> {% endcomment %}
+		                    	</div>
+							</div><!-- .tm-countdown-box -->
+						</div><!-- .tm-countdown-wrap -->
+					</div>
+				</div><!-- .col -->
+			</div>
+		</div>
+	</section>
+	<!-- End Hero Section -->
+
+	<!-- Start About Section -->
+	<section class="tm-about-wrap tm-bg" id="about" style="background-image: url({% static 'homePage/assets/img/about-bg.jpg' %});">
+		<div class="empty-space col-md-b90 col-xs-b55"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="tm-about-img-wrap">
+						<div class="tm-about-img">
+							<img src="{% static 'homePage/assets/img/about-img2.png' %}" alt="">
+							<img src="{% static 'homePage/assets/img/green-ethereum1.png' %}" alt="" class="tm-ethereum">
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<div class="tm-about">
+						<h2 class="tm-m0 tm-lh40 col-xs-t-1 tm-md-f28 tm-md-lh35 wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.25s">Who we are? 
+						</h2>
+						<div class="empty-space col-md-b20 col-xs-b10"></div>
+						<div class="tm-f20 tm-md-f15 tm-m0 tm-lh30 tm-md-lh20 wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.30s">Ritcoin Company, Inc. is a premier marketing research and data collection service firm, privately held and dedicated to excellence. Established in 2016 and headquartered in Dubai, UAE, we specialize in delivering high-quality data for both consumer and business-to-business studies. 
+						</div>
+						<div class="empty-space col-md-b10 col-xs-b15"></div>
+						<h2 class="tm-m0 tm-lh60 tm-md-f28 tm-md-lh34 wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.35s">Why Choose Ritcoin? ?</h2>
+						<div class="empty-space col-md-b10 col-xs-b10"></div>
+						<div class="tm-about-text tm-f20 tm-md-f15 tm-lh32 tm-md-lh20 col-xs-t-1">
+							<p class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.4s"> At Ritcoin Company, Inc., we deeply value our established client relationships and are committed to delivering exceptional service on every research project. Here’s why you should choose us 
+								for your data collection and market research needs.
+							
+						</div>
+					</div>
+				</div><!-- .col -->
+			</div>
+		</div>
+		<div class="empty-space col-md-b85 col-xs-b55"></div>
+	</section>
+	<!-- End About Section -->
+	
+	
+	<!-- Start How it Works -->
+    <section class="tm-ocher-work tm-bg" id="howitworks" style="background-image: url({% static 'homePage/assets/img/greeen-adventages.jpg' %});">
+    	<div class="empty-space col-md-b85 col-xs-b50"></div>
+    	<div class="container">
+    		<div class="tm-section-heading tm-style1">
+    		
+    			<div class="tm-section-heading-right">
+    				<h2 class="col-xs-b20 tm-md-f28 tm-md-lh34 wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.35s">How to Earn with Ritcoin?</h2>
+    				<div class="tm-f20 tm-md-f15 tm-lh30 tm-md-lh24 wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.45s"> 
+						<p class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.4s">                         Start by registering with your complete details such as email ID, name, referral user ID, country, and password.
+						</p>
+						<p class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.4s">                         Complete your KYC (Know Your Customer) process to verify your identity and activate your account.
+
+
+						</p>
+						<p class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.4s">                         Once your account is activated, you can start taking social jobs. Each social job provides you with the opportunity to earn income. Earn $5.5 for each social job you complete, with new social jobs available weekly.
+
+
+						</p>
+						<p class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.4s">  Join Ritcoin today and start earning by sharing your valuable opinions!
+
+						</p>
+							
+							
+    				</div>
+    			</div>
+    		</div>
+    		<div class="empty-space col-md-b75 col-xs-b50"></div>
+    		<div class="tm-section-heading tm-style2">
+    			<h2 class="text-center col-xs-b2 col-xs-t-2 tm-md-f28 tm-md-lh34 wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.45s">Look at our adventages</h2>
+    		</div>
+			<div class="empty-space col-md-b55 col-xs-b35"></div>
+    	</div>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-3 col-sm-6">
+					<div class="tm-single-work wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.55s">
+						<div class="tm-single-work-icon"><i class="flaticon-ethereum"></i></div>
+						<div class="tm-single-work-text tm-f20 tm-md-f18 tm-md-lh28 tm-lh30">Premium <br> Quality Data</div>
+					</div>
+					<div class="empty-space col-md-b30 col-xs-b30"></div>
+				</div>
+				<div class="col-lg-3 col-sm-6">
+					<div class="tm-single-work wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.65s">
+						<div class="tm-single-work-icon"><i class="flaticon-strategy"></i></div>
+						<div class="tm-single-work-text tm-f20 tm-md-f18 tm-md-lh28 tm-lh30">Bilingual <br> Capabilities</div>
+					</div>
+					<div class="empty-space col-md-b30 col-xs-b30"></div>
+				</div>
+				<div class="col-lg-3 col-sm-6">
+					<div class="tm-single-work wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.75s">
+						<div class="tm-single-work-icon"><i class="flaticon-block"></i></div>
+						<div class="tm-single-work-text tm-f20 tm-md-f18 tm-md-lh28 tm-lh30">Global <br> Reach</div>
+					</div>
+					<div class="empty-space col-md-b30 col-xs-b30"></div>
+				</div>
+				<div class="col-lg-3 col-sm-6">
+					<div class="tm-single-work wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.85s">
+						<div class="tm-single-work-icon"><i class="flaticon-decentralized"></i></div>
+						<div class="tm-single-work-text tm-f20 tm-md-f18 tm-md-lh28 tm-lh30">Earn <br> with Surveys</div>
+					</div>
+					<div class="empty-space col-md-b30 col-xs-b30"></div>
+				</div>
+			</div>
+		</div>
+		<div class="empty-space col-md-b60 col-xs-b30"></div>
+
+		{% comment %} <div class="tm-section-heading tm-style2">
+			<h2 class="text-center col-xs-b2 col-xs-t-1 tm-md-f28 tm-md-lh34 wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.95s">Comparison with other solutions</h2>
+		</div> {% endcomment %}
+		{% comment %} <div class="empty-space col-md-b55 col-xs-b35"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="tm-comparison-table text-center wow fadeIn" data-wow-duration="0.8s" data-wow-delay="1s">
+		    			<div class="table-responsive">          
+							<table class="table table-bordered">
+						    	<thead>
+						      		<tr>
+						        		<th></th>
+						        		<th>Traditional</th>
+						        		<th>BlockBit</th>
+						        		<th>ICOBlock</th>
+						      		</tr>
+						    	</thead>
+						    	<tbody>
+						      		<tr>
+							        	<td>Decentralized Database</td>
+							        	<td><div class="tm-blank"></div></td>
+							        	<td><div class="tm-blank"></div></td>
+							        	<td><div class="tm-blank"></div></td>
+							      	</tr>
+							      	<tr>
+							        	<td>Unique Numeric ID</td>
+							        	<td><div class="tm-blank"></div></td>
+							        	<td><div class="tm-blank"></div></td>
+							        	<td><div class="tm-blank"></div></td>
+							      	</tr>
+							      	<tr>
+							        	<td>Primary Target Market</td>
+							        	<td>UK</td>
+							        	<td>USA</td>
+							        	<td>Australia</td>
+							      	</tr>
+							      	<tr>
+							        	<td>Target Market Size</td>
+							        	<td>Country Specific</td>
+							        	<td>123 Million</td>
+							        	<td>1.5 Billion</td>
+							      	</tr>
+							      	<tr>
+							        	<td>Information Liability</td>
+							        	<td>High</td>
+							        	<td>Medium</td>
+							        	<td>Low</td>
+							      	</tr>
+						    	</tbody>
+						  	</table>
+						</div>
+		    		</div>
+				</div><!-- .col -->
+			</div>
+		</div><!-- .container -->
+		<div class="empty-space col-md-b95 col-xs-b60"></div>
+		 {% endcomment %}
+    </section>
+    <!-- End How it Works -->
+
+    <!-- Start Token Sale -->
+    <section class="tm-token-sale tm-dark-green-bg" id="tokensale">
+	    <div class="tm-bg" style="background-image: url({% static 'homePage/assets/img/greeen-token-sale-bg.jpg' %});">
+	    	<div class="empty-space col-md-b85 col-xs-b45"></div>
+	    	<div class="container">
+	    		<div class="tm-section-heading tm-style1 tm-color2">
+	    			<div class="tm-section-heading-left">
+	    				<h2 class="tm-m0 tm-green-c tm-md-f28 tm-md-lh34 wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.25s">How to Earn with Ritcoin</h2>
+	    			</div>
+	    			<div class="tm-section-heading-right">
+	    				<div class="tm-f20 tm-md-f15 tm-lh30 tm-white-c tm-md-lh24 wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.35s">                         Join Ritcoin, complete social job, and earn income. Each social job provides an opportunity to earn $5.5, with new social job available weekly. Start sharing your valuable opinions today!
+
+						</div>
+	    			</div>
+	    		</div>
+	    		<div class="empty-space col-md-b75 col-xs-b50"></div>
+		    </div>
+		    <div class="container">
+		    	<div class="row">
+		    		<div class="col-xl-12">
+		    			<h2 class="text-center col-xs-b2 col-xs-t-2 tm-green-c tm-md-f28 tm-md-lh34 wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.45s">Survey Distribution</h2>
+						<div class="empty-space col-md-b55 col-xs-b35"></div>
+						<div class="tm-token-distribution col-xs-b1">
+							<div class="tm-token-distribution-left tm-green-token-color1">
+								<ul class="tm-token-distribution-list tm-f20 tm-md-f15 tm-white-c list-one">
+									<li class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.55s"><span class="tm-blank tm-token-color1"></span>Weekly Surveys</li>
+									<li class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.55s"><span class="tm-blank tm-token-color2"></span>User-Friendly Platform</li>
+									<li class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.55s"><span class="tm-blank tm-token-color3"></span>High Earnings</li>
+									<li class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.55s"><span class="tm-blank tm-token-color4"></span>Secure and Reliable</li>
+									<li class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.55s"><span class="tm-blank tm-token-color5"></span>Referral Program</li>
+								</ul>
+							</div>
+							<div class="tm-token-distribution-right tm-sp-token-distribution wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.65s">
+								<img src="{% static 'homePage/assets/img/green-token-percentage01.png' %}" alt="" class="tm-token-distribution-img">
+							</div>
+						</div>
+						<div class="empty-space col-lg-b90 col-xs-b55"></div>
+		    		</div><!-- .col -->
+		    		<div class="col-xl-12">
+		    			<h2 class="text-center col-xs-b2 col-xs-t-2 tm-green-c tm-md-f28 tm-md-lh34 wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.45s">Earnings Distribution</h2>
+						<div class="empty-space col-md-b55 col-xs-b35"></div>
+						<div class="tm-token-distribution col-xs-b1">
+							<div class="tm-token-distribution-right wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.65s">
+								<img src="{% static 'homePage/assets/img/green-token-percentage01.png' %}" alt="" class="tm-token-distribution-img">
+							</div>
+							<div class="tm-token-distribution-left tm-green-token-color2">
+								<ul class="tm-token-distribution-list tm-f20 tm-md-f15 tm-white-c list-two">
+									<li class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.55s"><span class="tm-blank tm-token-color1"></span>Survey Earnings</li>
+									<li class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.55s"><span class="tm-blank tm-token-color2"></span>Referral Bonuses</li>
+									<li class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.55s"><span class="tm-blank tm-token-color3"></span>Weekly Rewards</li>
+									<li class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.55s"><span class="tm-blank tm-token-color4"></span>Special Promotions</li>
+									<li class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.55s"><span class="tm-blank tm-token-color5"></span>Extra Bonuses</li>
+								</ul>
+							</div>
+						</div>
+		    		</div><!-- .col -->
+		    	</div>
+		    </div>
+		    <div class="empty-space col-md-b95 col-xs-b60"></div>
+		</div>
+	    <div class="tm-dark-green-bg tm-bounty" id="bounty">
+	    	<div class="empty-space col-md-b90 col-xs-b55"></div>
+	    	<div class="container">
+	    		<h2 class="text-center col-xs-b2 tm-green-c col-xs-t-1 tm-md-f28 tm-md-lh34">Weekly Bounty Distribution(<span class="tm-white-c">5%</span> of the total)</h2>
+	    		<div class="empty-space col-md-b55 col-xs-b30"></div>
+		    	<div class="tm-token-distribution">
+					<div class="tm-token-distribution-left tm-green-token-color3">
+						<ul class="tm-token-distribution-list tm-f20 tm-md-f15 tm-white-c">
+							<li class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.55s"><span class="tm-blank tm-token-color1"></span><span class="tm-percentage tm-light-green-c">25%</span> Referral Bonuses</li>
+							<li class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.55s"><span class="tm-blank tm-token-color2"></span><span class="tm-percentage tm-light-green-c">25%</span> Weekly Rewards</li>
+							<li class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.55s"><span class="tm-blank tm-token-color3"></span><span class="tm-percentage tm-light-green-c">20%</span>Special Promotions</li>
+							<li class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.55s"><span class="tm-blank tm-token-color4"></span><span class="tm-percentage tm-light-green-c">15%</span>  Extra Bonuses</li>
+							
+							
+						</ul>
+						<div class="empty-space col-lg-b0 col-xs-b40"></div>
+					</div>
+					<div class="tm-token-distribution-right tm-sp-token-distribution col-xs-b1 wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.65s">
+						<img src="{% static 'homePage/assets/img/green-token-percentage03.png' %}" alt="" class="tm-token-distribution-img">
+					</div>
+				</div>
+	    	</div><!-- .container -->
+	    	<div class="empty-space col-md-b95 col-xs-b60"></div>
+	    </div>
+    </section>
+    <!-- End Token Sale -->
+	
+	<!-- Start Road Map Section -->
+	<section class="tm-roadmap-wrap tm-gray-bg tm-bg" id="roadmap" style="background-image: url({% static 'homePage/assets/img/greeen-roadmap.png' %});">
+		<div class="empty-space col-md-b90 col-xs-b55"></div>
+		<div class="container">
+			<div class="tm-section-heading tm-style2 text-center col-xs-t-1">
+				<h2 class="tm-f34 col-xs-b2 tm-md-f28 tm-md-lh34 wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.25s">Roadmap</h2>
+				<div class="empty-space col-md-b25 col-xs-b10"></div>
+				<div class="tm-f20 tm-md-f15 col-xs-t-4 col-xs-b1 wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.3s">We have big plans for the future.</div>
+			</div>
+		</div>
+		<div class="empty-space col-md-b85 col-xs-b45"></div>
+		<div class="container">
+			<div class="tm-green-roadmap">
+				<div class="green-slider-nav-wrap wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.5s">
+					<div class="slider green-slider-nav">
+					    <div>
+					    	<div class="tm-green-year"><span>2024</span></div>
+					    </div>
+					  
+				  	</div>
+				</div>
+			  	<div class="slider green-slider-for">
+				    <div>
+				    	<div class="tm-green-roadmap-text">
+				    		<div class="tm-green-roadmap-text-in">
+				    			<div class="tm-gr-single-text wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.45s">
+					    			<div class="tm-gr-yr">January<span class="tm-gr-ball"></span></div>
+					    			<div class="tm-gr-text">Launch of the project</div>
+					    		</div>
+					    		<div class="tm-gr-single-text wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.5s">
+					    			<div class="tm-gr-yr">March<span class="tm-gr-ball"></span></div>
+					    			<div class="tm-gr-text">Implement Survey Platform</div>
+					    		</div>
+					    		<div class="tm-gr-single-text wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.55s">
+					    			<div class="tm-gr-yr">June<span class="tm-gr-ball"></span></div>
+					    			<div class="tm-gr-text">Expand Survey Reach</div>
+					    		</div>
+					    		<div class="tm-gr-single-text wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.6s">
+					    			<div class="tm-gr-yr">September<span class="tm-gr-ball"></span></div>
+					    			<div class="tm-gr-text">Introduce Advanced Survey Features</div>
+					    		</div>
+				    		</div>
+				    	</div>
+				    </div>
+				    <div>
+				    	<div class="tm-green-roadmap-text">
+				    		<div class="tm-green-roadmap-text-in">
+				    			<div class="tm-gr-single-text wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.45s">
+					    			<div class="tm-gr-yr">March<span class="tm-gr-ball"></span></div>
+					    			<div class="tm-gr-text">Lunch of the project</div>
+					    		</div>
+					    		<div class="tm-gr-single-text wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.5s">
+					    			<div class="tm-gr-yr">June<span class="tm-gr-ball"></span></div>
+					    			<div class="tm-gr-text">Implement Survey Platform</div>
+					    		</div>
+					    		<div class="tm-gr-single-text wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.55s">
+					    			<div class="tm-gr-yr">September<span class="tm-gr-ball"></span></div>
+					    			<div class="tm-gr-text">Expand Survey Reach</div>
+					    		</div>
+					    		<div class="tm-gr-single-text wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.6s">
+					    			<div class="tm-gr-yr">Octobor<span class="tm-gr-ball"></span></div>
+					    			<div class="tm-gr-text">Introduce Advanced Survey Features</div>
+					    		</div>
+				    		</div>
+				    	</div>
+				    </div>
+				    <div>
+				    	<div class="tm-green-roadmap-text">
+				    		<div class="tm-green-roadmap-text-in">
+				    			<div class="tm-gr-single-text wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.45s">
+					    			<div class="tm-gr-yr">June<span class="tm-gr-ball"></span></div>
+					    			<div class="tm-gr-text">Lunch of the project</div>
+					    		</div>
+					    		<div class="tm-gr-single-text wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.5s">
+					    			<div class="tm-gr-yr">September<span class="tm-gr-ball"></span></div>
+					    			<div class="tm-gr-text">Blockchain reputational module implementation</div>
+					    		</div>
+					    		<div class="tm-gr-single-text wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.55s">
+					    			<div class="tm-gr-yr">Octobor<span class="tm-gr-ball"></span></div>
+					    			<div class="tm-gr-text">Inventory Management Systems</div>
+					    		</div>
+					    		<div class="tm-gr-single-text wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.6s">
+					    			<div class="tm-gr-yr">Novembor<span class="tm-gr-ball"></span></div>
+					    			<div class="tm-gr-text">Major partnerships in entertainment industry</div>
+					    		</div>
+				    		</div>
+				    	</div>
+				    </div>
+			  	</div>
+			</div>
+		</div>
+		<div class="empty-space col-md-b95 col-xs-b60"></div>
+	</section>
+	<!-- End Road Map Section -->
+
+	<!-- Start Team Section -->
+ <section class="tm-member tm-bg" id="team" style="background-image: url({% static 'homePage/assets/img/green-member-bg.jpg' %});">
+		<div class="tm-team-wrap">
+			<div class="empty-space col-md-b90 col-xs-b55"></div>
+			<h2 class="text-center col-xs-b2 tm-green-c col-xs-t-1 tm-md-f28 tm-md-lh34 wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.25s">Meet Our Team</h2>
+			<div class="empty-space col-md-b55 col-xs-b35"></div>
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-3 col-md-6">
+						<div class="tm-member-card text-center wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.65s">
+							<div class="tm-exmember">
+								<div class="tm-member-thumb"><img src="{% static 'homePage/assets/img/p5.jpg' %}" alt="" style="height:35vh;"></div>
+								<div class="tm-member-desc tm-white-bg">
+									<h3 class="tm-member-name tm-f20 tm-md-f15 tm-blue-c col-xs-b5">Harper Russo</h3>
+									<div class="tm-member-designation tm-f18">Founder Rimbeio</div>
+								</div>
+							</div>
+							<div class="empty-space col-md-b35 col-xs-b25"></div>
+							<ul class="tm-member-social-btn">
+								<li><a href="#" class="tm-social-btn"><span><i class="fa fa-linkedin"></i></span></a></li>
+								<li><a href="#" class="tm-social-btn"><span><i class="fa fa-telegram"></i></span></a></li>
+							</ul>
+						</div>
+						<div class="empty-space col-md-b30 col-xs-b30"></div>
+					</div>
+					<div class="col-lg-3 col-md-6">
+						<div class="tm-member-card text-center wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.35s">
+							<div class="tm-exmember">
+								<div class="tm-member-thumb"><img src="{% static 'homePage/assets/img/p1.jpg' %}" alt="" style="height:35vh;"></div>
+								<div class="tm-member-desc tm-white-bg">
+									<h3 class="tm-member-name tm-f20 tm-md-f15 tm-blue-c col-xs-b5">Francois Mercer</h3>
+									<div class="tm-member-designation tm-f18">Data Analyst</div>
+								</div>
+							</div>
+							<div class="empty-space col-md-b35 col-xs-b25"></div>
+							<ul class="tm-member-social-btn">
+								<li><a href="#" class="tm-social-btn"><span><i class="fa fa-linkedin"></i></span></a></li>
+								<li><a href="#" class="tm-social-btn"><span><i class="fa fa-telegram"></i></span></a></li>
+							</ul>
+						</div>
+						<div class="empty-space col-md-b30 col-xs-b30"></div>
+					</div><!-- .col -->
+					<div class="col-lg-3 col-md-6">
+						<div class="tm-member-card text-center wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.45s">
+							<div class="tm-exmember">
+								<div class="tm-member-thumb"><img src="{% static 'homePage/assets/img/p2.jpg' %}" alt="" style="height:35vh;"></div>
+								<div class="tm-member-desc tm-white-bg">
+									<h3 class="tm-member-name tm-f20 tm-md-f15 tm-blue-c col-xs-b5">Juliana Silva</h3>
+									<div class="tm-member-designation tm-f18">General Manager</div>
+								</div>
+							</div>
+							<div class="empty-space col-md-b35 col-xs-b25"></div>
+							<ul class="tm-member-social-btn">
+								<li><a href="#" class="tm-social-btn"><span><i class="fa fa-linkedin"></i></span></a></li>
+								<li><a href="#" class="tm-social-btn"><span><i class="fa fa-telegram"></i></span></a></li>
+							</ul>
+						</div>
+						<div class="empty-space col-md-b30 col-xs-b30"></div>
+					</div><!-- .col -->
+					<div class="col-lg-3 col-md-6">
+						<div class="tm-member-card text-center wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.55s">
+							<div class="tm-exmember">
+								<div class="tm-member-thumb"><img src="{% static 'homePage/assets/img/p3.jpg' %}" alt="" style="height:35vh;"></div>
+								<div class="tm-member-desc tm-white-bg">
+									<h3 class="tm-member-name tm-f20 tm-md-f15 tm-blue-c col-xs-b5">Olivia Wilson</h3>
+									<div class="tm-member-designation tm-f18">Employees Trainer</div>
+								</div>
+							</div>
+							<div class="empty-space col-md-b35 col-xs-b25"></div>
+							<ul class="tm-member-social-btn">
+								<li><a href="#" class="tm-social-btn"><span><i class="fa fa-linkedin"></i></span></a></li>
+								<li><a href="#" class="tm-social-btn"><span><i class="fa fa-telegram"></i></span></a></li>
+							</ul>
+						</div>
+						<div class="empty-space col-md-b30 col-xs-b30"></div>
+					</div><!-- .col -->
+					<!-- .col -->
+				</div>
+			</div>
+		</div>
+</section>
+	<!-- End Team Section -->
+
+	<!-- Start Token Seciton -->
+	{% comment %} <div class="tm-token-wrap tm-bg" id="featured-company" style="background-image: url({% static 'homePage/assets/img/token-list-bg.jpg' %});">
+		<div class="empty-space col-md-b95 col-xs-b60"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="tm-token">
+						<h2 class="tm-token-heading tm-m0 tm-md-f28 tm-md-lh34 wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.25s">Token Listed</h2>
+						<div class="tm-token-list wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.15s">
+							<div class="tm-single-token wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.35s"><img src="{% static 'homePage/assets/img/token07.png' %}" alt=""></div>
+							<div class="tm-single-token wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.45s"><img src="{% static 'homePage/assets/img/token08.png' %}" alt=""></div>
+							<div class="tm-single-token wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.55s"><img src="{% static 'homePage/assets/img/token09.png' %}" alt=""></div>
+						</div>
+					</div><!-- .tm-token -->
+					<div class="tm-token-bar wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.35s">
+						<span class="tm-bar-circle"></span>
+						<span class="tm-bar-circle"></span>
+					</div>
+					<div class="tm-token">
+						<h2 class="tm-token-heading tm-m0 tm-md-f28 tm-md-lh34 wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.25s">Featured On</h2>
+						<div class="tm-token-list wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.15s">
+							<div class="tm-single-token  wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.35s"><img src="{% static 'homePage/assets/img/token10.png' %}" alt=""></div>
+							<div class="tm-single-token  wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.45s"><img src="{% static 'suveyapp/homePage/assets/img/token11.png' %}" alt=""></div>
+							<div class="tm-single-token  wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.55s"><img src="{% static 'homePage/assets/img/token12.png' %}" alt=""></div>
+						</div>
+					</div><!-- .tm-token -->
+				</div>
+			</div>
+		</div>
+		<div class="empty-space col-md-b95 col-xs-b60"></div>
+	</div> {% endcomment %}
+	<!-- End Token Seciton -->
+
+	<!-- Start FAQ Section -->
+	<section class="tm-faq-wrap tm-bg" id="faq" style="background-image: url({% static 'homePage/assets/img/greeen-faq.jpg' %});">
+		<div class="empty-space col-md-b90 col-xs-b55"></div>
+		<h2 class="text-center col-xs-b2 tm-green-c col-xs-t-1 tm-md-f28 tm-md-lh34 wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.25s">Frequently Asked Questions</h2>
+		<div class="empty-space col-md-b55 col-xs-b35"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="tabs animated-fade">
+					    <ul class="tab-links">
+					      <li class="active wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.35s"><a href="#top-question">Top Questions</a></li>
+					      <li class="wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.45s"><a href="#company">Company</a></li>
+					      <!-- <li class="wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.55s"><a href="#product">Product</a></li> -->
+					      <li class="wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.65s"><a href="#token-sale"> Support</a></li>
+					    </ul>
+					    <div class="tab-content">
+						    <div id="top-question" class="tab active">
+						         <div class="tm-faq">
+									<div class="accordian-wrapper">
+						            	<div class="single-accordian wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.25s">
+						            		<h3 class="accordian-head tm-green-c tm-f20 tm-md-f16"> How often can I participate in social jobs?</h3>
+						            		<div class="accordian-body">You can participate in social jobs every 7 days. Each social job you complete will earn you a profit. </div>
+						            	</div><!-- .single-accordian -->
+						            	<div class="single-accordian wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.35s">
+						            		<h3 class="accordian-head tm-green-c tm-f20 tm-md-f16">What types of income can I earn through Ritcoin?</h3>
+						            		<div class="accordian-body">There are three types of income you can earn: Direct Bonus, Level Bonus, and Ads Bonus. The Direct Bonus is unlimited and can be earned every time you activate a package. The Level Bonus is distributed across 10 levels, and the Ads Bonus is earned by completing weekly social jobs.</div>
+						            	</div><!-- .single-accordian -->
+						            	<div class="single-accordian wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.45s">
+						            		<h3 class="accordian-head tm-green-c tm-f20 tm-md-f16">How does the Affiliate Bonus work??</h3>
+						            		<div class="accordian-body"> The Affiliate Bonus allows you to earn unlimited bonuses every time you or someone in your network regsiters in Ritcoin and take social jobs. There is no limit to how many times you can earn this bonus .</div>
+						            	</div><!-- .single-accordian -->
+						            	<div class="single-accordian wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.55s">
+						            		<h3 class="accordian-head tm-green-c tm-f20 tm-md-f16">Can you explain the Ads Bonus?</h3>
+						            		<div class="accordian-body">The Ads Bonus is earned by completing a social job every 7 days after activation. Each social jobs  completed will earn you $5.5, and you can earn from a maximum of 20 social jobs per activation </div>
+						            	</div><!-- .single-accordian -->
+						            
+						            </div>
+								</div><!-- .tm-faq -->
+						    </div>
+						    <div id="company" class="tab">
+						        <div class="tm-faq">
+									<div class="accordian-wrapper">
+						            
+						            	<div class="single-accordian wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.35s">
+						            		<h3 class="accordian-head tm-green-c tm-f20 tm-md-f16">Why do we need Blockchain technology</h3>
+						            		<div class="accordian-body"> Blockchain technology revolutionizes the way transitions are recoreded, ensuring security and decentralization across multiple computers.</div>
+						            	</div><!-- .single-accordian -->
+						            	<div class="single-accordian wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.45s">
+						            		<h3 class="accordian-head tm-green-c tm-f20 tm-md-f16">What is Ritcoin business plan?</h3>
+						            		<div class="accordian-body">Training is most important part, so firstlycompletely understand the process of working fromyour colleague.</div>
+						            	</div><!-- .single-accordian -->
+						            	<div class="single-accordian wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.55s">
+						            		<h3 class="accordian-head tm-green-c tm-f20 tm-md-f16">What is company mission and vission?</h3>
+						            		<div class="accordian-body">Our vission is  have to make believe on our perfect
+												transparent system.and our mission is working hard to make our visibility and
+												fast growth.</div>
+						            	</div><!-- .single-accordian -->
+										<div class="single-accordian wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.65s">
+						            		<h3 class="accordian-head tm-green-c tm-f20 tm-md-f16">Why Training &
+												Development
+												Matters?</h3>
+						            		<div class="accordian-body"> 
+                                         Proficiency in Blockchain and Cryptocurrency empowers your employees to craft deploy secure, decentralized solutions, innovate financial products, drive the evolution of global payment systems.
+						            	</div>
+						            	
+						            </div>
+								</div><!-- .tm-faq -->
+						    </div>
+						    
+						    <div id="token-sale" class="tab">
+						      	<div class="tm-faq">
+									<div class="accordian-wrapper">
+						            	<div class="single-accordian wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.25s">
+						            		<h3 class="accordian-head tm-green-c tm-f20 tm-md-f16">Are the social jobs conducted by Ritcoin secure and private?</h3>
+						            		<div class="accordian-body"> Yes, social jobs conducted by Ritcoin prioritize the security and privacy of participants. We employ robust encryption methods and stringent data protection measures to ensure </div>
+						            	</div><!-- .single-accordian -->
+						            	<div class="single-accordian wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.35s">
+						            		<h3 class="accordian-head tm-green-c tm-f20 tm-md-f16">How often are new social jobs available on Ritcoin?</h3>
+						            		<div class="accordian-body">New social jobs become available regularly on Ritcoin. We strive to provide a diverse range of social job opportunities</div>
+						            	</div><!-- .single-accordian -->
+						            	<div class="single-accordian wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.45s">
+						            		<h3 class="accordian-head tm-green-c tm-f20 tm-md-f16"> Are the rewards from social jobs on Ritcoin transferable to other cryptocurrency wallets?</h3>
+						            		<div class="accordian-body">Yes, the rewards earned from social jobs on Ritcoin are transferable to other cryptocurrency wallets..</div>
+						            	</div><!-- .single-accordian -->
+						            	<div class="single-accordian wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.55s">
+						            		<h3 class="accordian-head tm-green-c tm-f20 tm-md-f16"> How are social jobs rewards distributed on Ritcoin?</h3>
+						            		<div class="accordian-body">Survey rewards on Ritcoinare distributed directly to your account upon successful completion of each social jobs.</div>
+						            	</div><!-- .single-accordian -->
+						            </div>
+								</div><!-- .tm-faq -->
+						    </div>
+					    </div>
+					</div>
+				</div><!-- .col -->
+			</div>
+		</div>
+		<div class="empty-space col-md-b85 col-xs-b50"></div>
+	</section>
+	<!-- End FAQ Section -->
+
+    <section class="tm-subscribe-wrap tm-bg" id="tm-subscribe" style="background-image: url({% static 'homePage/assets/img/greeen-subscribe.jpg' %});">
+    	<div class="empty-space col-md-b90 col-xs-b55"></div>
+    	<div class="container">
+    		<div class="row">
+    			<div class="offset-lg-2 col-lg-8">
+    				<form class="mailchimp subscribe-form text-center" action="https://storerepublic.us12.list-manage.com/subscribe/post?u=d227d8d335060b093084903d0&amp;id=9ba078ceb0">
+    					<h2 class="col-xs-b2 col-xs-t-1 tm-md-f28 tm-md-lh34 wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.25s">Enter your email address for newsletter <br>
+    					subscription</h2>
+    					<div class="empty-space col-md-b25 col-xs-b25"></div>
+			        	<input type="email" name="subscribe" id="subscriber-email" placeholder="Your email address" class=" wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.35s">
+			        	<div class="empty-space col-md-b35 col-xs-b35"></div>
+			        	<button type="submit" id="subscribe-button" class="tm-btn col-xs-b1 wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.45s"><span>SUBSCRIBE</span></button>
+			        	<!-- SUBSCRIPTION SUCCESSFUL OR ERROR MESSAGES -->
+			        	<h5 class="subscription-success"> .</h5>
+			        	<h5 class="subscription-error"> .</h5>
+			        	<label class="subscription-label" for="subscriber-email"></label>
+			        </form>
+    			</div>
+    		</div>
+    	</div>
+    	<div class="empty-space col-md-b95 col-xs-b60"></div>
+    </section>
+
+    <!-- Start Siter Footer -->
+    <footer class="tm-site-footer tm-bg" id="footer">
+    	<div class="empty-space col-md-b90 col-xs-b55"></div>
+    	<div class="tm-top-footer">
+    		<div class="container">
+	    		<div class="row">
+	    			<div class="col-lg-5">
+	    				<h2 class="tm-footer-bar col-xs-b2 tm-green-c col-xs-t-1 tm-md-f28 tm-md-lh34 wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.25s">Send a message</h2>
+	    				<div class="empty-space col-md-b55 col-xs-b30"></div>
+	    				<form action="https://ocher.vercel.app/assets/php/mail.php" class="contact-form col-xs-b1" method="post"  id="contact-form">
+	    					<div class="tm-form-field wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.3s">
+					            <input type="text" id="name" name="name" required>
+					            <span class="bar"></span>
+					            <label>Full Name</label>
+					        </div>
+					        <div class="tm-form-field wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.35s">
+				              	<input type="text" id="email" name="email" required>
+				              	<span class="bar"></span>
+				              	<label>Email Address</label>
+				          	</div>
+				          	<div class="tm-form-field wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.4s">
+				                <textarea cols="30" rows="10" id="msg" name="msg" required></textarea>
+				                <span class="bar"></span>
+				                <label>Your Message</label>
+				            </div>
+				          	<button class="tm-btn wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.45s" type="submit" id="submit" name="submit">
+				          		<span>Send Message</span>
+				          	</button>
+     					</form>
+     					<div id="tm-alert"></div>
+	    			</div>
+	    			<div class="col-lg-7">
+	    				<h2 class="tm-footer-bar tm-style1 col-xs-b2 tm-green-c text-center col-xs-t-1 tm-md-f28 tm-md-lh34 wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.25s">Join us in the community</h2>
+	    				<div class="empty-space col-md-b55 col-xs-b40"></div>
+	    				<div class="tm-social-btn-wrap tm-style2 col-xs-b1">
+	    					<ul>
+	    						<li class="wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.3s">
+	    							<a href="#">
+	    								<i class="fa fa-facebook"></i>
+	    								<span>Facebook</span>
+	    							</a>
+	    						</li>
+	    						<li class="wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.35s">
+	    							<a href="#">
+	    								<i class="fa fa-linkedin"></i>
+	    								<span>Linkedin</span>
+	    							</a>
+	    						</li>
+	    						<li class="wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.4s">
+	    							<a href="#">
+	    								<i class="fa fa-twitter"></i>
+	    								<span>Twitter</span>
+	    							</a>
+	    						</li>
+	    						<li class="wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.45s">
+	    							<a href="#">
+	    								<i class="fa fa-reddit-alien"></i>
+	    								<span>Reddit</span>
+	    							</a>
+	    						</li>
+	    						<li class="wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.5s">
+	    							<a href="#">
+	    								<i class="fa fa-telegram"></i>
+	    								<span>Telegram</span>
+	    							</a>
+	    						</li>
+	    						<li class="wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.55s">
+	    							<a href="#">
+	    								<i class="fa fa-medium"></i>
+	    								<span>Medium</span>
+	    							</a>
+	    						</li>
+	    						<li class="wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.6s">
+	    							<a href="#">
+	    								<i class="fa fa-github-alt"></i>
+	    								<span>Github</span>
+	    							</a>
+	    						</li>
+	    						<li class="wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.65s">
+	    							<a href="#">
+	    								<i class="fa fa-youtube-play"></i>
+	    								<span>Youtube</span>
+	    							</a>
+	    						</li>
+	    					</ul>
+	    					<a href="#" class="tm-email-btn2 wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.7s">
+    							<i class="fa fa-envelope-o"></i>
+    							<div class="tm-social-btn-text">hello@Ritcoin.world</div>
+    						</a>
+	    				</div>
+	    			</div>
+	    		</div>
+	    	</div>
+    	</div>
+    	<div class="empty-space col-md-b95 col-xs-b55"></div>
+    	<div class="tm-copyright tm-white-c tm-f20 tm-md-f15">
+    		<div class="container wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.75s">© 2024 Ritcoin. </div>
+    	</div>
+    </footer>
+    <!-- End Siter Footer -->
+
+    <!-- The Modal -->
+  	<div class="modal fade  {% if regTab %}  show {% endif %}"  {% if regTab %} style="padding-right: 17px; display:block;" area-hidden='false'  {% endif %}  id="tm-signup" >
+    	<div class="modal-dialog">
+      		<div class="modal-content">
+			    <button type="button" class="close" data-dismiss="modal">x</button>
+			    <div class="tm-modal tm-color1" >
+					<h2 class="tm-modal-title">REGISTER TO Ritcoin</h2>
+					<form  action="{% url 'register' %}"   class="tm-modal-form"   id="registerForm" method="POST">
+						
+						{% csrf_token %}
+						<div class="tm-modal-input">
+							{% if refferalid   %}
+                          <input  type="text" id="uReffId" name="introducerid" placeholder="Enter Introducer id" id="usrIdInp" style="color:green;"  value="{{refferalid}}" onblur="callMeOnBlur(this)"   >
+							<i class="flaticon-profile"></i>
+							 <div id="refMsg" class="text-center"></div> 
+							 <small class="form-text text-danger text-center" id="introducerid">{{ form.introducerid.errors }}</small>
+
+                          
+                          {% else  %}
+                          <input type="text" name="introducerid" id="uReffId"  id="usrIdInp2"  value="{% if form.cleaned_data.introducerid %} {{form.cleaned_data.introducerid}} {% endif %}" onblur="callMeOnBlur(this)"  placeholder="Enter Introducer id">
+						  <i class="flaticon-profile"></i>
+						  <div id="refMsg" class="text-center"></div> 
+                          {% comment %} <small class="form-text text-danger text-center"></small>  {% endcomment %}
+						  <small class="form-text text-danger text-center" id="introducerid">{{ form.introducerid.errors }}</small>
+
+                          {% endif  %}
+                          
+						</div>
+						
+						<div class="tm-modal-input">
+							<input type="text" id="uName" name="username" placeholder="Enter username"   value="{{form.cleaned_data.username}}" onblur="checkUsernameAlreadyExixts(this)"  required>
+							<i class="flaticon-profile"></i>
+							<div id="refMsg" class="text-center"></div> 
+							<small class="form-text text-danger text-center" id="userNameErrors">{{ form.username.errors }}</small>
+						</div>
+						<div class="tm-modal-input">
+							<input type="email" id="uMail" placeholder="Email"name="email" value="{{form.cleaned_data.email}}" placeholder="Enter Email" required>
+							<i class="flaticon-mail"></i>
+							<small class="form-text text-danger">{{ form.email.errors }}</small>
+						</div>
+						
+						
+						
+						<div class="tm-modal-input">
+							<input type="password" id="uPass" name="password1"  placeholder="Enter Password"  required>
+							<i class="flaticon-lock"></i>
+                          <small class="form-text text-danger">{{ form.password1.errors }}</small>
+							
+						</div>
+						<div class="tm-modal-input">
+							<input type="password" id="uConfPass" name="password2" placeholder="Enter Confirm password"  required>
+							<i class="flaticon-lock"></i>
+							<small class="form-text text-danger">{{ form.password2.errors }}</small>
+						</div>
+
+
+						<div class="tm-modal-input">
+							<select id="country" name="country" id="uCountry" style="background-color: #025422;color:white;height:47px;padding-left: 55px;border:1px solid #025422;">
+								<option >--choose country--</option>
+								{% for c in countries %}
+								<option value="{{ c }}" name="country" {% if c == 'India' %}selected{% endif %}>{{ c }}</option>
+								{% endfor %}
+							  </select>
+
+							<i class="flaticon-money"></i>
+						</div>
+						
+						<div class="tm-modal-input">
+							<select id="local_currency" id="uLocalCurr" name="local_currency" style="background-color: #025422;color:white;height:47px;padding-left: 55px;border:1px solid #025422;">
+								<option >Local Currency</option>
+								{% for curr in currencies %}
+								<option value="{{ curr }}" name="local_currency" {% if curr == 'Indian Rupee (INR)' %}selected{% endif %}>{{ curr }}</option>
+								{% endfor %}
+							  </select>
+							
+							<i class="flaticon-mail"></i>
+						</div>
+						{% comment %} <div class="tm-modal-input"> {% endcomment %}
+							{% comment %} <input type="number" id="entOTP"  name="entOTP" placeholder="Enter OTP sent to entered email"  required style="display:none;"> {% endcomment %}
+							{% comment %} <small class="form-text text-danger" id="entOTPMessage" style="display:none;">enter email otp</small> {% endcomment %}
+							{% comment %} <div class="text-center"><span class="text-danger text-center"> </span></div> {% endcomment %}
+							{% comment %} <i class="flaticon-lock"></i> {% endcomment %}
+							{% comment %} <br> {% endcomment %}
+							{% comment %} <small class="form-text text-danger">{{ form.password2.errors }}</small> {% endcomment %}
+						{% comment %} </div> {% endcomment %}
+
+
+						<div class="empty-space col-md-b40 col-xs-b40"></div>
+						<button class="tm-btn tm-style1 w-100 " id="uRegister" type="submit" name="signInBtn">Register</button>
+						{% comment %} <button class="tm-btn tm-style1 w-100 " id="uverifyAndRegister" onclick="authenticate()"  style="display:none;" type="submit" name="signInBtn">Verify OTP</button> {% endcomment %}
+						{% comment %} <div class="tm-modal-or">OR</div> {% endcomment %}
+						{% comment %} <button class="tm-btn tm-style1 w-100 tm-modal-fb-btn"><i class="fa fa-facebook"></i>LOG in with facebook</button> {% endcomment %}
+						<div class="empty-space col-md-b20 col-xs-b20"></div>
+						{% comment %} <button class="tm-btn tm-style1 w-100 tm-modal-goo-btn"><i class="fa fa-google-plus"></i>LOG in with GOOGle</button> {% endcomment %}
+					</form>
+					<div class="empty-space col-md-b55 col-xs-b55"></div>
+					<div class="tm-modal-footer">
+						{% comment %} <a href="#" class="tm-forgot-p">Forgot Password?</a> {% endcomment %}
+						{% comment %} <a href="#" class="tm-new-signup">New Here? Sign UP</a> {% endcomment %}
+					</div>
+				</div><!-- .tm-modal -->
+      		</div>
+    	</div>
+  	</div>
+  	<div class="modal fade" id="tm-login">
+    	<div class="modal-dialog">
+      		<div class="modal-content">
+			    <button type="button" class="close" data-dismiss="modal">x</button>
+			    <div class="tm-modal tm-color1">
+					<h2 class="tm-modal-title">Log In TO Ritcoin</h2>
+					{% comment %} <form id="loginForm" class="tm-modal-form"> {% endcomment %}
+					<form method="POST" action="{% url 'login' %}" class="tm-modal-form">
+						{% csrf_token %}
+						<div class="tm-modal-input">
+							<input type="text" placeholder="Enter Your Username"  name="email_or_username" required>
+							<i class="flaticon-profile"></i>
+							<small class="form-text text-danger">{{ logForm.email.errors }}</small>
+						</div>
+						<div class="tm-modal-input">
+							<input type="password" name="password" placeholder="Enter Password"  required>
+							<i class="flaticon-lock"></i>
+							<small class="form-text text-danger">{{ logForm.password.errors }}</small>
+							{% comment %} <i class="toggle-password fa fa-fw fa-eye-slash"></i>  {% endcomment %}
+                          <ul class='list-style-type:none; text-decoration:none '>
+                            {% for field, error in form.errors.items %}
+                                <li class='text-danger'>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                          <input type="hidden" name="next" value="{{ request.GET.next }}">
+						</div>
+
+						<small class="form-text text-danger text-center" id="loginErrorsId"></small>
+						<div class="empty-space col-md-b40 col-xs-b40"></div>
+						<button class="tm-btn tm-style1 w-100" id="logInBtn" type="submit" name="logIn">LOG IN</button>
+
+					</form>
+						<div class="tm-modal-or">OR</div>
+						 <button class="tm-btn tm-style1 w-100 tm-modal-fb-btn"><i class="fa fa-facebook"></i>LOG in with facebook</button> 
+						<div class="empty-space col-md-b20 col-xs-b20"></div>
+						 <button class="tm-btn tm-style1 w-100 tm-modal-goo-btn"><i class="fa fa-google-plus"></i>LOG in with GOOGle</button> 
+					
+					<div class="col-md-b55 col-xs-b55"></div>
+					<div class="tm-modal-footer">
+						<a href="{% url 'changePassword' %}" class="tm-forgot-p">Forgot Password?</a>
+					
+						{% comment %} <button c>SIGNUP</button> {% endcomment %}
+					</div>
+				</div><!-- .tm-modal -->
+      		</div>
+    	</div>
+  	</div>
+
+	<!-- Scroll Up -->
+    <div id='scrollup'><i class="fa fa-angle-double-up"></i></div>
+
+	<!-- Scripts -->
+	{% comment %} <script src="{% static 'homePage/assets/js/vendor/jquery-1.12.4.min.js' %}"></script> {% endcomment %}
+	<script src="{% static 'homePage/assets/js/vendor/modernizr-3.5.0.min.js' %}"></script>
+    <script src="{% static 'homePage/assets/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'homePage/assets/js/smoothScroll.min.js' %}"></script>
+    <script src="{% static 'homePage/assets/js/jQuery.easing.min.js' %}"></script>
+    <script src="{% static 'homePage/assets/js/wow.min.js' %}"></script>
+    <script src="{% static 'homePage/assets/js/particles.min.js' %}"></script>
+    <script src="{% static 'homePage/assets/js/mailchimp.min.js' %}"></script>
+    <script src="{% static 'homePage/assets/js/slick.min.js' %}"></script>
+    <script src="{% static 'homePage/assets/js/modal.video.min.js' %}"></script>
+	<script src="{% static 'homePage/assets/js/main.js' %}"></script>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+	
+  <script>
+
+	setTimeout(function() {
+		document.getElementById('flash-messages').style.display = 'none';
+	}, 5000);
+
+
+
+	$(".toggle-password").click(function() {
+		$(this).toggleClass("fa-eye fa-eye-slash");
+		input = $(this).parent().find("input");
+		if (input.attr("type") == "password") {
+			input.attr("type", "text");
+		} else {
+			input.attr("type", "password");
+		}
+	});
+  </script>
+
+	<script>
+
+
+
+
+		function loginUser(formData){
+
+			
+				//console.log("came here");
+				var bt = $("#logInBtn");
+				bt.attr("disabled", true).html("<i class='fa fa-spin fa-spinner'></i>&nbsp;&nbsp;please wait...");
+			
+
+
+				//console.log("came here");
+				//console.log(formData);
+				//return
+				
+				const formObject = {};
+				formData.forEach((value, key) => {
+					formObject[key] = value;
+				});
+				//console.log(formObject);
+				
+				
+				if(formData){
+				
+			fetch('/accounts/login/', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					'X-CSRFToken': '{{ csrf_token }}'
+				},
+				body: JSON.stringify(formObject)
+			})
+			.then(response => {
+				if (!response.ok) {
+					throw new Error('Network response was not ok');
+				}
+				return response.json();
+			})
+			.then(data => {
+
+				console.log(data);
+				if (data.success) {
+					//alert('Login successful. Redirecting...');
+					//console.log(data.redirect_url);
+					//return
+					//console.log(window.location.href);
+					//return
+					window.location.href = data.redirect_url; 
+					//console.log(window.location.href);
+				} else {
+					('#loginErrorsId').text(data.msg);
+					bt.attr("disabled", false).html("LOG IN");
+					//alert('Login failed: ' + (data.error || 'Unknown error.'));
+				}
+				//location.reload(); // Reload the page
+			})
+			.catch(error => {
+				console.error('Error:', error);
+				alert('An error occurred while logging in.');
+				location.reload(); // Reload the page
+			});
+
+			}
+
+
+
+		}
+
+		
+		$(document).ready(function(){
+			console.log("Acrive");
+			$('#loginForm').submit(function(e){
+	
+				e.preventDefault();
+				var formData = new FormData(this);
+				
+				loginUser(formData);
+			});
+		});
+
+
+
+		function authenticate(){
+				$("#uverifyAndRegister").attr("disabled", true).html("<i class='fa fa-spin fa-spinner'></i>&nbsp;&nbsp;please wait...");
+
+				
+				const enteredOTP=$("#entOTP").val();
+
+				if(!(enteredOTP && enteredOTP.length>0)){
+
+					$("#entOTPMessage").text("Please Enter correct OTP");
+
+				}
+
+				fetch('/authenticate/', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+						'X-CSRFToken': '{{ csrf_token }}'
+					},
+					body: JSON.stringify({enteredOTP:enteredOTP})
+				})
+				.then(response => {
+					if (!response.ok) {
+						throw new Error('Network response was not ok');
+					}
+					return response.json();
+				})
+				.then(data => {
+					if (data.success) {
+						//alert('Login successful. Redirecting...');
+						//console.log(data.redirect_url);
+						//return
+						//console.log(window.location.href);
+						//return
+	
+						//console.log("came here");
+						//alert('An otp send in your email')
+						$("#entOTP").css("display", "block");
+						$("#uverifyAndRegister").css("display", "block");
+						window.location.href = data.redirect_url; 
+						
+						//console.log(window.location.href);
+					} else {
+						$("#entOTPMessage").text(data.msg);
+					}
+					
+				})
+				.catch(error => {
+					console.error('Error:', error);
+					alert('An error occurred while registering.');
+					
+				});
+
+
+			}
+
+
+
+
+
+		
+
+		
+	
+	</script>
+
+	<script>
+		{% comment %} function registration(formData){
+	
+			
+			var bt = $("#uRegister");
+			bt.attr("disabled", true).html("<i class='fa fa-spin fa-spinner'></i>&nbsp;&nbsp;please wait...");
+			$("#uName").prop("readonly", true);
+			$("#uMail").prop("readonly", true);
+			$("#uReffId").prop("readonly", true);
+			$("#uCountry").prop("disabled", true);
+			$("#uLocalCurr").prop("disabled", true);
+			$("#uPass").prop("readonly", true);
+			$("#uConfPass").prop("readonly", true);
+	
+	
+			//console.log("reg came here");
+			//console.log(formData);
+			//return
+			
+			const formObject = {};
+			formData.forEach((value, key) => {
+				formObject[key] = value;
+			});
+	
+			//formObject['referralId'] = value;
+			//console.log(formObject);
+			
+			
+			if(formData){
+			
+			fetch('/register/', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					'X-CSRFToken': '{{ csrf_token }}'
+				},
+				body: JSON.stringify(formObject)
+			})
+			.then(response => {
+				if (!response.ok) {
+					throw new Error('Network response was not ok');
+				}
+				return response.json();
+			})
+			.then(data => {
+				if (data.success) {
+					//alert('Login successful. Redirecting...');
+					//console.log(data.redirect_url);
+					//return
+					//console.log(window.location.href);
+					//return
+	
+					//console.log("came here");
+					window.location.href = data.redirect_url; 
+					//alert('An otp send in your email')
+					//$("#entOTP").css("display", "block");
+					//$("#uverifyAndRegister").css("display", "block");
+					//console.log(window.location.href);
+
+					//alert("mail sent successfully");
+				} else {
+					alert('Login failed: ' + (data.error || 'Unknown error.'));
+				}
+				//location.reload(); // Reload the page
+			})
+			.catch(error => {
+				console.error('Error:', error);
+				alert('An error occurred while registering.');
+				//location.reload(); // Reload the page
+			});
+	
+			}
+	
+	
+	
+			}
+	
+		
+		$(document).ready(function(){
+			//console.log("Acrive");
+			console.log("Document is ready");
+			$('#registerForm').submit(function(e){
+	
+				console.log("came here")
+				e.preventDefault();
+				var formData = new FormData(this);
+				
+				registration(formData);
+			});
+		}); {% endcomment %}
+	</script>
+
+
+	<script>
+
+
+		function callMeOnBlur(ememId){
+
+			
+				$.ajax({
+					url: '/get_member_name/',
+					type:'post',
+					data: {
+					  memberid: ememId.value,
+					  fieldType:'introducerid',
+					  csrfmiddlewaretoken: '{{ csrf_token }}'
+					},
+					dataType: 'json',
+					success: function(data) {
+		
+					  if(data.status===1){
+		
+						console.log(data.memberName);
+						//const resmsg='<small class="form-text text-success">'+data.memberName +'</small>';
+					   
+						$('#refMsg').html(`<span class="form-text " id="inRefMsg" >Introducer is valid</span>`);
+		
+						//$('#refMsg').append(resmsg);
+		
+		
+					  }else{
+		
+						$('#refMsg').html('<span class="form-text text-danger">'+data.msg +'</span>');
+		
+					  }
+						
+					},
+					error: function(xhr, status, error) {
+						console.error('Error:', error);
+					}
+				});
+		
+		
+
+	    }
+
+		function checkUsernameAlreadyExixts(ememId){
+
+			//console.log(ememId.value);
+
+			let userName=ememId.value;
+			//console.log(userName);
+			if (userName && userName.length>0){
+
+				$.ajax({
+					url: '/get_member_name/',
+					type:'post',
+					data: {
+						username: userName,
+					 	fieldType:'username',
+					    csrfmiddlewaretoken: '{{ csrf_token }}'
+					},
+					dataType: 'json',
+					success: function(data) {
+		
+					  if(data.status===1){
+		
+						//console.log(data.memberName);
+						//const resmsg='<small class="form-text text-success">'+data.memberName +'</small>';
+					   //console.log(data.msg);
+						//$('#userNameErrors').text=data.msg;
+						$('#userNameErrors').text(data.msg);
+		
+						//$('#refMsg').append(resmsg);
+		
+		
+					  }else{
+		
+						$('#userNameErrors').text('');
+		
+					  }
+						
+					},
+					error: function(xhr, status, error) {
+						console.error('Error:', error);
+					}
+				});
+			}
+
+			
+		
+	
+	
+
+	}
+
+
+</script>
+	
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MetaMask Integration</title>
+</head>
+<body>
+    <h1>Connect to MetaMask and Send Funds</h1>
+    <button id="connectButton">Connect MetaMask</button>
+    <div id="account"></div>
+    <div id="balance"></div>
+    <div id="network"></div>
+    <h2>Send Funds</h2>
+    <button id="sendButton">Send Funds</button>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.6.1-rc.0/web3.min.js"></script>
+    <script>
+        let account;
+        let web3;
+
+        async function connectMetaMask() {
+            if (typeof window.ethereum !== 'undefined') {
+                try {
+                    const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+                    account = accounts[0];
+                    document.getElementById('account').innerText = 'Connected Account: ' + account;
+
+                    web3 = new Web3(window.ethereum);
+                    const chainId = await web3.eth.getChainId();
+                    let networkName;
+                    let nativeCurrency;
+
+                    switch (chainId) {
+                        case 1:
+                            networkName = 'Ethereum Mainnet';
+                            nativeCurrency = 'ETH';
+                            break;
+                        case 3:
+                            networkName = 'Ropsten Testnet';
+                            nativeCurrency = 'ETH';
+                            break;
+                        case 4:
+                            networkName = 'Rinkeby Testnet';
+                            nativeCurrency = 'ETH';
+                            break;
+                        case 5:
+                            networkName = 'Goerli Testnet';
+                            nativeCurrency = 'ETH';
+                            break;
+                        case 42:
+                            networkName = 'Kovan Testnet';
+                            nativeCurrency = 'ETH';
+                            break;
+                        case 56:
+                            networkName = 'Binance Smart Chain Mainnet';
+                            nativeCurrency = 'BNB';
+                            break;
+                        case 97:
+                            networkName = 'Binance Smart Chain Testnet';
+                            nativeCurrency = 'tBNB';
+                            break;
+                        // Add other networks here as needed
+                        default:
+                            networkName = 'Unknown Network';
+                            nativeCurrency = 'Unknown';
+                    }
+
+                    document.getElementById('network').innerText = 'Connected Network: ' + networkName;
+
+                    const balance = await web3.eth.getBalance(account);
+                    const balanceInNativeCurrency = web3.utils.fromWei(balance, 'ether');
+                    document.getElementById('balance').innerText = 'Balance: ' + balanceInNativeCurrency + ' ' + nativeCurrency;
+
+                } catch (error) {
+                    console.error('User denied account access or error occurred', error);
+                }
+            } else {
+                alert('MetaMask is not installed. Please install it to use this feature.');
+            }
+        }
+
+        async function sendTransaction() {
+            if (typeof window.ethereum !== 'undefined' && account) {
+                try {
+                    const recipient = '0xRecipientAddressHere';  // Replace with the recipient's address
+                    const amount = web3.utils.toWei('0.1', 'ether');  // Replace with the amount to send
+
+                    await web3.eth.sendTransaction({
+                        from: account,
+                        to: recipient,
+                        value: amount
+                    })
+                    .on('transactionHash', (hash) => {
+                        console.log('Transaction Hash:', hash);
+                    })
+                    .on('receipt', (receipt) => {
+                        console.log('Receipt:', receipt);
+                    })
+                    .on('error', (error) => {
+                        console.error('Transaction failed:', error);
+                    });
+
+                } catch (error) {
+                    console.error('Error sending transaction:', error);
+                }
+            } else {
+                alert('MetaMask is not connected. Please connect it first.');
+            }
+        }
+
+        document.getElementById('connectButton').onclick = connectMetaMask;
+        document.getElementById('sendButton').onclick = sendTransaction;
+    </script>
+</body>
+</html>

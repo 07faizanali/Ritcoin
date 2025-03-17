@@ -1,0 +1,572 @@
+{% extends 'zqUsers/member/layout/main.html' %}
+{% load customFilters %}
+{% load static %}
+{% block 'addHeaderScripts' %}
+
+
+
+<style>
+ 
+  
+#myImg {
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#myImg:hover {opacity: 0.7;}
+
+
+.modal {
+  display: none; 
+  position: fixed; 
+  z-index: 1; 
+  padding-top: 170px; 
+  left: 0;
+  top: 40px;
+  width: 100%;
+  height: 100%; 
+  overflow: auto; 
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.9); 
+}
+
+
+.modal-content {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+}
+
+
+#caption {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+
+.modal-content, #caption {
+  animation-name: zoom;
+  animation-duration: 0.6s;
+}
+
+@keyframes zoom {
+  from {transform:scale(0)}
+  to {transform:scale(1)}
+}
+
+/* The Close Button */
+.close {
+  position: absolute;
+  top: 95px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+@media only screen and (max-width: 700px){
+  .modal-content {
+    width: 100%;
+  }
+}
+    
+</style>
+
+
+{% endblock %}
+
+{% block 'content' %}
+
+    <div class="container-fluid"style="">
+      <div class="row" >
+
+
+          <div class="col-xl-12 col-lg-12">
+
+            
+
+            {% comment %} {% else %} {% endcomment %}
+                  <div class="col-xl-12">
+                      <div class="card p-5">
+
+                        <form action="" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                              <div class="row card p-5">
+                                  <div class="col-md-12">
+                                      <div class="option-identity-wrapper">
+                                        
+                                          <div class="tab-head ">
+                                           <div class="row mt-3">
+                                              <div class="col-md-2">
+                                                <a href="https://www.youtube.com/@RITCOIN-k6m" target="_blank" rel="noopener noreferrer">
+                                                  <img src="/static/images/youtubelogo.png"    id="im" alt="icon" style="height:15vh;width:20vh"></a>
+                                              </div>
+                                              <div class="col-md-4">
+                                               <h5 style="font-weight:500;">Please upload the screen shot as a proof you joined our community.
+                                                  Introducing youtube, your direct line to our services through Youtube. 
+                                               </h5> 
+                                               {% comment %} <a href="https://www.adidas.co.in/" >https://www.adidas.co.in/</a> {% endcomment %}
+                                               <h5><a href="{{ytUrl}}" style="color: blue important!;">{{ytUrl}}</a></h5>
+
+                                               {% comment %} <a style="color:blue;" href="https://www.adidas.co.in/" >https://www.adidas.co.in/</a> {% endcomment %}
+
+                                              </div>
+
+                                             
+                                              <div class="col-md-4">
+                                                
+                                                  
+                                                  <input type="file"    style="margin-top:53px;" name="youtube_image" onchange="previewImage(event,'ytImgPrevDiv')" required>
+                                                  <small class="form-text text-danger">{{ form.youtube_image.errors }}</small>
+                                                  {% comment %} <input type="hidden" value="" > {% endcomment %}
+                                              </div>
+                                              <div class="col-md-2" id="ytImgPrevDiv">
+                                                {% comment %} <img  src="/static/images/youtubelogo.png " alt="Snow" style="width:100%;max-width:300px"> {% endcomment %}
+
+                                                <!-- The Modal -->
+                                                {% comment %} <div id="myModal" class="modal">
+                                                  <span class="close">&times;</span>
+                                                  <img class="modal-content" id="img01">
+                                                  <div id="caption"></div>
+                                                </div> {% endcomment %}
+
+                                              </div>
+                                            </form>
+                                           </div>
+                                         
+                                          </div>
+                                          
+                                      </div>
+                                  </div>
+                                <hr class="mt-3">
+                                {% comment %} <div class="col-md-12">
+                                  <div class="option-identity-wrapper">
+                                      
+                                      <div class="tab-head ">
+                                       <div class="row mt-3">
+                                          <div class="col-md-2">
+                                              <img src="/static/images/facebook.png"   id="im" alt="icon" style="height:20vh;" required>
+                                          </div>
+                                          <div class="col-md-4">
+                                           <h5 style="font-weight:500;">Please upload the screen shot as a proof you joined our community.
+                                              Introducing facebook, your direct line to our services through facebook. 
+                                           </h5> 
+                                           <h5><a href="{{facebook}}" style="color: blue important!;">{{facebook}}</a></h5>
+
+
+                                          </div>
+                                       
+                                          <div class="col-md-4">
+                                           
+                                              <input type="file"  style="margin-top:53px;" name="facebook_image" onchange="previewImage(event,'fbImagePrevDiv')" required>
+                                              <small class="form-text text-danger">{{ form.facebook_image.errors }}</small>
+                                              <input type="hidden"  name="social_job_id" value="{{surveyId}}">
+                                              <input type="hidden"  name="package_id" value="{{packageId}}">
+                                              <input type="hidden"  name="assigned_task_id" value="{{assignedTaskId}}">
+                                          </div>
+                                          <div class="col-md-2 mt-3"  id="fbImagePrevDiv">
+                                       
+                                          </div>
+
+                                        </form>
+                                       </div>
+                                      
+                                      </div>
+                                      
+                                  </div>
+                                </div> {% endcomment %}
+                              <hr class="mt-3">
+                              <div class="col-md-12">
+                                <div class="option-identity-wrapper">
+                                    
+                                    <div class="tab-head ">
+                                     <div class="row mt-3">
+                                        <div class="col-md-2">
+                                          <a href="https://www.instagram.com/ritcoin/" target="_blank" rel="noopener noreferrer">                                            <img src="/static/images/instagram.png"   id="im" alt="icon" style="height:20vh;">
+                                          </a>
+                                        </div>
+                                        <div class="col-md-4">
+                                         <h5 style="font-weight:500;">Please upload the screen shot as a proof you joined our community.
+                                            Introducing instagram, your direct line to our services through instagram. 
+                                         </h5> 
+                                         {% comment %} <h5><a href="{{twitter}}" style="color: blue important!;">{{twitter}}</a></h5> {% endcomment %}
+                                         <h5><a href="{{instagram}}" style="color: blue important!;">{{instagram}}</a></h5>
+
+                                         {% comment %} <a style="color:blue;" href="https://www.adidas.co.in/" >https://www.adidas.co.in/</a> {% endcomment %}
+
+                                        </div>
+                                        
+                                        <div class="col-md-4">
+                                            {% comment %} <form id="instaUpload" enctype="multipart/form-data"> {% endcomment %}
+                                                {% comment %} {% csrf_token %} {% endcomment %}
+                                            <input type="file"  style="margin-top:53px;" name="insta_image"  onchange="previewImage(event,'instaUploadPrevDiv')" required>
+                                            <small class="form-text text-danger">{{ form.insta_image.errors }}</small>
+                                        </div>
+                                        <div class="col-md-2 mt-3" id="instaUploadPrevDiv">
+
+                                            {% comment %} <img id="myImg" src="/static/images/youtubelogo.png " alt="Snow" style="width:100%;max-width:300px">
+
+                                            <!-- The Modal -->
+                                            <div id="myModal" class="modal">
+                                              <span class="close">&times;</span>
+                                              <img class="modal-content" id="img01">
+                                              <div id="caption"></div>
+                                            </div> {% endcomment %}
+                                          {% comment %} <button type="submit" id="instaUploadBtn" class="btn btn-primary  mt-4">Submit</button> {% endcomment %}
+                                       <!--Modal-->
+                                       
+                                        </div>
+                                    </form>
+                                     </div>
+                                    
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <hr class="mt-3">
+                            <div class="col-md-12">
+                              <div class="option-identity-wrapper">
+                                  
+                                  <div class="tab-head ">
+                                   <div class="row mt-3">
+                                      <div class="col-md-2">
+                                        <a href="https://x.com/RITCOIN24" target="_blank" rel="noopener noreferrer">                                          <img src="/static/images/twitter.png"   id="im" alt="icon" style="height:20vh;">
+                                        </a>
+                                      </div>
+                                      <div class="col-md-4">
+                                       <h5 style="font-weight:500;">Please upload the screen shot as a proof you joined our community.
+                                          Introducing twitter, your direct line to our services through twitter. 
+                                       </h5> 
+                                       <h5><a href="{{twitter}}" style="color: blue important!;">{{twitter}}</a></h5>
+
+                                       {% comment %} <a style="color:blue;" href="https://www.adidas.co.in/" style="color: blue important!;">https://www.adidas.co.in/</a> {% endcomment %}
+
+                                      </div>
+
+                                   
+                                      <div class="col-md-4">
+                                        {% comment %} <form id="twitterUpload" enctype="multipart/form-data"> {% endcomment %}
+                                            {% csrf_token %}
+                                          <input type="file"  style="margin-top:53px;" name="twitter_image"  onchange="previewImage(event,'twitterUploadPrevDiv')" required >
+                                          <small class="form-text text-danger">{{ form.twitter_image.errors }}</small>
+                                      </div>
+                                      <div class="col-md-2 mt-3" id="twitterUploadPrevDiv">
+                                        {% comment %} <img id="myImg" src="/static/images/youtubelogo.png " alt="Snow" style="width:100%;max-width:300px">
+
+                                        <!-- The Modal -->
+                                        <div id="myModal" class="modal">
+                                          <span class="close">&times;</span>
+                                          <img class="modal-content" id="img01">
+                                          <div id="caption"></div>
+                                        </div> {% endcomment %}
+                                     {% comment %} <button type="submit" id="twitterUploadBtn" class="btn btn-primary">Submit</button> {% endcomment %}
+                                      </div>
+                                    </form>
+                                   </div>
+                                   
+                                  </div>
+                                  
+                              </div>
+                          </div>
+                          <hr class="mt-3">
+                          {% comment %} <div class="col-md-12">
+                            <div class="option-identity-wrapper">
+                                
+                                <div class="tab-head ">
+                                 <div class="row mt-3">
+                                    <div class="col-md-2">
+                                        <img src="/static/images/greviews.jpg"   id="im" alt="icon" style="height:20vh;">
+                                    </div>
+                                    <div class="col-md-4">
+                                     <h5 style="font-weight:500;">Please upload the screen shot as a proof you joined our community.
+                                        Introducing Google reviews, your direct line to our services through Google reviews. 
+                                     </h5> 
+                                     <h5><a href="{{greviews}}" style="color: blue important!;">{{greviews}}</a></h5>
+
+                                
+
+                                    </div>
+
+                                   
+                                    <div class="col-md-4">
+                                        
+                                 
+                                        <input type="file"  style="margin-top:53px;" name="greview_image" onchange="previewImage(event,'grUploadPrevDiv')" required>
+                                        <small class="form-text text-danger">{{ form.greview_image.errors }}</small>
+                                    </div>
+                                    <div class="col-md-2 mt-3" id="grUploadPrevDiv">
+                         
+                                    </div>
+                                </form>
+                                 </div>
+                                
+                                </div>
+                                
+                            </div>
+                        
+                          </div> {% endcomment %}
+                          <div class="col-md-12">
+                            <div class="option-identity-wrapper">
+                                
+                                <div class="tab-head ">
+                                 <div class="row mt-3">
+                                    <div class="col-md-4">
+                                    </div>
+                                    
+                                 
+
+                                    
+                                    
+                                   
+                                    <div class="col-md-4">
+                                    <button type="submit"  class="btn btn-primary" name="socialJobTaskSubmit" value="submitted">submit tasks</button>
+
+                          
+                                    </div>
+                                    <div class="col-md-4 mt-3">
+                                      {% comment %} <button type="submit" id="grUploadBtn" class="btn btn-primary">Submit</button> {% endcomment %}
+                                 
+                                    </div>
+                                </form>
+                                 </div>
+                                
+                                </div>
+                                
+                            </div>
+                        
+                        </div>
+                             
+                        </div>
+                        </form>
+                         
+                    
+                        
+                         
+          
+                            {% comment %} {% endif %} {% endcomment %}
+                          </div>
+         
+       
+      </div>
+ 
+      
+  </div>
+
+<!--**********************************
+	Content body end
+***********************************-->
+
+
+
+{% endblock  %}
+
+
+{% block 'addFooterScripts' %}
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<!-- counter -->
+<script src="{% static 'surveyapp/vendor/counter/counter.min.js' %} "></script>
+<script src="{% static 'surveyapp/vendor/counter/waypoint.min.js' %} "></script>
+<script src="{% static 'surveyapp/vendor/peity/jquery.peity.min.js' %} "></script>
+<script src="{% static 'surveyapp/js/dashboard/dashboard-1.js' %} "></script>
+{% comment %} <script src="js/dashboard/dashboard-1.js"></script> {% endcomment %}
+
+{% comment %} <script src="{% static '/sur/vendor/counter/counter.min.js'  %}"></script> {% endcomment %}
+{% comment %} <script src="vendor/counter/waypoint.min.js"></script> {% endcomment %}
+
+<!-- Chart piety plugin files -->
+{% comment %} <script src="vendor/peity/jquery.peity.min.js"></script> {% endcomment %}
+<!-- <script src="vendor/swiper/js/swiper-bundle.min.js"></script> -->
+
+<script>
+    function previewImage(event,id) {
+        const file = event.target.files[0];
+        const previewDiv = document.getElementById(id);
+
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = document.createElement('img');
+                img.src = e.target.result;
+                img.alt = "Selected Image";
+                img.style.width = "100%";
+                img.style.maxWidth = "300px";
+                img.style.maxHeight = "300px";
+                
+                //alt="Snow" style="width:100%;max-width:300px"
+                previewDiv.innerHTML = '';
+                previewDiv.appendChild(img);
+            }
+            reader.readAsDataURL(file);
+        } else {
+            previewDiv.innerHTML = '<p>No image selected</p>';
+        }
+    }
+</script>
+<!-- Dashboard 1 -->
+<script>
+    // Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the image and insert it inside the modal - use its "alt" text as a caption
+var img = document.getElementById("myImg");
+var modalImg = document.getElementById("img01");
+var captionText = document.getElementById("caption");
+img.onclick = function(){
+  modal.style.display = "block";
+  modalImg.src = this.src;
+  captionText.innerHTML = this.alt;
+}
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+</script>
+
+
+<script>
+    const imageInput = document.querySelector('input[type="file"]');
+    const previewDiv = document.getElementById('image-preview');
+
+    imageInput.addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = document.createElement('img');
+                img.src = e.target.result;
+                previewDiv.innerHTML = '';
+                previewDiv.appendChild(img);
+            }
+            reader.readAsDataURL(file);
+        } else {
+            previewDiv.innerHTML = '<p>No image selected</p>';
+        }
+    });
+</script>
+
+<script>
+
+    function verifyBankName(formData,btnElemId) {
+        var bt = $(`#${btnElemId}`);
+        bt.attr("disabled", true).html("<i class='fa fa-spin fa-spinner'></i>&nbsp;&nbsp; please wait...");
+    
+        if (formData) {
+            $.ajax({
+                url: "/member/socialmedia/",
+                type: "post",
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (resultdata) {
+                    var status = resultdata.status;
+                    if (parseInt(status) !== 0) {
+                        alert(resultdata.msg);
+                        location.reload();
+                    } else {
+                        alert(resultdata.msg);
+                        location.reload();
+                    }
+                },
+                error: function () {
+                    alert("Something went wrong. Please try again later");
+                    location.reload();
+                },
+                complete: function () {
+                    // Reset button state
+                    bt.attr("disabled", false).html("submit");
+                }
+            });
+        } else {
+            alert("Form data is missing");
+        }
+    }
+    
+
+
+
+    $(document).ready(function(){
+        $('#ytUpload').submit(function(e){
+
+            e.preventDefault();
+            var formData = new FormData(this);
+           
+            verifyBankName(formData,'ytUploadBtn');
+        });
+        $('#fbUpload').submit(function(e){
+
+            e.preventDefault();
+            var formData = new FormData(this);
+           
+            verifyBankName(formData,'fbUploadBtn');
+        });
+
+        $('#instaUpload').submit(function(e){
+
+            e.preventDefault();
+            var formData = new FormData(this);
+           
+            verifyBankName(formData,'instaUploadBtn');
+        });
+
+        $('#twitterUpload').submit(function(e){
+
+            e.preventDefault();
+            var formData = new FormData(this);
+           
+            verifyBankName(formData,'twitterUploadBtn');
+        });
+
+        $('#grUpload').submit(function(e){
+
+            e.preventDefault();
+            var formData = new FormData(this);
+           
+            verifyBankName(formData,'grUpload');
+        });
+    });
+
+    var modal = document.getElementById('myModal');
+
+    // Get the image and insert it inside the modal - use its "alt" text as a caption
+    var img = document.getElementByClassName('myImg');
+    var modalImg = document.getElementsByClassName("img01");
+    var captionText = document.getElementByClassName("caption");
+    img.onclick = function(){
+        modal.style.display = "block";
+        modalImg.src = this.src;
+        captionText.innerHTML = this.alt;
+    }
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() { 
+        modal.style.display = "none";
+    }
+</script>
+
+{% endblock %}

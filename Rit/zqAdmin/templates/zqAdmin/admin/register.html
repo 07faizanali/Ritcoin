@@ -1,0 +1,184 @@
+{% extends "zqapp/layouts/main.html" %}
+{% load static %}
+{% block 'main'  %}
+      <!-- Content Section Start -->
+      <div class="midd-container">
+        <!-- Hero Section Start -->
+        <div
+          class="hero-main diamond-layout white-sec"
+          style="background: url({% static 'images/banner-4.jpg' %})"
+        >
+          <div class="container">
+            <div class="row align-items-center">
+              <div class="col-sm-12 col-md-6">
+                <div class="tab-section">
+                    <!-- Nav tabs -->
+                    <div class="hero-btns">
+                    <ul class="nav nav-tabs text-uppercase" role="tablist">
+                      
+
+
+                      <li class="nav-item">
+                        <span
+                          class="nav-link  text-white " id="mission-tab" data-toggle="tab" href="#mission" role="tab" aria-controls="mission" aria-selected="true" >Sign in</span>
+                      </li>
+                     
+                      <li class="nav-item">
+                         <span class="nav-link text-white " id="guarantees-tab" data-toggle="tab" href="#guarantees" role="tab" aria-controls="guarantees" aria-selected="false" >Sign up</span>
+                      </li>
+
+
+
+                     
+
+
+                    </ul>
+                  </div>
+                    
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                      <div
+                       
+                        class="tab-pane active"
+                        id="mission"
+                        role="tabpanel"
+                        aria-labelledby="mission-tab"
+                      >
+                      <div class="loginBox">
+                      
+                        <h5>Log In Here</h5>
+                        <form method="POST" action="{% url "login" %}">
+
+                          {% csrf_token  %}
+                          <p>Email</p>
+                          <input type="email" name="email" placeholder="Enter Email" required>
+                          <p>Password</p>
+                          <input type="password" name="password" placeholder="Enter Password" pattern="" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
+                          
+                          {% if login_error %}
+
+                          {{login_error}}
+
+                          {% endif  %}
+                          <input type="hidden" name="next" value="{{ request.GET.next }}">
+                          <input type="submit" name="sign-in" value="Sign In">
+                          <a href="{% url 'passwordReset' %}">Forget Password</a>
+                        </form>
+                      </div>
+                      </div>
+
+                      
+                   
+                      <div
+                      
+                        class="tab-pane "
+
+                        id="guarantees"
+                        role="tabpanel"
+                        aria-labelledby="guarantees-tab"
+                      >
+                      <div class="loginBox">
+                      
+                     
+                        <form method="POST" action="{% url 'register'   %}">
+                         {% csrf_token %} 
+                          
+                          <p>User Name</p>
+                          <input type="name" name="username" placeholder="Enter username" required>
+                          
+                          <small class="form-text text-danger">{{ form.username.errors }}</small>
+                          {% comment %} {% endfor %} {% endcomment %}
+                          <p>Email</p>
+                          <input type="email" name="email" placeholder="Enter Email" required>
+                          <small class="form-text text-danger">{{ form.email.errors }}</small>
+                          <p>Introducer id</p>
+                          <input type="text" name="introducerid" placeholder="Enter Introducer id" >
+
+                         
+                          <small class="form-text text-danger">{{ form.introducerid.errors }}</small>
+                          
+                          <p>Password</p>
+                          <input type="password" name="password1" placeholder="Enter Password" pattern="" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
+
+                          <small class="form-text text-danger">{{ form.password1.errors }}</small>
+                          <p> Confirm Password</p>
+                          <input type="password" name="password2" placeholder="Enter Confirm password" pattern="" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
+                          <small class="form-text text-danger">{{ form.password2.errors }}</small>
+                          <input type="submit" name="submit" value="Register">
+
+                          {% comment %} {% for error in form.password2.errors %}
+                          <small class="form-text text-danger">{{ error }}</small>
+                          {% endfor %} {% endcomment %}
+
+                         
+                        </form>
+                      </div>
+                      </div>
+                    </div>
+                  </div>
+              
+
+
+
+
+
+
+              </div>
+              <div class="col-sm-12 col-md-6" data-wow-delay="0.5s">
+                <div class="diamond-animation mobile-hidden">
+                  <div class="diamond-grid"></div>
+                  <div class="diamond-grid-2"></div>
+                  <div class="outer-Orbit">
+                    <div class="Orbit">
+                      <div class="rotate">
+                        <div class="OrbitSquare">
+                          <div class="inner">A</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="main">
+                    <div class="top-coin"><span></span></div>
+                    <div class="lines">
+                      <span class="l-1"></span>
+                      <span class="l-2"></span>
+                      <span class="l-3"></span>
+                      <span class="l-4"></span>
+                      <span class="l-5"></span>
+                      <span class="l-6"></span>
+                      <span class="l-7"></span>
+                      <span class="l-8"></span>
+                      <span class="l-9"></span>
+                      <span class="l-10"></span>
+                      <span class="l-11"></span>
+                      <span class="l-12"></span>
+                      <span class="l-13"></span>
+                      <span class="l-14"></span>
+                      <span class="l-15"></span>
+                    </div>
+                    <div class="inside-bitcoin"></div>
+                    <div class="gris2"></div>
+                    <div class="square-1"></div>
+                  </div>
+                  <div class="base"></div>
+                </div>
+                <div class="mobile-visible text-center">
+                  <img src="{% static 'images/diamond-animation-mobile.png' %}" alt="" />
+                </div>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+        
+    
+      
+      
+      
+      
+      <!-- Content Section End -->
+      
+{% endblock 'main'  %}

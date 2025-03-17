@@ -1,0 +1,529 @@
+{% load static %}
+
+
+<!-- In your Django template (e.g., templates/your_page.html) -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web3Modal Integration</title>
+</head>
+<body>
+    {% comment %} <button id="connectWalletButton">Connect Wallet</button> {% endcomment %}
+    <button id="connectWalletButton">Connect Wallet</button>
+    <h1 id="walletAddress"></h1>
+    <h1 id="ethBalance"></h1>
+    <h1 id="bnbBalance"></h1>
+    {% comment %} <button id="connectWalletButton">Connect Wallet</button> {% endcomment %}
+
+
+    <script src="{% static 'dist/bundle.js' %}"></script>  <!-- Adjust path as needed -->
+
+    {% comment %} <button id="open-connect-modal">Open Modal</button>
+    <button id="open-network-modal">Open Networks</button> {% endcomment %}
+    {% comment %} <div id="app">
+        <w3m-button></w3m-button>
+        <w3m-network-button> </w3m-network-button>
+      </div> {% endcomment %}
+    <!-- Other content specific to your page -->
+    {% comment %} <script type="module">
+        import { WalletConnectModal } from 'https://unpkg.com/@walletconnect/modal'
+      </script> {% endcomment %}
+
+      <script>
+
+        let web3;
+        let account;
+      let web3Modal;
+      let provider;
+       let web3;
+      let account;
+    
+    
+      function isMobileDevice() {
+        return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
+      }
+    
+        async function connectMetaMask() {
+            if (typeof window.ethereum !== 'undefined') {
+                web3 = new Web3(window.ethereum);
+                await window.ethereum.request({ method: 'eth_requestAccounts' });
+                const accounts = await web3.eth.getAccounts();
+                account = accounts[0];
+            
+           
+    
+                const chainId = await web3.eth.getChainId();
+                let networkName;
+                let nativeCurrency;
+    
+                switch (chainId) {
+                    case 1:
+                        networkName = 'Ethereum Mainnet';
+                        nativeCurrency = 'ETH';
+                        break;
+                    case 56:
+                        networkName = 'Binance Smart Chain Mainnet';
+                        nativeCurrency = 'BNB';
+                        break;
+                    case 97:
+                        networkName = 'Binance Smart Chain Testnet';
+                        nativeCurrency = 'tBNB';
+                        break;
+                    default:
+                        networkName = 'Unknown Network';
+                        nativeCurrency = 'Unknown';
+                }
+    
+                //document.getElementById('network').innerText = 'Connected Network: ' + networkName;
+    
+                if (chainId == 56) { // Check if the connected network is BSC Testnet
+    
+                    var totalBal=await getBalance(account);
+                    if(totalBal){
+    
+                        document.getElementById('cnbtn').innerHTML = `<button type="button" class="btn btn-success"><i class="fas fa-wallet"></i>${totalBal} BNB</button> `;
+                    }
+    
+    
+                } 
+                if (chainId !== 56) {
+                    try {
+                        await window.ethereum.request({
+                            method: 'wallet_switchEthereumChain',
+                            params: [{ chainId: '0x38' }], // Chain ID 97 in hexadecimal (0x61)
+                        });
+                    } catch (switchError) {
+                        if (switchError.code === 4902) {
+                            try {
+                                await window.ethereum.request({
+                                    method: 'wallet_addEthereumChain',
+                                    params: [
+                                        // {
+                                        //     chainId: '0x38',
+                                        //     chainName: 'Binance Smart Chain Mainnet',
+                                        //     rpcUrls: ['https://data-seed-prebsc-1-s1.binance.org:8545/'],
+                                        //     nativeCurrency: {
+                                        //         name: 'tBNB',
+                                        //         symbol: 'tBNB',
+                                        //         decimals: 18,
+                                        //     },
+                                        //     blockExplorerUrls: ['https://testnet.bscscan.com'],
+                                        // },
+    
+                      {
+                                        chainId: '0x38',
+                                        chainName: 'Binance Smart Chain Mainnet',
+                                        rpcUrls: ['https://bsc-dataseed.binance.org/'],
+                                        nativeCurrency: {
+                                            name: 'Binance Coin',
+                                            symbol: 'BNB',
+                                            decimals: 18,
+                                        },
+                                        blockExplorerUrls: ['https://bscscan.com'],
+                                    },
+                                    
+                    ],
+                                });
+                            } catch (addError) {
+                                console.error(addError);
+                            }
+                        }
+                    }
+                }
+    
+            } else {
+                if (isMobileDevice()) {
+                    window.open('https://metamask.app.link/dapp/https://www.ritcoin.exchange/member/walletHistory/'); // Replace YOUR_DAPP_URL with your actual dApp URL
+                } else {
+                    alert('MetaMask is not installed. Please install MetaMask to proceed.');
+                }
+            }
+        }
+        
+    
+    
+      async function connectTrustWallet() {
+        if (typeof window.ethereum !== 'undefined') {
+          // Check if Trust Wallet
+          const isTrustWallet = window.ethereum.isTrust || window.ethereum.isTrustWallet || window.ethereum.isTrustProvider;
+      
+          if (isTrustWallet) {
+            web3 = new Web3(window.ethereum);
+            await window.ethereum.request({ method: 'eth_requestAccounts' });
+            const accounts = await web3.eth.getAccounts();
+            account = accounts[0];
+      
+            const chainId = await web3.eth.getChainId();
+            if (chainId !== 56) {
+              try {
+                await window.ethereum.request({
+                  method: 'wallet_switchEthereumChain',
+                  params: [{ chainId: '0x38' }],
+                });
+              } catch (switchError) {
+                if (switchError.code === 4902) {
+                  try {
+                    await window.ethereum.request({
+                      method: 'wallet_addEthereumChain',
+                      params: [
+                        {
+                          chainId: '0x38',
+                          chainName: 'Binance Smart Chain Mainnet',
+                          rpcUrls: ['https://bsc-dataseed.binance.org/'],
+                          nativeCurrency: {
+                            name: 'Binance Coin',
+                            symbol: 'BNB',
+                            decimals: 18,
+                          },
+                          blockExplorerUrls: ['https://bscscan.com'],
+                        },
+                      ],
+                    });
+                  } catch (addError) {
+                    console.error(addError);
+                  }
+                }
+              }
+            }
+          } 
+          
+          else {
+            alert('Trust Wallet extension not detected. Please install Trust Wallet extension to proceed.');
+          }
+        } 
+        
+        else {
+          if (isMobileDevice()) {
+            window.open('https://link.trustwallet.com/open_url?coin_id=20000714&url=https://www.ritcoin.exchange/member/walletHistory/');
+            setTimeout(async () => {
+              web3 = new Web3(new Web3.providers.HttpProvider("https://bsc-dataseed.binance.org/"));
+              const accounts = await web3.eth.getAccounts();
+              account = accounts[0];
+              
+              // Display the balance on the button
+              const balance = await web3.eth.getBalance(account);
+              document.getElementById('balanceButton').innerText = `Balance: ${web3.utils.fromWei(balance, 'ether')} BNB`;
+            }, 5000); // Adjust the timeout as needed to ensure the wallet is connected
+          } 
+          
+          else {
+            alert('Trust Wallet is not installed. Please install Trust Wallet to proceed.');
+          }
+          
+          
+        }
+      }
+      
+      {% comment %} function isMobileDevice() {
+        return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+      } {% endcomment %}
+    
+      async function init() {
+        const providerOptions = {
+          walletconnect: {
+            package: WalletConnectProvider.default, // required
+            options: {
+              infuraId: "YOUR_INFURA_ID" // required
+            }
+          }
+        };
+    
+        web3Modal = new Web3Modal.default({
+          cacheProvider: false, // optional
+          providerOptions, // required
+          disableInjectedProvider: false, // optional. For MetaMask
+        });
+    
+        document.getElementById('connect-wallet-button').addEventListener('click', onConnect);
+      }
+    
+      async function onConnect() {
+        try {
+          provider = await web3Modal.connect();
+    
+          web3 = new ethers.providers.Web3Provider(provider);
+    
+          const accounts = await web3.listAccounts();
+          account = accounts[0];
+          document.getElementById('account').innerText = 'Account: ' + account;
+    
+          const balance = await web3.getBalance(account);
+          const balanceInBNB = ethers.utils.formatEther(balance);
+          document.getElementById('balance').innerText = balanceInBNB + ' BNB';
+    
+          provider.on("accountsChanged", (accounts) => {
+            document.getElementById('account').innerText = 'Account: ' + accounts[0];
+          });
+    
+          provider.on("chainChanged", (chainId) => {
+            // Handle the new chain.
+          });
+    
+          provider.on("disconnect", (code, reason) => {
+            console.log(code, reason);
+          });
+    
+        } catch (e) {
+          console.error("Could not connect to wallet", e);
+        }
+      }
+    
+    
+    
+    
+    
+    
+      async function getBalance(account) {
+            try {
+                const balance = await web3.eth.getBalance(account);
+                const balanceInBNB = web3.utils.fromWei(balance, 'ether');
+    
+                return balanceInBNB
+               // document.getElementById('balance').innerText = 'Balance: ' + balanceInBNB + ' tBNB';
+            } catch (error) {
+                console.error('Error getting balance:', error);
+                return false
+            }
+        }
+    
+    
+    
+    
+    
+async function payWithMetaMask() {
+    
+            //console.log("came here");
+            bt = $(`#pay-button`);
+            bt.attr("disabled", "").html("<i class='fa fa-spin fa-spinner'></i>&nbsp;&nbsp;Please wait...");
+    
+            var amnt=document.getElementById('amount').value;
+        
+        if (!amnt || (parseFloat(amnt)<0)){
+    
+          alert('Invaid amount');
+          location.reload();
+          return
+        }
+    
+    
+    
+    
+    
+            const response = await fetch(`/member/get-busd-price/`);
+            const data = await response.json();
+            const priceInUsd = data.price;
+            // console.log(priceInUsd);
+        // console.log(priceInUsd);
+            const cryptoAmount = parseFloat(amnt / priceInUsd).toFixed(18); // Calculate crypto amount for $55
+        console.log(cryptoAmount);
+        // return
+            console.log(cryptoAmount);
+            if (!account) {
+                alert('Please connect to MetaMask first.');
+                location.reload();
+                return;
+            }
+    
+        // const transactionParameters = {
+            // from: account,
+            // to: '0xe749438B8CEBC367869ADAAf7D1B108d3c77A856', // Replace with your testnet receiving address
+            // value: web3.utils.toWei(cryptoAmount, 'ether') // Amount in tBNB
+          // };
+    
+        // const gasPrice = await web3.eth.getGasPrice();
+          // transactionParameters.gasPrice = gasPrice;
+    
+        // const gasLimit = await web3.eth.estimateGas(transactionParameters);
+          // transactionParameters.gas = gasLimit;
+    
+    
+    
+            web3.eth.sendTransaction(
+          // transactionParameters
+          {
+                from: account,
+                to: '0xe749438B8CEBC367869ADAAf7D1B108d3c77A856', // Replace with your testnet receiving address
+                // //value: web3.utils.toWei('1', 'ether') // Amount in tBNB
+                value: web3.utils.toWei(cryptoAmount, 'ether') // Amount in tBNB
+            }
+      
+      )
+            .on('transactionHash', function(hash) {
+                console.log('Transaction Hash:', hash);
+                sendTransactionHashToDjango(hash,priceInUsd,'BNB',cryptoAmount,amnt);
+                //location.reload();
+            }).on('error', console.error);
+            /*.on('confirmation', function(hash,confirmationNumber, receipt) {
+                console.log(hash);
+                console.log('Confirmation Number:', confirmationNumber);
+                console.log('Receipt:', receipt);
+            })*/
+            
+}
+    
+        function ActivateUserId() {
+    
+           // console.log("came here");
+    
+           const totalWalletBalance = parseFloat(`{{ request.user.totalWalletBalance }}`);
+    
+            bt = $(`#ActivateId`);
+            bt.attr("disabled", "").html("<i class='fa fa-spin fa-spinner'></i>&nbsp;&nbsp;Please wait...");
+    
+            const amount = parseFloat($('#amount').val());
+    
+            if (isNaN(amount) || !(amount <= totalWalletBalance)) {
+                alert("Insufficient Wallet Balance");
+                location.reload();
+                return;  // Exit the function early
+            }
+    
+    
+    
+            fetch('/member/activate-id/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    //'X-CSRFToken': getCookie('csrftoken')
+                    'X-CSRFToken': `{{csrf_token}}`
+                },
+                body: JSON.stringify({Package:amount })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert(data.msg);
+                    location.reload(); // Reload the page
+                } else {
+                    alert(data.msg);
+                    location.reload();
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+        function sendTransactionHashToDjango(transactionHash,tranTimeCoinValue,coinName,cryptoAmount,amount) {
+            fetch('/member/verify-transaction/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    //'X-CSRFToken': getCookie('csrftoken')
+                    'X-CSRFToken': `{{csrf_token}}`
+                },
+                body: JSON.stringify({ transactionHash: transactionHash,tranTimeCoinValue:tranTimeCoinValue,coinName:coinName,cryptoAmount:cryptoAmount,amount:amount })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Transaction verified and funds added to your wallet.');
+                    location.reload(); // Reload the page
+                } else {
+                    alert('Transaction verification failed.');
+                    location.reload();
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    
+        {% comment %} function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        } {% endcomment %}
+      function isMobileDevice() {
+            return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
+        }
+
+
+        
+       function makePaymentQr() {
+           
+    
+            const entAmnt=$('#amount').val();
+        console.log(entAmnt);
+            if(!entAmnt){
+                 alert('Please enter correct transaction amount');
+           return
+           
+            }
+        
+            const amount = parseFloat(entAmnt);
+    
+            if(amount<=0){
+    
+                alert('amount should be greater than 0');
+               return // Reload the page
+              //  bt.attr("disabled", false).html("");
+    
+    
+            }
+        bt = $(`#viewQrBtn`);
+            bt.attr("disabled", "").html("<i class='fa fa-spin fa-spinner'></i>&nbsp;&nbsp;Please wait...");
+    
+        $.ajax({
+        url: "/member/makePayment/",
+        type: "post",
+        data: {
+                amount: amount,
+                csrfmiddlewaretoken: '{{ csrf_token }}'
+            },
+        
+        success: function (resultdata) {
+          var status = resultdata.status;
+          if (parseInt(status) == 1) {
+            var paymentUrl=resultdata.url;
+            window.location.href = paymentUrl;
+            // alert('Transaction verified and funds added to your wallet.');
+                    // location.reload(); // Reload the page
+            // alert(resultdata.msg);
+            // location.reload();
+          } else {
+            alert(resultdata.msg);
+            location.reload();
+            
+            // alert('Transaction verified and funds added to your wallet.');
+                    // location.reload(); // Reload the page
+          }
+        },
+        error: function () {
+          alert("Something went wrong. Please try again later");
+          location.reload();
+        },
+        complete: function () {
+          // Reset button state
+          bt.attr("disabled", false).html("submit");
+        }
+      });
+    
+    
+        }
+    
+        document.getElementById('connect-button-meta').addEventListener('click', connectMetaMask);
+        document.getElementById('connect-button-trust').addEventListener('click', connectTrustWallet);
+        document.getElementById('pay-button').addEventListener('click', payWithMetaMask);
+        document.getElementById('viewQrBtn').addEventListener('click', makePaymentQr);
+      window.addEventListener('load', init);
+    
+    
+    </script> 
+    
+    
+</body>
+</html>
+
+
+

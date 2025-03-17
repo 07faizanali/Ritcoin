@@ -1,0 +1,243 @@
+{% extends 'zqUsers/admin/layout/main.html' %} 
+
+
+{% block 'content' %}
+
+
+<div class="app-main__outer">
+<div class="app-main__inner">
+<div class="app-page-title">
+<div class="page-title-wrapper">
+<div class="page-title-heading">
+<div class="page-title-icon">
+<i class="pe-7s-drawer icon-gradient bg-happy-itmeo">
+</i>
+</div>
+<div>Acountent Topup
+<div class="page-title-subheading">You need to minimum 200 Zaan Queril Coin to activate your Zaan Queril Account.
+</div>
+</div>
+</div>
+<div class="page-title-actions">
+<button type="button" data-toggle="tooltip" title="Example Tooltip" data-placement="bottom" class="btn-shadow mr-3 btn btn-dark">
+<i class="fa fa-star"></i>
+</button>
+<div class="d-inline-block dropdown">
+<button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn-shadow dropdown-toggle btn btn-info">
+<span class="btn-icon-wrapper pr-2 opacity-7">
+<i class="fa fa-business-time fa-w-20"></i>
+</span>
+Buttons
+</button>
+<div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">
+<ul class="nav flex-column">
+<li class="nav-item">
+<a href="javascript:void(0);" class="nav-link">
+<i class="nav-link-icon lnr-inbox"></i>
+<span>
+Inbox
+</span>
+<div class="ml-auto badge badge-pill badge-secondary">86</div>
+</a>
+</li>
+<li class="nav-item">
+<a href="javascript:void(0);" class="nav-link">
+<i class="nav-link-icon lnr-book"></i>
+<span>
+Book
+</span>
+<div class="ml-auto badge badge-pill badge-danger">5</div>
+</a>
+</li>
+<li class="nav-item">
+<a href="javascript:void(0);" class="nav-link">
+<i class="nav-link-icon lnr-picture"></i>
+<span>
+Picture
+</span>
+</a>
+</li>
+<li class="nav-item">
+<a disabled href="javascript:void(0);" class="nav-link disabled">
+<i class="nav-link-icon lnr-file-empty"></i>
+<span>
+File Disabled
+</span>
+</a>
+</li>
+</ul>
+</div>
+</div>
+</div> 
+</div>
+</div>
+
+
+
+<div class="card p-5">
+    <h6 style="font-weight: 600;color: green;text-align: center;">BALANCE : 48071320.86 (Zaan Queril COIN)</h6>
+  
+    <div class="row mt-3">
+           
+        <div class="col-md-4 text-center mt-2">
+           <h6 class="mt-4" style="font-weight: 600;">Enter Email</h6>
+        </div>
+        
+        <div class="col-md-5">
+          
+            <div class="input-group mt-4">
+                <div class="input-group-prepend"></div>
+                <input placeholder="Enter Coin" type="number" class="form-control"></div>
+        </div>
+        </div>
+        <div class="row mt-3">
+           
+            <div class="col-md-4 text-center mt-2">
+               <h6 class="mt-4" style="font-weight: 600;">Enter Zaan Queril Coin</h6>
+            </div>
+            
+            <div class="col-md-5">
+              
+                <div class="input-group mt-4">
+                    <div class="input-group-prepend"></div>
+                    <input placeholder="Enter Coin" type="number" class="form-control"></div>
+            </div>
+            </div>
+            <button class="mb-2 mt-5 mr-2 btn btn-outline-primary btn-lg btn-block" onclick="withdrawal()"style="font-weight: 700;">Send OTP</button>
+    </div>
+
+
+<div class="row mt-4">
+    <div class="col-lg-12">
+        <div class="main- mb-3 ">
+        <div class="">
+        <table class="mb-0 table">
+        <thead>
+        <tr>
+       
+    
+        <th>Email</th>
+        <th>Type</th>
+        <th> Zaan Queril Coin 	</th>
+        <th>Date</th>
+        <th>Remark  </th>
+        <th>Transaction Type</th>
+        <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+       
+        
+         
+                <tr>
+                    <th scope="row">1</th>
+                    <td>dkdeep786@gmail.com</td>
+                    <td>TOPUP
+                    </td>
+                    <td> 261.19</td>
+                    <td>06-10-2021</td>
+                   <td>Zaan Queril Coin : 261.19 is used for topup of dkdeep786@gmail.com</td>
+                   <td>DEBIT</td>
+                   <td>Success<br>
+                    Transaction Type DEBIT<br>
+                    Status Success</td>
+                    
+                    
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>dkdeep786@gmail.com</td>
+                        <td>TOPUP
+                        </td>
+                        <td> 261.19</td>
+                        <td>06-10-2021</td>
+                       <td>Zaan Queril Coin : 261.19 is used for topup of dkdeep786@gmail.com</td>
+                       <td>DEBIT</td>
+                       <td>Success<br>
+                        Transaction Type DEBIT<br>
+                        Status Success</td>
+                        
+                        
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td>dkdeep786@gmail.com</td>
+                            <td>TOPUP
+                            </td>
+                            <td> 261.19</td>
+                            <td>06-10-2021</td>
+                           <td>Zaan Queril Coin : 261.19 is used for topup of dkdeep786@gmail.com</td>
+                           <td>DEBIT</td>
+                           <td>Success<br>
+                            Transaction Type DEBIT<br>
+                            Status Success</td>
+                            
+                            
+                            </tr>
+                            <tr>
+                                <th scope="row">4</th>
+                                <td>dkdeep786@gmail.com</td>
+                                <td>TOPUP
+                                </td>
+                                <td> 261.19</td>
+                                <td>06-10-2021</td>
+                               <td>Zaan Queril Coin : 261.19 is used for topup of dkdeep786@gmail.com</td>
+                               <td>DEBIT</td>
+                               <td>Success<br>
+                                Transaction Type DEBIT<br>
+                                Status Success</td>
+                                
+                                
+                                </tr>
+                                <tr>
+                                    <th scope="row">5</th>
+                                    <td>dkdeep786@gmail.com</td>
+                                    <td>TOPUP
+                                    </td>
+                                    <td> 261.19</td>
+                                    <td>06-10-2021</td>
+                                   <td>Zaan Queril Coin : 261.19 is used for topup of dkdeep786@gmail.com</td>
+                                   <td>DEBIT</td>
+                                   <td>Success<br>
+                                    Transaction Type DEBIT<br>
+                                    Status Success</td>
+                                    
+                                    
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">5</th>
+                                        <td>dkdeep786@gmail.com</td>
+                                        <td>TOPUP
+                                        </td>
+                                        <td> 261.19</td>
+                                        <td>06-10-2021</td>
+                                       <td>Zaan Queril Coin : 261.19 is used for topup of dkdeep786@gmail.com</td>
+                                       <td>DEBIT</td>
+                                       <td>Success<br>
+                                        Transaction Type DEBIT<br>
+                                        Status Success</td>
+                                        
+                                        
+                                        </tr>
+                                        
+        </tbody>
+        </table>
+        </div>
+        </div>
+        </div>
+</div>
+
+
+
+
+
+
+
+
+</div>
+ </div>
+</div>
+</div>
+
+
+{% endblock  %}

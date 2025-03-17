@@ -1,0 +1,1181 @@
+{% load static %}
+<!doctype html>
+<html>
+
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<head>
+	<!-- Meta Tags -->
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="author" content="ThemeMarch">
+	<!-- Page Title -->
+	<title></title>
+  
+    <link rel="stylesheet" type="text/css" href="{% static 'homePage/assets/css/plugins.css' %}">
+    <link rel="stylesheet" href="{% static 'homePage/assets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'homePage/assets/css/animate.min.css' %}">
+    <link rel="stylesheet" href="{% static 'homePage/assets/css/icofont.css' %}">
+    <link rel="stylesheet" href="{% static 'homePage/assets/css/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'homePage/assets/css/fontawesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'homePage/assets/css/slick.min.css' %}">
+    <link rel="stylesheet" href="{% static 'homePage/assets/css/modal.video.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'homePage/assets/css/style.css' %}">
+
+</head>
+<style>
+	@media (max-width: 575.98px) { 
+	.modal-content{
+		height:60vh !important;
+		width:60vw !important;
+	}
+ }
+</style>
+<body data-spy="scroll" data-target=".tm-section-active" class="tm-green-color">
+    <!-- Start Preloader -->
+	<div id="tm-preloader">
+		<div class="tm-preloader-in">
+	        <div class="bar bar-top"></div>
+	        <div class="bar bar-right"></div>
+	        <div class="bar bar-bottom"></div>
+	        <div class="bar bar-left"></div>
+	    </div>
+	</div>
+    <!-- End Preloader -->
+    <!-- Start Site Header Wrap -->
+    <header class="tm-site-header">
+        <div class="tm-header-menu">
+            <div class="container tm-header-menu-container">
+                <div class="tm-site-branding">
+                    <!-- For Image Logo -->
+                    <a href="{% url 'index' %}" class="tm-logo-link">
+                        <img src="{% static 'images/logo-dark.png' %}" alt="" class="tm-logo" style="height:19vh;">
+                        <img src="{% static 'images/logo-dark.png' %}" alt="" class="tm-mobile-logo" style="height:24vh;">
+                    </a>
+                   
+                </div>
+                <nav class="tm-primary-nav tm-section-active">
+                    <ul class="tm-primary-nav-list">
+                        <li class="menu-item"><a href="#about" class="nav-link">About</a></li>
+                        <li class="menu-item"><a href="#howitworks" class="nav-link">How It Works</a></li>
+                        <li class="menu-item"><a href="#tokensale" class="nav-link">Token Sale</a></li>
+                        <li class="menu-item"><a href="#bounty" class="nav-link">Bounty</a></li>
+                        <li class="menu-item"><a href="#roadmap" class="nav-link">Roadmap</a></li>
+                        <li class="menu-item"><a href="#team" class="nav-link">Team</a></li>
+                        <li class="menu-item"><a href="#faq" class="nav-link">Faq</a></li>
+                    </ul>
+                    <div class="tm-language">
+                    	<div class="tm-active-language">EN</div>
+                    	<div class="tm-lenguage-dropdown">
+                    		<a href="#">FR</a>
+                    		<a href="#">CH</a>
+                    		<a href="#">HI</a>
+                    	</div>
+                    </div><!-- .tm-language -->
+                    <div class="tm-menu-meta">
+                    	<button class="tm-btn tm-style1 tm-with-border" id="lgnButton" data-toggle="modal" data-target="#tm-login">LOGIN</button>
+                    	<button class="tm-btn tm-style1 tm-with-border" id="sgnButton" data-toggle="modal" data-target="#tm-signup">SIGNUP</button>
+                    </div>
+                </nav>
+            </div><!-- .tm-header-menu-container -->
+        </div><!-- .tm-header-menu -->
+    </header><!-- .tm-site-header -->
+    <!-- End Site Header Wrap -->
+	<div class="tm-section-active tm-fix-bar">
+		<ul class="wow fadeInRight" data-wow-duration="0.8s" data-wow-delay="0.5s">
+		    <li><a href="#home" class="nav-link"></a></li>
+		    <li><a href="#about" class="nav-link"></a></li>
+		    <li><a href="#video" class="nav-link"></a></li>
+		    <li><a href="#howitworks" class="nav-link"></a></li>
+		    <li><a href="#tokensale" class="nav-link"></a></li>
+		    <li><a href="#bounty" class="nav-link"></a></li>
+		    <li><a href="#roadmap" class="nav-link"></a></li>
+		    <li><a href="#team" class="nav-link"></a></li>
+		    <li><a href="#featured-company" class="nav-link"></a></li>
+		    <li><a href="#faq" class="nav-link"></a></li>
+		    <li><a href="#tm-subscribe" class="nav-link"></a></li>
+		    <li><a href="#footer" class="nav-link"></a></li>
+		</ul>
+	</div>
+	<!-- Start Hero Section -->
+	<section class="tm-hero-section tm-style1 tm-bg" id="home" style="background-image: url({% static 'homePage/assets/img/hero-bg-v2.jpg' %});">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="tm-hero-text">
+						<div class="tm-overflow-hidden">
+							<h1 class="tm-hero-title tm-white-c tm-f42 tm-lg-f38 tm-fw-medium tm-m0 tm-lh60 col-xs-t-14 tm-md-f30 tm-md-lh40 wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.7s">Ritcoin is a Amazing <br>
+							Crypto ICO Landing Page 
+						</h1>
+						</div>
+						<div class="empty-space col-xs-b10"></div>
+						<div class="tm-overflow-hidden">
+							<h2 class="tm-hero-sub-title tm-white-c tm-f24 tm-m0 tm-lh36 tm-md-f18 tm-md-lh26 wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.9s"> Cryptocurrency
+								Training &
+								development
+							</h2>
+						</div>
+						<div class="empty-space col-xs-b25"></div>
+						<div class="tm-overflow-hidden">
+							<div class="tm-btn-group wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="1.15s">
+						
+							</div>
+						</div>
+					</div>
+				</div><!-- .col -->
+				<div class="col-lg-6 wow zoomIn" data-wow-duration="1.25s" data-wow-delay="1.25s">
+					<div class="tm-countdown-outer">
+					<div class="tm-countdown-wrap tm-style1 text-center">
+						<div class="tm-countdown-bg"></div>
+							<div class="tm-countdown-box">
+								<div class="tm-countdown-heading tm-f20 tm-white-c tm-lh16">ICO Ends In</div>
+								 <div id="tm-if-expired" class="tm-countdown tm-if-expired">
+			                        <div class="countdown-element">
+			                            <div id="tm-count-days" class="tm-f50 tm-md-f50 tm-green-c tm-fw-medium tm-lh62 tm-oswald-fonts"></div>
+			                            <span class="tm-white-c">Days</span>
+			                        </div>
+			                        <span class="tm-sep tm-f60 tm-green-c">:</span>
+			                        <div class="countdown-element">
+			                            <div id="tm-count-hours" class="tm-f50 tm-md-f50 tm-green-c tm-fw-medium tm-lh62 tm-oswald-fonts"></div>
+			                            <span class="tm-white-c">Hours</span>
+			                        </div>
+			                        <span class="tm-sep tm-f60 tm-green-c">:</span>
+			                        <div class="countdown-element">
+			                            <div id="tm-count-minutes" class="tm-f50 tm-md-f50 tm-green-c tm-fw-medium tm-lh62 tm-oswald-fonts"></div>
+			                            <span class="tm-white-c">Minutes</span>
+			                        </div>
+			                        <span class="tm-sep tm-f60 tm-green-c">:</span>
+			                        <div class="countdown-element">
+			                            <div id="tm-count-seconds" class="tm-f50 tm-md-f50 tm-green-c tm-fw-medium tm-lh62 tm-oswald-fonts"></div>
+			                            <span class="tm-white-c">Seconds</span>
+			                        </div>
+			                    </div><!-- .tm-countdown -->
+			                    <div class="tm-token-status-bar tm-f13 tm-white-c">
+			                    	<span class="tm-token-start">Start</span>
+			                    	<span class="tm-token-softcap">Softcap</span>
+			                    	<span class="tm-token-hardcap">Hardcap</span>
+			                    	<div class="tm-token-status-bar-out">
+			                    		<div class="tm-token-status-bar-in" style="width: 80%;"></div>
+			                    	</div>
+			                    </div><!-- .tm-token-status-bar -->
+			                    <div class="empty-space col-xs-b35"></div>
+			                    <div class="text-center">
+		                    		<a href="#" class="tm-btn">Contribute Now</a>
+		                    	</div>
+							</div><!-- .tm-countdown-box -->
+						</div><!-- .tm-countdown-wrap -->
+					</div>
+				</div><!-- .col -->
+			</div>
+		</div>
+	</section>
+	<!-- End Hero Section -->
+
+	<!-- Start About Section -->
+	<section class="tm-about-wrap tm-bg" id="about" style="background-image: url({% static 'homePage/assets/img/about-bg.jpg' %});">
+		<div class="empty-space col-md-b90 col-xs-b55"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="tm-about-img-wrap">
+						<div class="tm-about-img">
+							<img src="{% static 'homePage/assets/img/about-img2.png' %}" alt="">
+							<img src="{% static 'homePage/assets/img/green-ethereum1.png' %}" alt="" class="tm-ethereum">
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<div class="tm-about">
+						<h2 class="tm-m0 tm-lh40 col-xs-t-1 tm-md-f28 tm-md-lh35 wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.25s">Company Overview 
+						</h2>
+						<div class="empty-space col-md-b20 col-xs-b10"></div>
+						<div class="tm-f20 tm-md-f15 tm-m0 tm-lh30 tm-md-lh20 wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.30s">Ritcoin Company, Inc. is a privately held marketing research data collection service firm. As a leading data collection services provider for both consumer and business to business studies. Our top commitment is delivering the highest quality data to our clients in a timely manner at a competitive price.
+						</div>
+						<div class="empty-space col-md-b10 col-xs-b15"></div>
+						<h2 class="tm-m0 tm-lh60 tm-md-f28 tm-md-lh34 wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.35s">Why ?</h2>
+						<div class="empty-space col-md-b10 col-xs-b10"></div>
+						<div class="tm-about-text tm-f20 tm-md-f15 tm-lh32 tm-md-lh20 col-xs-t-1">
+							<p class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.4s"> We value our established client relationships and are dedicated to providing premium interviewing on every research project awarded.</p>
+							
+						</div>
+					</div>
+				</div><!-- .col -->
+			</div>
+		</div>
+		<div class="empty-space col-md-b85 col-xs-b55"></div>
+	</section>
+	<!-- End About Section -->
+	
+	
+	<!-- Start How it Works -->
+    <section class="tm-ocher-work tm-bg" id="howitworks" style="background-image: url({% static 'homePage/assets/img/greeen-adventages.jpg' %});">
+    	<div class="empty-space col-md-b85 col-xs-b50"></div>
+    	<div class="container">
+    		<div class="tm-section-heading tm-style1">
+    		
+    			<div class="tm-section-heading-right">
+    				<h2 class="col-xs-b20 tm-md-f28 tm-md-lh34 wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.35s">Ritcoin
+						PLAN FOR
+						PROMOTERS</h2>
+    				<div class="tm-f20 tm-md-f15 tm-lh30 tm-md-lh24 wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.45s"> 
+						<p class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.4s"> Start registration with your complete details like mail id, name, colleague userid, country, password etc.</p>
+						<p class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.4s">  Complete your Kyc and activate your account through any crypto wallet like MetaMask,Trustwallet etc.</p>
+							
+							
+    				</div>
+    			</div>
+    		</div>
+    		<div class="empty-space col-md-b75 col-xs-b50"></div>
+    		<div class="tm-section-heading tm-style2">
+    			<h2 class="text-center col-xs-b2 col-xs-t-2 tm-md-f28 tm-md-lh34 wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.45s">Look at our adventages</h2>
+    		</div>
+			<div class="empty-space col-md-b55 col-xs-b35"></div>
+    	</div>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-3 col-sm-6">
+					<div class="tm-single-work wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.55s">
+						<div class="tm-single-work-icon"><i class="flaticon-ethereum"></i></div>
+						<div class="tm-single-work-text tm-f20 tm-md-f18 tm-md-lh28 tm-lh30">Ethereum <br> Blockchain</div>
+					</div>
+					<div class="empty-space col-md-b30 col-xs-b30"></div>
+				</div>
+				<div class="col-lg-3 col-sm-6">
+					<div class="tm-single-work wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.65s">
+						<div class="tm-single-work-icon"><i class="flaticon-strategy"></i></div>
+						<div class="tm-single-work-text tm-f20 tm-md-f18 tm-md-lh28 tm-lh30">Easy to used <br> Tokensale Platform</div>
+					</div>
+					<div class="empty-space col-md-b30 col-xs-b30"></div>
+				</div>
+				<div class="col-lg-3 col-sm-6">
+					<div class="tm-single-work wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.75s">
+						<div class="tm-single-work-icon"><i class="flaticon-block"></i></div>
+						<div class="tm-single-work-text tm-f20 tm-md-f18 tm-md-lh28 tm-lh30">High <br> Security</div>
+					</div>
+					<div class="empty-space col-md-b30 col-xs-b30"></div>
+				</div>
+				<div class="col-lg-3 col-sm-6">
+					<div class="tm-single-work wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.85s">
+						<div class="tm-single-work-icon"><i class="flaticon-decentralized"></i></div>
+						<div class="tm-single-work-text tm-f20 tm-md-f18 tm-md-lh28 tm-lh30">First and <br> Decentrelazed</div>
+					</div>
+					<div class="empty-space col-md-b30 col-xs-b30"></div>
+				</div>
+			</div>
+		</div>
+		<div class="empty-space col-md-b60 col-xs-b30"></div>
+		<div class="tm-section-heading tm-style2">
+			<h2 class="text-center col-xs-b2 col-xs-t-1 tm-md-f28 tm-md-lh34 wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.95s">Comparison with other solutions</h2>
+		</div>
+		<div class="empty-space col-md-b55 col-xs-b35"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="tm-comparison-table text-center wow fadeIn" data-wow-duration="0.8s" data-wow-delay="1s">
+		    			<div class="table-responsive">          
+							<table class="table table-bordered">
+						    	<thead>
+						      		<tr>
+						        		<th></th>
+						        		<th>Traditional</th>
+						        		<th>BlockBit</th>
+						        		<th>ICOBlock</th>
+						      		</tr>
+						    	</thead>
+						    	<tbody>
+						      		<tr>
+							        	<td>Decentralized Database</td>
+							        	<td><div class="tm-blank"></div></td>
+							        	<td><div class="tm-blank"></div></td>
+							        	<td><div class="tm-blank"></div></td>
+							      	</tr>
+							      	<tr>
+							        	<td>Unique Numeric ID</td>
+							        	<td><div class="tm-blank"></div></td>
+							        	<td><div class="tm-blank"></div></td>
+							        	<td><div class="tm-blank"></div></td>
+							      	</tr>
+							      	<tr>
+							        	<td>Primary Target Market</td>
+							        	<td>UK</td>
+							        	<td>USA</td>
+							        	<td>Australia</td>
+							      	</tr>
+							      	<tr>
+							        	<td>Target Market Size</td>
+							        	<td>Country Specific</td>
+							        	<td>123 Million</td>
+							        	<td>1.5 Billion</td>
+							      	</tr>
+							      	<tr>
+							        	<td>Information Liability</td>
+							        	<td>High</td>
+							        	<td>Medium</td>
+							        	<td>Low</td>
+							      	</tr>
+						    	</tbody>
+						  	</table>
+						</div>
+		    		</div>
+				</div><!-- .col -->
+			</div>
+		</div><!-- .container -->
+		<div class="empty-space col-md-b95 col-xs-b60"></div>
+    </section>
+    <!-- End How it Works -->
+
+    <!-- Start Token Sale -->
+    <section class="tm-token-sale tm-dark-green-bg" id="tokensale">
+	    <div class="tm-bg" style="background-image: url({% static 'homePage/assets/img/greeen-token-sale-bg.jpg' %});">
+	    	<div class="empty-space col-md-b85 col-xs-b45"></div>
+	    	<div class="container">
+	    		<div class="tm-section-heading tm-style1 tm-color2">
+	    			<div class="tm-section-heading-left">
+	    				<h2 class="tm-m0 tm-green-c tm-md-f28 tm-md-lh34 wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.25s">What <br>
+	    				is a token sale?</h2>
+	    			</div>
+	    			<div class="tm-section-heading-right">
+	    				<div class="tm-f20 tm-md-f15 tm-lh30 tm-white-c tm-md-lh24 wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.35s">A token sale, sometimes referred to as an ICO, is form of crowd funding for digital currency-related projects. In token sales, purch - asers buy units of a new currency in exchange for legal tender or other digital currencies, such as Bitcoin or Ethereum.</div>
+	    			</div>
+	    		</div>
+	    		<div class="empty-space col-md-b75 col-xs-b50"></div>
+		    </div>
+		    <div class="container">
+		    	<div class="row">
+		    		<div class="col-xl-12">
+		    			<h2 class="text-center col-xs-b2 col-xs-t-2 tm-green-c tm-md-f28 tm-md-lh34 wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.45s">Token Distribution</h2>
+						<div class="empty-space col-md-b55 col-xs-b35"></div>
+						<div class="tm-token-distribution col-xs-b1">
+							<div class="tm-token-distribution-left tm-green-token-color1">
+								<ul class="tm-token-distribution-list tm-f20 tm-md-f15 tm-white-c list-one">
+									<li class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.55s"><span class="tm-blank tm-token-color1"></span>ICO supporters</li>
+									<li class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.55s"><span class="tm-blank tm-token-color2"></span>Team members</li>
+									<li class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.55s"><span class="tm-blank tm-token-color3"></span>Marketing</li>
+									<li class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.55s"><span class="tm-blank tm-token-color4"></span>Angel investors</li>
+									<li class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.55s"><span class="tm-blank tm-token-color5"></span>Bounty Fund</li>
+								</ul>
+							</div>
+							<div class="tm-token-distribution-right tm-sp-token-distribution wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.65s">
+								<img src="{% static 'homePage/assets/img/green-token-percentage01.png' %}" alt="" class="tm-token-distribution-img">
+							</div>
+						</div>
+						<div class="empty-space col-lg-b90 col-xs-b55"></div>
+		    		</div><!-- .col -->
+		    		<div class="col-xl-12">
+		    			<h2 class="text-center col-xs-b2 col-xs-t-2 tm-green-c tm-md-f28 tm-md-lh34 wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.45s">Token Fund Usage</h2>
+						<div class="empty-space col-md-b55 col-xs-b35"></div>
+						<div class="tm-token-distribution col-xs-b1">
+							<div class="tm-token-distribution-right wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.65s">
+								<img src="{% static 'homePage/assets/img/green-token-percentage01.png' %}" alt="" class="tm-token-distribution-img">
+							</div>
+							<div class="tm-token-distribution-left tm-green-token-color2">
+								<ul class="tm-token-distribution-list tm-f20 tm-md-f15 tm-white-c list-two">
+									<li class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.55s"><span class="tm-blank tm-token-color1"></span>Platform development</li>
+									<li class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.55s"><span class="tm-blank tm-token-color2"></span>Sales & marketing</li>
+									<li class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.55s"><span class="tm-blank tm-token-color3"></span>Operational costs</li>
+									<li class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.55s"><span class="tm-blank tm-token-color4"></span>Legal expenses</li>
+									<li class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.55s"><span class="tm-blank tm-token-color5"></span>Strategy development</li>
+								</ul>
+							</div>
+						</div>
+		    		</div><!-- .col -->
+		    	</div>
+		    </div>
+		    <div class="empty-space col-md-b95 col-xs-b60"></div>
+		</div>
+	    <div class="tm-dark-green-bg tm-bounty" id="bounty">
+	    	<div class="empty-space col-md-b90 col-xs-b55"></div>
+	    	<div class="container">
+	    		<h2 class="text-center col-xs-b2 tm-green-c col-xs-t-1 tm-md-f28 tm-md-lh34">Bounty Fund Distribution (<span class="tm-white-c">5%</span> of the total)</h2>
+	    		<div class="empty-space col-md-b55 col-xs-b30"></div>
+		    	<div class="tm-token-distribution">
+					<div class="tm-token-distribution-left tm-green-token-color3">
+						<ul class="tm-token-distribution-list tm-f20 tm-md-f15 tm-white-c">
+							<li class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.55s"><span class="tm-blank tm-token-color1"></span><span class="tm-percentage tm-light-green-c">25%</span> Facebook bounty campaing</li>
+							<li class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.55s"><span class="tm-blank tm-token-color2"></span><span class="tm-percentage tm-light-green-c">25%</span> Telegram bounty campaing</li>
+							<li class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.55s"><span class="tm-blank tm-token-color3"></span><span class="tm-percentage tm-light-green-c">20%</span> Twitter bounty campaing</li>
+							<li class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.55s"><span class="tm-blank tm-token-color4"></span><span class="tm-percentage tm-light-green-c">15%</span> Membership bounty campaing</li>
+							<li class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.55s"><span class="tm-blank tm-token-color5"></span><span class="tm-percentage tm-light-green-c">10%</span> Authors bounty campaing</li>
+							<li class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.55s"><span class="tm-blank tm-token-color5"></span><span class="tm-percentage tm-light-green-c">05%</span> Reserve</li>
+						</ul>
+						<div class="empty-space col-lg-b0 col-xs-b40"></div>
+					</div>
+					<div class="tm-token-distribution-right tm-sp-token-distribution col-xs-b1 wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.65s">
+						<img src="{% static 'homePage/assets/img/green-token-percentage03.png' %}" alt="" class="tm-token-distribution-img">
+					</div>
+				</div>
+	    	</div><!-- .container -->
+	    	<div class="empty-space col-md-b95 col-xs-b60"></div>
+	    </div>
+    </section>
+    <!-- End Token Sale -->
+	
+	<!-- Start Road Map Section -->
+	<section class="tm-roadmap-wrap tm-gray-bg tm-bg" id="roadmap" style="background-image: url({% static 'homePage/assets/img/greeen-roadmap.png' %});">
+		<div class="empty-space col-md-b90 col-xs-b55"></div>
+		<div class="container">
+			<div class="tm-section-heading tm-style2 text-center col-xs-t-1">
+				<h2 class="tm-f34 col-xs-b2 tm-md-f28 tm-md-lh34 wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.25s">Roadmap</h2>
+				<div class="empty-space col-md-b25 col-xs-b10"></div>
+				<div class="tm-f20 tm-md-f15 col-xs-t-4 col-xs-b1 wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.3s">We have big plans for the future of Request.</div>
+			</div>
+		</div>
+		<div class="empty-space col-md-b85 col-xs-b45"></div>
+		<div class="container">
+			<div class="tm-green-roadmap">
+				<div class="green-slider-nav-wrap wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.5s">
+					<div class="slider green-slider-nav">
+					    <div>
+					    	<div class="tm-green-year"><span>2024</span></div>
+					    </div>
+					  
+				  	</div>
+				</div>
+			  	<div class="slider green-slider-for">
+				    <div>
+				    	<div class="tm-green-roadmap-text">
+				    		<div class="tm-green-roadmap-text-in">
+				    			<div class="tm-gr-single-text wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.45s">
+					    			<div class="tm-gr-yr">January<span class="tm-gr-ball"></span></div>
+					    			<div class="tm-gr-text">Launch of the project</div>
+					    		</div>
+					    		<div class="tm-gr-single-text wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.5s">
+					    			<div class="tm-gr-yr">March<span class="tm-gr-ball"></span></div>
+					    			<div class="tm-gr-text">Blockchain reputational module implementation</div>
+					    		</div>
+					    		<div class="tm-gr-single-text wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.55s">
+					    			<div class="tm-gr-yr">June<span class="tm-gr-ball"></span></div>
+					    			<div class="tm-gr-text">Inventory Management Systems</div>
+					    		</div>
+					    		<div class="tm-gr-single-text wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.6s">
+					    			<div class="tm-gr-yr">September<span class="tm-gr-ball"></span></div>
+					    			<div class="tm-gr-text">Major partnerships in entertainment industry</div>
+					    		</div>
+				    		</div>
+				    	</div>
+				    </div>
+				    <div>
+				    	<div class="tm-green-roadmap-text">
+				    		<div class="tm-green-roadmap-text-in">
+				    			<div class="tm-gr-single-text wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.45s">
+					    			<div class="tm-gr-yr">March<span class="tm-gr-ball"></span></div>
+					    			<div class="tm-gr-text">Lunch of the project</div>
+					    		</div>
+					    		<div class="tm-gr-single-text wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.5s">
+					    			<div class="tm-gr-yr">June<span class="tm-gr-ball"></span></div>
+					    			<div class="tm-gr-text">Blockchain reputational module implementation</div>
+					    		</div>
+					    		<div class="tm-gr-single-text wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.55s">
+					    			<div class="tm-gr-yr">September<span class="tm-gr-ball"></span></div>
+					    			<div class="tm-gr-text">Inventory Management Systems</div>
+					    		</div>
+					    		<div class="tm-gr-single-text wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.6s">
+					    			<div class="tm-gr-yr">Octobor<span class="tm-gr-ball"></span></div>
+					    			<div class="tm-gr-text">Major partnerships in entertainment industry</div>
+					    		</div>
+				    		</div>
+				    	</div>
+				    </div>
+				    <div>
+				    	<div class="tm-green-roadmap-text">
+				    		<div class="tm-green-roadmap-text-in">
+				    			<div class="tm-gr-single-text wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.45s">
+					    			<div class="tm-gr-yr">June<span class="tm-gr-ball"></span></div>
+					    			<div class="tm-gr-text">Lunch of the project</div>
+					    		</div>
+					    		<div class="tm-gr-single-text wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.5s">
+					    			<div class="tm-gr-yr">September<span class="tm-gr-ball"></span></div>
+					    			<div class="tm-gr-text">Blockchain reputational module implementation</div>
+					    		</div>
+					    		<div class="tm-gr-single-text wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.55s">
+					    			<div class="tm-gr-yr">Octobor<span class="tm-gr-ball"></span></div>
+					    			<div class="tm-gr-text">Inventory Management Systems</div>
+					    		</div>
+					    		<div class="tm-gr-single-text wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.6s">
+					    			<div class="tm-gr-yr">Novembor<span class="tm-gr-ball"></span></div>
+					    			<div class="tm-gr-text">Major partnerships in entertainment industry</div>
+					    		</div>
+				    		</div>
+				    	</div>
+				    </div>
+			  	</div>
+			</div>
+		</div>
+		<div class="empty-space col-md-b95 col-xs-b60"></div>
+	</section>
+	<!-- End Road Map Section -->
+
+	<!-- Start Team Section -->
+	<section class="tm-member tm-bg" id="team" style="background-image: url({% static 'homePage/assets/img/green-member-bg.jpg' %});">
+		<div class="tm-team-wrap">
+			<div class="empty-space col-md-b90 col-xs-b55"></div>
+			<h2 class="text-center col-xs-b2 tm-green-c col-xs-t-1 tm-md-f28 tm-md-lh34 wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.25s">Meet Our Team</h2>
+			<div class="empty-space col-md-b55 col-xs-b35"></div>
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-3 col-md-6">
+						<div class="tm-member-card text-center wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.35s">
+							<div class="tm-exmember">
+								<div class="tm-member-thumb"><img src="{% static 'homePage/assets/img/member01.jpg' %}" alt=""></div>
+								<div class="tm-member-desc tm-white-bg">
+									<h3 class="tm-member-name tm-f20 tm-md-f15 tm-blue-c col-xs-b5">George Alexiev</h3>
+									<div class="tm-member-designation tm-f18">Senior Developer</div>
+								</div>
+							</div>
+							<div class="empty-space col-md-b35 col-xs-b25"></div>
+							<ul class="tm-member-social-btn">
+								<li><a href="#" class="tm-social-btn"><span><i class="fa fa-linkedin"></i></span></a></li>
+								<li><a href="#" class="tm-social-btn"><span><i class="fa fa-telegram"></i></span></a></li>
+							</ul>
+						</div>
+						<div class="empty-space col-md-b30 col-xs-b30"></div>
+					</div><!-- .col -->
+					<div class="col-lg-3 col-md-6">
+						<div class="tm-member-card text-center wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.45s">
+							<div class="tm-exmember">
+								<div class="tm-member-thumb"><img src="{% static 'homePage/assets/img/member02.jpg' %}" alt=""></div>
+								<div class="tm-member-desc tm-white-bg">
+									<h3 class="tm-member-name tm-f20 tm-md-f15 tm-blue-c col-xs-b5">Oscar Machado</h3>
+									<div class="tm-member-designation tm-f18">UX/ UI designer</div>
+								</div>
+							</div>
+							<div class="empty-space col-md-b35 col-xs-b25"></div>
+							<ul class="tm-member-social-btn">
+								<li><a href="#" class="tm-social-btn"><span><i class="fa fa-linkedin"></i></span></a></li>
+								<li><a href="#" class="tm-social-btn"><span><i class="fa fa-telegram"></i></span></a></li>
+							</ul>
+						</div>
+						<div class="empty-space col-md-b30 col-xs-b30"></div>
+					</div><!-- .col -->
+					<div class="col-lg-3 col-md-6">
+						<div class="tm-member-card text-center wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.55s">
+							<div class="tm-exmember">
+								<div class="tm-member-thumb"><img src="{% static 'homePage/assets/img/member03.jpg' %}" alt=""></div>
+								<div class="tm-member-desc tm-white-bg">
+									<h3 class="tm-member-name tm-f20 tm-md-f15 tm-blue-c col-xs-b5">Lasse Clausen</h3>
+									<div class="tm-member-designation tm-f18">Analitics</div>
+								</div>
+							</div>
+							<div class="empty-space col-md-b35 col-xs-b25"></div>
+							<ul class="tm-member-social-btn">
+								<li><a href="#" class="tm-social-btn"><span><i class="fa fa-linkedin"></i></span></a></li>
+								<li><a href="#" class="tm-social-btn"><span><i class="fa fa-telegram"></i></span></a></li>
+							</ul>
+						</div>
+						<div class="empty-space col-md-b30 col-xs-b30"></div>
+					</div><!-- .col -->
+					<div class="col-lg-3 col-md-6">
+						<div class="tm-member-card text-center wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.65s">
+							<div class="tm-exmember">
+								<div class="tm-member-thumb"><img src="{% static 'homePage/assets/img/member04.jpg' %}" alt=""></div>
+								<div class="tm-member-desc tm-white-bg">
+									<h3 class="tm-member-name tm-f20 tm-md-f15 tm-blue-c col-xs-b5">Daniil Kostin</h3>
+									<div class="tm-member-designation tm-f18">Fronted Developer</div>
+								</div>
+							</div>
+							<div class="empty-space col-md-b35 col-xs-b25"></div>
+							<ul class="tm-member-social-btn">
+								<li><a href="#" class="tm-social-btn"><span><i class="fa fa-linkedin"></i></span></a></li>
+								<li><a href="#" class="tm-social-btn"><span><i class="fa fa-telegram"></i></span></a></li>
+							</ul>
+						</div>
+						<div class="empty-space col-md-b30 col-xs-b30"></div>
+					</div><!-- .col -->
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- End Team Section -->
+
+	<!-- Start Token Seciton -->
+	<div class="tm-token-wrap tm-bg" id="featured-company" style="background-image: url({% static 'homePage/assets/img/token-list-bg.jpg' %});">
+		<div class="empty-space col-md-b95 col-xs-b60"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="tm-token">
+						<h2 class="tm-token-heading tm-m0 tm-md-f28 tm-md-lh34 wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.25s">Token Listed</h2>
+						<div class="tm-token-list wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.15s">
+							<div class="tm-single-token wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.35s"><img src="{% static 'homePage/assets/img/token07.png' %}" alt=""></div>
+							<div class="tm-single-token wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.45s"><img src="{% static 'homePage/assets/img/token08.png' %}" alt=""></div>
+							<div class="tm-single-token wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.55s"><img src="{% static 'homePage/assets/img/token09.png' %}" alt=""></div>
+						</div>
+					</div><!-- .tm-token -->
+					<div class="tm-token-bar wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.35s">
+						<span class="tm-bar-circle"></span>
+						<span class="tm-bar-circle"></span>
+					</div>
+					<div class="tm-token">
+						<h2 class="tm-token-heading tm-m0 tm-md-f28 tm-md-lh34 wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.25s">Featured On</h2>
+						<div class="tm-token-list wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.15s">
+							<div class="tm-single-token  wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.35s"><img src="{% static 'homePage/assets/img/token10.png' %}" alt=""></div>
+							<div class="tm-single-token  wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.45s"><img src="{% static 'suveyapp/homePage/assets/img/token11.png' %}" alt=""></div>
+							<div class="tm-single-token  wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.55s"><img src="{% static 'homePage/assets/img/token12.png' %}" alt=""></div>
+						</div>
+					</div><!-- .tm-token -->
+				</div>
+			</div>
+		</div>
+		<div class="empty-space col-md-b95 col-xs-b60"></div>
+	</div>
+	<!-- End Token Seciton -->
+
+	<!-- Start FAQ Section -->
+	<section class="tm-faq-wrap tm-bg" id="faq" style="background-image: url({% static 'homePage/assets/img/greeen-faq.jpg' %});">
+		<div class="empty-space col-md-b90 col-xs-b55"></div>
+		<h2 class="text-center col-xs-b2 tm-green-c col-xs-t-1 tm-md-f28 tm-md-lh34 wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.25s">Frequently Asked Questions</h2>
+		<div class="empty-space col-md-b55 col-xs-b35"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="tabs animated-fade">
+					    <ul class="tab-links">
+					      <li class="active wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.35s"><a href="#top-question">Top Questions</a></li>
+					      <li class="wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.45s"><a href="#company">Company</a></li>
+					      <li class="wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.55s"><a href="#product">Product</a></li>
+					      <li class="wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.65s"><a href="#token-sale">Token Sale</a></li>
+					    </ul>
+					    <div class="tab-content">
+						    <div id="top-question" class="tab active">
+						        <div class="tm-faq">
+									<div class="accordian-wrapper">
+						            	<div class="single-accordian wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.25s">
+						            		<h3 class="accordian-head tm-green-c tm-f20 tm-md-f16">What is Ocher ?</h3>
+						            		<div class="accordian-body">Ocher is the most functional template for Ethereum block chain ERC Token ICO’S. Switable for star up ICO’s. A token sale, sometimes referred to as an initial coin offering (ICO), is form of rowd-funding for digital currency-related projects.</div>
+						            	</div><!-- .single-accordian -->
+						            	<div class="single-accordian wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.35s">
+						            		<h3 class="accordian-head tm-green-c tm-f20 tm-md-f16">Why do we need Ethereum?</h3>
+						            		<div class="accordian-body">Ocher is the most functional template for Ethereum block chain ERC Token ICO’S. Switable for star up ICO’s. A token sale, sometimes referred to as an initial coin offering (ICO), is form of rowd-funding for digital currency-related projects.</div>
+						            	</div><!-- .single-accordian -->
+						            	<div class="single-accordian wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.45s">
+						            		<h3 class="accordian-head tm-green-c tm-f20 tm-md-f16">Which countries does populous currently support?</h3>
+						            		<div class="accordian-body">Ocher is the most functional template for Ethereum block chain ERC Token ICO’S. Switable for star up ICO’s. A token sale, sometimes referred to as an initial coin offering (ICO), is form of rowd-funding for digital currency-related projects.</div>
+						            	</div><!-- .single-accordian -->
+						            	<div class="single-accordian wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.55s">
+						            		<h3 class="accordian-head tm-green-c tm-f20 tm-md-f16">What kind security does populous use to protect my account?</h3>
+						            		<div class="accordian-body">Ocher is the most functional template for Ethereum block chain ERC Token ICO’S. Switable for star up ICO’s. A token sale, sometimes referred to as an initial coin offering (ICO), is form of rowd-funding for digital currency-related projects.</div>
+						            	</div><!-- .single-accordian -->
+						            	<div class="single-accordian wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.65s">
+						            		<h3 class="accordian-head tm-green-c tm-f20 tm-md-f16">What problems does Ocher attempt to solve?</h3>
+						            		<div class="accordian-body">Ocher is the most functional template for Ethereum block chain ERC Token ICO’S. Switable for star up ICO’s. A token sale, sometimes referred to as an initial coin offering (ICO), is form of rowd-funding for digital currency-related projects.</div>
+						            	</div><!-- .single-accordian -->
+						            	<div class="single-accordian wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.75s">
+						            		<h3 class="accordian-head tm-green-c tm-f20 tm-md-f16">What would you consider to be a success with this ICO?</h3>
+						            		<div class="accordian-body">Ocher is the most functional template for Ethereum block chain ERC Token ICO’S. Switable for star up ICO’s. A token sale, sometimes referred to as an initial coin offering (ICO), is form of rowd-funding for digital currency-related projects.</div>
+						            	</div><!-- .single-accordian -->
+						            	<div class="single-accordian wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.85s">
+						            		<h3 class="accordian-head tm-green-c tm-f20 tm-md-f16">Are Ocher token ERC-20 resellable?</h3>
+						            		<div class="accordian-body">Ocher is the most functional template for Ethereum block chain ERC Token ICO’S. Switable for star up ICO’s. A token sale, sometimes referred to as an initial coin offering (ICO), is form of rowd-funding for digital currency-related projects.</div>
+						            	</div><!-- .single-accordian -->
+						            	<div class="single-accordian wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.95s">
+						            		<h3 class="accordian-head tm-green-c tm-f20 tm-md-f16">Whom can I reach out to with other questions?</h3>
+						            		<div class="accordian-body">Ocher is the most functional template for Ethereum block chain ERC Token ICO’S. Switable for star up ICO’s. A token sale, sometimes referred to as an initial coin offering (ICO), is form of rowd-funding for digital currency-related projects.</div>
+						            	</div><!-- .single-accordian -->
+						            </div>
+								</div><!-- .tm-faq -->
+						    </div>
+						    <div id="company" class="tab">
+						        <div class="tm-faq">
+									<div class="accordian-wrapper">
+						            	<div class="single-accordian wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.25s">
+						            		<h3 class="accordian-head tm-green-c tm-f20 tm-md-f16">What is Ocher ?</h3>
+						            		<div class="accordian-body">Ocher is the most functional template for Ethereum block chain ERC Token ICO’S. Switable for star up ICO’s. A token sale, sometimes referred to as an initial coin offering (ICO), is form of rowd-funding for digital currency-related projects.</div>
+						            	</div><!-- .single-accordian -->
+						            	<div class="single-accordian wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.35s">
+						            		<h3 class="accordian-head tm-green-c tm-f20 tm-md-f16">Why do we need Ethereum?</h3>
+						            		<div class="accordian-body">Ocher is the most functional template for Ethereum block chain ERC Token ICO’S. Switable for star up ICO’s. A token sale, sometimes referred to as an initial coin offering (ICO), is form of rowd-funding for digital currency-related projects.</div>
+						            	</div><!-- .single-accordian -->
+						            	<div class="single-accordian wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.45s">
+						            		<h3 class="accordian-head tm-green-c tm-f20 tm-md-f16">Which countries does populous currently support?</h3>
+						            		<div class="accordian-body">Ocher is the most functional template for Ethereum block chain ERC Token ICO’S. Switable for star up ICO’s. A token sale, sometimes referred to as an initial coin offering (ICO), is form of rowd-funding for digital currency-related projects.</div>
+						            	</div><!-- .single-accordian -->
+						            	<div class="single-accordian wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.55s">
+						            		<h3 class="accordian-head tm-green-c tm-f20 tm-md-f16">What kind security does populous use to protect my account?</h3>
+						            		<div class="accordian-body">Ocher is the most functional template for Ethereum block chain ERC Token ICO’S. Switable for star up ICO’s. A token sale, sometimes referred to as an initial coin offering (ICO), is form of rowd-funding for digital currency-related projects.</div>
+						            	</div><!-- .single-accordian -->
+						            	<div class="single-accordian wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.65s">
+						            		<h3 class="accordian-head tm-green-c tm-f20 tm-md-f16">What problems does Ocher attempt to solve?</h3>
+						            		<div class="accordian-body">Ocher is the most functional template for Ethereum block chain ERC Token ICO’S. Switable for star up ICO’s. A token sale, sometimes referred to as an initial coin offering (ICO), is form of rowd-funding for digital currency-related projects.</div>
+						            	</div><!-- .single-accordian -->
+						            	<div class="single-accordian wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.75s">
+						            		<h3 class="accordian-head tm-green-c tm-f20 tm-md-f16">What would you consider to be a success with this ICO?</h3>
+						            		<div class="accordian-body">Ocher is the most functional template for Ethereum block chain ERC Token ICO’S. Switable for star up ICO’s. A token sale, sometimes referred to as an initial coin offering (ICO), is form of rowd-funding for digital currency-related projects.</div>
+						            	</div><!-- .single-accordian -->
+						            	<div class="single-accordian wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.85s">
+						            		<h3 class="accordian-head tm-green-c tm-f20 tm-md-f16">Are Ocher token ERC-20 resellable?</h3>
+						            		<div class="accordian-body">Ocher is the most functional template for Ethereum block chain ERC Token ICO’S. Switable for star up ICO’s. A token sale, sometimes referred to as an initial coin offering (ICO), is form of rowd-funding for digital currency-related projects.</div>
+						            	</div><!-- .single-accordian -->
+						            	<div class="single-accordian wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.95s">
+						            		<h3 class="accordian-head tm-green-c tm-f20 tm-md-f16">Whom can I reach out to with other questions?</h3>
+						            		<div class="accordian-body">Ocher is the most functional template for Ethereum block chain ERC Token ICO’S. Switable for star up ICO’s. A token sale, sometimes referred to as an initial coin offering (ICO), is form of rowd-funding for digital currency-related projects.</div>
+						            	</div><!-- .single-accordian -->
+						            </div>
+								</div><!-- .tm-faq -->
+						    </div>
+						    <div id="product" class="tab">
+						      	<div class="tm-faq">
+									<div class="accordian-wrapper">
+						            	<div class="single-accordian wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.25s">
+						            		<h3 class="accordian-head tm-green-c tm-f20 tm-md-f16">What is Ocher ?</h3>
+						            		<div class="accordian-body">Ocher is the most functional template for Ethereum block chain ERC Token ICO’S. Switable for star up ICO’s. A token sale, sometimes referred to as an initial coin offering (ICO), is form of rowd-funding for digital currency-related projects.</div>
+						            	</div><!-- .single-accordian -->
+						            	<div class="single-accordian wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.35s">
+						            		<h3 class="accordian-head tm-green-c tm-f20 tm-md-f16">Why do we need Ethereum?</h3>
+						            		<div class="accordian-body">Ocher is the most functional template for Ethereum block chain ERC Token ICO’S. Switable for star up ICO’s. A token sale, sometimes referred to as an initial coin offering (ICO), is form of rowd-funding for digital currency-related projects.</div>
+						            	</div><!-- .single-accordian -->
+						            	<div class="single-accordian wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.45s">
+						            		<h3 class="accordian-head tm-green-c tm-f20 tm-md-f16">Which countries does populous currently support?</h3>
+						            		<div class="accordian-body">Ocher is the most functional template for Ethereum block chain ERC Token ICO’S. Switable for star up ICO’s. A token sale, sometimes referred to as an initial coin offering (ICO), is form of rowd-funding for digital currency-related projects.</div>
+						            	</div><!-- .single-accordian -->
+						            	<div class="single-accordian wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.55s">
+						            		<h3 class="accordian-head tm-green-c tm-f20 tm-md-f16">What kind security does populous use to protect my account?</h3>
+						            		<div class="accordian-body">Ocher is the most functional template for Ethereum block chain ERC Token ICO’S. Switable for star up ICO’s. A token sale, sometimes referred to as an initial coin offering (ICO), is form of rowd-funding for digital currency-related projects.</div>
+						            	</div><!-- .single-accordian -->
+						            	<div class="single-accordian wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.65s">
+						            		<h3 class="accordian-head tm-green-c tm-f20 tm-md-f16">What problems does Ocher attempt to solve?</h3>
+						            		<div class="accordian-body">Ocher is the most functional template for Ethereum block chain ERC Token ICO’S. Switable for star up ICO’s. A token sale, sometimes referred to as an initial coin offering (ICO), is form of rowd-funding for digital currency-related projects.</div>
+						            	</div><!-- .single-accordian -->
+						            	<div class="single-accordian wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.75s">
+						            		<h3 class="accordian-head tm-green-c tm-f20 tm-md-f16">What would you consider to be a success with this ICO?</h3>
+						            		<div class="accordian-body">Ocher is the most functional template for Ethereum block chain ERC Token ICO’S. Switable for star up ICO’s. A token sale, sometimes referred to as an initial coin offering (ICO), is form of rowd-funding for digital currency-related projects.</div>
+						            	</div><!-- .single-accordian -->
+						            	<div class="single-accordian wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.85s">
+						            		<h3 class="accordian-head tm-green-c tm-f20 tm-md-f16">Are Ocher token ERC-20 resellable?</h3>
+						            		<div class="accordian-body">Ocher is the most functional template for Ethereum block chain ERC Token ICO’S. Switable for star up ICO’s. A token sale, sometimes referred to as an initial coin offering (ICO), is form of rowd-funding for digital currency-related projects.</div>
+						            	</div><!-- .single-accordian -->
+						            	<div class="single-accordian wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.95s">
+						            		<h3 class="accordian-head tm-green-c tm-f20 tm-md-f16">Whom can I reach out to with other questions?</h3>
+						            		<div class="accordian-body">Ocher is the most functional template for Ethereum block chain ERC Token ICO’S. Switable for star up ICO’s. A token sale, sometimes referred to as an initial coin offering (ICO), is form of rowd-funding for digital currency-related projects.</div>
+						            	</div><!-- .single-accordian -->
+						            </div>
+								</div><!-- .tm-faq -->
+							</div>
+						    <div id="token-sale" class="tab">
+						      	<div class="tm-faq">
+									<div class="accordian-wrapper">
+						            	<div class="single-accordian wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.25s">
+						            		<h3 class="accordian-head tm-green-c tm-f20 tm-md-f16">What is Ocher ?</h3>
+						            		<div class="accordian-body">Ocher is the most functional template for Ethereum block chain ERC Token ICO’S. Switable for star up ICO’s. A token sale, sometimes referred to as an initial coin offering (ICO), is form of rowd-funding for digital currency-related projects.</div>
+						            	</div><!-- .single-accordian -->
+						            	<div class="single-accordian wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.35s">
+						            		<h3 class="accordian-head tm-green-c tm-f20 tm-md-f16">Why do we need Ethereum?</h3>
+						            		<div class="accordian-body">Ocher is the most functional template for Ethereum block chain ERC Token ICO’S. Switable for star up ICO’s. A token sale, sometimes referred to as an initial coin offering (ICO), is form of rowd-funding for digital currency-related projects.</div>
+						            	</div><!-- .single-accordian -->
+						            	<div class="single-accordian wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.45s">
+						            		<h3 class="accordian-head tm-green-c tm-f20 tm-md-f16">Which countries does populous currently support?</h3>
+						            		<div class="accordian-body">Ocher is the most functional template for Ethereum block chain ERC Token ICO’S. Switable for star up ICO’s. A token sale, sometimes referred to as an initial coin offering (ICO), is form of rowd-funding for digital currency-related projects.</div>
+						            	</div><!-- .single-accordian -->
+						            	<div class="single-accordian wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.55s">
+						            		<h3 class="accordian-head tm-green-c tm-f20 tm-md-f16">What kind security does populous use to protect my account?</h3>
+						            		<div class="accordian-body">Ocher is the most functional template for Ethereum block chain ERC Token ICO’S. Switable for star up ICO’s. A token sale, sometimes referred to as an initial coin offering (ICO), is form of rowd-funding for digital currency-related projects.</div>
+						            	</div><!-- .single-accordian -->
+						            	<div class="single-accordian wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.65s">
+						            		<h3 class="accordian-head tm-green-c tm-f20 tm-md-f16">What problems does Ocher attempt to solve?</h3>
+						            		<div class="accordian-body">Ocher is the most functional template for Ethereum block chain ERC Token ICO’S. Switable for star up ICO’s. A token sale, sometimes referred to as an initial coin offering (ICO), is form of rowd-funding for digital currency-related projects.</div>
+						            	</div><!-- .single-accordian -->
+						            	<div class="single-accordian wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.75s">
+						            		<h3 class="accordian-head tm-green-c tm-f20 tm-md-f16">What would you consider to be a success with this ICO?</h3>
+						            		<div class="accordian-body">Ocher is the most functional template for Ethereum block chain ERC Token ICO’S. Switable for star up ICO’s. A token sale, sometimes referred to as an initial coin offering (ICO), is form of rowd-funding for digital currency-related projects.</div>
+						            	</div><!-- .single-accordian -->
+						            	<div class="single-accordian wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.85s">
+						            		<h3 class="accordian-head tm-green-c tm-f20 tm-md-f16">Are Ocher token ERC-20 resellable?</h3>
+						            		<div class="accordian-body">Ocher is the most functional template for Ethereum block chain ERC Token ICO’S. Switable for star up ICO’s. A token sale, sometimes referred to as an initial coin offering (ICO), is form of rowd-funding for digital currency-related projects.</div>
+						            	</div><!-- .single-accordian -->
+						            	<div class="single-accordian wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.95s">
+						            		<h3 class="accordian-head tm-green-c tm-f20 tm-md-f16">Whom can I reach out to with other questions?</h3>
+						            		<div class="accordian-body">Ocher is the most functional template for Ethereum block chain ERC Token ICO’S. Switable for star up ICO’s. A token sale, sometimes referred to as an initial coin offering (ICO), is form of rowd-funding for digital currency-related projects.</div>
+						            	</div><!-- .single-accordian -->
+						            </div>
+								</div><!-- .tm-faq -->
+						    </div>
+					    </div>
+					</div>
+				</div><!-- .col -->
+			</div>
+		</div>
+		<div class="empty-space col-md-b85 col-xs-b50"></div>
+	</section>
+	<!-- End FAQ Section -->
+
+    <section class="tm-subscribe-wrap tm-bg" id="tm-subscribe" style="background-image: url({% static 'homePage/assets/img/greeen-subscribe.jpg' %});">
+    	<div class="empty-space col-md-b90 col-xs-b55"></div>
+    	<div class="container">
+    		<div class="row">
+    			<div class="offset-lg-2 col-lg-8">
+    				<form class="mailchimp subscribe-form text-center" action="https://storerepublic.us12.list-manage.com/subscribe/post?u=d227d8d335060b093084903d0&amp;id=9ba078ceb0">
+    					<h2 class="col-xs-b2 col-xs-t-1 tm-md-f28 tm-md-lh34 wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.25s">Enter your email address for newsletter <br>
+    					subscription</h2>
+    					<div class="empty-space col-md-b25 col-xs-b25"></div>
+			        	<input type="email" name="subscribe" id="subscriber-email" placeholder="Your email address" class=" wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.35s">
+			        	<div class="empty-space col-md-b35 col-xs-b35"></div>
+			        	<button type="submit" id="subscribe-button" class="tm-btn col-xs-b1 wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.45s"><span>SUBSCRIBE</span></button>
+			        	<!-- SUBSCRIPTION SUCCESSFUL OR ERROR MESSAGES -->
+			        	<h5 class="subscription-success"> .</h5>
+			        	<h5 class="subscription-error"> .</h5>
+			        	<label class="subscription-label" for="subscriber-email"></label>
+			        </form>
+    			</div>
+    		</div>
+    	</div>
+    	<div class="empty-space col-md-b95 col-xs-b60"></div>
+    </section>
+
+    <!-- Start Siter Footer -->
+    <footer class="tm-site-footer tm-bg" id="footer">
+    	<div class="empty-space col-md-b90 col-xs-b55"></div>
+    	<div class="tm-top-footer">
+    		<div class="container">
+	    		<div class="row">
+	    			<div class="col-lg-5">
+	    				<h2 class="tm-footer-bar col-xs-b2 tm-green-c col-xs-t-1 tm-md-f28 tm-md-lh34 wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.25s">Send a message</h2>
+	    				<div class="empty-space col-md-b55 col-xs-b30"></div>
+	    				<form action="https://ocher.vercel.app/assets/php/mail.php" class="contact-form col-xs-b1" method="post"  id="contact-form">
+	    					<div class="tm-form-field wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.3s">
+					            <input type="text" id="name" name="name" required>
+					            <span class="bar"></span>
+					            <label>Full Name</label>
+					        </div>
+					        <div class="tm-form-field wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.35s">
+				              	<input type="text" id="email" name="email" required>
+				              	<span class="bar"></span>
+				              	<label>Email Address</label>
+				          	</div>
+				          	<div class="tm-form-field wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.4s">
+				                <textarea cols="30" rows="10" id="msg" name="msg" required></textarea>
+				                <span class="bar"></span>
+				                <label>Your Message</label>
+				            </div>
+				          	<button class="tm-btn wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.45s" type="submit" id="submit" name="submit">
+				          		<span>Send Message</span>
+				          	</button>
+     					</form>
+     					<div id="tm-alert"></div>
+	    			</div>
+	    			<div class="col-lg-7">
+	    				<h2 class="tm-footer-bar tm-style1 col-xs-b2 tm-green-c text-center col-xs-t-1 tm-md-f28 tm-md-lh34 wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.25s">Join us in the community</h2>
+	    				<div class="empty-space col-md-b55 col-xs-b40"></div>
+	    				<div class="tm-social-btn-wrap tm-style2 col-xs-b1">
+	    					<ul>
+	    						<li class="wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.3s">
+	    							<a href="#">
+	    								<i class="fa fa-facebook"></i>
+	    								<span>Facebook</span>
+	    							</a>
+	    						</li>
+	    						<li class="wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.35s">
+	    							<a href="#">
+	    								<i class="fa fa-linkedin"></i>
+	    								<span>Linkedin</span>
+	    							</a>
+	    						</li>
+	    						<li class="wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.4s">
+	    							<a href="#">
+	    								<i class="fa fa-twitter"></i>
+	    								<span>Twitter</span>
+	    							</a>
+	    						</li>
+	    						<li class="wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.45s">
+	    							<a href="#">
+	    								<i class="fa fa-reddit-alien"></i>
+	    								<span>Reddit</span>
+	    							</a>
+	    						</li>
+	    						<li class="wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.5s">
+	    							<a href="#">
+	    								<i class="fa fa-telegram"></i>
+	    								<span>Telegram</span>
+	    							</a>
+	    						</li>
+	    						<li class="wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.55s">
+	    							<a href="#">
+	    								<i class="fa fa-medium"></i>
+	    								<span>Medium</span>
+	    							</a>
+	    						</li>
+	    						<li class="wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.6s">
+	    							<a href="#">
+	    								<i class="fa fa-github-alt"></i>
+	    								<span>Github</span>
+	    							</a>
+	    						</li>
+	    						<li class="wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.65s">
+	    							<a href="#">
+	    								<i class="fa fa-youtube-play"></i>
+	    								<span>Youtube</span>
+	    							</a>
+	    						</li>
+	    					</ul>
+	    					<a href="#" class="tm-email-btn2 wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.7s">
+    							<i class="fa fa-envelope-o"></i>
+    							<div class="tm-social-btn-text">supporticomarch.com</div>
+    						</a>
+	    				</div>
+	    			</div>
+	    		</div>
+	    	</div>
+    	</div>
+    	<div class="empty-space col-md-b95 col-xs-b55"></div>
+    	<div class="tm-copyright tm-white-c tm-f20 tm-md-f15">
+    		<div class="container wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.75s">© 2024 Ritcoin. </div>
+    	</div>
+    </footer>
+    <!-- End Siter Footer -->
+
+    <!-- The Modal -->
+  	<div class="modal fade" id="tm-signup">
+    	<div class="modal-dialog">
+      		<div class="modal-content">
+			    <button type="button" class="close" data-dismiss="modal">x</button>
+			    <div class="tm-modal tm-color1">
+					<h2 class="tm-modal-title">REGISTER TO Ritcoin</h2>
+					<form action="#" class="tm-modal-form">
+						<div class="tm-modal-input">
+							<input type="text" name="username" placeholder="Enter username"   value="{{form.cleaned_data.username}}" required>
+							<i class="flaticon-profile"></i>
+							<small class="form-text text-danger">{{ form.username.errors }}</small>
+						</div>
+						<div class="tm-modal-input">
+							<input type="email" placeholder="Email" name="email" value="{{form.cleaned_data.email}}" placeholder="Enter Email" required>
+							<i class="flaticon-mail"></i>
+							<small class="form-text text-danger">{{ form.email.errors }}</small>
+						</div>
+						<div class="tm-modal-input">
+							{% if refferalid   %}
+                          <input  type="text" name="introducerid" placeholder="Enter Introducer id" id="user_id_input" style="color:green;"  value="{{refferalid}}" readonly >
+							<i class="flaticon-profile"></i>
+							<div id="refMsg"></div>
+                          
+                          {% else  %}
+                          <input type="text" name="introducerid" value="{{form.cleaned_data.introducerid}}"  id="user_id_input"  placeholder="Enter Introducer id">
+                          <div id="refMsg"></div>
+                          {% endif  %}
+						</div>
+						
+						<div class="tm-modal-input">
+							
+							<select id="country" name="country" style="background-color: #025422;color:white;height:47px;padding-left: 55px;border:1px solid #025422;">
+								<option >--choose country--</option>
+								{% for c in countries %}
+								<option value="{{ c }}" name="country">{{ c }}</option>
+								{% endfor %}
+							  </select>
+							
+							<i class="flaticon-mail"></i>
+						</div>
+						
+						<div class="tm-modal-input">
+							<select id="currency" name="currency" style="background-color: #025422;color:white;height:47px;padding-left: 55px;border:1px solid #025422;">
+								<option >Local Currency</option>
+								{% for curr in currencies %}
+								<option value="{{ curr }}" name="currency">{{ curr }}</option>
+								{% endfor %}
+							  </select>
+							
+							<i class="flaticon-mail"></i>
+						</div>
+						
+						<div class="tm-modal-input">
+							<input type="password" name="password1"  placeholder="Enter Password"  required>
+							<i class="flaticon-lock"></i>
+                          <small class="form-text text-danger">{{ form.password1.errors }}</small>
+							
+						</div>
+						<div class="tm-modal-input">
+							<input type="password" name="password2" placeholder="Enter Confirm password"  required>
+							<i class="flaticon-lock"></i>
+							<small class="form-text text-danger">{{ form.password2.errors }}</small>
+						</div>
+						<div class="empty-space col-md-b40 col-xs-b40"></div>
+						<button class="tm-btn tm-style1 w-100 " type="submit" nae="signIn">LOG IN</button>
+						<div class="tm-modal-or">OR</div>
+						{% comment %} <button class="tm-btn tm-style1 w-100 tm-modal-fb-btn"><i class="fa fa-facebook"></i>LOG in with facebook</button> {% endcomment %}
+						<div class="empty-space col-md-b20 col-xs-b20"></div>
+						{% comment %} <button class="tm-btn tm-style1 w-100 tm-modal-goo-btn"><i class="fa fa-google-plus"></i>LOG in with GOOGle</button> {% endcomment %}
+					</form>
+					<div class="empty-space col-md-b55 col-xs-b55"></div>
+					<div class="tm-modal-footer">
+						<a href="#" class="tm-forgot-p">Forgot Password?</a>
+						<a href="#" class="tm-new-signup">New Here? Sign UP</a>
+					</div>
+				</div><!-- .tm-modal -->
+      		</div>
+    	</div>
+  	</div>
+  	<div class="modal fade" id="tm-login">
+    	<div class="modal-dialog">
+      		<div class="modal-content">
+			    <button type="button" class="close" data-dismiss="modal">x</button>
+			    <div class="tm-modal tm-color1">
+					<h2 class="tm-modal-title">Log In TO Ritcoin</h2>
+					<form id="loginForm" class="tm-modal-form">
+						{% csrf_token %}
+						<div class="tm-modal-input">
+							<input type="text" placeholder="enter email or username" required name="email_or_username">
+							<i class="flaticon-profile"></i>
+							<small class="form-text text-danger">{{ logForm.email.errors }}</small>
+						</div>
+						<div class="tm-modal-input">
+							<input type="text" name="password" placeholder="Enter Password"  required>
+							<i class="flaticon-lock"></i>
+							<small class="form-text text-danger">{{ logForm.password.errors }}</small>
+                          <ul class='list-style-type:none; text-decoration:none '>
+                            {% for field, error in form.errors.items %}
+                                <li class='text-danger'>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                          <input type="hidden" name="next" value="{{ request.GET.next }}">
+						</div>
+						<div class="empty-space col-md-b40 col-xs-b40"></div>
+						<button class="tm-btn tm-style1 w-100" type="submit" name="logIn">LOG IN</button>
+						<div class="tm-modal-or">OR</div>
+						{% comment %} <button class="tm-btn tm-style1 w-100 tm-modal-fb-btn"><i class="fa fa-facebook"></i>LOG in with facebook</button> {% endcomment %}
+						<div class="empty-space col-md-b20 col-xs-b20"></div>
+						{% comment %} <button class="tm-btn tm-style1 w-100 tm-modal-goo-btn"><i class="fa fa-google-plus"></i>LOG in with GOOGle</button> {% endcomment %}
+					</form>
+					<div class="empty-space col-md-b55 col-xs-b55"></div>
+					<div class="tm-modal-footer">
+						<a href="{% url 'passwordReset' %}" class="tm-forgot-p">Forgot Password?</a>
+						<a href="#" class="tm-new-signup">New Here? Sign UP</a>
+					</div>
+				</div><!-- .tm-modal -->
+      		</div>
+    	</div>
+  	</div>
+
+	<!-- Scroll Up -->
+    <div id='scrollup'><i class="fa fa-angle-double-up"></i></div>
+
+	<!-- Scripts -->
+	<script src="{% static 'homePage/assets/js/vendor/modernizr-3.5.0.min.js' %}"></script>
+	<script src="{% static 'homePage/assets/js/vendor/jquery-1.12.4.min.js' %}"></script>
+    <script src="{% static 'homePage/assets/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'homePage/assets/js/smoothScroll.min.js' %}"></script>
+    <script src="{% static 'homePage/assets/js/jQuery.easing.min.js' %}"></script>
+    <script src="{% static 'homePage/assets/js/wow.min.js' %}"></script>
+    <script src="{% static 'homePage/assets/js/particles.min.js' %}"></script>
+    <script src="{% static 'homePage/assets/js/mailchimp.min.js' %}"></script>
+    <script src="{% static 'homePage/assets/js/slick.min.js' %}"></script>
+    <script src="{% static 'homePage/assets/js/modal.video.min.js' %}"></script>
+	<script src="{% static 'homePage/assets/js/main.js' %}"></script>
+
+	<script>
+
+
+		function loginUser(formData){
+
+
+				
+				
+				
+			fetch('/member/verify-transaction/', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					'X-CSRFToken': '{{ csrf_token }}'
+				},
+				body: JSON.stringify({
+					transactionHash: transactionHash,
+					tranTimeCoinValue: tranTimeCoinValue,
+					coinName: coinName,
+					cryptoAmount: cryptoAmount
+				})
+			})
+			.then(response => {
+				if (!response.ok) {
+					throw new Error('Network response was not ok');
+				}
+				return response.json();
+			})
+			.then(data => {
+				if (data.success) {
+					alert('Transaction verified and funds added to your wallet.');
+				} else {
+					alert('Transaction verification failed.');
+				}
+				location.reload(); // Reload the page
+			})
+			.catch(error => {
+				console.error('Error:', error);
+				alert('An error occurred while verifying the transaction.');
+				location.reload(); // Reload the page
+			});
+
+			}
+	
+			$(document).ready(function(){
+				$('#loginForm').submit(function(e){
+		
+					e.preventDefault();
+					var formData = new FormData(this);
+				   
+					loginUser(formData);
+				});
+			});
+
+			$(document).ready(function() {
+
+				console.log("came here");
+				$('#user_id_input').on('blur', function() {
+		
+					console.log("came here");
+					var userId = $(this).val();
+				   // console.log(userId);
+					$.ajax({
+						url: '/get_member_name/',
+						type:'post',
+						data: {
+						  memberid: userId,
+							csrfmiddlewaretoken: '{{ csrf_token }}'
+						},
+						dataType: 'json',
+						success: function(data) {
+			
+						  if(data.status===1){
+			
+							console.log(data.memberName);
+							//const resmsg='<small class="form-text text-success">'+data.memberName +'</small>';
+						   
+							$('#refMsg').html(`<span class="form-text text-success" id="inRefMsg" >${data.memberName}</span>`);
+			
+							//$('#refMsg').append(resmsg);
+			
+			
+						  }else{
+			
+							$('#refMsg').html('<span class="form-text text-danger">'+data.msg +'</span>');
+			
+						  }
+							
+						},
+						error: function(xhr, status, error) {
+							console.error('Error:', error);
+						}
+					});
+				});
+			});
+	
+
+	</script>
+
+
+<script>
+	// Combined onload function
+	window.onload = function() {
+		// Check if there are form errors and open the modal if so
+		const isLogin = {{  regTab | yesno:"true,false" }};
+		console.log(isLogin);
+		if (isLogin) {
+			document.getElementById('sgnButton').click();
+		}
+
+		const hasErrors = {{  logTab | yesno:"true,false" }};
+		console.log(hasErrors);
+		if (hasErrors) {
+			document.getElementById('lgnButton').click();
+		}
+	};
+</script>
+</body>
+
+
+</html>

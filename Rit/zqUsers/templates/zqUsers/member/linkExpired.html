@@ -1,0 +1,95 @@
+{% extends 'zqUsers/member/layout/main.html' %}
+
+{% load static %}
+{% load customFilters %}
+
+
+{% block 'content' %}
+
+<div class="container mt-5">
+  <div class="row">
+	  <div class="col-md-3"></div>
+	  <div class="col-xl-6 p-5">
+		  <div class="filter cm-content-box box-primary ">
+			  
+			  
+				  <div class="card-body p-5"style="background-color:white;color:black;">
+					  <p style="font-size:17px;line-height:24px; color:red "> <i>Your activation link has been expired please  resend it to activate your account</i></p>
+					  <div class="row">
+					  <div class="col-lg-4"></div>
+					  <div class="col-lg-5">
+					  <button type="btn" class="btn btn-primary " id="reSendMail"  onclick="resendMailActivation()">Resend Activation link</button></div>
+					  <div class="col-lg-3"></div>
+					  </div>
+				  </div>
+			  
+		  </div>
+	  
+		  
+	  </div>
+	  <div class="col-md-3"></div>
+  </div>
+</div>
+
+
+
+{% endblock  %}
+
+
+{% block 'addFooterScripts' %}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.6.1-rc.0/web3.min.js"></script>
+
+
+<script>
+	function resendMailActivation(){
+
+			
+		var bt = $("#reSendMail");
+		bt.attr("disabled", true).html("<i class='fa fa-spin fa-spinner'></i>&nbsp;&nbsp;please wait...");
+	
+
+
+			$.ajax({
+				url: "/resendactivationemail/",
+				type: "post",
+				data: {
+					
+					type:'reset',
+					csrfmiddlewaretoken: `{{ csrf_token }}`
+				},
+			   // processData: false,
+			   // contentType: false,
+				success: function (resultdata) {
+					var status = resultdata.status;
+					if (parseInt(status) !== 0) {
+						alert(resultdata.msg);
+						location.reload();
+					} else {
+						alert(resultdata.msg);
+						location.reload();
+					}
+				},
+				error: function () {
+					alert("Something went wrong. Please try again later");
+					location.reload();
+				},
+				complete: function () {
+					// Reset button state
+					bt.attr("disabled", false).html("Verify Bank");
+				}
+			});
+		
+		
+		
+	
+
+}
+</script>
+
+
+
+{% endblock %}
+
+
+

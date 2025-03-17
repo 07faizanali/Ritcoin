@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Multi-Blockchain Payment</title>
+    <script src="https://cdn.jsdelivr.net/npm/web3/dist/web3.min.js"></script>
+</head>
+<body>
+    <label for="blockchain-select">Choose a blockchain:</label>
+    <select id="blockchain-select">
+        <option value="ethereum">Ethereum</option>
+        <option value="bsc">Binance Smart Chain</option>
+        <!-- Add more blockchains as needed -->
+    </select>
+
+    <label for="token-select">Choose a token:</label>
+    <select id="token-select">
+        <option value="native">Native Currency</option>
+        <option value="busd">BUSD</option>
+        <!-- Add more tokens as needed -->
+    </select>
+
+    <button id="pay-button">Pay $55</button>
+    <p id="account"></p>
+
+    <script type="text/javascript">
+        async function payWithMetaMask() {
+            if (typeof window.ethereum !== 'undefined') {
+                const web3 = new Web3(window.ethereum);
+                await window.ethereum.enable();
+
+                const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+                const account = accounts[0];
+                document.getElementById('account').innerText = 'Connected Account: ' + account;
+
+                const chainId = await web3.eth.getChainId();
+                let networkName;
+                let nativeCurrency;
+                let tokenContractAddress;
+                let tokenDecimals;
+
+                switch (chainId) {
+                    case 1:
+                        networkName = 'Ethereum Mainnet';
+                        nativeCurrency = 'ETH';
+                        break;
+                    case 3:
+                        networkName = 'Ropsten Testnet';
+                        nativeCurrency = 'ETH';
+                        break;
+                    case 4:
+                        networkName = 'Rinkeby Testnet';
+                        nativeCurrency = 'ETH';
+                        break;
+                    case 5:
+                        networkName = 'Goerli Testnet';
+                        nativeCurrency = 'ETH';
+                        break;
+                    case 42:
+                        networkName = 'Kovan Testnet';
+                        nativeCurrency = 'ETH';
+                        break;
+                    case 56:
+                        networkName = 'Binance Smart Chain Mainnet';
+                        nativeCurrency = 'BNB';
+                        break;
+                    case 97:
+                        networkName = 'Binance Smart Chain Testnet';
+                        nativeCurrency = 'tBNB';
+                        break;
+                    default:
+                        alert('Unsupported network');
+                        return;
+                }
+
+                const token = document.getElementById('token-select').value;
+
+                if (token === 'busd') {
+                    if (chainId !== 56 && chainId !== 97) {
+                        alert('BUSD is only supported on Binance Smart Chain.');
+                        return;
+                    }
+
+                    tokenContractAddress = '0xe9e7cea3dedca5984780bafc599bd69add087d56'; // BUSD contract address on BSC Mainnet
+                    tokenDecimals = 18;
+
+                    const response = await fetch('/get-busd-price');
+                    const data = await response.json();
+                    const busdPriceInUsd = data.price;
+                    const busdAmount = (55 / busdPriceInUsd).toFixed(tokenDecimals);
+
+                    const busdContract = new web3.eth.Contract([
+                        // Minimal ABI to transfer BUSD
+                        {
+                            "constant": false,
+                            "inputs": [
+                                {
+                                    "name": "_to",
+                                    "type": "address"
+                                },
+                                {
+                                    "name": "_value",
+                                    "type": "uint256"
+                                }
+                            ],
+                            "name": "transfer",
+                            "outputs": [
+                                {
+                                    "name": "",
+                                    "type": "bool"
+                                }
+                            ],
+                            "type": "function"
+                        }
+                    ], tokenContractAddress);
+
+                    busdContract.methods.transfer('YOUR_RECEIVING_ADDRESS', web3.utils.toWei(busdAmount, 'ether')).send({ from: account })
+                        .on('transactionHash', function(hash) {
+                            console.log('Transaction Hash:', hash);
+                        })
+                        .on('confirmation', function(confirmationNumber, receipt) {
+                            console.log('Confirmation Number:', confirmationNumber);
+                            console.log('Receipt:', receipt);
+                        })
+                        .on('error', console.error);
+                } else {
+                    const response = await fetch(`/get-price/${networkName.toLowerCase()}`);
+                    const data = await response.json();
+                    const priceInUsd = data.price;
+                    const cryptoAmount = (55 / priceInUsd).toFixed(18);
+
+                    web3.eth.sendTransaction({
+                        from: account,
+                        to: 'YOUR_RECEIVING_ADDRESS',
+                        value: web3.utils.toWei(cryptoAmount, 'ether')
+                    })
+                    .on('transactionHash', function(hash) {
+                        console.log('Transaction Hash:', hash);
+                    })
+                    .on('confirmation', function(confirmationNumber, receipt) {
+                        console.log('Confirmation Number:', confirmationNumber);
+                        console.log('Receipt:', receipt);
+                    })
+                    .on('error', console.error);
+                }
+            } else {
+                alert('MetaMask is not installed. Please install MetaMask to proceed.');
+            }
+        }
+
+        document.getElementById('pay-button').addEventListener('click', payWithMetaMask);
+    </script>
+</body>
+</html>

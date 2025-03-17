@@ -1,0 +1,66 @@
+{% extends 'zqUsers/member/layout/main.html' %}
+{% block 'content' %}
+    <div class="app-main__outer">
+        <div class="app-main__inner"
+             style="background-color: rgba(255, 255, 255, 0.775)">
+            <div class="app-page-title">
+                <div class="page-title-wrapper">
+                    <div class="page-title-heading">
+                        <div class="page-title-icon">
+                            <i class="pe-7s-car icon-gradient bg-warm-flame">
+                            </i>
+                        </div>
+                        <div>
+                            My Direct
+                            <div class="page-title-subheading"></div>
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            <div class="row" style="overflow-x:auto;">
+                <div class="col-lg-12">
+                    <div class="main- mb-3 ">
+                        <div class="">
+                            <h5 class="card-title">TOTAL DIRECTS - {{ total }}</h5>
+                            <table class="mb-0 table">
+                                <thead>
+                                    <tr>
+                                        <th>Sr No.</th>
+                                        <th>Email ID</th>
+                                        <th>Date of registration</th>
+                                        <th>Level</th>
+                                        <th>Package</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for  index,user in DirectTeam %}
+                                        <tr>
+                                            <th scope="row">{{ index|add:1 }}</th>
+                                            <td>{{ user.email }}</td>
+                                            <td>{{ user.date_joined }}</td>
+                                            <td>1</td>
+                                            <td>{{user.pin_amount}}</td>
+                                            {% if user.status == 1 %}
+                                                <td>
+                                                    <button class="btn-wide mb-2 mr-2 btn btn-success btngenrate btn-lg  mt-4">Active</button>
+                                                </td>
+                                            {% else %}
+                                                <td>
+                                                    <button class="btn-wide mb-2 mr-2 btn btn-danger btngenrate btn-lg  mt-4">Inactive</button>
+                                                </td>
+                                            {% endif %}
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock 'content' %}

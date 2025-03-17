@@ -1,0 +1,1555 @@
+{% extends "zqapp/layouts/main.html" %}
+  {% load static   %}
+  {% block 'headerContent' %} 
+      
+  {% endblock  %} 
+     {% block 'main'   %}
+     
+  <div class="midd-container">
+        <!-- Hero Section Start -->
+        <div
+          class="hero-main diamond-layout white-sec"
+          style="background: url({% static 'images/banner-4.jpg' %})"
+        >
+          <div class="container pt-5">
+            <div class="row align-items-center pt-5">
+              <div class="col-sm-12 col-md-6">
+                <h1>
+                SHIFRA 
+                  <span> Best Trading and Mining platform!</span>
+                </h1>
+                <p class="lead">
+              It’s a convenient solution for those who want to profit from either the growth or decline of the cryptocurrency market and from long-term investments in crypto assets.
+                </p>
+                <div class="hero-btns">
+                  <a href="{% url 'register'   %}" class="btn">register TO JOIN</a>
+                  <a href="#token" class="btn btn3">Tokens Distribution</a>
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-6" data-wow-delay="0.5s">
+                <div class="diamond-animation mobile-hidden">
+                  <div class="diamond-grid"></div>
+                  <div class="diamond-grid-2"></div>
+                  <div class="outer-Orbit">
+                    <div class="Orbit">
+                      <div class="rotate">
+                        <div class="OrbitSquare">
+                          <div class="inner">A</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="main">
+                    <div class="top-coin"><span></span></div>
+                    <div class="lines">
+                      <span class="l-1"></span>
+                      <span class="l-2"></span>
+                      <span class="l-3"></span>
+                      <span class="l-4"></span>
+                      <span class="l-5"></span>
+                      <span class="l-6"></span>
+                      <span class="l-7"></span>
+                      <span class="l-8"></span>
+                      <span class="l-9"></span>
+                      <span class="l-10"></span>
+                      <span class="l-11"></span>
+                      <span class="l-12"></span>
+                      <span class="l-13"></span>
+                      <span class="l-14"></span>
+                      <span class="l-15"></span>
+                    </div>
+                    <div class="inside-bitcoin"></div>
+                    <div class="gris2"></div>
+                    <div class="square-1"></div>
+                  </div>
+                  <div class="base"></div>
+                </div>
+                <div class="mobile-visible text-center">
+                  <img src="{% static 'images/diamond-animation-mobile.png' %}" alt="" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Hero Section End -->
+
+        <!--About Start -->
+        <div class="about-section p-tb diamond-layout" id="about">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-5 col-md-12">
+                <div class="diamond-icon">
+                  <a href="#" title="">
+                      <h1 style="padding-top:180px; padding-left:50px">SHIFRA</h1>  
+                    </a>
+                </div>
+              </div>
+              <div class="col-lg-7 col-md-12">
+                <h2 class="section-heading">About ICO</h2>
+                <h4>Why to choose SHIFRA?</h4>
+                <h5>
+                    The platform gives you opportunities in both rising and falling markets and allows you to trade the most popular cryptocurrency pairs with up to 300x multiplier.
+
+                <div class="tab-section">
+                  <!-- Nav tabs -->
+                  <ul class="nav nav-tabs text-uppercase" role="tablist">
+                    <li class="nav-item">
+                      <span
+                        class="nav-link active"
+                        id="mission-tab"
+                        data-toggle="tab"
+                        href="#mission"
+                        role="tab"
+                        aria-controls="mission"
+                        aria-selected="true"
+                        >Our Mission</span
+                      >
+                    </li>
+                    <li class="nav-item">
+                      <span
+                        class="nav-link"
+                        id="vision-tab"
+                        data-toggle="tab"
+                        href="#vision"
+                        role="tab"
+                        aria-controls="vision"
+                        aria-selected="false"
+                        >Our vision</span
+                      >
+                    </li>
+                    <li class="nav-item">
+                      <span
+                        class="nav-link"
+                        id="guarantees-tab"
+                        data-toggle="tab"
+                        href="#guarantees"
+                        role="tab"
+                        aria-controls="guarantees"
+                        aria-selected="false"
+                        >Guarantees</span
+                      >
+                    </li>
+                  </ul>
+                  <!-- Tab panes -->
+                  <div class="tab-content">
+                    <div
+                      class="tab-pane active"
+                      id="mission"
+                      role="tabpanel"
+                      aria-labelledby="mission-tab"
+                    >
+                      <p>
+                        Inspired by the desire to make cryptocurrency trading more profitable for everyone, SHIFRA takes the best of investment and cryptocurrency markets and offers a platform for trading via cryptocurrency futures contracts.
+                      </p>
+                    </div>
+                    <div
+                      class="tab-pane"
+                      id="vision"
+                      role="tabpanel"
+                      aria-labelledby="vision-tab"
+                    >
+                      <p>
+                        Make cryptocurrency trading decisions based on StormGain's trading signals. Each Buy or Sell signal has two main indicators, profitability and probability, to help you make sound decisions.
+                      </p>
+                      <p>
+                        Trading with leverage involves using borrowed money to 'multiply' the amount
+                      </p>
+                    </div>
+                    <div
+                      class="tab-pane"
+                      id="guarantees"
+                      role="tabpanel"
+                      aria-labelledby="guarantees-tab"
+                    >
+                      <ul>
+                        <li>
+                             Use professional technical analysis tools to increase your profitability.
+                           
+                           
+                        </li>
+                        <li>  Analyse the current market situation with charts..</li>
+                        <li>
+                            Low commissions.
+                        </li>
+                       
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="button-wrapper">
+                  <a class="btn" href="#">Read More</a>
+                  <a class="watch-link" href="#">
+                    <i class="fas fa-play"></i>
+                    <span
+                      ><strong>Watch video</strong>What and How it work</span
+                    >
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--About end -->
+        <!-- Benefits Start -->
+        <div class="benefits p-tb black-bg white-sec diamond-layout">
+          <div id="gold-tech-bg"></div>
+          <div class="container">
+            <div class="text-center">
+              <h2 class="section-heading">
+                <span>Benefits of Using Our Solution</span>
+              </h2>
+            </div>
+            <div class="sub-txt mw-850 text-center">
+              <p>
+                The platform gives you opportunities in both rising and falling markets and allows you to trade the most popular cryptocurrency pairs with up to 300x multiplier.
+              </p>
+            </div>
+            <div class="row">
+              <div class="col-lg-4 col-md-6">
+                <div class="benefit-box text-center">
+                  <div class="benefit-icon">
+                    <img
+                      src="{% static 'images/benefit-icon-1.png'  %}"
+                      alt="Safe and Secure"
+                    />
+                  </div>
+                  <div class="text">
+                    <h4>Safe and Secure</h4>
+                    <p>
+                        Use a unique email address and password for your account.
+                        You can use a secure password manager or be sure you are creating more complex, secure passwords without fear of forgetting them.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-6">
+                <div class="benefit-box text-center">
+                  <div class="benefit-icon">
+                    <img
+                      src="{% static 'images/benefit-icon-2.png' %}"
+                      alt="Instant Exchange"
+                    />
+                  </div>
+                  <div class="text">
+                    <h4>Instant Exchange</h4>
+                    <p>
+                        built-in wallet provides a simple way to secure, manage and exchange your funds whenever and wherever you want. All you need to do is register and deposit your assets!
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-6">
+                <div class="benefit-box text-center">
+                  <div class="benefit-icon">
+                    <img src="{% static 'images/benefit-icon-3.png' %}" alt="World Coverage" />
+                  </div>
+                  <div class="text">
+                    <h4>World Coverage</h4>
+                    <p>
+                        Combining traditional and advanced trading features, a user-friendly interface and 24/7 customer support, StormGain offers an all-in-one solution for all of your cryptocurrency trading needs.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-6">
+                <div class="benefit-box text-center">
+                  <div class="benefit-icon">
+                    <img src="{% static 'images/benefit-icon-4.png' %}" alt="Mobile Apps" />
+                  </div>
+                  <div class="text">
+                    <h4>Bitcoin Mining</h4>
+                    <p>
+                        Mining free Bitcoin is a great opportunity for those who want to add funds to their accounts for free and then trade with them. Not only is it easy to do, it doesn't drain resources from your devices,resulting in positive pays for our clients
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-6">
+                <div class="benefit-box text-center">
+                  <div class="benefit-icon">
+                    <img src="{% static 'images/benefit-icon-5.png'  %}" alt="Strong Network" />
+                  </div>
+                  <div class="text">
+                    <h4>Strong Network</h4>
+                    <p>
+                       The cryptocurrency market is relatively new, and most people know nothing about it. Not so for traders, most of whom added cryptocurrency to their portfolio right away. Why? They saw another opportunity to earn money.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-6">
+                <div class="benefit-box text-center">
+                  <div class="benefit-icon">
+                    <img src="{% static 'images/benefit-icon-6.png'   %}" alt="Margin Trading" />
+                  </div>
+                  <div class="text">
+                    <h4>Margin Trading</h4>
+                    <p>
+                        Make trading decisions, test hypotheses and plan trades based on data from professional traders. The signals are based on analysis of technical indicators.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Benefits End -->
+        
+        <!-- Our Mission Start -->
+        <div id="convertor" class="currency-convertor p-t p-tb c-l">
+          <div class="container">
+            <div class="text-center">
+              <h2 class="section-heading">Currency Convertor</h2>
+            </div>
+            <div class="sub-txt text-center">
+              <p>
+                You receive those signals every few hours with precise Stop Loss and Take Profit levels. The forecast accuracy is 70%.
+              </p>
+            </div>
+            <div class="convertor-content">
+              <div class="current-prices">
+                
+                <div class="item">
+                  <div class="current-ico">
+                    <img src="{% static 'images/bitcoin-icon.png'    %}" alt="" />
+                  </div>
+                  <div class="currency-price">
+                    <h4>Bitcoin (BTC)</h4>
+                    <span>$9,360.41 (0.32%)</span>
+                  </div>
+                </div>
+
+                <div class="item">
+                  <div class="current-ico">
+                    <img src="{% static 'images/ethereum-icon.png'   %}" alt="" />
+                  </div>
+                  <div class="currency-price">
+                    <h4>Ethereum (ETH)</h4>
+                    <span>$182.53 (4.32%)</span>
+                  </div>
+                </div>
+
+                <div class="item">
+                  <div class="current-ico">
+                    <img src="{% static 'images/litecoin-icon.png'   %}" alt="" />
+                  </div>
+                  <div class="currency-price">
+                    <h4>Litecoin (LTC)</h4>
+                    <span>$68.48 (11.64%)</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="convertor-widget">
+                <div class="current-ico">
+                  <img src="{% static 'images/convert-icon.png'   %}" alt="" />
+                </div>
+                {% comment %} JUST commented============================= {% endcomment %}
+
+                {% comment %} <div class="currency-calulator">
+                  <script type="text/javascript">
+                    crypt_calc_border_width = 0;
+                    crypt_calc_border_color = "#ffffff";
+                    crypt_calc_border_corners = "square";
+                    crypt_calc_font_family = "Open sans";
+                  </script>
+                  <script
+                    type="text/javascript"
+                    src="../www.cryptonator.com/ui/js/widget/calc_widget.html"
+                  ></script>
+                </div> {% endcomment %}
+                {% comment %} JUST commented============================= {% endcomment %}
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Our Mission End -->
+
+        <!-- Token Sale start -->
+        <div class="token-sale p-tb light-gray-bg diamond-layout" id="token">
+          <div class="container">
+            <div class="text-center">
+              <h2 class="section-heading">Token Allocation</h2>
+            </div>
+            <div class="sub-txt mw-650 text-center">
+              <p>
+                Token allocation are derivative contracts whose value corresponds to the value of the specific underlying asset. When the price of the underlying commodity rises or falls, the same happens with the price of its derivative contract.
+              </p>
+            </div>
+            <div class="row">
+              <div class="col-lg-5 col-md-12">
+                <div class="token-allocation-box style-3">
+                  <div class="token-sale-left">
+                    <h3>Pre-Sale <span>will end in</span></h3>
+                    <div id="clock" data-date="2024/03/31"></div>
+                    <div class="hero-right-btn">
+                      <a class="btn btn4" href="#">Register & Buy Tokens Now</a>
+                    </div>
+                  </div>
+                  <div class="token-sale-right">
+                    <div class="row">
+                      <div class="sale-list col">
+                        <h4>PRIVATE SALE</h4>
+                        <div class="price-tag">
+                          <span>1 BCT = $32.21</span>
+                          Bonus 65%(0.068)
+                        </div>
+                      </div>
+                      <div class="sale-list col">
+                        <h4>PRIVATE SALE</h4>
+                        <div class="price-tag">
+                          <span>1 BCT = $25.09</span>
+                          Bonus 65%(0.068)
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="sale-list col">
+                        <h4>PRIVATE SALE</h4>
+                        <div class="price-tag">
+                          <span>1 BCT = $25.09</span>
+                          Bonus 65%(0.068)
+                        </div>
+                      </div>
+                      <div class="sale-list col">
+                        <h4>PRIVATE (S)</h4>
+                        <div class="price-tag">
+                          <span>$1.32548</span>
+                          Completion: 35%
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="sale-list">
+                        <h4>LIVE FEED</h4>
+                        <ul class="livefeed-list">
+                          <li><span>USA</span> 1500 BCT sold in</li>
+                          <li><span>UK</span> 1225 BCT sold in</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="button-wrapper">
+                  <a class="btn btn4" href="#">WhitePaper</a>
+                  <a class="btn btn4" href="#">Privacy Policy</a>
+                </div>
+              </div>
+              <div class="col-lg-7 col-md-12 col-sm-12">
+                <div class="sale-chart-view">
+                  <div class="doughnut">
+                    <div class="doughnutChartContainer">
+                      <canvas id="doughnutChart" height="270"></canvas>
+                    </div>
+
+                    <div id="legend" class="chart-legend"></div>
+                  </div>
+                </div>
+                <div class="sale-chart-view">
+                  <div class="doughnut">
+                    <div class="doughnutChartContainer">
+                      <canvas id="layout2doughnutChart1" height="270"></canvas>
+                    </div>
+                    <div id="layout2legend1" class="chart-legend"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Token Sale end -->
+<!--Minnig start-->
+
+ <div class="benefits p-tb black-bg white-sec diamond-layout">
+  <div id="gold-tech-bg"></div>
+  <div class="container">
+    <div class="text-center">
+      <h2 class="section-heading">
+        <span>Our mining operational centers</span>
+      </h2>
+   <div class="row mt-4">
+    <div class="col-md-6" >
+   {% comment %} <img src="/static/images/mnii3.png" style="height:54vh;"> {% endcomment %}
+
+   <div style="display: flex; justify-content: center;">
+    <img src="/static/images/mi1.png" style="height:80vh; justify-content:center!important;  filter: drop-shadow(10px 0px 20px lightgray);transition: filter .3s;">
+   </div>
+
+    </div>
+    <div class="col-md-6 text-white text-left mt-5">
+     
+    <p>It boasts a hash rate of 2.6 terahashes per second (TH/s) and consumes around 230 watts of power. The inclusion of a power supply unit (PSU) compatible with both 110V and 240V is convenient for users in different regions.
+
+    </p>
+    <p>If it's ready to ship, that's great news for anyone interested in getting into Kadena mining or expanding their existing setup. Make sure to consider factors like electricity costs, mining difficulty, and potential returns before making a purchase.</p>
+
+
+    </div>
+   </div>
+
+     <div class="row mt-5">
+    <div class="col-md-6 text-white text-left">
+
+      <p> A 1800W mining power supply unit designed for Ethereum mining rigs with up to 8 GPUs. These power supplies are specifically tailored to meet the demanding power requirements of cryptocurrency mining equipment, offering stable and efficient power delivery.
+      </p>
+      <p>One notable feature is the auto thermally controlled fan, which helps regulate the temperature of the power supply unit based on the internal heat generated during operation, ensuring optimal performance and longevity.</p>
+    </div>
+  
+    <div class="col-md-6" >
+    {% comment %} <img src="/static/images/mnii4.png" style="height:54vh;"> {% endcomment %}
+
+    <div style="display: flex; justify-content: center;">
+    <img src="/static/images/m12.png" style="height:60vh; justify-content:center!important;  filter: drop-shadow(10px 0px 20px lightgray);transition: filter .3s;">
+    </div>
+    </div>
+   </div>
+    </div>
+  
+   
+  </div>
+</div>
+
+
+<!--Minnig end-->
+
+
+        <!-- The Roadmap  start-->
+        <div class="roadmap-sec p-tb diamond-layout" id="roadmap">
+          <div class="container">
+            <div class="text-center">
+              <h2 class="section-heading">Road Map</h2>
+            </div>
+            <div class="sub-txt text-center">
+              <p>
+                <!-- Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
+                cursus tincidunt ultrices. Ut quis blandit dolor. Ut laoreet
+                sagittis arcu eu tristique. -->
+              </p>
+            </div>
+            <div class="horizontal-roadmap owl-carousel">
+              <div class="roadmap-item odd">
+                <div class="roadmap-icon">
+                  <img src="{% static 'images/timeline-icon-1.png'   %}" alt="" />
+                </div>
+                <div class="roadmap-text">
+                  <div class="roadmap-day">Q1 2024</div>
+                  <div class="roadmap-item-text">
+                    <p>
+                      •	Project Startup
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="roadmap-item even">
+                <div class="roadmap-icon">
+                  <img src="{% static 'images/timeline-icon-2.png'   %}" alt="" />
+                </div>
+                <div class="roadmap-text">
+                  <div class="roadmap-day">
+                    <span>Q2 2024</span>
+                  </div>
+                  <div class="roadmap-item-text">
+                    <p>
+                      •	Initial Commitment<br/> 
+                      •	Initial design<br/> 
+                      •	User and profile management<br/> 
+                      •	Email service
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="roadmap-item odd">
+                <div class="roadmap-icon">
+                  <img src="{% static 'images/timeline-icon-3.png'  %}" alt="" />
+                </div>
+                <div class="roadmap-text">
+                  <div class="roadmap-day">
+                    <span>Q3 2024</span>
+                  </div>
+                  <div class="roadmap-item-text">
+                    <p>
+                      •	Movie, series and documentary views<br/> 
+                      •	Live streaming<br/> 
+                      •	Implementation of video comments<br/> 
+                      •	Video preview
+        
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="roadmap-item even">
+                <div class="roadmap-icon">
+                  <img src="{% static 'images/timeline-icon-4.png' %}" alt="" />
+                </div>
+                <div class="roadmap-text">
+                  <div class="roadmap-day">
+                    <span>Q4 2024</span>
+                  </div>
+                  <div class="roadmap-item-text">
+                    <p>
+                      •	Migration to Binance (BEP20)<br/> 
+                      •	Smart Contract for storage servers
+                      </p>
+                  </div>
+                </div>
+              </div>
+              <div class="roadmap-item odd">
+                <div class="roadmap-icon">
+                  <img src="{% static 'images/timeline-icon-5.png' %}" alt="" />
+                </div>
+                <div class="roadmap-text">
+                  <div class="roadmap-day">
+                    <span>Q1 2025</span>
+                  </div>
+                  <div class="roadmap-item-text">
+                    <p>
+                      •	Messaging System<br/>
+                      •	Multi-language search engine<br/>
+                      •	Players with additional functionalities according to the genre of the content
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="roadmap-item even">
+                <div class="roadmap-icon">
+                  <img src="{% static 'images/timeline-icon-6.png' %}" alt="" />
+                </div>
+                <div class="roadmap-text">
+                  <div class="roadmap-day">
+                    <span>Q2 2025</span>
+                  </div>
+                  <div class="roadmap-item-text">
+                    <p>
+                      •	URLs Refactoring<br/>
+                      •	Content Management Panels<br/>
+                      •	Trailers<br/>
+                      •	File Caching                      
+                    </p>
+                  </div>
+                </div>
+              </div><br/>
+
+              <div class="roadmap-item odd">
+                <div class="roadmap-icon">
+                  <img src="{% static 'images/timeline-icon-1.png' %}" alt="" />
+                </div>
+                <div class="roadmap-text">
+                  <div class="roadmap-day">Q3 2025</div>
+                  <div class="roadmap-item-text">
+                    <p>
+                      •	Smart Contract and Ads functionality<br/>
+                      •	Pictures & screenshots in WEBM format<br/>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="roadmap-item even">
+                <div class="roadmap-icon">
+                  <img src="{% static 'images/timeline-icon-2.png'   %}" alt="" />
+                </div>
+                <div class="roadmap-text">
+                  <div class="roadmap-day">
+                    <span>Q4 2025</span>
+                  </div>
+                  <div class="roadmap-item-text">
+                    <p>
+                      •	Public demo and Whitepaper v1<br/>
+                      •	Creation of dissemination channels<br/>
+                      •	Marketing campaign to attract users and content creators
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="roadmap-item odd">
+                <div class="roadmap-icon">
+                  <img src="{% static 'images/timeline-icon-3.png' %}" alt="" />
+                </div>
+                <div class="roadmap-text">
+                  <div class="roadmap-day">
+                    <span>Q1 2026</span>
+                  </div>
+                  <div class="roadmap-item-text">
+                    <p>
+                      •	API for GRPC<br/>
+                      •	Streaming scalability<br/>
+                      •	Payments with TRX<br/>
+                      •	Design of an interface for content producers
+
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="roadmap-item even">
+                <div class="roadmap-icon">
+                  <img src="{% static 'images/timeline-icon-4.png' %}" alt="" />
+                </div>
+                <div class="roadmap-text">
+                  <div class="roadmap-day">
+                    <span>Q2 2026</span>
+                  </div>
+                  <div class="roadmap-item-text">
+                    <p>
+                      •	Recommendation system<br/>
+                      •	Integration of Google Cloud Storage with SHIFRA Network<br/>
+                      •	Payments with other crypto currencies
+
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="roadmap-item odd">
+                <div class="roadmap-icon">
+                  <img src="{% static 'images/timeline-icon-5.png' %}" alt="" />
+                </div>
+                <div class="roadmap-text">
+                  <div class="roadmap-day">
+                    <span>Q3 2026</span>
+                  </div>
+                  <div class="roadmap-item-text">
+                    <p>
+                      •	Detection system for duplicate videos<br/>
+                      •	In-stream advertising on Streaming
+
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="roadmap-item even">
+                <div class="roadmap-icon">
+                  <img src="{% static 'images/timeline-icon-6.png' %}" alt="" />
+                </div>
+                <div class="roadmap-text">
+                  <div class="roadmap-day">
+                    <span>Q4 2026</span>
+                  </div>
+                  <div class="roadmap-item-text">
+                    <p>
+                      •	Design and marketing of Crypto Collectibles<br/><br/>
+                      •	Filters for stories in Android and iOS<br/><br/><br/>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        
+        <!-- The Roadmap end-->
+        <div id="counter" class="milestone-section p-tb c-l">
+          <div class="container">
+            <div class="row">
+              <div class="col">
+                <div class="counter">
+                  <div class="counter-icon">
+                    <img src="{% static 'images/transactions-icon.png'   %}" alt="" />
+                  </div>
+                  <div class="counter-value" data-count="1594">0</div>
+                  <h4 class="count-text">Transactions</h4>
+                </div>
+              </div>
+              <div class="col">
+                <div class="counter">
+                  <div class="counter-icon">
+                    <img src="{% static 'images/support-icon.png'   %}" alt="" />
+                  </div>
+                  <div class="counter-value" data-count="649">0</div>
+                  <h4 class="count-text">Operator</h4>
+                </div>
+              </div>
+              <div class="col">
+                <div class="counter">
+                  <div class="counter-icon">
+                    <img src="{% static 'images/wallets-icon.png'   %}" alt="" />
+                  </div>
+                  <div class="counter-value" data-count="852">0</div>
+                  <h4 class="count-text">Bitcoin Wallets</h4>
+                </div>
+              </div>
+              <div class="col">
+                <div class="counter">
+                  <div class="counter-icon">
+                    <img src="images/countries-icon.png" alt="" />
+                    <img src="{% static 'images/countries-icon.png'   %}" alt="" />
+                  </div>
+                  <div class="counter-value" data-count="198">0</div>
+                  <h4 class="count-text">Countries</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+<!--terms & conditions-->
+
+<div id="terms" class="p-tb c-l">
+  <div class="container">
+    <h2 class="section-heading text-center">Terms & Conditions</h2>
+<div style="text-align: justify;">
+    <p>&#10148;  The terms and conditions presented by shifra.in outline a comprehensive framework
+      designed to protect both the platform and its users. These guidelines underscore the
+      importance of legal compliance, confidentiality, and ethical conduct within the digital
+      investment space. By agreeing to these terms, users affirm their legal age and acknowledge
+      the private nature of the information shared on the platform. This agreement ensures that
+      all interactions and transactions are conducted within a secure and private environment,
+      thereby fostering trust among its members.</p>
+      <p>&#10148;   
+      Shifra.in's commitment to maintaining the privacy of its users' data is evident in its strict
+      policy against the disclosure of information to third parties. This approach not only
+      safeguards the users' personal and financial information but also enhances the platform's
+      integrity. Additionally, the provision that allows shifra.in to modify its rules and rates
+      underscores the dynamic nature of the investment landscape. It's a reminder to users of the
+      importance of staying informed about the latest terms and conditions, as these changes can
+      impact their investment strategies and outcomes.
+
+      </p>
+      <p>&#10148;  
+      You agree to be of legal age in your country to partake in this program, and in all the
+      cases your minimal age must be 18 years.<br>
+     <p>&#10148;  
+     You agree that all information, communications, materials coming from shifra.in are
+     unsolicited and must be kept private, confidential and protected from any disclosure.
+     Moreover, the information, communications and materials contained herein are not to
+     be regarded as an offer, nor a solicitation for investments in any jurisdiction which
+     deems non-public offers or solicitations unlawful, nor to any person to whom it will be
+     unlawful to make such offer or solicitation.<br></p>
+     <p>&#10148;  
+     You agree to be of legal age in your country to partake in this program, and in all the
+    cases your minimal age must be 18 years.<br></p>
+    <p>&#10148;  
+    You agree that all information, communications, materials coming from shifra.in are
+    unsolicited and must be kept private, confidential and protected from any disclosure.
+    Moreover, the information, communications and materials contained herein are not to
+    be regarded as an offer, nor a solicitation for investments in any jurisdiction which
+    deems non-public offers or solicitations unlawful, nor to any person to whom it will be
+    unlawful to make such offer or solicitation.<br></p>
+    <p>&#10148;   
+    All the data giving by a member to shifra.in will be only privately used and not disclosed
+    to any third parties. shifra.in is not responsible or liable for any loss of data.
+       </p>
+    </div>
+  </div>
+</div>
+    
+
+
+
+
+
+
+        <!-- FAQ Section start-->
+        <div class="faq-section p-tb white-bg diamond-layout" id="faq">
+          <div class="container">
+            <div class="text-center">
+              <h2 class="section-heading">Frequently Asked Questions</h2>
+            </div>
+            <div class="row">
+              <div class="col-sm-12 col-md-12">
+                <!--Accordion wrapper-->
+                <div
+                  class="accordion md-accordion style-2"
+                  id="accordionEx"
+                  role="tablist"
+                  aria-multiselectable="true"
+                >
+                  <!-- Accordion card -->
+                  <div class="card">
+                    <!-- Card header -->
+                    <div class="card-header" role="tab" id="headingOne1">
+                      <a
+                        data-toggle="collapse"
+                        data-parent="#accordionEx"
+                        href="#collapseOne1"
+                        aria-expanded="true"
+                        aria-controls="collapseOne1"
+                      >
+                        <h5 class="mb-0">
+                            How do I buy cryptocurrency on SHIFRA?
+                          <i class="fas fa-caret-down rotate-icon"></i>
+                        </h5>
+                      </a>
+                    </div>
+                    <!-- Card body -->
+                    <div
+                      id="collapseOne1"
+                      class="collapse show"
+                      role="tabpanel"
+                      aria-labelledby="headingOne1"
+                      data-parent="#accordionEx"
+                    >
+                      <div class="card-body">
+                        To buy crypto on StormGain, all you need to do is create an account, search for the 'Buy crypto with credit card' button in the app or web platform and then you use your debit/credit card to buy crypto and add funds to your account.
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Accordion card -->
+                  <!-- Accordion card -->
+                  <div class="card">
+                    <!-- Card header -->
+                    <div class="card-header" role="tab" id="headingTwo2">
+                      <a
+                        class="collapsed"
+                        data-toggle="collapse"
+                        data-parent="#accordionEx"
+                        href="#collapseTwo2"
+                        aria-expanded="false"
+                        aria-controls="collapseTwo2"
+                      >
+                        <h5 class="mb-0">
+                            How to use crypto trading signals?
+                          <i class="fas fa-caret-down rotate-icon"></i>
+                        </h5>
+                      </a>
+                    </div>
+                    <!-- Card body -->
+                    <div
+                      id="collapseTwo2"
+                      class="collapse"
+                      role="tabpanel"
+                      aria-labelledby="headingTwo2"
+                      data-parent="#accordionEx"
+                    >
+                      <div class="card-body">
+                        To use a signal, simply click or tap the cryptocurrency you want. A trade window will then open.<br>
+
+                        After that, click or tap the corresponding signal button. In the example, this is a "Buy signal".<br>
+                        
+                        If you want to use the signal to open a trade or make modifications to its default parameters, click "Use signal". A dialogue window will open.<br>
+                        
+                        You can change your investment amount or leverage by clicking or tapping the corresponding tab in StormGain.<br>
+                        
+                        Your Take Profit and Stop Loss levels will automatically recalculate based on the input trade parameters. After that, click or tap "Confirm Purchase (Sale) at price of…"<br>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Accordion card -->
+                  <!-- Accordion card -->
+                  <div class="card">
+                    <!-- Card header -->
+                    <div class="card-header" role="tab" id="headingThree3">
+                      <a
+                        class="collapsed"
+                        data-toggle="collapse"
+                        data-parent="#accordionEx"
+                        href="#collapseThree3"
+                        aria-expanded="false"
+                        aria-controls="collapseThree3"
+                      >
+                        <h5 class="mb-0">
+                            How to manage risks using crypto trading signals
+                          <i class="fas fa-caret-down rotate-icon"></i>
+                        </h5>
+                      </a>
+                    </div>
+                    <!-- Card body -->
+                    <div
+                      id="collapseThree3"
+                      class="collapse"
+                      role="tabpanel"
+                      aria-labelledby="headingThree3"
+                      data-parent="#accordionEx"
+                    >
+                      <div class="card-body">
+                        The probability required to reach a profitable signal is about 65%-75%, depending on the cryptocurrency market situation and the specific cryptocurrency. The signals are generated through technical analysis. So, if you want to take profit, please choose the signals that display a higher probability.
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Accordion card -->
+                  <!-- Accordion card -->
+                  <div class="card">
+                    <!-- Card header -->
+                    <div class="card-header" role="tab" id="headingFour4">
+                      <a
+                        class="collapsed"
+                        data-toggle="collapse"
+                        data-parent="#accordionEx"
+                        href="#collapseFour4"
+                        aria-expanded="false"
+                        aria-controls="collapseFour4"
+                      >
+                        <h5 class="mb-0">
+                            Where can I find the deposit tag?
+                          <i class="fas fa-caret-down rotate-icon"></i>
+                        </h5>
+                      </a>
+                    </div>
+                    <!-- Card body -->
+                    <div
+                      id="collapseFour4"
+                      class="collapse"
+                      role="tabpanel"
+                      aria-labelledby="headingFour4"
+                      data-parent="#accordionEx"
+                    >
+                      <div class="card-body">
+                        To find your deposit tag, please complete these steps:
+                        <br>
+                        1 - Click 'Deposit'. <br>
+                        2 - Select your Zaan Queril wallet for XRP. <br>
+                        3 - Select Ripple as your payment method. <br>
+                        4 - The deposit tag option will appear at the bottom. 
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Accordion card -->
+                  <!-- Accordion card -->
+                  <div class="card">
+                    <!-- Card header -->
+                    <div class="card-header" role="tab" id="headingFive5">
+                      <a
+                        class="collapsed"
+                        data-toggle="collapse"
+                        data-parent="#accordionEx"
+                        href="#collapseFive5"
+                        aria-expanded="false"
+                        aria-controls="collapseFive5"
+                      >
+                        <h5 class="mb-0">
+                            Do I have to buy a whole crypto coin??
+                          <i class="fas fa-caret-down rotate-icon"></i>
+                        </h5>
+                      </a>
+                    </div>
+                    <!-- Card body -->
+                    <div
+                      id="collapseFive5"
+                      class="collapse"
+                      role="tabpanel"
+                      aria-labelledby="headingFive5"
+                      data-parent="#accordionEx"
+                    >
+                      <div class="card-body">
+                        No, there's no need to buy a whole coin. Start with as little as you want. Like most fiat currencies that can be subdivided into small amounts (like dollars and euros into cents, pesos and reais into centavos and etc.), cryptocurrencies can also be divided into smaller units. For example, Bitcoin is divided into Satoshis, which are only 1/100,000,000 of 1 BTC.
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Accordion card -->
+                  <!-- Accordion card -->
+                  <div class="card" style="width:100%!important;">
+                    <!-- Card header -->
+                    <div class="card-header" role="tab" id="headingSix6">
+                      <a
+                        class="collapsed"
+                        data-toggle="collapse"
+                        data-parent="#accordionEx"
+                        href="#collapseSix6"
+                        aria-expanded="false"
+                        aria-controls="collapseSix6"
+                      >
+                        <h5 class="mb-0">
+                            How long will it take to mine 1 Bitcoin??
+                          <i class="fas fa-caret-down rotate-icon"></i>
+                        </h5>
+                      </a>
+                    </div>
+                    <!-- Card body -->
+                    <div
+                      id="collapseSix6"
+                      class="collapse"
+                      role="tabpanel"
+                      aria-labelledby="headingSix6"
+                      data-parent="#accordionEx"
+                    >
+                      <div class="card-body">
+                        It takes exactly 4 hours to get a single mining reward. After you've mined the equivalent of at least 10 USDT in Bitcoin, click the Withdraw button. We'll credit the profit as a trading bonus to your account in 72 hours.
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Accordion card -->
+                  <!-- Accordion card -->
+                  <div class="card">
+                    <!-- Card header -->
+                    <div class="card-header" role="tab" id="headingSeven7">
+                      <a
+                        class="collapsed"
+                        data-toggle="collapse"
+                        data-parent="#accordionEx"
+                        href="#collapseSeven7"
+                        aria-expanded="false"
+                        aria-controls="collapseSeven7"
+                      >
+                        <h5 class="mb-0">
+                            Can I leverage trade with Crypto Options?
+                          <i class="fas fa-caret-down rotate-icon"></i>
+                        </h5>
+                      </a>
+                    </div>
+                    <!-- Card body -->
+                    <div
+                      id="collapseSeven7"
+                      class="collapse"
+                      role="tabpanel"
+                      aria-labelledby="headingSeven7"
+                      data-parent="#accordionEx"
+                    >
+                      <div class="card-body">
+                        Leverage trading is available on Zaan Queril for Crypto Options. Although it is important to note that Crypto Options are extremely volatile by themselves, even compared with traditional Crypto assets. Therefore, we advise that you be extremely cautious using leverage while trading Crypto Options.
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Accordion card -->
+                </div>
+                <!-- Accordion wrapper -->
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- FAQ Section end-->
+        <!-- Team sec start-->
+        <!-- <div class="team-section p-tb light-gray-bg diamond-layout" id="team">
+          <div class="container">
+            <div class="text-center">
+              <h2 class="section-heading">Advisory Team</h2>
+            </div>
+            <div class="row">
+              <div class="col-md-6 col-lg-3">
+                <div class="team-box">
+                  <div class="team-img">
+                    <img src="images/team-9.jpg" alt="" />
+                    <div class="team-social">
+                      <ul>
+                        <li>
+                          <a href="https://facebook.com/"
+                            ><i class="fab fa-facebook-f"></i
+                          ></a>
+                        </li>
+                        <li>
+                          <a href="https://twitter.com/"
+                            ><i class="fab fa-twitter"></i
+                          ></a>
+                        </li>
+                        <li>
+                          <a href="https://www.linkedin.com/"
+                            ><i class="fab fa-linkedin-in"></i
+                          ></a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="text">
+                    <h4>Andy Sant</h4>
+                    <span>Founder & CEO</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 col-lg-3">
+                <div class="team-box">
+                  <div class="team-img">
+                    <img src="images/team-10.jpg" alt="" />
+                    <div class="team-social">
+                      <ul>
+                        <li>
+                          <a href="https://facebook.com/"
+                            ><i class="fab fa-facebook-f"></i
+                          ></a>
+                        </li>
+                        <li>
+                          <a href="https://twitter.com/"
+                            ><i class="fab fa-twitter"></i
+                          ></a>
+                        </li>
+                        <li>
+                          <a href="https://www.linkedin.com/"
+                            ><i class="fab fa-linkedin-in"></i
+                          ></a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="text">
+                    <h4>Dan Kaul</h4>
+                    <span>Co-founder & CTO</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 col-lg-3">
+                <div class="team-box">
+                  <div class="team-img">
+                    <img src="images/team-12.jpg" alt="" />
+                    <div class="team-social">
+                      <ul>
+                        <li>
+                          <a href="https://facebook.com/"
+                            ><i class="fab fa-facebook-f"></i
+                          ></a>
+                        </li>
+                        <li>
+                          <a href="https://twitter.com/"
+                            ><i class="fab fa-twitter"></i
+                          ></a>
+                        </li>
+                        <li>
+                          <a href="https://www.linkedin.com/"
+                            ><i class="fab fa-linkedin-in"></i
+                          ></a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="text">
+                    <h4>Saru Matt</h4>
+                    <span>Marketing Officer</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 col-lg-3">
+                <div class="team-box">
+                  <div class="team-img">
+                    <img src="images/team-11.jpg" alt="" />
+                    <div class="team-social">
+                      <ul>
+                        <li>
+                          <a href="https://facebook.com/"
+                            ><i class="fab fa-facebook-f"></i
+                          ></a>
+                        </li>
+                        <li>
+                          <a href="https://twitter.com/"
+                            ><i class="fab fa-twitter"></i
+                          ></a>
+                        </li>
+                        <li>
+                          <a href="https://www.linkedin.com/"
+                            ><i class="fab fa-linkedin-in"></i
+                          ></a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="text">
+                    <h4>Cyrus Nato</h4>
+                    <span>Lead Product Manager</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="team-minimal-section p-b black-bg white-sec">
+          <div class="container">
+            <div class="text-center">
+              <h2 class="section-heading"><span>Core Team</span></h2>
+            </div>
+            <div class="row">
+              <div class="col-md-4 col-sm-6">
+                <div class="team-box">
+                  <div class="team-img">
+                    <img src="images/team-7.jpg" alt="" />
+                    <div class="team-social">
+                      <ul>
+                        <li>
+                          <a href="https://www.linkedin.com/"
+                            ><i class="fab fa-linkedin-in"></i
+                          ></a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="text">
+                    <h4>Helen Ansley</h4>
+                    <span>Нead of Investor</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 col-sm-6">
+                <div class="team-box">
+                  <div class="team-img">
+                    <img src="images/team-4.jpg" alt="" />
+                    <div class="team-social">
+                      <ul>
+                        <li>
+                          <a href="https://www.linkedin.com/"
+                            ><i class="fab fa-linkedin-in"></i
+                          ></a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="text">
+                    <h4>Cecil Casey</h4>
+                    <span>Head of Marketing</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 col-sm-6">
+                <div class="team-box">
+                  <div class="team-img">
+                    <img src="images/team-3.jpg" alt="" />
+                    <div class="team-social">
+                      <ul>
+                        <li>
+                          <a href="https://www.linkedin.com/"
+                            ><i class="fab fa-linkedin-in"></i
+                          ></a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="text">
+                    <h4>Sylvia Neal</h4>
+                    <span>ICO Specialist</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 col-sm-6">
+                <div class="team-box">
+                  <div class="team-img">
+                    <img src="images/team-8.jpg" alt="" />
+                    <div class="team-social">
+                      <ul>
+                        <li>
+                          <a href="https://www.linkedin.com/"
+                            ><i class="fab fa-linkedin-in"></i
+                          ></a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="text">
+                    <h4>Teresa Pacheco</h4>
+                    <span>Community Manager</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 col-sm-6">
+                <div class="team-box">
+                  <div class="team-img">
+                    <img src="images/team-5.jpg" alt="" />
+                    <div class="team-social">
+                      <ul>
+                        <li>
+                          <a href="https://www.linkedin.com/"
+                            ><i class="fab fa-linkedin-in"></i
+                          ></a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="text">
+                    <h4>Elvin Poe</h4>
+                    <span>Marketing Officer</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 col-sm-6">
+                <div class="team-box">
+                  <div class="team-img">
+                    <img src="images/team-6.jpg" alt="" />
+                    <div class="team-social">
+                      <ul>
+                        <li>
+                          <a href="https://www.linkedin.com/"
+                            ><i class="fab fa-linkedin-in"></i
+                          ></a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="text">
+                    <h4>Jorge Meza</h4>
+                    <span>Suppot</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!- Team sec end-->
+        <!-- blog section -->
+        <!-- <div class="blog-section white-bg p-tb diamond-layout" id="press">
+          <div class="container">
+            <div class="text-center">
+              <h2 class="section-heading">We are in the Media</h2>
+            </div>
+            <div class="row blogmain">
+              <div class="blog-slider owl-carousel with-navigation">
+                <div class="item">
+                  <div class="blog-list">
+                    <div
+                      class="blog-list-img"
+                      style="background-image: url('images/blog-img1.jpg')"
+                    >
+                      <a
+                        href="cp-diamond-single-post-with-left-sidebar.html"
+                      ></a>
+                    </div>
+                    <div class="blog-list-desc">
+                      <span class="blog-category-meta">
+                        <a href="#">category</a>
+                      </span>
+                      <h4>
+                        <a href="cp-diamond-single-post-with-left-sidebar.html"
+                          >Pay for Purchases Directly with Your
+                          Cryptocurrency</a
+                        >
+                      </h4>
+                      <span class="blog-date-meta">February 21, 2020</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="blog-list">
+                    <div
+                      class="blog-list-img"
+                      style="background-image: url('images/blog-img2.jpg')"
+                    >
+                      <a
+                        href="cp-diamond-single-post-with-right-sidebar.html"
+                      ></a>
+                    </div>
+                    <div class="blog-list-desc">
+                      <span class="blog-category-meta">
+                        <a href="#">category</a>
+                      </span>
+                      <h4>
+                        <a href="cp-diamond-single-post-with-right-sidebar.html"
+                          >First Long-Term Bitcoin Option Price of $10,000
+                          Launched by STMX</a
+                        >
+                      </h4>
+                      <span class="blog-date-meta">February 18, 2020</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="blog-list">
+                    <div
+                      class="blog-list-img"
+                      style="background-image: url('images/blog-img3.jpg')"
+                    >
+                      <a href="cp-diamond-single-post-with-no-sidebar.html"></a>
+                    </div>
+                    <div class="blog-list-desc">
+                      <span class="blog-category-meta">
+                        <a href="#">category</a>
+                      </span>
+                      <h4>
+                        <a href="cp-diamond-single-post-with-no-sidebar.html"
+                          >Pay for Purchases Directly with Your
+                          Cryptocurrency</a
+                        >
+                      </h4>
+                      <span class="blog-date-meta">February 05, 2020</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="blog-list">
+                    <div
+                      class="blog-list-img"
+                      style="background-image: url('images/blog-img1.jpg')"
+                    >
+                      <a
+                        href="cp-diamond-single-post-with-left-sidebar.html"
+                      ></a>
+                    </div>
+                    <div class="blog-list-desc">
+                      <span class="blog-category-meta">
+                        <a href="#">category</a>
+                      </span>
+                      <h4>
+                        <a href="cp-diamond-single-post-with-left-sidebar.html"
+                          >Pay for Purchases Directly with Your
+                          Cryptocurrency</a
+                        >
+                      </h4>
+                      <span class="blog-date-meta">January 20, 2020</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="blog-list">
+                    <div
+                      class="blog-list-img"
+                      style="background-image: url('images/blog-img2.jpg')"
+                    >
+                      <a
+                        href="cp-diamond-single-post-with-right-sidebar.html"
+                      ></a>
+                    </div>
+                    <div class="blog-list-desc">
+                      <span class="blog-category-meta">
+                        <a href="#">category</a>
+                      </span>
+                      <h4>
+                        <a href="cp-diamond-single-post-with-right-sidebar.html"
+                          >First Long-Term Bitcoin Option Price of $10,000
+                          Launched by STMX</a
+                        >
+                      </h4>
+                      <span class="blog-date-meta">February 18, 2020</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="blog-list">
+                    <div
+                      class="blog-list-img"
+                      style="background-image: url('images/blog-img3.jpg')"
+                    >
+                      <a
+                        href="cp-diamond-single-post-with-right-sidebar.html"
+                      ></a>
+                    </div>
+                    <div class="blog-list-desc">
+                      <span class="blog-category-meta">
+                        <a href="#">category</a>
+                      </span>
+                      <h4>
+                        <a href="cp-diamond-single-post-with-right-sidebar.html"
+                          >First Long-Term Bitcoin Option Price of $10,000
+                          Launched by STMX</a
+                        >
+                      </h4>
+                      <span class="blog-date-meta">January 12, 2020</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> -->
+        <!-- blog section End -->
+        <!-- Brand logo slider -->
+        <!-- <div class="partner-logo p-tb white-sec dark-gray-bg">
+          <div class="container">
+            <div class="text-center">
+              <h2 class="section-heading"><span>Partners</span></h2>
+            </div>
+            <div class="partner-logo-grid">
+              <div class="item">
+                <img src="images/brand-logo1.png" alt="Brand Logo 1" />
+              </div>
+              <div class="item">
+                <img src="images/brand-logo2.png" alt="Brand Logo 2" />
+              </div>
+              <div class="item">
+                <img src="images/brand-logo5.png" alt="Brand Logo 5" />
+              </div>
+              <div class="item">
+                <img src="images/brand-logo4.png" alt="Brand Logo 4" />
+              </div>
+            </div>
+            <div class="partner-logo-grid">
+              <div class="item">
+                <img src="images/brand-logo3.png" alt="Brand Logo 3" />
+              </div>
+              <div class="item">
+                <img src="images/brand-logo1.png" alt="Brand Logo 1" />
+              </div>
+              <div class="item">
+                <img src="images/brand-logo2.png" alt="Brand Logo 2" />
+              </div>
+              <div class="item">
+                <img src="images/brand-logo5.png" alt="Brand Logo 5" />
+              </div>
+            </div>
+          </div>
+        </div> --> 
+        <!-- Brand logo end -->
+      </div>
+      
+      {% endblock 'main'   %}

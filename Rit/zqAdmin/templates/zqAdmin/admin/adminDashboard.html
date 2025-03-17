@@ -1,0 +1,378 @@
+{% extends 'zqAdmin/admin/layout/main.html' %} 
+{% load customFilters  %}
+
+{% block 'content' %}
+{% load static  %}
+{% comment %} {% load customFilters  %} {% endcomment %}
+
+
+
+<div class="app-main__outer">
+  <div class="app-main__inner">
+    <div class="app-page-title">
+      <div class="page-title-wrapper">
+        <div class="page-title-heading">
+          <div class="page-title-icon">
+            <i
+              class="pe-7s-drawer fa fa-globe icon-gradient bg-mean-fruit"
+            >
+            </i>
+          </div>
+          <div>
+            Welcome to the RITCOIN
+            {% comment %} <div class="page-title-subheading">
+              https://shifra.in/register/?referralid=vagak123
+              &nbsp;&nbsp;&nbsp;&nbsp;<button
+                class="btn-wide mb-2 mr-2 btn btn-success btngenrate btn-lg mt-1"
+                style="background-color: green"
+              >
+                Copy Refferal
+              </button>
+            </div> {% endcomment %}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 col-xl-4">
+        <div
+          class="card mb-3 pt-4 pb-4 widget-content bg-arielle-smile"
+        >
+          <div class="widget-content-wrapper text-white">
+            <div class="widget-content-left">
+              <div class="widget-heading">Total Registrations</div>
+              <div class="widget-subheading">
+                {% comment %} 17:57:07 {% endcomment %}
+                <div class="widget-subheading"></div>
+              </div>
+            </div>
+            <div class="widget-content-right">
+              <div class="widget-numbers text-white ml-2">
+                <span style="font-size: 15px">{{totalRegs}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-xl-4">
+        <div class="card mb-3 pt-4 pb-4 widget-content bg-grow-early">
+          <div class="widget-content-wrapper text-white">
+            <div class="widget-content-left">
+              <div class="widget-heading">Today Registrations</div>
+              {% comment %} <div class="widget-subheading">17:57:07</div> {% endcomment %}
+            </div>
+            <div class="widget-content-right">
+              <div class="widget-numbers text-white">
+                <span style="font-size: 15px">{{totalTodayRegs}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-xl-4">
+        <div class="card mb-3 pt-4 pb-4 widget-content bg-happy-itmeo">
+          <div class="widget-content-wrapper text-white">
+            <div class="widget-content-left">
+              <div class="widget-heading">Today Paid</div>
+              <div class="widget-subheading"></div>
+            </div>
+            <div class="widget-content-right">
+              <div class="widget-numbers text-white">
+                {% comment %} {% with totalDirectIncome| totalDirectIncome*ZQLRate %}  {% endcomment %}
+                <span style="font-size: 15px">{{totalTodayPaid|floatformat:"2"}}/${{totalTodayPaidUSDT}}</span>
+                {% comment %} <span>$0</span> {% endcomment %}
+                {% comment %} {% endwith %}  {% endcomment %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+     
+     
+      {% comment %} <div class="col-md-6 col-xl-4">
+        <div class="card mb-3 pt-4 pb-4 widget-content bg-deep-blue">
+          <div class="widget-content-wrapper text-white">
+            <div class="widget-content-left">
+              <div class="widget-heading">Total Payout</div>
+              <div class="widget-subheading"></div>
+            </div>
+            <div class="widget-content-right">
+              <div class="widget-numbers text-white">
+                <span>$ 0</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> {% endcomment %}
+
+      {% comment %} <div class="d-xl-none d-lg-block col-md-6 col-xl-4">
+        <div class="card mb-3 widget-content bg-premium-dark">
+          <div class="widget-content-wrapper text-white">
+            <div class="widget-content-left">
+              <div class="widget-heading">Total Level</div>
+              <div class="widget-subheading"></div>
+            </div>
+            <div class="widget-content-right">
+              <div class="widget-numbers text-warning">
+                <span style="font-size: 15px">${{totalLevelIncome}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> {% endcomment %}
+      {% comment %} <div class="col-md-6 col-xl-4">
+        <div
+          class="card mb-3 pt-4 pb-4 widget-content bg-midnight-bloom"
+        >
+          <div class="widget-content-wrapper text-white">
+            <div class="widget-content-left">
+              <div class="widget-heading">Total sponsor</div>
+              <div class="widget-subheading"></div>
+            </div>
+            <div class="widget-content-right">
+              <div class="widget-numbers text-white">
+                <span style="font-size: 15px">{{totalSponsor|floatformat:"2"}}/${{totalTodayMiningUSDT}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> {% endcomment %}
+      {% comment %} <div class="col-md-6 col-xl-4">
+        <div class="card mb-3 pt-4 pb-4 widget-content bg-dark">
+          <div class="widget-content-wrapper text-white">
+            <div class="widget-content-left">
+              <div class="widget-heading">Total Level</div>
+              <div class="widget-subheading"></div>
+            </div>
+            <div class="widget-content-right">
+              <div class="widget-numbers text-white">
+                <span style="font-size: 15px">{{totalLevelIncome|floatformat:"2"}}/${{totalLevelIncomeUSDT}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>  {% endcomment %}
+      <div class="col-md-6 col-xl-4">
+        <div class="card mb-3 pt-4 pb-4 widget-content bg-danger">
+          <div class="widget-content-wrapper text-white">
+            <div class="widget-content-left">
+              <div class="widget-heading">Total withdrawls</div>
+              <div class="widget-subheading"></div>
+            </div>
+            <div class="widget-content-right">
+              <div class="widget-numbers text-white">
+                <span style="font-size: 15px">{{totalWithdrawls|floatformat:"2"}}/${{totalWithdrawlsUSDT}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-xl-4">
+        <div class="card mb-3 pt-4 pb-4 widget-content bg-primary">
+          <div class="widget-content-wrapper text-white">
+            <div class="widget-content-left">
+              <div class="widget-heading">Paid withdrawl</div>
+              <div class="widget-subheading"></div>
+            </div>
+            <div class="widget-content-right">
+              <div class="widget-numbers text-white">
+                <span style="font-size: 15px">{{totalPaidWithdrawls |floatformat:"2"}}/${{totalPaidWithdrawlsUSDT}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-xl-4">
+        <div class="card mb-3 pt-4 pb-4 widget-content bg-warning">
+          <div class="widget-content-wrapper text-white">
+            <div class="widget-content-left">
+              <div class="widget-heading">Unpaid withdrawl</div>
+              <div class="widget-subheading"></div>
+            </div>
+            <div class="widget-content-right">
+              <div class="widget-numbers text-white">
+                <span style="font-size: 15px">{{totalUnPaidWithdrawls|floatformat:"2"}}/${{totalUnPaidWithdrawlsUSDT}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-xl-4">
+        <div class="card mb-3 pt-4 pb-4 widget-content bg-strong-bliss">
+          <div class="widget-content-wrapper text-white">
+            <div class="widget-content-left">
+              <div class="widget-heading">Direct Bonus</div>
+              <div class="widget-subheading"></div>
+            </div>
+            <div class="widget-content-right">
+              <div class="widget-numbers text-white">
+                <span style="font-size: 15px">{{totalAssets|floatformat:"2"}}/${{totalAssetsUSDT}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% comment %} <div class="col-md-6 col-xl-4">
+        <div class="card mb-3 pt-4 pb-4 widget-content " style="background-color:green;">
+          <div class="widget-content-wrapper text-white">
+            <div class="widget-content-left">
+              <div class="widget-heading">Level Bonus</div>
+              <div class="widget-subheading"></div>
+            </div>
+            <div class="widget-content-right">
+              <div class="widget-numbers text-white">
+                <span style="font-size: 15px">{{totalAssets|floatformat:"2"}}/${{totalAssetsUSDT}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> {% endcomment %}
+
+      
+      {% comment %} <div class="col-md-6 col-xl-4">
+        <div class="card mb-3 pt-4 pb-4 widget-content "style="background-color:red;">
+          <div class="widget-content-wrapper text-white">
+            <div class="widget-content-left">
+              <div class="widget-heading">Social job Bonus</div>
+              <div class="widget-subheading"></div>
+            </div>
+            <div class="widget-content-right">
+              <div class="widget-numbers text-white">
+                <span style="font-size: 15px">{{totalAssets|floatformat:"2"}}/${{totalAssetsUSDT}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> {% endcomment %}
+
+      {% comment %} <div class="col-md-6 col-xl-4">
+        <div
+          class="card mb-3 pt-4 pb-4 widget-content bg-sunny-morning"
+        >
+          <div class="widget-content-wrapper text-white">
+            <div class="widget-content-left">
+              <div class="widget-heading">Magic Bonus</div>
+              <div class="widget-subheading"></div>
+            </div>
+            <div class="widget-content-right">
+              <div class="widget-numbers text-white">
+                <span style="font-size: 15px">{{totalMining|floatformat:"2"}}/${{totalMiningUSDT}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> {% endcomment %}
+
+      {% comment %} <div class="col-md-6 col-xl-4">
+        <div class="card mb-3 pt-4 pb-4 widget-content bg-ripe-malin">
+          <div class="widget-content-wrapper text-white">
+            <div class="widget-content-left">
+              <div class="widget-heading">Community Building Bonus</div>
+            </div>
+            <div class="widget-content-right">
+              <div class="widget-numbers text-white">
+                <span style="font-size: 15px">{{totalTodayMining|floatformat:"2"}}/${{totalTodayMiningUSDT}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> {% endcomment %}
+    </div>
+  </div>
+</div>
+
+
+
+<script>
+
+    function copyToClipboard(event) {
+        //debugger;
+        event.preventDefault();
+        //e.preventDefault();
+        $("#message").val("")
+
+        //var val1 = $('#refferallink').val();
+        var val1 = $('#refferallink').val();
+        
+        //console.log("value is===================");
+        //console.log(val1);
+
+        // Create a "hidden" input
+        var aux = document.createElement("input");
+
+        // Assign it the value of the specified element
+        aux.setAttribute("value", val1);
+
+        // Append it to the body
+        document.body.appendChild(aux);
+
+        // Highlight its content
+        aux.select();
+
+        // Copy the highlighted text
+        document.execCommand("copy");
+
+        // Remove it from the body
+        document.body.removeChild(aux);
+        $("#message").addClass('disabled');
+        $("#message").text("REFFERAL COPIED !")
+
+    }
+
+
+
+</script>
+
+<script>
+  // Function to calculate ROI paid
+function calculateROI(startTime,amount,rate) {
+  // Get current time
+  var currentTime = new Date();
+  
+  // Calculate elapsed time in seconds
+  var elapsedTimeSeconds = Math.floor((currentTime - startTime) / 1000);
+
+  // Calculate ROI paid
+  var roiPaid = ({{totalInvestment}}*rate*elapsedTimeSeconds)/8640000; // 1.5% per second
+  //console.log({{totalInvestment}})
+  // Display ROI paid
+  
+  var container = document.getElementById("interest-container");
+  var tt=({{totalMiningBonus}}+roiPaid).toFixed(5);
+  var att=({{totalAllBonus}}+roiPaid).toFixed(5);
+  container.textContent = "+" +({{totalMiningBonus}}+roiPaid).toFixed(5)+"/$"+(tt*{{ZQLRate}});
+  var containerTotal = document.getElementById("interest-container-total");
+  containerTotal.textContent = "" + ({{totalAllBonus}} +roiPaid).toFixed(5)+"/$"+(att*{{ZQLRate}});
+  //console.log("ROI paid: " + roiPaid.toFixed(2)); // Displaying with two decimal places
+}
+
+// Get start time (00:00:00 AM)
+var startTime = new Date();
+startTime.setHours(0, 0, 0, 0);
+
+
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+// Function to execute at a random interval
+function executeAtRandomInterval() {
+  // Calculate random delay between 1 to 10 seconds
+  var randomDelay = getRandomInt(1, 5) * 1000; // Convert to milliseconds
+
+  // Execute function after random delay
+  setTimeout(function() {
+      // Your code to execute here
+      calculateROI(startTime, {{ totalMiningBonus }}, {{ rate }});
+      
+      // Call the function recursively to repeat
+      executeAtRandomInterval();
+  }, randomDelay);
+}
+
+// Start the execution
+executeAtRandomInterval();
+</script>
+
+{% endblock %}

@@ -1,0 +1,435 @@
+{% extends 'zqAdmin/admin/layout/main.html' %} 
+{% load customFilters  %}
+
+{% block headerScripts %}
+
+<style>
+    .modal-backdrop.show{
+        opacity: 0;
+    }
+</style>
+
+{% endblock  %}
+
+
+{% block 'content' %}
+    <div class="app-main__outer" >
+        <div class="app-main__inner" style="background-color: rgba(255, 255, 255, 0.775);">
+            <div class="app-page-title">
+                <div class="page-title-wrapper">
+                    <div class="page-title-heading">
+                        <div class="page-title-icon">
+                            <i class="pe-7s-drawer icon-gradient bg-happy-itmeo">
+                            </i>
+                        </div>
+
+                    
+                        <div>
+
+                            Distribute Mining
+                        </div> 
+                    </div>
+                    <div class="page-title-actions">
+
+
+              
+
+
+                        <div class="d-inline-block dropdown">
+          
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class=" p-5 shadow" >
+            
+               
+                <div class="row mt-3">
+                
+                      
+
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-4 text-center mt-2">
+                            <h6 class="mt-4" style="font-weight: 600;">Enter ROI Rate</h6>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="input-group mt-4">
+                                <div class="input-group-prepend"></div>
+                                <input placeholder="Enter roi rate"
+                                       type="number"
+                                       class="form-control"
+                                       id="rate"
+                                       value="{{currentRate}}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-4 text-center mt-2">
+                            <h6 class="mt-4" style="font-weight: 600;">Enter ROI Rate</h6>
+                        </div>
+                        <div class="col-md-5">
+                 
+                            <div class="input-group mt-4">
+                                <div class="input-group-prepend"></div>
+                                <input placeholder="Enter roi rate"
+                                       type="datetime-local"
+                                       class="form-control"
+                                       id="rateSetDate"
+                                       value="{{setDate|date:"Y-m-d" }}T{{ setDate|time:'H:i:s'}}">
+                            </div>
+                         
+                        </div>
+                    </div>
+                    {% comment %} <button class="mb-2 mt-5 mr-2 btn btn-primary btn-lg btn-block"
+                            style="font-weight: 700"
+                            id="confirmBtn"
+                            onclick="#confirmModal"
+                           
+                           >Distribute ROI</button> {% endcomment %}
+
+                           {% comment %} <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#customModal">
+                            Open Modal
+                          </button> {% endcomment %}
+                    <button class="mb-2 mt-5 mr-2 btn btn-primary btn-lg btn-block"
+                            style="font-weight: 700"
+                            id="btnsubmit confirmBtn"
+                           
+                            onclick="distributeROI()">Distribute ROI</button>
+
+
+                </div>
+
+                  {% comment %} ============================ {% endcomment %}
+
+                  
+                  
+                  <!-- Modal -->
+                  {% comment %} <div class="modal fade mt-5" id="customModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Confirm Action</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          Are you sure you want to proceed with this action?
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          <button type="button" class="btn btn-primary">Confirm</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div> {% endcomment %}
+
+
+
+                   {% comment %} ============================ {% endcomment %}
+
+
+                <div class="row mt-3 text-center shadow" >
+                    <div class="table " style="justify-content:center;">
+                        <div class="row "style="overflow-x:auto; height:auto;width:100%;justify-content:center;">
+                            <div class="">
+                                <div class="main-card mb-3 ">
+                                    <div class="p-5">
+
+                                        <h4 class="text-center mb-4">Previously Distibuted ROI rates</h4>
+                                        <table id="myTable"  class="display" >
+
+                                            <thead>
+                                                <tr>
+                                                    <th >Sr No.</th>
+                                                    {% comment %} <th></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th></th> {% endcomment %}
+                                                    <th  >Rate</th>
+                                                    {% comment %} <th></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th></th> {% endcomment %}
+                                                    <th > Set date</th>
+                                                    {% comment %} <th></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th></th> {% endcomment %}
+                                                    <th> ROIDistributedToMembers(total)</th>
+                                                
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% if  allRates  %}
+                                                {% for index,item in allRates %}
+                                                    <tr>
+                                                        <th >{{ index|add:1 }}</th>
+                                                        {% comment %} <td ></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        {% endcomment %}
+                                                        <td >{{ item.rate }}</td>
+                                                        {% comment %} <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td> {% endcomment %}
+                                                      
+                                                        <td  >{{item.set_date|date:'d-m-Y H:i:s'}}</td>
+                                                        {% comment %} <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td> {% endcomment %}
+                                                        {% if item.set_date|hasROIDistributed == 0 %}
+                                                                <td class="text-success">yet to be distributed </td>
+                                                        {% else %}
+                                                                <td>
+                                                                    <a href="{% url 'allLatestDistributedROI' %}?roiId={{ item.id }}">
+                                                                        {{ item.set_date|hasROIDistributed }}
+                                                                        
+                                                                    </a>
+                                                                </td>
+                                                        {% endif %}
+                                                        
+                                                       
+                                                     
+                                      
+                                                    </tr>
+                                                {% endfor %}
+
+                                                {% else  %}
+
+                                                No rates Found
+                                            {% endif %}
+                                        </tbody>
+                                    </table>
+
+                                    <p>item.set_date: {{ item.set_date }}</p>
+                                    <p>today: {{ today }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            
+            
+            </div>
+
+         
+            
+        </div>
+      
+    </div>
+</div>
+</div>
+
+
+
+<script>
+
+
+    function distributeROI() {
+        //debugger;
+        var rate = $("#rate").val();
+        var rateSetDate = $("#rateSetDate").val();
+        var confirmation = window.confirm(`Are you sure you want to distribute ROI for rate ${rate} for date ${rateSetDate} ?`);
+    
+        // If user clicks "OK", perform the action
+        if (confirmation) {
+            // Your action here
+            var hasConfirmed=confirmation;
+        } else {
+            // If user clicks "Cancel", do nothing or perform another action
+            //alert("Action cancelled");
+            var hasConfirmed=confirmation;
+
+        }
+
+        //return;
+        //var volumes = $("#totalamnt").val();
+        //var useremail = $("#useremail").val();
+       // return;
+        if (hasConfirmed && parseFloat(rate)>parseFloat(0)) {
+            $("#btnsubmit").text('Please wait...');
+            $("#btnsubmit").attr("disabled", "disabled");
+            $.ajax({
+                url: "/zqadmin/distribute-mining/",
+                type: "post",
+                data: {
+                    rate: rate,
+                    setDate: rateSetDate,
+                    csrfmiddlewaretoken: '{{ csrf_token }}'
+                },
+                success: function (resultdata) {
+                    var status = resultdata.status;
+                    if (parseInt(status) == 1) {
+                      
+                        alert(resultdata.message);
+                       
+                    }
+                    else {
+                        $("#rate").val('');
+                        $("#rateSetDate").val('');
+                        $("#btnsubmit").text('Distribute ROI');
+                        $("#btnsubmit").removeAttr("disabled");
+                        alert(resultdata.message);
+
+                    }
+
+                },
+                error: function (er) {
+                    alert("Something went wrong. Please try again later");
+                    $("#btnsubmit").text('Proceed');
+                    $("#btnsubmit").removeAttr("disabled");
+
+                }
+            });
+        }
+        else {
+            alert("Please enter correct rate");
+            $("#amount").val('');
+        }
+
+    }
+
+    {% comment %} function showresendotp() {
+        debugger;
+
+        var email = $("#email").val();
+        $.ajax({
+            url: "/member/expiredotpfortopup",
+            type: "post",
+            data: {
+                email: email,
+                csrfmiddlewaretoken: '{{ csrf_token }}'
+            },
+            success: function (resultdata) {
+                var status = resultdata.status;
+                if (parseInt(status) == 1) {
+                    $("#btnotp").css("display", "none");
+                    $("#btrenotp").css("display", "block");
+                    $("#otptxt").text('Your OTP is expired');
+                    alert(resultdata.message);
+                }
+                else {
+                    alert(resultdata.message);
+                    $("#btnsubmit").text('Proceed');
+                    $("#btnsubmit").removeAttr("disabled");
+                }
+
+            },
+            error: function (er) {
+                alert("Something went wrong. Please try again later");
+                $("#btnsubmit").text('Proceed');
+                $("#btnsubmit").removeAttr("disabled");
+
+            }
+        });
+    }
+
+    function resendotp() {
+        debugger;
+
+        var email = $("#email").val();
+        $.ajax({
+            url: "/member/resendotp",
+            type: "post",
+            data: {
+                email: email
+            },
+            success: function (resultdata) {
+                var status = resultdata.status;
+                if (parseInt(status) == 1) {
+                    $("#btnotp").css("display", "block");
+                    $("#btrenotp").css("display", "none");
+                    $("#otptxt").text('Your OTP will expire within 5 minutes.');
+                    $("#otp").val('');
+                    alert(resultdata.message);
+                    setTimeout(showresendotp, 300000);
+                }
+                else {
+                    alert(resultdata.message);
+                }
+
+            },
+            error: function (er) {
+                alert("Something went wrong. Please try again later");
+                $("#btnsubmit").text('Proceed');
+                $("#btnsubmit").removeAttr("disabled");
+
+            }
+        });
+    }
+
+    function confirmedotp() {
+        var email = $("#email").val();
+        var amount = $("#amount").val();
+        var volumes = $("#totalamnt").val();
+        var otp = $("#otp").val();
+        if (parseFloat(amount) <= parseFloat(volumes)) {
+            $("#btnsubmit").text('Please wait...');
+            $("#btnsubmit").attr("disabled", "disabled");
+            $.ajax({
+                url: "/member/confirm-topup-otp/",
+                type: "post",
+                data: {
+                    email: email,
+                    amount: amount,
+                    otp: otp,
+                    csrfmiddlewaretoken: '{{ csrf_token }}'
+                },
+                success: function (resultdata) {
+                    var status = resultdata.status;
+                    if (parseInt(status) == 1) {
+                        alert(resultdata.message);
+                        location.reload();
+                    }
+                    else {
+
+                        alert(resultdata.message);
+                        $("#otp").val('');
+                    }
+
+                },
+                error: function (er) {
+                    alert("Something went wrong. Please try again later");
+                    $("#btnsubmit").text('Proceed');
+                    $("#btnsubmit").removeAttr("disabled");
+
+                }
+            });
+        }
+        else {
+            alert("Please enter correct volume");
+        }
+    } {% endcomment %}
+{% comment %} 
+    $(document).ready(function(){
+        // Bind click event to the button
+        $('#confirmBtn').click(function(){
+            // Show the confirmation modal
+            $('#confirmModal').modal('show');
+        });
+        
+        // Bind click event to the confirm button in the modal
+        $('#confirmActionBtn').click(function(){
+            // Perform the action here
+            // For example, redirect to another page
+            // window.location.href = 'your_action_url_here';
+            alert('Action confirmed');
+            // Close the modal
+            $('#confirmModal').modal('hide');
+        });
+    }); {% endcomment %}
+
+</script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+{% endblock %}

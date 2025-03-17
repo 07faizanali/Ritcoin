@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ritcoin Registration</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.lordicon.com/lordicon.js"></script>
+
+    <style>
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            background-color: #28a745;
+            border: none;
+            border-radius: 5px;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+
+<div style="border: 5px solid blue; text-align: center; padding: 20px; font-family: Arial, sans-serif;">
+    <h2>
+        <span style="font-size: 28px; font-weight: 900; font-family: fangsong; color: #d92550;">R</span>
+        <span style="font-size: 28px; font-weight: 900; font-family: fangsong; color: blue;" class="shifra">ITCOIN</span>
+    </h2>
+    <h1>Welcome to Ritcoin</h1>
+    {% autoescape off %}
+    <p>Dear Member,</p>
+    <p>Congratulations on your successful registration to Ritcoin! We are excited to have you on board. Below are your login credentials:</p>
+    <p><strong>Username:</strong> {{ username }}</p>
+    <p><strong>Password:</strong> {{ password }}</p>
+    <p>Please keep this information safe and do not share it with anyone.</p>
+    <p>You can log in to your account by clicking the button below:</p>
+    <a href="https://www.Ritcoin.world/accounts/login/" class="btn">Login to Ritcoin</a>
+    <p>If you did not register for this account, please ignore this email.</p>
+    <p>Regards,</p>
+    <p>The Ritcoin Team</p>
+    <p><span>Copyright © 2023 Ritcoin!. All rights reserved.</span></p>
+    {% endautoescape %}
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

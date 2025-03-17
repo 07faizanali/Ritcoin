@@ -1,0 +1,1096 @@
+{% extends 'zqUsers/member/layout/main.html' %}
+
+{% load static %}
+{% load customFilters %}
+{% block 'addHeaderScripts' %}
+
+    <style>
+        @media (max-width: 576px) {
+            .tabs {
+                height: 138vh !important;
+            
+            }
+            #icon{
+                font-size:13px !important;
+            }
+            #connectWalletButton{
+                font-size:10px !important;
+            }
+            #entotpwd{
+                width:65vw !important;
+            }
+        
+        }
+
+        @media (max-width: 360px) {
+        #tb{
+            overflow-y:auto !important;
+        } 
+        .table-responsive{
+            overflow-y:auto !important;
+            max-height : 230px !important;
+        }
+        
+
+        }
+        
+        .tabs {
+        display: flex;
+        box-sizing: border-box;
+        flex-direction: column;
+        padding: 1rem;
+        height: 125dvh;
+        z-index:1;
+        }
+        .tabs .tabs-nav {
+        display: flex;
+        width: max-content;
+        margin: 0 auto;
+        padding: 5px;
+        gap: 5px;
+        border-radius: 9999px;
+        background-color: #efefef;
+        box-shadow: 2px 2px 10px #3333;
+        }
+        .tabs .tab-nav {
+        display: block;
+        outline: none;
+        border: 2px solid rgb(0,34,51);
+        color: rgb(0,34,51);
+        border-radius: 9999px;
+        padding: 0.5em 2em;
+        font-weight: 700;
+        cursor: pointer;
+        background-color: inherit;
+        transition: background-color 300ms, color 300ms;
+        }
+        .tabs .tab-nav:hover {
+        background-color: rgb(0,34,51);
+        color: #fff;
+        }
+        .tabs .tab-content input[name="tab-index"] {
+        display: none !important;
+        }
+        .tabs .tab-contents {
+            display: block;
+            position: relative;
+            height: 100%;
+            margin-top: 1rem;
+            background-color: inherit;
+            overflow: hidden;
+            z-index: 1;
+        }
+        .tabs .tab-content {
+        background-color: inherit;
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        max-height: 100%;
+        top: 0; left: 100%;
+        overflow: hidden;
+        box-sizing: border-box;
+        border-radius: 10px;
+        padding: 0;
+        } 
+        .tabs.animate .tab-content {
+        transition: left 500ms;
+        }
+        .tabs .tab-content .content {
+        max-height: 100%;
+        max-width: 100%;
+        
+        }
+
+        .tabs .tab-content:has(input[name="tab-index"]:checked) {
+        left: 0;
+        z-index: 100;
+        }
+
+                .dropdown-icon::after {
+                    content: "\f078"; /* Font Awesome caret down icon */
+                    font-family: "Font Awesome 5 Free";
+                    font-weight: 900;
+                    position: absolute;
+                    right: 10px;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    pointer-events: none;
+                }
+
+
+                .card.disabled {
+                    opacity: 0.6;
+                    cursor: not-allowed;
+                    pointer-events: none;
+                    filter: grayscale(100%);
+                }
+            
+                #connectWalletButton.disabled {
+                background-color: green;
+                cursor: not-allowed;
+        }
+
+
+    </style>
+
+
+{% endblock %}
+
+
+{% block 'content' %}
+
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-xl-12">
+        <div class="col-lg-4"><h3>Withdrawal</h3></div>
+        <div>
+    </div>
+    <div  class="row">
+
+        <div class="col-xl-12">
+            <div  class="tabs">
+                <div class="tabs-nav">
+                    <!--   Must be label element   -->
+                    <label class="tab-nav" for="tab-index2">RITCOIN</label>
+                    <label class="tab-nav" for="tab-index1">USDT</label>
+                </div>      
+           
+            <div class="tab-contents">
+                <div class="tab-content">
+                    <input type="radio" name="tab-index" id="tab-index1" >
+                    <div class="content">
+                        <div class="row">
+                            <div class="col-xl-12 col-lg-12">
+                       
+                                        <div class="card p-5">
+                                            
+                    
+                                            <div class="row">
+                                                <div class="col-lg-4"><h3>Withdrawal USDT</h3></div>
+                                                <div class="col-lg-4"></div>
+                                                <div class="col-lg-4 btn-group"  role="group"  id="cnbtn" >
+                                             
+                                                         <button type="button" id="viewQrBtn" class="btn btn-primary">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="50px" height="25px" viewBox="0 0 24 24" version="1.1" class="svg-main-icon" id="icon">
+                                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                                <rect x="0" y="0" width="24" height="24"/>
+                                                                <circle fill="#fff" opacity="0.3" cx="20.5" cy="12.5" r="1.5"/>
+                                                                <rect fill="#fff" opacity="0.3" transform="translate(12.000000, 6.500000) rotate(-15.000000) translate(-12.000000, -6.500000) " x="3" y="3" width="18" height="7" rx="1"/>
+                                                                <path d="M22,9.33681558 C21.5453723,9.12084552 21.0367986,9 20.5,9 C18.5670034,9 17,10.5670034 17,12.5 C17,14.4329966 18.5670034,16 20.5,16 C21.0367986,16 21.5453723,15.8791545 22,15.6631844 L22,18 C22,19.1045695 21.1045695,20 20,20 L4,20 C2.8954305,20 2,19.1045695 2,18 L2,6 C2,4.8954305 2.8954305,4 4,4 L20,4 C21.1045695,4 22,4.8954305 22,6 L22,9.33681558 Z" fill="#fff"/>
+                                                            </g>
+                                                        </svg>
+                                                        
+                                                            {{request.user.totalWithdrawalableBalance|floatformat:2}}
+                                                            </button>
+                                                    
+                                                       
+                                                       
+                                                       
+                                                        
+                                                             
+                        
+                                                </div>
+
+                                              
+                        
+                                            
+                                            </div>
+
+                                            <div class="row ">
+                                                <div class="col-md-4 text-center mt-2">
+                                                    <h6 class="mt-4" style="font-weight: 600;">Enter Wallet Address</h6>
+                                                </div>
+                                                
+                                                <div class="col-md-5">
+                                                    <div class="input-group mt-4">
+                                                        <div class="input-group-prepend"></div>
+                                                        <input placeholder="Enter withdrawal address" id="walletAdd" value="{{request.user.withdrawal_tron_address}}" type="text" class="form-control" readonly>
+                                                        <input type="text" id="coinType" name="coinType" value="usdt" hidden>
+                                                    </div>
+                                                </div>
+                                                
+                                                
+                                                <div class="col-md-3"></div>
+                                            </div>
+                                            <div class="row mt-3">
+                                            
+                                                <div class="col-md-4 text-center mt-2">
+                                                    <h6 class="mt-4" style="font-weight: 600;">Withdrawal Amount($)</h6>
+                                                </div>
+                                                
+                                                <div class="col-md-5">
+                                                
+                                                    <div class="input-group mt-4">
+                                                        <div class="input-group-prepend"></div>
+                                                        <input placeholder="Enter amount in USD"  id="amount" type="number" class="form-control" >
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-3"></div>
+                                            </div>
+                                            
+                                            <div class="d-flex mt-3 justify-content-center align-items-center " >
+                                            
+                                               <div class=" justify-content-center align-items-center " id='wdotp' style='display:none;'>
+                                                    <h6 class="mt-4 text-center" style="font-weight: 600;">Enter OTP</h6>
+                                                
+                                                    <div class="input-group mt-4">
+                                                        <div class="input-group-prepend"></div>
+                                                        <input placeholder="" id="entotpwd" type="number" class="form-control" style="width:25vw;">
+                                                    </div>
+                                              </div>   
+                                            </div>
+                                           
+                                            <div class="row mt-3 mb-10">
+                                                <div class="col-md-3"></div>
+
+                                                <div class="col-lg-4 col-lg-6 col-md-4">
+                                                    <button class="mb-2 mt-5 mr-2 btn btn-outline-primary btn-lg btn-block "     id="sendotpwithdarwal" style="font-weight: 600;" {% if request.user.is_withdrawal_blocked or request.user.associated_id %} disabled {% endif %} >Send OTP</button>
+                                                    <button class="mb-2 mt-5 mr-2 btn btn-outline-primary btn-lg btn-block " id="withdrawButton" style="font-weight: 600;display:none" {% if request.user.is_withdrawal_blocked or request.user.associated_id %} disabled {% endif %}  >Withdrawal</button>
+                                                    {% if request.user.associated_id %}
+                                                    <span class="text-danger">Withdrawals on associated Ids are not allowed Please use your main account for withdrawal</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="col-md-3"></div>
+
+
+
+                                            </div>
+                                        
+                                        </div>
+                                  
+                            
+                            </div>
+                        </div>
+                    
+                        <div class="row">
+                        
+                            <div class="col-lg-12 mb-4" >
+                                <div class="card transaction-table " style ='margin-bottom:50px'>
+                                    <div class="card-header border-0 flex-wrap pb-0">
+                                        <div class="mb-2">
+                                            <h4 class="card-title">Recent Withdrawals</h4>
+                                            <p class="mb-sm-3 mb-0">All Withdrawals</p>
+                                
+                                        </div>
+                                    </div>
+                        
+
+                                            
+                                    <div class="card-body p-0 " style="overflow-x:auto !important;overflow-y:overlay !important; " >                                            
+                                        <div class="table-responsive" id="tb"  style= "max-height:250px;overflow-y:overlay !important;">
+  
+                                            <table class="table table-responsive-md">
+                                                <thead>
+                                                    <tr>
+                                                        <th>
+                                                            #
+                                                        </th>
+                                                        <th>Withdrawal Address</th>
+                                                        
+                                                        <th>Requested Amount($)</th>
+                                                        <th>Admin charge($)</th>
+                                                        <th>Total Transferred($)</th>
+                                                        <th>Coin</th>
+                                                        <th>Coin Rate(USDT)</th>
+                                                        <th>Trasferred value</th>
+                                                        <th>Transaction Hash</th>
+                                                        <th>Date</th>
+                                                        {% comment %} <th>To</th> {% endcomment %}
+                                                        <th class="text-end">Status</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody >
+                                                
+                                                    {% if allWdsINR %}
+                
+                                                    {% for index,inv in  allWdsINR %}
+                
+                
+                                                    <tr>
+                                                        <td>
+                                                            <svg class="arrow style-2 svg-main-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                                    <polygon points="0 0 24 0 24 24 0 24"/>
+                                                                    <rect fill="#fff" opacity="0.3" transform="translate(11.646447, 12.853553) rotate(-315.000000) translate(-11.646447, -12.853553) " x="10.6464466" y="5.85355339" width="2" height="14" rx="1"/>
+                                                                    <path d="M8.1109127,8.90380592 C7.55862795,8.90380592 7.1109127,8.45609067 7.1109127,7.90380592 C7.1109127,7.35152117 7.55862795,6.90380592 8.1109127,6.90380592 L16.5961941,6.90380592 C17.1315855,6.90380592 17.5719943,7.32548256 17.5952502,7.8603687 L17.9488036,15.9920967 C17.9727933,16.5438602 17.5449482,17.0106003 16.9931847,17.0345901 C16.4414212,17.0585798 15.974681,16.6307346 15.9506913,16.0789711 L15.6387276,8.90380592 L8.1109127,8.90380592 Z" fill="#fff" fill-rule="nonzero"/>
+                                                                </g>
+                                                            </svg>
+                                                        </td>
+                                                        <td>{{inv.address}}</td>
+                                                        {% comment %} <td>{{inv.transactionId.hashtrxn}}</td> {% endcomment %}
+                                                        <td>{{inv.amount}}</td>
+                                                      
+                                                        <td>{{inv.remark}}</td>
+                                                        <td class="font-w600">{{inv.trans_date}}</td>
+                                                        {% comment %} <td></td> {% endcomment %}
+                                                        {% comment %} <td class="text-success font-w600">{{inv.amivolume}}</td> {% endcomment %}
+                                                        
+                                                        {% if inv.status %}
+                                                            
+                                                        <td  class="text-end"><div class="badge badge-sm badge-success">SUCCESS</div></td>
+                                                        
+                                                        {% else %}
+                                                        <td  class="text-end"><div class="badge badge-sm badge-danger">PENDING</div></td>
+
+                                                        {% endif %}
+                                                            
+                                                    </tr>
+                
+                                                    {% endfor %}
+                                                    {% endif %}
+                
+                                                
+                
+                
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                {% comment %} </div> {% endcomment %}
+                <div class="tab-content">
+                    <input type="radio" name="tab-index" id="tab-index2"checked/>
+                    <div class="content">
+                    
+                        <div class="row">
+                            <div class="col-xl-12 col-lg-12">
+                       
+                                        <div class="card p-5">
+                                            
+                    
+                                            <div class="row">
+                                                <div class="col-lg-4"><h3>Withdrawal RITCOIN</h3></div>
+                                                <div class="col-lg-4"></div>
+                                                <div class="col-lg-4 btn-group"  role="group"  id="cnbtn" >
+                                             
+                                                    <button type="button" id="viewQrBtn" class="btn btn-primary">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="50px" height="25px" viewBox="0 0 24 24" version="1.1" class="svg-main-icon" id="icon">
+                                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                                <rect x="0" y="0" width="24" height="24"/>
+                                                                <circle fill="#fff" opacity="0.3" cx="20.5" cy="12.5" r="1.5"/>
+                                                                <rect fill="#fff" opacity="0.3" transform="translate(12.000000, 6.500000) rotate(-15.000000) translate(-12.000000, -6.500000) " x="3" y="3" width="18" height="7" rx="1"/>
+                                                                <path d="M22,9.33681558 C21.5453723,9.12084552 21.0367986,9 20.5,9 C18.5670034,9 17,10.5670034 17,12.5 C17,14.4329966 18.5670034,16 20.5,16 C21.0367986,16 21.5453723,15.8791545 22,15.6631844 L22,18 C22,19.1045695 21.1045695,20 20,20 L4,20 C2.8954305,20 2,19.1045695 2,18 L2,6 C2,4.8954305 2.8954305,4 4,4 L20,4 C21.1045695,4 22,4.8954305 22,6 L22,9.33681558 Z" fill="#fff"/>
+                                                            </g>
+                                                        </svg>
+                                                        
+                                                            {{request.user.totalRimberioWalletBalance|floatformat:2}}
+                                                            </button>
+                                                    
+                                                       
+                                                        {% comment %} <button type="button" class="btn btn-success"  id="connectWalletButtonRT">Connect Wallet    
+                                                            <g fill="none" fill-rule="evenodd">
+                                                                <polygon fill="#CDBDB2" points="60.75 173.25 88.313 180.563 88.313 171 90.563 168.75 106.313 168.75 106.313 180 106.313 187.875 89.438 187.875 68.625 178.875"></polygon>
+                                                                <polygon fill="#CDBDB2" points="105.75 173.25 132.75 180.563 132.75 171 135 168.75 150.75 168.75 150.75 180 150.75 187.875 133.875 187.875 113.063 178.875" transform="matrix(-1 0 0 1 256.5 0)"></polygon>
+                                                                <polygon fill="#393939" points="90.563 152.438 88.313 171 91.125 168.75 120.375 168.75 123.75 171 121.5 152.438 117 149.625 94.5 150.188"></polygon>
+                                                                <polygon fill="#F89C35" points="75.375 27 88.875 58.5 95.063 150.188 117 150.188 123.75 58.5 136.125 27"></polygon>
+                                                                <polygon fill="#F89D35" points="16.313 96.188 .563 141.75 39.938 139.5 65.25 139.5 65.25 119.813 64.125 79.313 58.5 83.813"></polygon>
+                                                                <polygon fill="#D87C30" points="46.125 101.25 92.25 102.375 87.188 126 65.25 120.375"></polygon>
+                                                                <polygon fill="#EA8D3A" points="46.125 101.813 65.25 119.813 65.25 137.813"></polygon>
+                                                                <polygon fill="#F89D35" points="65.25 120.375 87.75 126 95.063 150.188 90 153 65.25 138.375"></polygon>
+                                                                <polygon fill="#EB8F35" points="65.25 138.375 60.75 173.25 90.563 152.438"></polygon>
+                                                                <polygon fill="#EA8E3A" points="92.25 102.375 95.063 150.188 86.625 125.719"></polygon>
+                                                                <polygon fill="#D87C30" points="39.375 138.938 65.25 138.375 60.75 173.25"></polygon>
+                                                                <polygon fill="#EB8F35" points="12.938 188.438 60.75 173.25 39.375 138.938 .563 141.75">
+                        
+                                                                </polygon><polygon fill="#E8821E" points="88.875 58.5 64.688 78.75 46.125 101.25 92.25 102.938">
+                        
+                                                                </polygon><polygon fill="#DFCEC3" points="60.75 173.25 90.563 152.438 88.313 170.438 88.313 180.563 68.063 176.625"></polygon>
+                                                                <polygon fill="#DFCEC3" points="121.5 173.25 150.75 152.438 148.5 170.438 148.5 180.563 128.25 176.625" transform="matrix(-1 0 0 1 272.25 0)"></polygon><polygon fill="#393939" points="70.313 112.5 64.125 125.438 86.063 119.813" transform="matrix(-1 0 0 1 150.188 0)"></polygon><polygon fill="#E88F35" points="12.375 .563 88.875 58.5 75.938 27"></polygon><path fill="#8E5A30" d="M12.3750002,0.562500008 L2.25000003,31.5000005 L7.87500012,65.250001 L3.93750006,67.500001 L9.56250014,72.5625 L5.06250008,76.5000011 L11.25,82.1250012 L7.31250011,85.5000013 L16.3125002,96.7500014 L58.5000009,83.8125012 C79.1250012,67.3125004 89.2500013,58.8750003 88.8750013,58.5000009 C88.5000013,58.1250009 63.0000009,38.8125006 12.3750002,0.562500008 Z"></path><g transform="matrix(-1 0 0 1 211.5 0)"><polygon fill="#F89D35" points="16.313 96.188 .563 141.75 39.938 139.5 65.25 139.5 65.25 119.813 64.125 79.313 58.5 83.813"></polygon><polygon fill="#D87C30" points="46.125 101.25 92.25 102.375 87.188 126 65.25 120.375"></polygon><polygon fill="#EA8D3A" points="46.125 101.813 65.25 119.813 65.25 137.813"></polygon><polygon fill="#F89D35" points="65.25 120.375 87.75 126 95.063 150.188 90 153 65.25 138.375"></polygon><polygon fill="#EB8F35" points="65.25 138.375 60.75 173.25 90 153"></polygon><polygon fill="#EA8E3A" points="92.25 102.375 95.063 150.188 86.625 125.719"></polygon><polygon fill="#D87C30" points="39.375 138.938 65.25 138.375 60.75 173.25"></polygon><polygon fill="#EB8F35" points="12.938 188.438 60.75 173.25 39.375 138.938 .563 141.75"></polygon><polygon fill="#E8821E" points="88.875 58.5 64.688 78.75 46.125 101.25 92.25 102.938"></polygon><polygon fill="#393939" points="70.313 112.5 64.125 125.438 86.063 119.813" transform="matrix(-1 0 0 1 150.188 0)"></polygon><polygon fill="#E88F35" points="12.375 .563 88.875 58.5 75.938 27"></polygon><path fill="#8E5A30" d="M12.3750002,0.562500008 L2.25000003,31.5000005 L7.87500012,65.250001 L3.93750006,67.500001 L9.56250014,72.5625 L5.06250008,76.5000011 L11.25,82.1250012 L7.31250011,85.5000013 L16.3125002,96.7500014 L58.5000009,83.8125012 C79.1250012,67.3125004 89.2500013,58.8750003 88.8750013,58.5000009 C88.5000013,58.1250009 63.0000009,38.8125006 12.3750002,0.562500008 Z"></path></g></g></svg>
+                                                                <svg xmlns="http://www.w3.org/2000/svg" id="icon" width="25" height="25" viewBox="0 0 2000 2000"><circle cx="1000" cy="1000" r="1000" fill="#3375bb"/><path d="M1490.78 504.57a65.1 65.1 0 0 1 65 65.94c-3.12 186.3-10.31 328.8-23.75 441.6-13.1 112.8-32.81 196.6-62.5 264.4-20 45.3-44.69 82.8-73.7 114.7-39.1 42.2-83.7 72.82-132.5 101.9-20.84 12.46-42.51 24.77-65.2 37.68-48.5 27.54-101.8 57.83-162.3 98.3a64.66 64.66 0 0 1 -72.18 0c-61.4-40.91-115.4-71.6-164.3-99.3q-16.32-9.25-31.92-18.2c-57.2-33.1-108.7-64.7-153.7-110.3-30-30-55.94-66.6-76.6-110-28.1-58.1-47.2-128.4-61.2-219.4C457 950.2 447.7 791.1 444.2 570.5A65.13 65.13 0 0 1 462.66 524a66.25 66.25 0 0 1 46.56 -19.38H536.1c82.8.31 265.6-7.81 423.7-130.9a65.21 65.21 0 0 1 79.69 0c158.1 123.1 340.9 131.3 424.1 130.9m-118.1 730.3c20.31-41.87 37.2-99.7 50-182.8 15.31-99.4 24.69-234.4 29.1-418.1-97.5-2.82-265-21.57-424.7-129.1C840.2 612.1 672.7 630.8 575.5 634c3.44 151.9 10.31 270 21.25 362.8 12.5 105.6 30.3 177.2 52.5 227.5 14.69 33.44 30.94 57.5 50.3 78.8 25.94 28.44 58.75 51.87 103.4 78.8 18.54 11.1 39 22.69 61.2 35.3 39.64 22.43 85 48.1 135.6 80.3 49.71-31.7 94.4-57.1 133.6-79.4 11.81-6.72 23.1-13.1 33.89-19.37 55-31.56 95.6-57.81 125.9-88.4C1313.6 1289.3 1330.2 1266.5 1345.5 1234.9" fill="#fff" fill-rule="evenodd"/></svg>
+                                                        </button>
+                                                         {% endcomment %}
+                                                             
+                        
+                                                </div>
+
+                                              
+                        
+                                            
+                                            </div>
+
+                                            <div class="row ">
+                                                <div class="col-md-4 text-center mt-2">
+                                                    <h6 class="mt-4" style="font-weight: 600;">Enter Wallet Address</h6>
+                                                </div>
+                                                
+                                                <div class="col-md-5">
+                                                    <div class="input-group mt-4">
+                                                        <div class="input-group-prepend"></div>
+                                                        <input placeholder="Enter withdrawal address" value="{{request.user.withdrawal_usdt_address}}" id="walletAddRT" type="text" class="form-control"  readonly >
+                                                    </div>
+                                                </div>
+                                                
+                                                
+                                                <div class="col-md-3"></div>
+                                            </div>
+                                            <div class="row mt-3">
+                                            
+                                                <div class="col-md-4 text-center mt-2">
+                                                    <h6 class="mt-4" style="font-weight: 600;">Withdrawal Amount(RT)</h6>
+                                                </div>
+                                                
+                                                <div class="col-md-5">
+                                                
+                                                    <div class="input-group mt-4">
+                                                        <div class="input-group-prepend"></div>
+                                                        <input placeholder="Enter amount in RT" id="amountRT" type="number" class="form-control" >
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-3"></div>
+                                            </div>
+                                            
+                                            {% comment %} <div class="d-flex mt-3 justify-content-center align-items-center " >
+                                            
+                                               <div class=" justify-content-center align-items-center " id='wdotprt' style='display:none;'>
+                                                    <h6 class="mt-4 text-center" style="font-weight: 600;">Enter OTP</h6>
+                                                
+                                                    <div class="input-group mt-4">
+                                                        <div class="input-group-prepend"></div>
+                                                        <input placeholder="" id="entotpwd" type="number" class="form-control" style="width:25vw;">
+                                                    </div>
+                                              </div>   
+                                            </div> {% endcomment %}
+                                           
+                                            <div class="row mt-3 mb-10">
+                                                <div class="col-md-3"></div>
+
+                                                <div class="col-lg-4 col-lg-6 col-md-4">
+                                                    
+                                                    <button class="mb-2 mt-5 mr-2 btn btn-outline-primary btn-lg btn-block " id="withdrawButtonRT" style="font-weight: 600;display:block" {% if request.user.is_withdrawal_blocked %} disabled {% endif %}  >Transfer</button>
+                                                   
+                                                </div>
+                                                <div class="col-md-3"></div>
+
+
+
+                                            </div>
+                                        
+                                        </div>
+                                  
+                            
+                            </div>
+                        </div>
+                    
+                        <div class="row">
+                        
+                            <div class="col-lg-12 mb-4" >
+                                <div class="card transaction-table " style ='margin-bottom:50px'>
+                                    <div class="card-header border-0 flex-wrap pb-0">
+                                        <div class="mb-2">
+                                            <h4 class="card-title">Recent Withdrawals</h4>
+                                            <p class="mb-sm-3 mb-0">All Withdrawals</p>
+                                
+                                        </div>
+                                    </div>
+                        
+
+                                            
+                                    <div class="card-body p-0 " style="overflow-x:auto !important;overflow-y:overlay !important; " >                                            
+                                        <div class="table-responsive" id="tb"  style= "max-height:250px;overflow-y:overlay !important;">
+  
+                                            <table class="table table-responsive-md">
+                                                <thead>
+                                                    <tr>
+                                                        <th>
+                                                            #
+                                                        </th>
+                                                        <th>Withdrawal Address</th>
+                                                        
+                                                        <th>Requested Amount($)</th>
+                                                        <th>Admin charge($)</th>
+                                                        <th>Total Transferred($)</th>
+                                                        <th>Coin</th>
+                                                        <th>Coin Rate(USDT)</th>
+                                                        <th>Trasferred value</th>
+                                                        <th>Transaction Hash</th>
+                                                        <th>Date</th>
+                                                        {% comment %} <th>To</th> {% endcomment %}
+                                                        <th class="text-end">Status</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody >
+                                                
+                                                    {% if allWds %}
+                
+                                                    {% for index,inv in  allWds %}
+                
+                
+                                                    <tr>
+                                                        <td>
+                                                            <svg class="arrow style-2 svg-main-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                                    <polygon points="0 0 24 0 24 24 0 24"/>
+                                                                    <rect fill="#fff" opacity="0.3" transform="translate(11.646447, 12.853553) rotate(-315.000000) translate(-11.646447, -12.853553) " x="10.6464466" y="5.85355339" width="2" height="14" rx="1"/>
+                                                                    <path d="M8.1109127,8.90380592 C7.55862795,8.90380592 7.1109127,8.45609067 7.1109127,7.90380592 C7.1109127,7.35152117 7.55862795,6.90380592 8.1109127,6.90380592 L16.5961941,6.90380592 C17.1315855,6.90380592 17.5719943,7.32548256 17.5952502,7.8603687 L17.9488036,15.9920967 C17.9727933,16.5438602 17.5449482,17.0106003 16.9931847,17.0345901 C16.4414212,17.0585798 15.974681,16.6307346 15.9506913,16.0789711 L15.6387276,8.90380592 L8.1109127,8.90380592 Z" fill="#fff" fill-rule="nonzero"/>
+                                                                </g>
+                                                            </svg>
+                                                        </td>
+                                                        <td>{{inv.withrawal_add}}</td>
+                                                        {% comment %} <td>{{inv.transactionId.hashtrxn}}</td> {% endcomment %}
+                                                        <td>{{inv.requested_amount}}</td>
+                                                        <td class="text-danger font-w600">-{{inv.admin_charge}}</td>
+                                                        <td class="text-success font-w600">+{{inv.total_value}}</td>
+                                                        
+                                                        <td> {{inv.transactionId.cointype}}</td>
+                                                        <td><div class="d-flex align-items-center"><img src="images/svg/btc.svg" alt="" class="me-2 img-btc">{{inv.transactionId.coinvalue}}</div></td>
+                                                        <td class="text-success font-w600">{{inv.transactionId.amivolume}}</td>
+                                                        
+                                                        <td>{{inv.transactionId.hashtrxn}}</td>
+                                                        <td class="font-w600">{{inv.transactionId.trxndate}}</td>
+                                                        {% comment %} <td></td> {% endcomment %}
+                                                        {% comment %} <td class="text-success font-w600">{{inv.amivolume}}</td> {% endcomment %}
+                                                        <td  class="text-end"><div class="badge badge-sm badge-success">SUCCESS</div></td>
+                                                    </tr>
+                
+                                                    {% endfor %}
+                                                    {% endif %}
+                
+                                                
+                
+                
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                  
+                    
+                    </div> 
+                </div>
+
+
+                {% comment %} </div> {% endcomment %}
+            </div>
+        </div>
+
+        </div>
+    </div>
+
+
+</div>    
+
+  
+
+{% endblock  %}
+
+
+
+{% block 'addFooterScripts' %}
+
+
+
+<script type="text/javascript">
+
+
+
+	function sendOTPPhone() {
+
+
+
+        
+		const phone_num = document.getElementById('phNumber').value;
+		const usrname = document.getElementById('usrname').value;
+		//const totalBal=`{{request.user.totalWalletBalance}}`;
+		//console.log(amount);
+		if (!phone_num) {
+			alert('Please enter a  valid phone number.');
+			return;
+		}
+        const phoneRegex = /^\d{10}$/;
+    
+        if (!phoneRegex.test(phone_num)) {
+            alert('Please enter a valid phone number.');
+            return;
+        }
+	
+
+        if(phone_num){
+
+        bt = $(`#sendOTP`);
+        bt.attr("disabled", "").html("<i class='fa fa-spin fa-spinner'></i>&nbsp;&nbsp;Please wait...");
+        $('#phNumber').prop('readonly', true);
+        $('#usrname').prop('readonly', true);
+		fetch('/member/withdraw/', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				'X-CSRFToken': getCookie('csrftoken')
+			},
+			body: JSON.stringify({ phone_number: phone_num, type: 'INR',full_name:usrname,what_for:'sendOTP' })
+		})
+		.then(response => response.json())
+		.then(data => {
+			if (data.status) {
+
+                if (data.status && data.msg =='Already Registered' ){
+                    alert("Phone number verified successfully");
+
+				    location.reload();
+                    return
+                }
+
+                $(`#entOTPMsgs`).html('enter otp sent to your phone number');
+                $('#entPhoneOTPDiv').css('display', 'block');
+
+                $('#sendOTP').css('display', 'none');
+                $('#verifyPhone').css('display', 'block');
+                //$('#ActivateId').css('display', 'block');
+				//alert( data.msg);
+			} else {
+				alert(data.msg);
+
+				location.reload();
+			}
+		})
+		.catch(error => {
+			console.error('Error:', error);
+		});
+
+        } 
+    }
+
+
+	function sendOTPWithdrawal() {
+
+
+
+        
+		const amount = document.getElementById('amount').value;
+		const walletAdd = document.getElementById('walletAdd').value;
+		const sendotpwithdrawalbutton = document.getElementById('sendotpwithdarwal');
+		const  withdrawButton= document.getElementById('withdrawButton');
+		//const totalBal=`{{request.user.totalWalletBalance}}`;
+		//console.log(amount);
+		if (!amount ||  ! (amount>0) ) {
+			alert('Please enter a  valid amount.');
+			return;
+		}
+       
+    
+        if (!walletAdd) {
+            alert('Please enter a valid wallet address.');
+            return;
+        }
+	
+
+        if(true){
+
+        bt = $(`#sendotpwithdarwal`);
+        bt.attr("disabled", "").html("<i class='fa fa-spin fa-spinner'></i>&nbsp;&nbsp;Please wait...");
+        $('#amount').prop('readonly', true);
+        $('#walletAdd').prop('readonly', true);
+		fetch('/member/withdraw/', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				'X-CSRFToken': getCookie('csrftoken')
+			},
+			body: JSON.stringify({ walletAdd: walletAdd, type: 'USD',amount:amount,what_for:'sendOTPWalletWd' })
+		})
+		.then(response => response.json())
+		.then(data => {
+			if (data.success) {
+
+               
+                    $('#sendotpwithdarwal').css('display', 'none');
+                    $('#wdotp').css('display', 'block');
+                    {% comment %} $('#wdotp').css('display', 'block'); {% endcomment %}
+                    $('#withdrawButton').css('display', 'block');
+
+                    return
+                    
+               
+
+              
+			} else {
+				alert(data.msg);
+
+				location.reload();
+			}
+		})
+		.catch(error => {
+			console.error('Error:', error);
+		});
+
+        } 
+
+
+	}
+	function verifyOTPPhone() {
+
+
+
+        
+		const phone_num = document.getElementById('phNumber').value;
+		const usrname = document.getElementById('usrname').value;
+        const OTP = document.getElementById('phoneOTP').value;
+
+		//const totalBal=`{{request.user.totalWalletBalance}}`;
+		//console.log(amount);
+		if (!phone_num) {
+			alert('Please enter a  valid phone number.');
+			return;
+		}
+		if (!OTP) {
+			alert('Please enter a  valid OTP.');
+			return;
+		}
+
+
+        const phoneRegex = /^\d{10}$/;
+    
+        if (!phoneRegex.test(phone_num)) {
+            alert('Please enter a valid phone number.');
+            return;
+        }
+	
+
+        if(phone_num && OTP ){
+
+        bt = $(`#verifyPhone`);
+        bt.attr("disabled", "").html("<i class='fa fa-spin fa-spinner'></i>&nbsp;&nbsp;Please wait...");
+        $('#phNumber').prop('readonly', true);
+        $('#usrname').prop('readonly', true);
+        $('#phoneOTP').prop('readonly', true);
+		fetch('/member/withdraw/', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				'X-CSRFToken': getCookie('csrftoken')
+			},
+			body: JSON.stringify({ phone_number: phone_num, type: 'INR',full_name:usrname,'entOTP':OTP,what_for:'otpVerify' })
+		})
+		.then(response => response.json())
+		.then(data => {
+			if (data.status) {
+                alert("OTP verified successfully");
+                location.reload();
+                //$('#ActivateId').css('display', 'block');
+				//alert( data.msg);
+			} else {
+				alert(data.msg);
+
+				location.reload();
+			}
+		})
+		.catch(error => {
+			console.error('Error:', error);
+		});
+
+     }
+
+
+	}
+
+    function addBank() {
+
+
+
+        
+		const acHolderName = document.getElementById('acHolderName').value;
+		const bankName = document.getElementById('bankName').value;
+        const ifscCode = document.getElementById('ifscCode').value;
+        const acNumber = document.getElementById('acNumber').value;
+        const confAcNumber = document.getElementById('confAcNumber').value;
+
+		//const totalBal=`{{request.user.totalWalletBalance}}`;
+		//console.log(amount);
+		if (!acHolderName) {
+			alert('Please enter account holder name.');
+			return;
+		}
+		if (!bankName) {
+			alert('Please enter Bank Name.');
+			return;
+		}
+		if (!ifscCode) {
+			alert('Please enter IFSC code.');
+			return;
+		}
+		if (!acNumber) {
+			alert('Please enter valid account number.');
+			return;
+		}
+		if (!confAcNumber) {
+			alert('Please enter valid confirm account number.');
+			return;
+		}
+
+        if(acNumber.trim()!==confAcNumber.trim()){
+            alert('Account number and confirm account number should be same.');
+            return;
+
+        }
+
+
+      
+	
+
+        if (acHolderName && bankName && ifscCode && acNumber && confAcNumber){
+
+            bt = $(`#addBankDetails`);
+            bt.attr("disabled", "").html("<i class='fa fa-spin fa-spinner'></i>&nbsp;&nbsp;Please wait...");
+            $('#acHolderName').prop('readonly', true);
+            $('#bankName').prop('readonly', true);
+            $('#ifscCode').prop('readonly', true);
+            $('#acNumber').prop('readonly', true);
+            $('#confAcNumber').prop('readonly', true);
+
+            fetch('/member/withdraw/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCookie('csrftoken')
+                },
+                body: JSON.stringify({ accountHolder: acHolderName, type: 'INR',BankName:bankName,IFSC:ifscCode,accountNumber:acNumber,confirmAccountNumber:confAcNumber,what_for:'addBankDetails' })
+            })
+            .then(response => response.json())
+            .then(data => {
+
+               console.log(data);
+                if (data.status) {
+                    
+                    alert("Bank registred successfully");
+                    location.reload();
+                    //$('#ActivateId').css('display', 'block');
+                    //alert( data.msg);
+                } else {
+                    alert(data.msg);
+
+                    location.reload();
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+
+        }
+
+
+	}
+    function withdrawFundINR() {
+
+
+
+		const wdAMNT = document.getElementById('Wdamount').value;
+		const bankSelected = document.getElementById('bankSelect').value;
+         
+        const avilableBalanceToWithdraw=parseFloat(`{{request.user.totalWithdrawalableBalance}}`)*90;
+       console.log(wdAMNT);
+        console.log(bankSelected);
+        console.log(avilableBalanceToWithdraw);
+        
+		//const totalBal=`{{request.user.totalWalletBalance}}`;
+		//console.log(totalBal);
+		if (!wdAMNT) {
+			alert('Please enter amount.');
+			return;
+		}
+		if (parseFloat(wdAMNT)<20 ) {
+			alert('Minimum withdrawal amount is 20');
+			return;
+		}
+		if (parseFloat(wdAMNT)>5000 ) {
+			alert('Maximum withdrawal limit is 5000');
+			return;
+		}
+
+       if (parseFloat(wdAMNT)>parseFloat(avilableBalanceToWithdraw)){
+
+        alert("You have Insufficient balance in your account to process this withdrawal");
+        location.reload();
+        return
+       }
+
+
+
+        if (parseFloat(wdAMNT)<=parseFloat(avilableBalanceToWithdraw)){
+
+            bt = $(`#withdrawButtonINR`);
+            bt.attr("disabled", "").html("<i class='fa fa-spin fa-spinner'></i>&nbsp;&nbsp;Please wait...");
+           // $('#bankName').prop('readonly', true);
+           $('#Wdamount').prop('readonly', true);
+           $('#bankSelected').prop('disbaled', true);
+           // $('#acNumber').prop('readonly', true);
+           // $('#confAcNumber').prop('readonly', true);
+
+            fetch('/member/withdraw/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCookie('csrftoken')
+                },
+                body: JSON.stringify({ withdrawAmount: parseFloat(wdAMNT),selectedBank:bankSelected ,type: 'INR',what_for:'withdrawFund' })
+            })
+            .then(response => response.json())
+            .then(data => {
+
+              
+                if (data.status) {
+                    
+                    alert(data.msg);
+                    location.reload();
+                   
+                } else {
+                    alert(data.msg);
+
+                    location.reload();
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+
+        }else{
+            alert("You have Insufficient balance in your account to process this withdrawal");
+            location.reload();
+            return
+
+        }
+
+
+	}
+	
+
+	function withdraw() {
+		const amount = document.getElementById('amount').value;
+		const account = document.getElementById('walletAdd').value;
+		//const wdotp = document.getElementById('entotpwd').value;
+		const totalBal=`{{request.user.totalWalletBalance}}`;
+
+      
+		console.log(wdotp);
+		if (!account) {
+			alert('Please connect to wallet first.');
+			return;
+		}
+		if (!amount) {
+			alert('Please enter an amount.');
+			return;
+		}
+
+
+		if (amount && parseFloat(amount)>parseFloat(totalBal)) {
+			alert('Insufficient wallet balance');
+			return;
+		}
+
+	
+
+
+        bt = $(`#withdrawButton`);
+        bt.attr("disabled", "").html("<i class='fa fa-spin fa-spinner'></i>&nbsp;&nbsp;Please wait...");
+       // $('#bankName').prop('readonly', true);
+        $('#amount').prop('readonly', true);
+        $('#walletAdd').prop('readonly', true);
+		fetch('/member/withdraw/', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				'X-CSRFToken': getCookie('csrftoken')
+			},
+			body: JSON.stringify({ account: account, amount: amount,type:'USD',wtdotp: wdotp })
+		})
+		.then(response => response.json())
+		.then(data => {
+			if (data.success) {
+				location.reload();
+				alert('Withdrawal successful! Transaction Hash: ' + data.transactionHash);
+			} else {
+				location.reload();
+				alert('Withdrawal failed: ' + data.error);
+			}
+		})
+		.catch(error => {
+			console.error('Error:', error);
+		});
+
+
+	}
+	function withdrawRT() {
+		const amount = document.getElementById('amountRT').value;
+		const account = document.getElementById('walletAddRT').value;
+		//const wdotp = document.getElementById('entotpwd').value;
+		const totalBal=`{{request.user.totalRimberioWalletBalance}}`;
+
+      
+		//console.log(wdotp);
+		if (!account) {
+			alert('Please enter your wallet address');
+			return;
+		}
+		if (!amount) {
+			alert('Please enter correct amount.');
+			return;
+		}
+
+
+		if (amount && parseFloat(amount)>parseFloat(totalBal)) {
+			alert('Insufficient wallet balance');
+			return;
+		}
+
+		
+
+
+        bt = $(`#withdrawButtonRT`);
+        bt.attr("disabled", "").html("<i class='fa fa-spin fa-spinner'></i>&nbsp;&nbsp;Please wait...");
+        $('#amount').prop('readonly', true);
+        $('#walletAdd').prop('readonly', true);
+		fetch('/member/withdraw/', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				'X-CSRFToken': getCookie('csrftoken')
+			},
+			body: JSON.stringify({ account: account, amount: amount,type:'RT',what_for:'withdrawFund' })
+		})
+		.then(response => response.json())
+		.then(data => {
+			if (data.success) {
+				location.reload();
+				alert('Withdrawal successful!' + data.message);
+			} else {
+				location.reload();
+				alert('Withdrawal failed: ' + data.error);
+			}
+		})
+		.catch(error => {
+			console.error('Error:', error);
+		});
+
+
+	}
+
+
+
+	document.getElementById('withdrawButton').onclick = withdraw;
+	document.getElementById('withdrawButtonRT').onclick = withdrawRT;
+	document.getElementById('sendotpwithdarwal').onclick = sendOTPWithdrawal;
+
+
+</script>
+
+
+
+
+
+{% endblock %}
+
+
+
+

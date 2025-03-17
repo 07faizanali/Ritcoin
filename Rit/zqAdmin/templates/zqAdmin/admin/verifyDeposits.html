@@ -1,0 +1,303 @@
+{% extends 'zqAdmin/admin/layout/main.html' %}
+{% load customFilters  %}
+
+{% block 'content' %}
+    <div class="app-main__outer">
+        <div class="app-main__inner"
+             style="background-color: rgba(255, 255, 255, 0.775)">
+            <div class="app-page-title">
+                <div class="page-title-wrapper">
+                    <div class="page-title-heading">
+                        <div class="page-title-icon">
+                            <i class="pe-7s-wallet icon-gradient bg-plum-plate"> </i>
+                        </div>
+                        <div>
+                          Verify Deposits
+                            <div class="page-title-subheading"></div>
+                        </div>
+                    </div>
+                   
+                </div>
+            </div>
+            {% if allWithdrawals %}
+                <div class="row shadow"style="overflow-x:auto; height:auto;">
+                    <div class="col-lg-12">
+                        <div class="main-card mb-3 ">
+                            <div class="">
+                                <table id="myTable"  class="display" >
+                                    <thead>
+                                        <tr>
+                                            <th>Sr No.</th>
+                                            <th>Username</th>
+                                            <th>Address</th>
+                                            <th>Amount</th>
+
+                                            <th>COIN</th>
+                                            <th>Received Date</th>
+                                            <th>Action</th>
+                                            <th>TXNHASH</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for index,item in allWithdrawals %}
+                                            <tr>
+                                                <th scope="row">{{ index|add:1 }}</th>
+                                                <td>{{ item.memberid.username }}</td>
+                                                {% if item.withrawal_add %}
+                                                <td>{{item.withrawal_add}}</td>
+                                                {% else %}
+                                                <td>NA</td>
+                                                {% endif %}
+                                                
+                                                <td>{{ item.amount }}</td>
+                                                <td>USDT</td>
+                                                {% if item.trxndate %}
+                                                    <td class="">{{ item.trxndate }}</td>
+                                                {% else %}
+                                                    <td class="">NA</td>
+                                                {% endif %}
+
+
+
+                                              
+
+                                                <td>
+
+                                                    {% if  item.status == 'pending' %}
+                    
+                                                                                
+                    
+                    
+                                                        <div class="btn-group">
+                                                            <button 
+                                                            id="markDoneButton{{item.id}}"
+                                                            class="btn btn-primary" 
+                                                            hx-post="/zqadmin/verifyhelpUSDT/" 
+                                                            hx-trigger="click"
+                                                            hx-vals='{"srno": "{{ item.id }}", "status": "success"}'
+                                                            hx-target="#rescontainer2"
+                                                        
+                                                            
+                                                            
+                                                            >Approve
+                    
+                                                        
+                                                        
+                                                        </button>
+                                                        <button 
+                                                        id="appbtn"
+                                                        class="btn btn-danger" 
+                                                        hx-post="/zqadmin/verifyhelpUSDT/"
+                                                        hx-trigger="click"
+                                                        hx-vals='{"srno": "{{ item.id }}", "status": "rejected"' 
+                                                        hx-target="#rescontainer2"
+                                                        
+                                                        
+                                                        >Reject
+                    
+                                                    
+                                                        
+                                                    </button>
+                                                        </div>
+                    
+                    
+                                                        {% elif item.status == 'success' %}
+                    
+                                                        <button 
+                                                        class="btn btn-success" 
+                                                        
+                                                        disabled
+                                                        >Confirmed
+                    
+                                                    
+                                                        
+                                                    </button>
+                    
+                                                    {% elif item.status == 'rejected'  %}
+                    
+                                                    <button 
+                                                    class="btn btn-danger" 
+                                                    
+                                                    disabled
+                                                    >Rejected
+
+                                                </button>
+
+                                                {% comment %} {% else %}
+                                                <button 
+                                                class="btn btn-warning" 
+                                                
+                                                disabled
+                                                >Pending
+
+                                            </button> {% endcomment %}
+                    
+                                                    {% endif %}
+                    
+                                                </td>
+
+
+                                                <td>
+
+                                                                
+
+
+                                                    <div class="d-flex flex-column flex-sm-row align-items-stretch gap-2" style="max-width: 100%;">
+
+
+                                                    {% if not item.remark %}  
+                                                    
+                                                    
+                                                    <input 
+                                                    type="text" 
+                                                    class="form-control text-fix flex-grow-1" 
+                                                    placeholder="Enter Transaction Number" 
+                                                    id="transactionNumber{{ item.id }}" 
+                                                    name="transaction_number{{ item.id }}"
+                                                    style="width: 100%;"
+                                                    onblur="updateHxVals('{{ item.id }}', '0')"
+                                                    value=" {% if item.remark %} {{item.remark}}   {% endif %}"
+
+                                                    {% if item.remark %} disabled   {% endif %}
+                                                >
+                                                    
+                                                    
+                                                    
+                                                    {% endif %}
+
+                                                    
+                                        
+
+                                                    
+                                                  
+                                                </div>
+
+
+                                                </td>
+
+                                                {% comment %} <td>Paid</td>
+                                                <td><button class="btn-wide mb-2 mr-2 btn btn-success btngenrate btn-lg disabled mt-4">Paid</button></td> {% endcomment %}
+                                            </tr>
+                                        {% endfor %}
+                                    {% endif %}
+                                    </tbody>
+                                </table>
+                            </div>
+
+
+                            <div id="rescontainer2" style="display: none;"></div>
+                    </div>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock 'content' %}
+{% block 'footerScripts' %}
+
+<script>
+    $(document).ready(function() {
+        $('#myTable').DataTable();
+    });
+    
+
+{% comment %} function cancelWithdrawl(id) {
+
+    //console.log(id)
+    const response = confirm('Are you sure you want to cancel this withdrawal?');
+    //console.log(response)
+    //console.log(id)
+    if (response) {
+
+        $.ajax({
+            type: "POST",
+            url: "{% url 'cancelWithdrawl' %}",
+            data: {
+                transId: id,
+                csrfmiddlewaretoken: '{{ csrf_token }}'
+            }, success: function (result) {
+                // debugger;
+                var status = result.status;
+                if (parseInt(status) == 1) {
+                    alert(result.message);
+                    $("#sucessmsg").text(result.message);
+                    location.reload();
+                }
+                else {
+                    alert(result.message);
+                }
+            },
+            error: function (er) {
+                alert(er);
+            }
+        });
+       
+    }
+   
+} {% endcomment %}
+
+</script>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        let CSRF_TOKEN = '{{ csrf_token }}';
+        document.body.addEventListener('htmx:configRequest', (event) => {
+            event.detail.headers['X-CSRFToken'] = CSRF_TOKEN;
+        })
+       
+
+  
+
+        document.addEventListener('htmx:afterRequest', function(evt) {
+            // Put the JS code that you want to execute here
+            console.log('Handling response...');
+
+
+
+            const response = event.detail.xhr.response;
+            const data = JSON.parse(response);
+            //alert(data.msg);
+            console.log(data);
+
+            if (data.success) {
+                alert(data.msg);
+                
+            }else{
+                alert(data.msg);
+
+            }
+        });
+
+
+
+
+
+    });
+
+
+
+
+
+    
+</script>
+
+
+<script>
+    // Function to update hx-vals when input field loses focus
+    function updateHxVals(id) {
+        const transactionNumber = document.getElementById("transactionNumber" + id).value;
+        const button = document.getElementById("markDoneButton" + id);
+
+        // Update the hx-vals attribute dynamically
+        button.setAttribute('hx-vals', JSON.stringify({
+            "srno": id, 
+            "transaction_number": transactionNumber
+        }));
+    }
+</script>
+
+
+{% endblock %}

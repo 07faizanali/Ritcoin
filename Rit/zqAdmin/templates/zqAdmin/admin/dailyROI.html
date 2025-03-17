@@ -1,0 +1,191 @@
+{% extends 'zqUsers/member/layout/main.html' %}
+{% load customFilters  %}
+
+{% block 'content' %}
+    <div class="app-main__outer">
+        <div class="app-main__inner">
+            <div class="app-page-title">
+                <div class="page-title-wrapper">
+                    <div class="page-title-heading">
+                        <div class="page-title-icon">
+                            <i class="pe-7s-glasses icon-gradient bg-love-kiss">
+                            </i>
+                        </div>
+                        <div>
+                            Mining Bonus
+                            <div class="page-title-subheading"></div>
+                        </div>
+                    </div>
+                 
+                </div>
+            </div>
+            <div class="row" style="overflow-x:auto;">
+                <div class="col-lg-12">
+                    <div class="main- mb-3 ">
+                        {% if listTxn  %}
+                        <div class="">
+
+                          
+                            <table id="myTable"  class="display">
+                                <thead>
+                                    <tr>
+                                        <th>Sr No.</th>
+                                        <th>Date</th>
+                                        <th>Total Assets(ZAAN)</th>
+                                        <th>Total Assets(USDT)</th>
+                                        {% comment %} <th>Investment</th> {% endcomment %}
+                                       
+                                        {% comment %} <th>ROI</th> {% endcomment %}
+                                        <th>Mining(ZAAN)</th>
+                                        <th>Mining(USDT)</th>
+                                        <th>ROI Days</th>
+                                        <th>Remark</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    
+                                    
+                                 
+                                {% for index,txn in  listTxn %}
+                                <tr>
+                                    <th scope="row">{{index|add:1}}</th>
+                                    <td>{{txn.roi_date|date:"d-m-y"}}</td>
+                                    <td>{{txn.total_sbg}}</td>
+                                    <td> ${% mul txn.total_sbg ZQLRate %}</td>
+                                    {% comment %} <td>{{txn.total_sbg}}</td> {% endcomment %}
+                                    <td>{{txn.roi_sbg}}</td>
+                                    {% comment %} <td>{{txn.roi_sbg|mul:ZQLRate}}</td> {% endcomment %}
+                                   <td> ${% mul txn.roi_sbg ZQLRate %}</td>
+                                    <td>{{txn.roi_days}}</td>
+                                    <td>{{txn.remark}}</td>
+                                </tr>
+
+                                {% endfor  %}
+
+                                <tfoot class="text-secondry " style="background-color:lightgray;">
+                                    <tr>
+                                        {% comment %} <th>Total(ZAAN):</th> {% endcomment %}
+                                        <th >Total:</th>
+                                        <th></th>
+                                        <th class="text-danger">{{totalInvestement}}(ZAAN)</th>
+                                        {% if totalInvestement   %}
+                                        <th class="text-danger">{% mul totalInvestement ZQLRate %}(USDT)</th>
+                                        {% else   %}
+                                        <th class="text-danger">0(USDT)</th>
+                                        {% endif   %}
+
+                                        {% if totalROI   %}
+                                        <th class="text-danger">{{totalROI}}(ZAAN)</th>
+                                        
+                                        
+                                        <th class="text-danger">{% mul totalROI ZQLRate %}(USDT)</th>
+                                        {% else   %}
+                                        <th class="text-danger">0(ZAAN)</th>
+                                        <th class="text-danger">0(USDT)</th>
+                                        {% endif   %}
+                                        {% comment %} <th>commented part< {% endcomment %}
+                                        <th></th>
+                                        <th></th>
+    
+                                        <th scope="row"></th>
+                                        <th scope="row" class='text-danger'> </th>
+                                      
+                                    </tr>
+                                </tfoot>
+                                {% comment %} <tr>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+
+                                    <th scope="row">Total(USDT):</th>
+                                    <th scope="row" class='text-danger'>${% mul total ZQLRate %}</th>
+                                  
+                                </tr> {% endcomment %}
+
+
+
+                                    {% comment %} <tr>
+                                        <th scope="row">1</th>
+                                        <td>18-09-2022</td>
+                                        <td>10000620.98</td>
+                                        <td>200012.42</td>
+                                        <td>240</td>
+                                        <td>Roi for 1.00006e+007 ZQL Coin is 2%</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">2</th>
+                                        <td>18-09-2022</td>
+                                        <td>10000620.98</td>
+                                        <td>200012.42</td>
+                                        <td>240</td>
+                                        <td>Roi for 1.00006e+007 ZQL Coin is 2%</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">3</th>
+                                        <td>18-09-2022</td>
+                                        <td>10000620.98</td>
+                                        <td>200012.42</td>
+                                        <td>240</td>
+                                        <td>Roi for 1.00006e+007 ZQL Coin is 2%</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">4</th>
+                                        <td>18-09-2022</td>
+                                        <td>10000620.98</td>
+                                        <td>200012.42</td>
+                                        <td>240</td>
+                                        <td>Roi for 1.00006e+007 ZQL Coin is 2%</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">5</th>
+                                        <td>18-09-2022</td>
+                                        <td>10000620.98</td>
+                                        <td>200012.42</td>
+                                        <td>240</td>
+                                        <td>Roi for 1.00006e+007 ZQL Coin is 2%</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">6</th>
+                                        <td>18-09-2022</td>
+                                        <td>10000620.98</td>
+                                        <td>200012.42</td>
+                                        <td>240</td>
+                                        <td>Roi for 1.00006e+007 ZQL Coin is 2%</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">7</th>
+                                        <td>18-09-2022</td>
+                                        <td>10000620.98</td>
+                                        <td>200012.42</td>
+                                        <td>240</td>
+                                        <td>Roi for 1.00006e+007 ZQL Coin is 2%</td>
+                                    </tr> {% endcomment %}
+
+
+                                </tbody>
+                            </table>
+
+                           
+                        </div>
+                        {% else  %}
+
+                        <div class="row">
+                            <div class="col-md-12 ">
+                                <div class=" mb-3  ">
+                                    <div class="card-body mt-5 mb-5 text-center bg-white">
+                                        <span style="color:red;">No Records found</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {% endif   %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock 'content' %}

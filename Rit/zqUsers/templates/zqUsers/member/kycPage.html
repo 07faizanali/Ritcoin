@@ -1,0 +1,427 @@
+
+
+{% extends 'zqUsers/member/layout/main.html' %}
+
+{% load static %}
+{% load customFilters %}
+
+
+
+{% block 'content' %}
+
+{% comment %} <div class="content-body"> {% endcomment %}
+    <div class="container-fluid"style="">
+        <div class="row" >
+            <div class="col-xl-12 col-lg-12 ">
+                <div class="row" >
+                    <div class="col-xl-12">
+                        <div class="card p-5 " disabled>
+                          
+                            <div class="row ">
+                                <div class="col-xs-12">
+                                    <div class="option-identity-wrapper ">
+                                        <div class="tab-head ">
+                                             <h3 class="bold no-mt">Update Email and username</h3> 
+                                            <div class="row">
+                                            <div class="col-lg-5 ">
+                                                <div class="form-group">
+                                                    <label class="form-label">Username</label>	
+                                                    <div class="controls">
+                                                        <input type="text" class="form-control" id="username"    name="username" placeholder="Enter username">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-5 ">
+                                                <div class="form-group">
+                                                    <label class="form-label">Email</label>
+                                             
+                                                    <div class="controls">
+                                                        <input type="text" class="form-control" id="emailId"    name="email" placeholder="Enter Email">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" id="emailOTPBox" style="display:None;">
+                                                    <label class="form-label">Enter OTP</label>
+                                                    <span class="desc">(2fa)</span> 
+                                                    <div class="controls">
+                                                        <input type="text"
+                                                               class="form-control"
+                                                               id="emailOTP"
+                                                               name="emailOTP"
+                                                               placeholder="Enter OTP">
+                                                        <span id="sendSpanId" class="text-danger">enter otp sent to your email</span>
+                                                        <div class="col-sm-3 no-pr">
+                                                            <button type="button"
+                                                                    class="btn btn-primary mt-30 btn-corner"
+                                                                    onclick="verifyMailOTP()">
+                                                                <i class="fa fa-check"></i> Verify
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2 mt-4">
+                                                <button id="sendEmailOTP"
+                                                        type="button"
+                                                        class="btn  btn-primary  mt-30 btn-corner"
+                                                        onclick="sendMailOTP()">
+                                                    <i class="fa fa-check"></i> Update
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <p><a href="#" target="_blank">https://www.bing.com/webmasters/help/url-submission-62f2860b</a></p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                           
+                </div>
+            </div>
+            <div class="col-xl-12 col-lg-12">
+                <div class="row" >
+                    <div class="col-xl-12">
+                        <div class="card p-5">
+                          
+                            <div class="row ">
+                                <div class="col-xs-12">
+                                    <div class="option-identity-wrapper ">
+                                        <div class="tab-head ">
+                                             <h3 class="bold no-mt">Update Email and username</h3> 
+                                            <div class="row">
+                                            <div class="col-lg-5 ">
+                                                <div class="form-group">
+                                                    <label class="form-label">Username</label>	
+                                                    <div class="controls">
+                                                        <input type="text" class="form-control" id="username"    name="username" placeholder="Enter username">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-5 ">
+                                                <div class="form-group">
+                                                    <label class="form-label">Email</label>
+                                             
+                                                    <div class="controls">
+                                                        <input type="text" class="form-control" id="emailId"    name="email" placeholder="Enter Email">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" id="emailOTPBox" style="display:None;">
+                                                    <label class="form-label">Enter OTP</label>
+                                                    <span class="desc">(2fa)</span> 
+                                                    <div class="controls">
+                                                        <input type="text"
+                                                               class="form-control"
+                                                               id="emailOTP"
+                                                               name="emailOTP"
+                                                               placeholder="Enter OTP">
+                                                        <span id="sendSpanId" class="text-danger">enter otp sent to your email</span>
+                                                        <div class="col-sm-3 no-pr">
+                                                            <button type="button"
+                                                                    class="btn btn-primary mt-30 btn-corner"
+                                                                    onclick="verifyMailOTP()">
+                                                                <i class="fa fa-check"></i> Verify
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2 mt-4">
+                                                <button id="sendEmailOTP"
+                                                        type="button"
+                                                        class="btn  btn-primary  mt-30 btn-corner"
+                                                        onclick="sendMailOTP()">
+                                                    <i class="fa fa-check"></i> Update
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <p><a href="#" target="_blank">https://www.bing.com/webmasters/help/url-submission-62f2860b</a></p>
+ 
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                           
+                </div>
+            </div>
+            <div class="col-xl-12 col-lg-12">
+                <div class="row" >
+                    <div class="col-xl-12">
+                        <div class="card p-5">
+                          
+                            <div class="row ">
+                                <div class="col-xs-12">
+                                    <div class="option-identity-wrapper ">
+                                        <div class="tab-head ">
+                                             <h3 class="bold no-mt">Update Email and username</h3> 
+                                            <div class="row">
+                                            <div class="col-lg-5 ">
+                                                <div class="form-group">
+                                                    <label class="form-label">Username</label>	
+                                                    <div class="controls">
+                                                        <input type="text" class="form-control" id="username"    name="username" placeholder="Enter username">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-5 ">
+                                                <div class="form-group">
+                                                    <label class="form-label">Email</label>
+                                             
+                                                    <div class="controls">
+                                                        <input type="text" class="form-control" id="emailId"    name="email" placeholder="Enter Email">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" id="emailOTPBox" style="display:None;">
+                                                    <label class="form-label">Enter OTP</label>
+                                                    <span class="desc">(2fa)</span> 
+                                                    <div class="controls">
+                                                        <input type="text"
+                                                               class="form-control"
+                                                               id="emailOTP"
+                                                               name="emailOTP"
+                                                               placeholder="Enter OTP">
+                                                        <span id="sendSpanId" class="text-danger">enter otp sent to your email</span>
+                                                        <div class="col-sm-3 no-pr">
+                                                            <button type="button"
+                                                                    class="btn btn-primary mt-30 btn-corner"
+                                                                    onclick="verifyMailOTP()">
+                                                                <i class="fa fa-check"></i> Verify
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2 mt-4">
+                                                <button id="sendEmailOTP"
+                                                        type="button"
+                                                        class="btn  btn-primary  mt-30 btn-corner"
+                                                        onclick="sendMailOTP()">
+                                                    <i class="fa fa-check"></i> Update
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <p><a href="#" target="_blank">https://www.bing.com/webmasters/help/url-submission-62f2860b</a></p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                          
+                </div>
+            </div>
+            <div class="col-xl-12 col-lg-12">
+                <div class="row" >
+                    <div class="col-xl-12">
+                        <div class="card p-5">
+                           
+                            <div class="row ">
+                                <div class="col-xs-12">
+                                    <div class="option-identity-wrapper ">
+                                        <div class="tab-head ">
+                                             <h3 class="bold no-mt">Update Email and username</h3> 
+                                            <div class="row">
+                                            <div class="col-lg-5 ">
+                                                <div class="form-group">
+                                                    <label class="form-label">Username</label>	
+                                                    <div class="controls">
+                                                        <input type="text" class="form-control" id="username"    name="username" placeholder="Enter username">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-5 ">
+                                                <div class="form-group">
+                                                    <label class="form-label">Email</label>
+                                             
+                                                    <div class="controls">
+                                                        <input type="text" class="form-control" id="emailId"    name="email" placeholder="Enter Email">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" id="emailOTPBox" style="display:None;">
+                                                    <label class="form-label">Enter OTP</label>
+                                                    <span class="desc">(2fa)</span> 
+                                                    <div class="controls">
+                                                        <input type="text"
+                                                               class="form-control"
+                                                               id="emailOTP"
+                                                               name="emailOTP"
+                                                               placeholder="Enter OTP">
+                                                        <span id="sendSpanId" class="text-danger">enter otp sent to your email</span>
+                                                        <div class="col-sm-3 no-pr">
+                                                            <button type="button"
+                                                                    class="btn btn-primary mt-30 btn-corner"
+                                                                    onclick="verifyMailOTP()">
+                                                                <i class="fa fa-check"></i> Verify
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2 mt-4">
+                                                <button id="sendEmailOTP"
+                                                        type="button"
+                                                        class="btn  btn-primary  mt-30 btn-corner"
+                                                        onclick="sendMailOTP()">
+                                                    <i class="fa fa-check"></i> Update
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <p><a href="#" target="_blank">https://www.bing.com/webmasters/help/url-submission-62f2860b</a></p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                           
+                </div>
+            </div>
+            <div class="col-xl-12 col-lg-12">
+                <div class="row" >
+                    <div class="col-xl-12">
+                        <div class="card p-5">
+                          
+                            <div class="row ">
+                                <div class="col-xs-12">
+                                    <div class="option-identity-wrapper ">
+                                        <div class="tab-head ">
+                                             <h3 class="bold no-mt">Update Email and username</h3> 
+                                            <div class="row">
+                                            <div class="col-lg-5 ">
+                                                <div class="form-group">
+                                                    <label class="form-label">Username</label>	
+                                                    <div class="controls">
+                                                        <input type="text" class="form-control" id="username"    name="username" placeholder="Enter username">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-5 ">
+                                                <div class="form-group">
+                                                    <label class="form-label">Email</label>
+                                             
+                                                    <div class="controls">
+                                                        <input type="text" class="form-control" id="emailId"    name="email" placeholder="Enter Email">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" id="emailOTPBox" style="display:None;">
+                                                    <label class="form-label">Enter OTP</label>
+                                                    <span class="desc">(2fa)</span> 
+                                                    <div class="controls">
+                                                        <input type="text"
+                                                               class="form-control"
+                                                               id="emailOTP"
+                                                               name="emailOTP"
+                                                               placeholder="Enter OTP">
+                                                        <span id="sendSpanId" class="text-danger">enter otp sent to your email</span>
+                                                        <div class="col-sm-3 no-pr">
+                                                            <button type="button"
+                                                                    class="btn btn-primary mt-30 btn-corner"
+                                                                    onclick="verifyMailOTP()">
+                                                                <i class="fa fa-check"></i> Verify
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2 mt-4">
+                                                <button id="sendEmailOTP"
+                                                        type="button"
+                                                        class="btn  btn-primary  mt-30 btn-corner"
+                                                        onclick="sendMailOTP()">
+                                                    <i class="fa fa-check"></i> Update
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <p><a href="#" target="_blank">https://www.bing.com/webmasters/help/url-submission-62f2860b</a></p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                          
+                </div>
+            </div>
+            <div class="col-xl-12 col-lg-12">
+                <div class="row" >
+                    <div class="col-xl-12">
+                        <div class="card p-5">
+                        
+                            <div class="row ">
+                                <div class="col-xs-12">
+                                    <div class="option-identity-wrapper ">
+                                        <div class="tab-head ">
+                                             <h3 class="bold no-mt">Update Email and username</h3> 
+                                            <div class="row">
+                                            <div class="col-lg-5 ">
+                                                <div class="form-group">
+                                                    <label class="form-label">Username</label>	
+                                                    <div class="controls">
+                                                        <input type="text" class="form-control" id="username"    name="username" placeholder="Enter username">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-5 ">
+                                                <div class="form-group">
+                                                    <label class="form-label">Email</label>
+                                             
+                                                    <div class="controls">
+                                                        <input type="text" class="form-control" id="emailId"    name="email" placeholder="Enter Email">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" id="emailOTPBox" style="display:None;">
+                                                    <label class="form-label">Enter OTP</label>
+                                                    <span class="desc">(2fa)</span> 
+                                                    <div class="controls">
+                                                        <input type="text"
+                                                               class="form-control"
+                                                               id="emailOTP"
+                                                               name="emailOTP"
+                                                               placeholder="Enter OTP">
+                                                        <span id="sendSpanId" class="text-danger">enter otp sent to your email</span>
+                                                        <div class="col-sm-3 no-pr">
+                                                            <button type="button"
+                                                                    class="btn btn-primary mt-30 btn-corner"
+                                                                    onclick="verifyMailOTP()">
+                                                                <i class="fa fa-check"></i> Verify
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2 mt-4">
+                                                <button id="sendEmailOTP"
+                                                        type="button"
+                                                        class="btn  btn-primary  mt-30 btn-corner"
+                                                        onclick="sendMailOTP()">
+                                                    <i class="fa fa-check"></i> Update
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <p><a href="#" target="_blank">https://www.bing.com/webmasters/help/url-submission-62f2860b</a></p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                           
+                </div>
+            </div>
+        </div>
+   
+        
+    </div>
+
+
+
+	
+
+
+
+{% endblock  %}
+
+
+{% block 'addFooterScripts' %}
+
+
+
+
+
+
+{% endblock %}
+

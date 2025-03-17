@@ -1,0 +1,399 @@
+{% extends 'zqUsers/member/layout/main.html' %}
+{% load customFilters  %}
+
+{% block 'content' %}
+    <div class="app-main__outer" >
+        <div class="app-main__inner" style="background-color: rgba(255, 255, 255, 0.775);">
+            <div class="app-page-title">
+                <div class="page-title-wrapper">
+                    <div class="page-title-heading">
+                        <div class="page-title-icon">
+                            <i class="pe-7s-drawer icon-gradient bg-happy-itmeo">
+                            </i>
+                        </div>
+                        <div>
+                            P2P Transfer
+                            <div class="page-title-subheading">Transfer Zaan coin to  Zaan Queril members through their username</div>
+                        </div>
+                    </div>
+                    <div class="page-title-actions">
+                       
+                        <div class="d-inline-block dropdown">
+                         
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class=" p-5 shadow" >
+                <h6 style="font-weight: 600;color: red;text-align: center;">
+                    BALANCE : <span style="color: green">&nbsp;{{ totalamount }} (Zaan COIN)</span>
+                </h6>
+                <input type="hidden" id="useremail" value="{{ user.email }}" />
+                <div class="row mt-3">
+                    {% if True %}
+                        <div class="col-md-4 text-center mt-2">
+                            <input type="hidden"  value="{{ totalamount }}" id="totalamnt" />
+                            {% comment %} <div class="col-md-4 text-center mt-2"> {% endcomment %}
+                                <h6 class="mt-4" style="font-weight: 600;">Enter Username:</h6>
+                            </div>
+                            
+                        
+                       
+                            
+                        <div class="col-md-5">
+                            <div class="input-group mt-4">
+                                <div class="input-group-prepend"></div>
+                                <input type="text"
+                                id="enteredUsername"
+                                class="form-control"
+                               >
+                                {% comment %} <input placeholder="Enter ZQL Coin"
+                                       type="number"
+                                       class="form-control"
+                                       id="amount"> {% endcomment %}
+                            </div>
+                        </div>
+                        {% comment %} <div class="col-md-5">
+                            <div class="input-group mt-4">
+                                <div class="input-group-prepend"></div>
+                                <input placeholder="Enter Coin" type="number" class="form-control">
+                            </div>
+                        </div> {% endcomment %}
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-4 text-center mt-2">
+                            <h6 class="mt-4" style="font-weight: 600;">Enter Zaan Coin</h6>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="input-group mt-4">
+                                <div class="input-group-prepend"></div>
+                                <input placeholder="Enter Zaan Coin"
+                                       type="number"
+                                       class="form-control"
+                                       id="amount">
+                            </div>
+                        </div>
+                    </div>
+                    <button class="mb-2 mt-5 mr-2 btn btn-outline-primary btn-lg btn-block"
+                            style="font-weight: 700"
+                            id="btnsubmit"
+                            onclick="sendotphere()">Send OTP</button>
+                    {% comment %} <button class="mb-2 mr-2 btn btn-outline-primary btn-lg btn-block" id="btnsubmit" onclick="sendotphere()" style="letter-spacing: 1px; font-size: 15px;">Send OTP</button> {% endcomment %}
+                </div>
+               <div class="card">
+                <div class="card-body" id="tblotp" style="display: none">
+                    <div class="row mb-4">
+                        <div class="col-sm-2 text-center ml-5 mt-4 ">
+                            <h5 class="card-title pt-2">Enter OTP here </h5>
+                        </div>
+                        <div class="col-sm-6 mt-4">
+                
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="otp"  placeholder="Enter OTP">
+                                <div class="input-group-append">
+                                </div>
+                            </div>
+                            <br />
+                            <span id="otptxt" style="color: red;"></span>
+                        </div>
+                        <div class="col-sm-3 mt-4 pt-2">
+                            <a href="" id="btrenotp" onclick="resendotp()" style="display: none;"><span>Resend OTP</span></a>
+                
+                        </div>
+                
+                    </div>
+                    <div class="row">
+                        <div class="col-md-11 text-center ml-5 mt-4 mb-5 ">
+                
+                            <button class="mb-2 mr-2 btn btn-outline-primary btn-lg btn-block" id="btnotp" onclick="confirmedotp()" style="letter-spacing: 1px; font-size: 15px;">Proceed</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+                <div class="row mt-4 " style="overflow-x:auto;">
+                    {% if allTxns %}
+                        <div class="col-lg-12">
+                            <div class="main- mb-3 ">
+                                <div class="">
+                                    <table class="mb-0 table">
+                                        <thead>
+                                            <tr>
+                                                <th>Transferred By</th>
+                                                <th>Transferred To</th>
+                                                <th>Transferred Mode</th>
+                                                {% comment %} <th>Type</th> {% endcomment %}
+                                                <th>Amount(Zaan)</th>
+                                                <th>Amount(USDT)</th>
+                                                <th>Date</th>
+                                                <th>Remark</th>
+                                                <th>Transaction Type</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for item in allTxns %}
+                                                <tr>
+                                                    <td>{{ item.col5 }}</td>
+                                                    <td>{{ item.col6 }}</td>
+                                                    <td>P2P</td>
+                                                    <td>{{ item.amount }}</td>
+                                                    <td>${% mul item.amount ZQLRate   %}</td>
+                                                    <td>{{ item.txn_date }}</td>
+                                                    <td>{{ item.col4 }}</td>
+                                                    <td>{{ item.txn_type }}</td>
+                                                    <td class="text-success">Success</td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                        
+                                        <tfoot>
+                                            <tr>
+                                                <th rowspan="1" colspan="2" style="text-align:right;">Total</th>
+                                                <th rowspan="1" colspan="5">${{ total }}</th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                    {% endif %}
+                    </div>
+                {% else %}
+                    <center><span style="color:red;">You don't have any ZQL Coin</span></center>
+                {% endif %}
+            
+        </div>
+    </div>
+</div>
+</div>
+<script>
+
+
+    function sendotphere() {
+        //debugger;
+        var entUsername = $("#enteredUsername").val();
+        var amount = $("#amount").val();
+        var volumes = $("#totalamnt").val();
+        //var useremail = $("#useremail").val();
+
+        if (parseFloat(amount) <= parseFloat(volumes)) {
+            $("#btnsubmit").text('Please wait...');
+            $("#btnsubmit").attr("disabled", "disabled");
+            $.ajax({
+                url: "/member/sendOTPP2PTransfer/",
+                type: "post",
+                data: {
+                    entUsername: entUsername,
+                    amount: amount,
+                    csrfmiddlewaretoken: '{{ csrf_token }}'
+                },
+                success: function (resultdata) {
+                    var status = resultdata.status;
+                    if (parseInt(status) == 1) {
+                        $("#tbltopup").css("display", "none");
+                        $("#tblotp").css("display", "block");
+                        $("#otptxt").text('Your OTP will expire within 5 minutes.');
+                        alert(resultdata.message);
+                        setTimeout(showresendotp, 300000);
+                    }
+                    else {
+                        $("#email").val('');
+                        $("#amount").val('');
+                        $("#btnsubmit").text('Proceed');
+                        $("#btnsubmit").removeAttr("disabled");
+                        alert(resultdata.message);
+
+                    }
+
+                },
+                error: function (er) {
+                    alert("Something went wrong. Please try again later");
+                    $("#btnsubmit").text('Proceed');
+                    $("#btnsubmit").removeAttr("disabled");
+
+                }
+            });
+        }
+        else {
+            alert("Please enter correct volume");
+            $("#amount").val('');
+        }
+
+    }
+
+
+
+    {% comment %} function () {
+        //debugger;
+        var entUsername = $("#enteredUsername").val();
+        var amount = $("#amount").val();
+        var volumes = $("#totalamnt").val();
+        //var useremail = $("#useremail").val();
+
+        if (parseFloat(amount) <= parseFloat(volumes)) {
+            $("#btnsubmit").text('Please wait...');
+            $("#btnsubmit").attr("disabled", "disabled");
+            $.ajax({
+                url: "/member/sendOTPP2PTransfer/",
+                type: "post",
+                data: {
+                    entUsername: entUsername,
+                    amount: amount,
+                    csrfmiddlewaretoken: '{{ csrf_token }}'
+                },
+                success: function (resultdata) {
+                    var status = resultdata.status;
+                    if (parseInt(status) == 1) {
+                        $("#tbltopup").css("display", "none");
+                        $("#tblotp").css("display", "block");
+                        $("#otptxt").text('Your OTP will expire within 5 minutes.');
+                        alert(resultdata.message);
+                        setTimeout(showresendotp, 300000);
+                    }
+                    else {
+                        $("#email").val('');
+                        $("#amount").val('');
+                        $("#btnsubmit").text('Proceed');
+                        $("#btnsubmit").removeAttr("disabled");
+                        alert(resultdata.message);
+
+                    }
+
+                },
+                error: function (er) {
+                    alert("Something went wrong. Please try again later");
+                    $("#btnsubmit").text('Proceed');
+                    $("#btnsubmit").removeAttr("disabled");
+
+                }
+            });
+        }
+        else {
+            alert("Please enter correct volume");
+            $("#amount").val('');
+        }
+
+    } {% endcomment %}
+
+    function showresendotp() {
+        debugger;
+
+        var email = $("#email").val();
+        $.ajax({
+            url: "/member/expiredotpfortopup",
+            type: "post",
+            data: {
+                email: email,
+                csrfmiddlewaretoken: '{{ csrf_token }}'
+            },
+            success: function (resultdata) {
+                var status = resultdata.status;
+                if (parseInt(status) == 1) {
+                    $("#btnotp").css("display", "none");
+                    $("#btrenotp").css("display", "block");
+                    $("#otptxt").text('Your OTP is expired');
+                    alert(resultdata.message);
+                }
+                else {
+                    alert(resultdata.message);
+                    $("#btnsubmit").text('Proceed');
+                    $("#btnsubmit").removeAttr("disabled");
+                }
+
+            },
+            error: function (er) {
+                alert("Something went wrong. Please try again later");
+                $("#btnsubmit").text('Proceed');
+                $("#btnsubmit").removeAttr("disabled");
+
+            }
+        });
+    }
+
+    function resendotp() {
+        debugger;
+
+        var email = $("#email").val();
+        $.ajax({
+            url: "/member/resendotp",
+            type: "post",
+            data: {
+                email: email
+            },
+            success: function (resultdata) {
+                var status = resultdata.status;
+                if (parseInt(status) == 1) {
+                    $("#btnotp").css("display", "block");
+                    $("#btrenotp").css("display", "none");
+                    $("#otptxt").text('Your OTP will expire within 5 minutes.');
+                    $("#otp").val('');
+                    alert(resultdata.message);
+                    setTimeout(showresendotp, 300000);
+                }
+                else {
+                    alert(resultdata.message);
+                }
+
+            },
+            error: function (er) {
+                alert("Something went wrong. Please try again later");
+                $("#btnsubmit").text('Proceed');
+                $("#btnsubmit").removeAttr("disabled");
+
+            }
+        });
+    }
+
+    function confirmedotp() {
+        var entUsername = $("#enteredUsername").val();
+        var amount = $("#amount").val();
+        var volumes = $("#totalamnt").val();
+        //var email = $("#email").val();
+        //var amount = $("#amount").val();
+        //var volumes = $("#totalamnt").val();
+        var otp = $("#otp").val();
+        if (parseFloat(amount) <= parseFloat(volumes)) {
+            $("#btnsubmit").text('Please wait...');
+            $("#btnsubmit").attr("disabled", "disabled");
+            $.ajax({
+                url: "/member/sendOTPP2PTransferVerify/",
+                type: "post",
+                data: {
+                    username: entUsername,
+                    amount: amount,
+                    otp: otp,
+                    csrfmiddlewaretoken: '{{ csrf_token }}'
+                },
+                success: function (resultdata) {
+                    var status = resultdata.status;
+                    if (parseInt(status) == 1) {
+                        alert(resultdata.message);
+                        location.reload();
+                    }
+                    else {
+
+                        alert(resultdata.message);
+                        $("#otp").val('');
+                    }
+
+                },
+                error: function (er) {
+                    alert("Something went wrong. Please try again later");
+                    $("#btnsubmit").text('Proceed');
+                    $("#btnsubmit").removeAttr("disabled");
+
+                }
+            });
+        }
+        else {
+            alert("Please enter correct volume");
+        }
+    }
+
+
+
+</script>
+{% endblock %}

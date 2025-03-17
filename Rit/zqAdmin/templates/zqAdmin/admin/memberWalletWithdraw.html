@@ -1,0 +1,359 @@
+{% extends 'zqAdmin/admin/layout/main.html' %} 
+{% load customFilters  %}
+
+{% block 'content' %}
+    <div class="app-main__outer" >
+        <div class="app-main__inner" style="background-color: rgba(255, 255, 255, 0.775);">
+            <div class="app-page-title">
+                <div class="page-title-wrapper">
+                    <div class="page-title-heading">
+                        <div class="page-title-icon">
+                            <i class="pe-7s-drawer icon-gradient bg-happy-itmeo">
+                            </i>
+                        </div>
+                        <div>
+                           Withdraw from member account
+                        </div>
+                    </div>
+                    <div class="page-title-actions">
+
+                       
+
+
+                        <div class="d-inline-block dropdown">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class=" p-5 shadow" >
+
+
+                <div class="row mt-3">
+                
+                        <div class="col-md-4 text-center mt-2">
+                            <input type="hidden"  value="" id="totalamnt" />
+                                <h6 class="mt-4" style="font-weight: 600;">Enter MemberID</h6>
+                        </div>
+
+                        <div class="col-md-5">
+                            <div class="input-group mt-4">
+                                <div class="input-group-prepend"></div>
+                                <input type="text"
+                                id="memId"
+                                class="form-control"
+                                value=""
+                                
+                                placeholder="enter memberid ">
+                              
+                            </div>
+                        </div>
+                        
+                </div>
+
+                <div class="row mt-3 ">
+                    <div class="col-md-4 text-center mt-2">
+                        <h6 class="mt-4" style="font-weight: 600;">Enter Amount</h6>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="input-group mt-4">
+                            <div class="input-group-prepend"></div>
+                            <input placeholder="enter amount to withdraw"
+                                    type="number"
+                                    class="form-control"
+                                    id="amount">
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="row">
+              
+                    
+                    <div class="col-md-2"   id="activateMemberIdBtn"> 
+                           
+
+                            <button class="mb-2 mt-5 mr-2 btn-primary text-center  btn-sm btn-block justify-content-center d-flex align-item-center "
+                            style="justify-content:center;"
+                           
+                            onclick="activateMemberId()">Withdraw Fund</button>
+
+                    
+                    </div>
+                    <div class="col-md-5"></div>
+                </div>
+
+
+                
+
+            </div>
+            {% comment %} new section starts here {% endcomment %}
+
+        </div>
+            </div>
+            
+            
+            </div>
+
+         
+            
+        </div>
+      
+    </div>
+</div>
+</div>
+<script>
+
+
+
+    
+
+    function sendOTPToactivateMemId()  {
+        //debugger;
+        //var email = $("#email").val();
+        var amount = $("#amount").val();
+        var memId = $("#memId").val();
+
+        //console.log(amount,memId);
+        //amount=parseFloat(amount)/(ZQLRate);
+        //var volumes = $("#totalamnt").val();
+        //var useremail = $("#useremail").val();
+
+        if (memId!="" &&  parseFloat(amount) > parseFloat(0)) {
+
+            //$("#btnsubmit").text('Please wait...');
+            //$("#btnsubmit").attr("disabled", "disabled");
+            amount=parseFloat(amount)/({{ZQLRate}});
+            $.ajax({
+                url: "/zqadmin/sendOTPToActivateId/",
+                type: "post",
+                data: {
+                    amount: amount,
+                    memberId: memId,
+                    csrfmiddlewaretoken: '{{ csrf_token }}'
+                },
+                success: function (resultdata) {
+                    var status = resultdata.status;
+                    if (parseInt(status) == 1) {
+                        $("#otpDIV").css("display", "block");
+                        $("#sendOTPBtn").css("display", "none");
+                        $("#activateMemberIdBtn").css("display", "block");
+
+                        /*
+                        $("#tblotp").css("display", "block");
+                        $("#otptxt").text('Your OTP will expire within 5 minutes.');
+                        */
+                        alert(resultdata.msg);
+                        //setTimeout(showresendotp, 300000);
+                    }
+                    else {
+                        /**/
+                        //$("#email").val('');
+                        //$("#amount").val('');
+                        //$("#btnsubmit").text('Proceed');
+                        //$("#btnsubmit").removeAttr("disabled");
+                        alert(resultdata.msg);
+
+                    }
+
+                },
+                error: function (er) {
+                    alert("Something went wrong. Please try again later");
+                   // $("#btnsubmit").text('Proceed');
+                   // $("#btnsubmit").removeAttr("disabled");
+                   alert(resultdata.msg);
+
+                }
+            });
+        }
+        else {
+            alert("Please enter correct volume");
+            $("#amount").val('');
+        }
+
+    }
+    function activateMemberId()  {
+        //debugger;
+        //var email = $("#email").val();
+        var amount = $("#amount").val();
+        var memId = $("#memId").val();
+        {% comment %} var entOTP = $("#entOTP").val(); {% endcomment %}
+
+        //console.log(amount,memId);
+        //amount=parseFloat(amount)/(ZQLRate);
+        //var volumes = $("#totalamnt").val();
+        //var useremail = $("#useremail").val();
+
+        if (memId!="" &&  parseFloat(amount) > parseFloat(0)) {
+
+            //$("#btnsubmit").text('Please wait...');
+            //$("#btnsubmit").attr("disabled", "disabled");
+           // amount=parseFloat(amount)/({{ZQLRate}});
+            $.ajax({
+                url: "{% url 'memberWalletwithdraw' %}",
+                type: "post",
+                data: {
+                    amount: amount,
+                    memberId: memId,
+                    csrfmiddlewaretoken: '{{ csrf_token }}'
+                },
+                success: function (resultdata) {
+                    var status = resultdata.status;
+                    if (parseInt(status) == 1) {
+                      //  $("#otpDIV").css("display", "block");
+                       // $("#").css("display", "block");
+                        /*
+                        $("#tblotp").css("display", "block");
+                        $("#otptxt").text('Your OTP will expire within 5 minutes.');
+                        */
+                        alert(resultdata.msg);
+                        location.reload();
+                        //setTimeout(showresendotp, 300000);
+                    }
+                    else {
+                        /**/
+                        //$("#email").val('');
+                        //$("#amount").val('');
+                        //$("#btnsubmit").text('Proceed');
+                        //$("#btnsubmit").removeAttr("disabled");
+                        alert(resultdata.msg);
+
+                    }
+
+                },
+                error: function (er) {
+                    alert("Something went wrong. Please try again later");
+                   // $("#btnsubmit").text('Proceed');
+                   // $("#btnsubmit").removeAttr("disabled");
+                   alert(resultdata.msg);
+
+                }
+            });
+        }
+        else {
+            alert("Please enter correct volume");
+            $("#amount").val('');
+        }
+
+    }
+
+
+
+
+    function showresendotp() {
+        debugger;
+
+        var email = $("#email").val();
+        $.ajax({
+            url: "/member/expiredotpfortopup",
+            type: "post",
+            data: {
+                email: email,
+                csrfmiddlewaretoken: '{{ csrf_token }}'
+            },
+            success: function (resultdata) {
+                var status = resultdata.status;
+                if (parseInt(status) == 1) {
+                    $("#btnotp").css("display", "none");
+                    $("#btrenotp").css("display", "block");
+                    $("#otptxt").text('Your OTP is expired');
+                    alert(resultdata.message);
+                }
+                else {
+                    alert(resultdata.message);
+                    $("#btnsubmit").text('Proceed');
+                    $("#btnsubmit").removeAttr("disabled");
+                }
+
+            },
+            error: function (er) {
+                alert("Something went wrong. Please try again later");
+                $("#btnsubmit").text('Proceed');
+                $("#btnsubmit").removeAttr("disabled");
+
+            }
+        });
+    }
+
+    function resendotp() {
+        debugger;
+
+        var email = $("#email").val();
+        $.ajax({
+            url: "/member/resendotp",
+            type: "post",
+            data: {
+                email: email
+            },
+            success: function (resultdata) {
+                var status = resultdata.status;
+                if (parseInt(status) == 1) {
+                    $("#btnotp").css("display", "block");
+                    $("#btrenotp").css("display", "none");
+                    $("#otptxt").text('Your OTP will expire within 5 minutes.');
+                    $("#otp").val('');
+                    alert(resultdata.message);
+                    setTimeout(showresendotp, 300000);
+                }
+                else {
+                    alert(resultdata.message);
+                }
+
+            },
+            error: function (er) {
+                alert("Something went wrong. Please try again later");
+                $("#btnsubmit").text('Proceed');
+                $("#btnsubmit").removeAttr("disabled");
+
+            }
+        });
+    }
+
+    function confirmedotp() {
+        var email = $("#email").val();
+        var amount = $("#amount").val();
+        var volumes = $("#totalamnt").val();
+        var otp = $("#otp").val();
+        if (parseFloat(amount) <= parseFloat(volumes)) {
+            $("#btnsubmit").text('Please wait...');
+            $("#btnsubmit").attr("disabled", "disabled");
+            $.ajax({
+                url: "/member/confirm-topup-otp/",
+                type: "post",
+                data: {
+                    email: email,
+                    amount: amount,
+                    otp: otp,
+                    csrfmiddlewaretoken: '{{ csrf_token }}'
+                },
+                success: function (resultdata) {
+                    var status = resultdata.status;
+                    if (parseInt(status) == 1) {
+                        alert(resultdata.message);
+                        location.reload();
+                    }
+                    else {
+
+                        alert(resultdata.message);
+                        $("#otp").val('');
+                    }
+
+                },
+                error: function (er) {
+                    alert("Something went wrong. Please try again later");
+                    $("#btnsubmit").text('Proceed');
+                    $("#btnsubmit").removeAttr("disabled");
+
+                }
+            });
+        }
+        else {
+            alert("Please enter correct volume");
+        }
+    }
+
+
+
+</script>
+{% endblock %}

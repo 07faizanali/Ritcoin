@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Activation Status</title>
+  </head>
+  <body>
+    <h1>Activation Status</h1>
+    <div id="status">Waiting for activation...</div>
+    <script>
+      const statusDiv = document.getElementById("status");
+      //const socket = new WebSocket('ws://localhost:8000/ws/activate/');
+      const socket = new WebSocket(
+        "ws://" + window.location.host + "/ws/activate/"
+      );
+
+      socket.onmessage = function (event) {
+        const data = JSON.parse(event.data);
+        const status = data.status;
+        // Update UI with the received status
+        console.log("Status:", status);
+        statusDiv.innerText = status;
+      };
+
+      socket.onclose = function (event) {
+        console.error("WebSocket closed unexpectedly");
+      };
+    </script>
+  </body>
+</html>

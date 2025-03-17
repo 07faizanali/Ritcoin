@@ -1,0 +1,1379 @@
+{% load  static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Language" content="en" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Analytics Dashboard</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no"
+    />
+    <meta
+      name="description"
+      content="This is an example dashboard created using build-in elements and components."
+    />
+    <meta name="msapplication-tap-highlight" content="no" />
+    
+
+    {% comment %} <link href="main.css" rel="stylesheet" /> {% endcomment %}
+    <link href="{% static 'zqUsers/assets/main.css'  %}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.3/css/dataTables.dataTables.css" />
+  
+
+    {% comment %} {% block headerScripts %} {% endcomment %}
+
+    {% comment %} {% endblock  %} {% endcomment %}
+
+
+<style>
+
+    
+#flash-messages {
+  position: fixed; 
+  top: 30px;
+  width: 25%; 
+  height:60px;
+  font-size: 17px;
+  font-weight: 700;
+
+  left:40%;
+  {% comment %} right:70px; {% endcomment %}
+  
+  z-index: 1000; 
+  text-align:center;
+
+}
+
+@media (max-width: 576px) { 
+  #flash-messages {
+    
+    top: 24px;
+    width: auto; 
+    height:auto;
+    {% comment %} background-color:rgba(0, 217, 255, 0.693); {% endcomment %}
+    font-size: 17px;
+    font-weight: 700;
+  
+   align-item:center !important;
+    {% comment %} right:70px; {% endcomment %}
+  padding:30px;
+    z-index: 1000; 
+   left:3%;
+
+  }
+
+
+ }
+
+
+</style>
+{% block headerScripts %}
+
+{% endblock  %}
+  </head>
+  <body>
+
+
+          {% if messages %}
+
+          <div id="flash-messages"  style="display:block;">
+        {% for message in messages %}
+            <div class="alert alert-{{message.tags}}">
+                {{ message }}
+            </div>
+        {% endfor %}
+        </div>
+      {% endif %}
+
+  
+    <div
+      class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header"
+    >
+
+
+      
+      <div class="app-header header-shadow bg-asteroid">
+        <div class="app-header__logo">
+          <div class="text-center mt-3 ">
+            <p style="font-size:28px;font-weight:700;font-family:fangsong;color:#00ABF0;"><span style="font-size:28px;font-weight:900;font-family:fangsong;color:#d92550;">SH</span>IFRA<p>
+          </div>
+          <div class="header__pane ml-auto">
+            <div>
+              <button
+                type="button"
+                class="hamburger close-sidebar-btn hamburger--elastic"
+                data-class="closed-sidebar"
+              >
+                <span class="hamburger-box">
+                  <span class="hamburger-inner"></span>
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="app-header__mobile-menu">
+          <div>
+            <button
+              type="button"
+              class="hamburger hamburger--elastic mobile-toggle-nav"
+            >
+              <span class="hamburger-box">
+                <span class="hamburger-inner"></span>
+              </span>
+            </button>
+          </div>
+        </div>
+        <div class="app-header__menu ">
+          <span>
+            <button
+              type="button"
+              class="btn-icon btn-icon-only btn btn-primary btn-sm mobile-toggle-header-nav"
+            >
+              <span class="btn-icon-wrapper">
+                <i class="fa fa-ellipsis-v fa-w-6"></i>
+              </span>
+            </button>
+          </span>
+        </div>
+        <div class="app-header__content ">
+          <div class="app-header-left text-white">
+            1 Zaan  Coin: &nbsp;
+            <button
+              type="button"
+              class="btn btn-danger pb-1"
+              style="height: 5vh; border-radius: 40%"
+            >
+              ${{ZQLRate}}
+            </button>
+          </div>
+          <div class="app-header-right pt-5">
+            <div class="header-btn-lg pr-0">
+              <div class="widget-content p-0">
+                <div class="widget-content-wrapper">
+                  <div class="widget-content-left">
+                    <button type="button"  id="connectButton"  class="btn btn-danger">Connect Wallet</button> &nbsp;
+                    <div class="btn-group">
+                      <a
+                        data-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                        class="p-0 btn"
+                      >
+                        <img
+                          width="42"
+                          class="rounded-circle"
+                          src="{% static 'zqUsers/assets/images/im.png'   %}"
+                          alt
+                        />
+                      </a>
+                    </div>
+                  </div>
+                  <div class="widget-content-left ml-3 header-user-info text-white">
+                    <div class="widget-heading">{{ request.user.name}}</div>
+                    <div class="widget-subheading">{{request.user.email}}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="ui-theme-settings">
+        
+        <div class="theme-settings__inner">
+          <div class="scrollbar-container">
+            <div class="theme-settings__options-wrapper">
+              <h3 class="themeoptions-heading">Layout Options</h3>
+              <div class="p-3">
+                <ul class="list-group">
+                  <li class="list-group-item">
+                    <div class="widget-content p-0">
+                      <div class="widget-content-wrapper">
+                        <div class="widget-content-left mr-3">
+                          <div
+                            class="switch has-switch switch-container-class"
+                            data-class="fixed-header"
+                          >
+                            <div class="switch-animate switch-on">
+                              <input
+                                type="checkbox"
+                                checked
+                                data-toggle="toggle"
+                                data-onstyle="success"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                        <div class="widget-content-left">
+                          <div class="widget-heading">Fixed Header</div>
+                          <div class="widget-subheading">
+                            Makes the header top fixed, always visible!
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="list-group-item">
+                    <div class="widget-content p-0">
+                      <div class="widget-content-wrapper">
+                        <div class="widget-content-left mr-3">
+                          <div
+                            class="switch has-switch switch-container-class"
+                            data-class="fixed-sidebar"
+                          >
+                            <div class="switch-animate switch-on">
+                              <input
+                                type="checkbox"
+                                checked
+                                data-toggle="toggle"
+                                data-onstyle="success"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                        <div class="widget-content-left">
+                          <div class="widget-heading">Fixed Sidebar</div>
+                          <div class="widget-subheading">
+                            Makes the sidebar left fixed, always visible!
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="list-group-item">
+                    <div class="widget-content p-0">
+                      <div class="widget-content-wrapper">
+                        <div class="widget-content-left mr-3">
+                          <div
+                            class="switch has-switch switch-container-class"
+                            data-class="fixed-footer"
+                          >
+                            <div class="switch-animate switch-off">
+                              <input
+                                type="checkbox"
+                                data-toggle="toggle"
+                                data-onstyle="success"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                        <div class="widget-content-left">
+                          <div class="widget-heading">Fixed Footer</div>
+                          <div class="widget-subheading">
+                            Makes the app footer bottom fixed, always visible!
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <h3 class="themeoptions-heading">
+                <div>Header Options</div>
+                <button
+                  type="button"
+                  class="btn-pill btn-shadow btn-wide ml-auto btn btn-focus btn-sm switch-header-cs-class"
+                  data-class
+                >
+                  Restore Default
+                </button>
+              </h3>
+              <div class="p-3">
+                <ul class="list-group">
+                  <li class="list-group-item">
+                    <h5 class="pb-2">Choose Color Scheme</h5>
+                    <div class="theme-settings-swatches">
+                      <div
+                        class="swatch-holder bg-primary switch-header-cs-class"
+                        data-class="bg-primary header-text-light"
+                      ></div>
+                      <div
+                        class="swatch-holder bg-secondary switch-header-cs-class"
+                        data-class="bg-secondary header-text-light"
+                      ></div>
+                      <div
+                        class="swatch-holder bg-success switch-header-cs-class"
+                        data-class="bg-success header-text-dark"
+                      ></div>
+                      <div
+                        class="swatch-holder bg-info switch-header-cs-class"
+                        data-class="bg-info header-text-dark"
+                      ></div>
+                      <div
+                        class="swatch-holder bg-warning switch-header-cs-class"
+                        data-class="bg-warning header-text-dark"
+                      ></div>
+                      <div
+                        class="swatch-holder bg-danger switch-header-cs-class"
+                        data-class="bg-danger header-text-light"
+                      ></div>
+                      <div
+                        class="swatch-holder bg-light switch-header-cs-class"
+                        data-class="bg-light header-text-dark"
+                      ></div>
+                      <div
+                        class="swatch-holder bg-dark switch-header-cs-class"
+                        data-class="bg-dark header-text-light"
+                      ></div>
+                      <div
+                        class="swatch-holder bg-focus switch-header-cs-class"
+                        data-class="bg-focus header-text-light"
+                      ></div>
+                      <div
+                        class="swatch-holder bg-alternate switch-header-cs-class"
+                        data-class="bg-alternate header-text-light"
+                      ></div>
+                      <div class="divider"></div>
+                      <div
+                        class="swatch-holder bg-vicious-stance switch-header-cs-class"
+                        data-class="bg-vicious-stance header-text-light"
+                      ></div>
+                      <div
+                        class="swatch-holder bg-midnight-bloom switch-header-cs-class"
+                        data-class="bg-midnight-bloom header-text-light"
+                      ></div>
+                      <div
+                        class="swatch-holder bg-night-sky switch-header-cs-class"
+                        data-class="bg-night-sky header-text-light"
+                      ></div>
+                      <div
+                        class="swatch-holder bg-slick-carbon switch-header-cs-class"
+                        data-class="bg-slick-carbon header-text-light"
+                      ></div>
+                      <div
+                        class="swatch-holder bg-asteroid switch-header-cs-class"
+                        data-class="bg-asteroid header-text-light"
+                      ></div>
+                      <div
+                        class="swatch-holder bg-royal switch-header-cs-class"
+                        data-class="bg-royal header-text-light"
+                      ></div>
+                      <div
+                        class="swatch-holder bg-warm-flame switch-header-cs-class"
+                        data-class="bg-warm-flame header-text-dark"
+                      ></div>
+                      <div
+                        class="swatch-holder bg-night-fade switch-header-cs-class"
+                        data-class="bg-night-fade header-text-dark"
+                      ></div>
+                      <div
+                        class="swatch-holder bg-sunny-morning switch-header-cs-class"
+                        data-class="bg-sunny-morning header-text-dark"
+                      ></div>
+                      <div
+                        class="swatch-holder bg-tempting-azure switch-header-cs-class"
+                        data-class="bg-tempting-azure header-text-dark"
+                      ></div>
+                      <div
+                        class="swatch-holder bg-amy-crisp switch-header-cs-class"
+                        data-class="bg-amy-crisp header-text-dark"
+                      ></div>
+                      <div
+                        class="swatch-holder bg-heavy-rain switch-header-cs-class"
+                        data-class="bg-heavy-rain header-text-dark"
+                      ></div>
+                      <div
+                        class="swatch-holder bg-mean-fruit switch-header-cs-class"
+                        data-class="bg-mean-fruit header-text-dark"
+                      ></div>
+                      <div
+                        class="swatch-holder bg-malibu-beach switch-header-cs-class"
+                        data-class="bg-malibu-beach header-text-light"
+                      ></div>
+                      <div
+                        class="swatch-holder bg-deep-blue switch-header-cs-class"
+                        data-class="bg-deep-blue header-text-dark"
+                      ></div>
+                      <div
+                        class="swatch-holder bg-ripe-malin switch-header-cs-class"
+                        data-class="bg-ripe-malin header-text-light"
+                      ></div>
+                      <div
+                        class="swatch-holder bg-arielle-smile switch-header-cs-class"
+                        data-class="bg-arielle-smile header-text-light"
+                      ></div>
+                      <div
+                        class="swatch-holder bg-plum-plate switch-header-cs-class"
+                        data-class="bg-plum-plate header-text-light"
+                      ></div>
+                      <div
+                        class="swatch-holder bg-happy-fisher switch-header-cs-class"
+                        data-class="bg-happy-fisher header-text-dark"
+                      ></div>
+                      <div
+                        class="swatch-holder bg-happy-itmeo switch-header-cs-class"
+                        data-class="bg-happy-itmeo header-text-light"
+                      ></div>
+                      <div
+                        class="swatch-holder bg-mixed-hopes switch-header-cs-class"
+                        data-class="bg-mixed-hopes header-text-light"
+                      ></div>
+                      <div
+                        class="swatch-holder bg-strong-bliss switch-header-cs-class"
+                        data-class="bg-strong-bliss header-text-light"
+                      ></div>
+                      <div
+                        class="swatch-holder bg-grow-early switch-header-cs-class"
+                        data-class="bg-grow-early header-text-light"
+                      ></div>
+                      <div
+                        class="swatch-holder bg-love-kiss switch-header-cs-class"
+                        data-class="bg-love-kiss header-text-light"
+                      ></div>
+                      <div
+                        class="swatch-holder bg-premium-dark switch-header-cs-class"
+                        data-class="bg-premium-dark header-text-light"
+                      ></div>
+                      <div
+                        class="swatch-holder bg-happy-green switch-header-cs-class"
+                        data-class="bg-happy-green header-text-light"
+                      ></div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <h3 class="themeoptions-heading">
+                <div>Sidebar Options</div>
+                <button
+                  type="button"
+                  class="btn-pill btn-shadow btn-wide ml-auto btn btn-focus btn-sm switch-sidebar-cs-class"
+                  data-class
+                >
+                  Restore Default
+                </button>
+              </h3>
+              <div class="p-3">
+                <ul class="list-group">
+                  <li class="list-group-item">
+                    <h5 class="pb-2">Choose Color Scheme</h5>
+                    <div class="theme-settings-swatches">
+                      <div
+                        class="swatch-holder bg-primary switch-sidebar-cs-class"
+                        data-class="bg-primary sidebar-text-light"
+                      ></div>
+                      <div
+                        class="swatch-holder bg-secondary switch-sidebar-cs-class"
+                        data-class="bg-secondary sidebar-text-light"
+                      ></div>
+                      <div
+                        class="swatch-holder bg-success switch-sidebar-cs-class"
+                        data-class="bg-success sidebar-text-dark"
+                      ></div>
+                      <div
+                        class="swatch-holder bg-info switch-sidebar-cs-class"
+                        data-class="bg-info sidebar-text-dark"
+                      ></div>
+                      <div
+                        class="swatch-holder bg-warning switch-sidebar-cs-class"
+                        data-class="bg-warning sidebar-text-dark"
+                      ></div>
+                      <div
+                        class="swatch-holder bg-danger switch-sidebar-cs-class"
+                        data-class="bg-danger sidebar-text-light"
+                      ></div>
+                      <div
+                        class="swatch-holder bg-light switch-sidebar-cs-class"
+                        data-class="bg-light sidebar-text-dark"
+                      ></div>
+                      <div
+                        class="swatch-holder bg-dark switch-sidebar-cs-class"
+                        data-class="bg-dark sidebar-text-light"
+                      ></div>
+                      <div
+                        class="swatch-holder bg-focus switch-sidebar-cs-class"
+                        data-class="bg-focus sidebar-text-light"
+                      ></div>
+                      <div
+                        class="swatch-holder bg-alternate switch-sidebar-cs-class"
+                        data-class="bg-alternate sidebar-text-light"
+                      ></div>
+                      <div class="divider"></div>
+                      <div
+                        class="swatch-holder bg-vicious-stance switch-sidebar-cs-class"
+                        data-class="bg-vicious-stance sidebar-text-light"
+                      ></div>
+                      <div
+                        class="swatch-holder bg-midnight-bloom switch-sidebar-cs-class"
+                        data-class="bg-midnight-bloom sidebar-text-light"
+                      ></div>
+                      <div
+                        class="swatch-holder bg-night-sky switch-sidebar-cs-class"
+                        data-class="bg-night-sky sidebar-text-light"
+                      ></div>
+                      <div
+                        class="swatch-holder bg-slick-carbon switch-sidebar-cs-class"
+                        data-class="bg-slick-carbon sidebar-text-light"
+                      ></div>
+                      <div
+                        class="swatch-holder bg-asteroid switch-sidebar-cs-class"
+                        data-class="bg-asteroid sidebar-text-light"
+                      ></div>
+                      <div
+                        class="swatch-holder bg-royal switch-sidebar-cs-class"
+                        data-class="bg-royal sidebar-text-light"
+                      ></div>
+                      <div
+                        class="swatch-holder bg-warm-flame switch-sidebar-cs-class"
+                        data-class="bg-warm-flame sidebar-text-dark"
+                      ></div>
+                      <div
+                        class="swatch-holder bg-night-fade switch-sidebar-cs-class"
+                        data-class="bg-night-fade sidebar-text-dark"
+                      ></div>
+                      <div
+                        class="swatch-holder bg-sunny-morning switch-sidebar-cs-class"
+                        data-class="bg-sunny-morning sidebar-text-dark"
+                      ></div>
+                      <div
+                        class="swatch-holder bg-tempting-azure switch-sidebar-cs-class"
+                        data-class="bg-tempting-azure sidebar-text-dark"
+                      ></div>
+                      <div
+                        class="swatch-holder bg-amy-crisp switch-sidebar-cs-class"
+                        data-class="bg-amy-crisp sidebar-text-dark"
+                      ></div>
+                      <div
+                        class="swatch-holder bg-heavy-rain switch-sidebar-cs-class"
+                        data-class="bg-heavy-rain sidebar-text-dark"
+                      ></div>
+                      <div
+                        class="swatch-holder bg-mean-fruit switch-sidebar-cs-class"
+                        data-class="bg-mean-fruit sidebar-text-dark"
+                      ></div>
+                      <div
+                        class="swatch-holder bg-malibu-beach switch-sidebar-cs-class"
+                        data-class="bg-malibu-beach sidebar-text-light"
+                      ></div>
+                      <div
+                        class="swatch-holder bg-deep-blue switch-sidebar-cs-class"
+                        data-class="bg-deep-blue sidebar-text-dark"
+                      ></div>
+                      <div
+                        class="swatch-holder bg-ripe-malin switch-sidebar-cs-class"
+                        data-class="bg-ripe-malin sidebar-text-light"
+                      ></div>
+                      <div
+                        class="swatch-holder bg-arielle-smile switch-sidebar-cs-class"
+                        data-class="bg-arielle-smile sidebar-text-light"
+                      ></div>
+                      <div
+                        class="swatch-holder bg-plum-plate switch-sidebar-cs-class"
+                        data-class="bg-plum-plate sidebar-text-light"
+                      ></div>
+                      <div
+                        class="swatch-holder bg-happy-fisher switch-sidebar-cs-class"
+                        data-class="bg-happy-fisher sidebar-text-dark"
+                      ></div>
+                      <div
+                        class="swatch-holder bg-happy-itmeo switch-sidebar-cs-class"
+                        data-class="bg-happy-itmeo sidebar-text-light"
+                      ></div>
+                      <div
+                        class="swatch-holder bg-mixed-hopes switch-sidebar-cs-class"
+                        data-class="bg-mixed-hopes sidebar-text-light"
+                      ></div>
+                      <div
+                        class="swatch-holder bg-strong-bliss switch-sidebar-cs-class"
+                        data-class="bg-strong-bliss sidebar-text-light"
+                      ></div>
+                      <div
+                        class="swatch-holder bg-grow-early switch-sidebar-cs-class"
+                        data-class="bg-grow-early sidebar-text-light"
+                      ></div>
+                      <div
+                        class="swatch-holder bg-love-kiss switch-sidebar-cs-class"
+                        data-class="bg-love-kiss sidebar-text-light"
+                      ></div>
+                      <div
+                        class="swatch-holder bg-premium-dark switch-sidebar-cs-class"
+                        data-class="bg-premium-dark sidebar-text-light"
+                      ></div>
+                      <div
+                        class="swatch-holder bg-happy-green switch-sidebar-cs-class"
+                        data-class="bg-happy-green sidebar-text-light"
+                      ></div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <h3 class="themeoptions-heading">
+                <div>Main Content Options</div>
+                <button
+                  type="button"
+                  class="btn-pill btn-shadow btn-wide ml-auto active btn btn-focus btn-sm"
+                >
+                  Restore Default
+                </button>
+              </h3>
+              <div class="p-3">
+                <ul class="list-group">
+                  <li class="list-group-item">
+                    <h5 class="pb-2">Page Section Tabs</h5>
+                    <div class="theme-settings-swatches">
+                      <div role="group" class="mt-2 btn-group">
+                        <button
+                          type="button"
+                          class="btn-wide btn-shadow btn-primary btn btn-secondary switch-theme-class"
+                          data-class="body-tabs-line"
+                        >
+                          Line
+                        </button>
+                        <button
+                          type="button"
+                          class="btn-wide btn-shadow btn-primary active btn btn-secondary switch-theme-class"
+                          data-class="body-tabs-shadow"
+                        >
+                          Shadow
+                        </button>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+      <div class="app-main">
+        <div class="app-sidebar sidebar-shadow ">
+          <div class="app-header__logo">
+            <div class="logo-src"></div>
+            <div class="header__pane ml-auto">
+              <div>
+                <button
+                  type="button"
+                  class="hamburger close-sidebar-btn hamburger--elastic"
+                  data-class="closed-sidebar"
+                >
+                  <span class="hamburger-box">
+                    <span class="hamburger-inner"></span>
+                  </span>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="app-header__mobile-menu">
+            <div>
+              <button
+                type="button"
+                class="hamburger hamburger--elastic mobile-toggle-nav"
+              >
+                <span class="hamburger-box">
+                  <span class="hamburger-inner"></span>
+                </span>
+              </button>
+            </div>
+          </div>
+          <div class="app-header__menu">
+            <span>
+              <button
+                type="button"
+                class="btn-icon btn-icon-only btn btn-primary btn-sm mobile-toggle-header-nav"
+              >
+                <span class="btn-icon-wrapper">
+                  <i class="fa fa-ellipsis-v fa-w-6"></i>
+                </span>
+              </button>
+            </span>
+          </div>
+          <div class="scrollbar-sidebar bg-asteroid">
+            <div class="app-sidebar__inner">
+              <h5 style="font-family:arish;">Menu</h5>
+              <ul class="vertical-nav-menu text-white">
+                <li>
+                  <a href="{% url 'zqAdminDashboard' %}" class="" style="color:white;">
+                    <i
+                      class="metismenu-icon pe-7s-target"
+                      style="font-weight: 900; color: white;"
+                    ></i>
+                    Dashboard
+                  </a>
+                </li>
+
+                {% comment %} <li>
+                  <a href="{% url 'zqAdminDashboard' %}" style="color:white;">
+                    <i
+                      class="metismenu-icon pe-7s-wallet"
+                      style="font-weight: 900; color: white;"
+                    ></i>
+                    Wallet
+                    <i
+                      class="metismenu-state-icon pe-7s-angle-down caret-left"
+                    ></i>
+                  </a>
+                  <ul>
+                    <li>
+                      <a href="{% url 'myAdd' %}" style="color:white;">
+                        <i class="metismenu-icon"></i>
+                        My Address
+                      </a>
+                    </li>
+                    <li>
+                      <a href="{% url 'addNVerify' %}" style="color:white;">
+                        <i class="metismenu-icon"> </i>Add & Verify
+                      </a>
+                    </li>
+                    <li>
+                      <a href="{% url 'withdrawl' %}" style="color:white;">
+                        <i class="metismenu-icon"> </i>Withdrawal
+                      </a>
+                    </li>
+                  </ul>
+                </li> {% endcomment %}
+                <li>
+                  <a href="{% url 'distributeMining'  %}" style="color:white;">
+                    <i
+                      class="metismenu-icon pe-7s-cash"
+                      style="font-weight: 900; color: white;"
+                    ></i>
+                    Distribute Mining
+                    {% comment %} <i
+                      class="metismenu-state-icon pe-7s-angle-down caret-left"
+                    ></i> {% endcomment %}
+                  </a>
+
+                  {% comment %} <ul>
+                    <li>
+                      <a href="{% url 'directIncome'  %}" style="color:white;">
+                        <i class="metismenu-icon"> </i>Sponsor Bonus
+                      </a>
+                    </li>
+                    <li>
+                      <a href="{% url 'levelIncome'   %}" style="color:white;">
+                        <i class="metismenu-icon"> </i>Promotion Bonus
+                      </a>
+                    </li>
+                    <li>
+                      <a href="{% url 'dailyROI'   %}" style="color:white;">
+                        <i class="metismenu-icon"> </i>Mining Bonus
+                      </a>
+                    </li>
+                    <li>
+                      <a href="{% url 'rewardBonus'   %}" style="color:white;">
+                        <i class="metismenu-icon"> </i>Reward Bonus
+                      </a>
+                    </li>
+                  </ul> {% endcomment %}
+                </li>
+                
+                <li>
+                  <a href="{% url 'setCoinRate'  %}" style="color:white;">
+                    <i
+                      class="metismenu-icon pe-7s-credit"
+                      style="font-weight: 900; color: white;"
+                    ></i>
+                   Set Coin Rate
+                  </a>
+                </li>
+                
+                {% comment %} <li>
+                  <a href="{% url 'setCoinRate'  %}" style="color:white;">
+                    <i
+                      class="metismenu-icon pe-7s-credit"
+                      style="font-weight: 900; color: white;"
+                    ></i>
+                   Withdrawls
+                  </a>
+                </li> {% endcomment %}
+
+                {% comment %} <li>
+                  <a href="{% url 'setCoinRate'  %}" style="color:white;">
+                    <i
+                      class="metismenu-icon pe-7s-display2"
+                      style="font-weight: 900; color: white;"
+                    ></i>
+                    Withdrawal transaction
+                  </a>
+                </li> {% endcomment %}
+
+                {% comment %} <li>
+                  <a href="{% url 'inviteFriend'  %}" style="color:white;">
+                    <i
+                      class="metismenu-icon pe-7s-add-user"
+                      style="font-weight: 900; color: white;"
+                    >
+                    </i
+                    >Invite Friend
+                  </a>
+                </li> {% endcomment %}
+
+                {% comment %} <li>
+                  <a href="#" style="color:white;">
+                    <i
+                      class="metismenu-icon pe-7s-network"
+                      style="font-weight: 900; color: white;"
+                    >
+                    </i
+                    >Team
+                    <i
+                      class="metismenu-state-icon pe-7s-angle-down caret-left"
+                    ></i>
+                  </a>
+                  <ul>
+                    <li>
+                      <a href="{% url 'directTeam'   %}" style="color:white;">
+                        <i class="metismenu-icon"> </i>Direct Team
+                      </a>
+                    </li>
+                    <li>
+                      <a href="{% url 'allTeam'   %}" style="color:white;">
+                        <i class="metismenu-icon"> </i>All Team
+                      </a>
+                    </li>
+                   
+                  </ul>
+                </li> {% endcomment %}
+                {% comment %} <li>
+                  <a href="components-carousel.html">
+                    <i
+                      class="metismenu-icon pe-7s-pendrive"
+                      style="font-weight: 900; color: black"
+                    >
+                    </i
+                    >Support
+                  </a>
+                </li> {% endcomment %}
+
+             
+                  <li>
+                  <a href="#" style="color:white;">
+                    <i
+                      class="metismenu-icon pe-7s-settings"
+                      style="font-weight: 900; color: white;"
+                    >
+                    </i
+                    >Withdrawals
+                    <i
+                      class="metismenu-state-icon pe-7s-angle-down caret-left"
+                    ></i>
+                  </a>
+                  <ul>
+                    <li>
+                      <a href="{% url 'requestedWithdrawals'  %}" style="color:white;">
+                        <i class="metismenu-icon"> </i>Requested Withdrawals</a>
+                    </li>
+                    <li>
+                      <a href="{% url 'approvedWithdrawals'  %}" style="color:white;">
+                        <i class="metismenu-icon"> </i> Approved Withdrawals  </a>
+                    </li>
+                    <li>
+                      <a href="{% url 'allWithdrawls'  %}" style="color:white;">
+                        <i class="metismenu-icon"> </i>All Withdrawals </a>
+                    </li>
+                  </ul>
+                </li> 
+
+                <li>
+                  <a
+                    href="{% url 'viewAllMembers'  %}"
+                     style="color:white;"
+                  >
+                    <i
+                      class="metismenu-icon pe-7s-door-lock"
+                      style="font-weight: 900; color: white;"
+                    >
+                    </i>
+                    Members
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="{% url 'addFundsToMembersWallet'  %}"
+                     style="color:white;"
+                  >
+                    <i
+                      class="metismenu-icon pe-7s-door-lock"
+                      style="font-weight: 900; color: white;"
+                    >
+                    </i>
+                    Member wallet topup
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="{% url 'makeTrans'  %}"
+                     style="color:white;"
+                  >
+                    <i
+                      class="metismenu-icon pe-7s-door-lock"
+                      style="font-weight: 900; color: white;"
+                    >
+                    </i>
+                    make Payment
+                  </a>
+                </li>
+
+
+
+                <li>
+                  <a
+                    href="{% url 'activateIdOfAMember'  %}"
+                     style="color:white;"
+                  >
+                    <i
+                      class="metismenu-icon pe-7s-door-lock"
+                      style="font-weight: 900; color: white;"
+                    >
+                    </i>
+                    Activate Meberid
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="{% url 'allMembersROIs'  %}"
+                     style="color:white;"
+                  >
+                    <i
+                      class="metismenu-icon pe-7s-door-lock"
+                      style="font-weight: 900; color: white;"
+                    >
+                    </i>
+                    All members ROI
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="{% url 'allInvestments'  %}"
+                     style="color:white;"
+                  >
+                    <i
+                      class="metismenu-icon pe-7s-door-lock"
+                      style="font-weight: 900; color: white;"
+                    >
+                    </i>
+                    All Investments
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="{% url 'withdrawal-type'  %}"
+                     style="color:white;"
+                  >
+                    <i
+                      class="metismenu-icon pe-7s-door-lock"
+                      style="font-weight: 900; color: white;"
+                    >
+                    </i>
+                    Withdrawal Types
+                  </a>
+                </li>
+
+                <li>
+                  <a href="{% url 'newmemberDashboard'  %}" style="color:white;">
+                    <i
+                      class="metismenu-icon pe-7s-credit"
+                      style="font-weight: 900; color: white;"
+                    ></i>
+                   Visit Member Panel
+                  </a>
+                </li>
+                <li>
+                  <a href="{% url 'addsocialjob'  %}" style="color:white;">
+                    <i
+                      class="metismenu-icon pe-7s-credit"
+                      style="font-weight: 900; color: white;"
+                    ></i>
+                   Add Social Jobs
+                  </a>
+                </li>
+
+
+                <li>
+                  <a
+                    href="{% url 'adminlogout'  %}"
+                     style="color:white;"
+                  >
+                    <i
+                      class="metismenu-icon pe-7s-door-lock"
+                      style="font-weight: 900; color: white;"
+                    >
+                    </i>
+                    Logout
+                  </a>
+                </li>
+
+
+
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        {% block 'content'  %}
+        
+
+
+    
+    
+        {% endblock 'content' %}
+        
+        <script src="https://maps.google.com/maps/api/js?sensor=true"></script>
+      </div>
+    </div>
+    {% comment %} <script type="text/javascript" src="assets/scripts/main.js"></script> {% endcomment %}
+    <script type="text/javascript" src="{% static "zqUsers/assets/scripts/main.js"  %}"></script>
+    
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/2.0.3/js/dataTables.js"></script>
+  <script>
+
+    $(document).ready( function () {
+      $('#myTable').DataTable();
+  });
+
+    // Hide flash messages after 5 seconds
+    setTimeout(function() {
+        document.getElementById('flash-messages').style.display = 'none';
+    }, 5000);
+</script>
+
+{% block footerScripts %}
+
+
+
+
+{% comment %} 
+<script type="text/javascript">
+
+  function verify_withdrawal_address(el, el_id) {
+      $("#sucessmsg").text("");
+      debugger;
+      var c = $("#" + el_id), v = c.val(), bt = $(el);
+      if (v.length == 0) {
+          alert(c.attr("title"));
+      } else {
+          c.attr("readonly", "");
+          bt.attr("disabled", "").html("<i class='fa fa-spin fa-spinner'></i>&nbsp;&nbsp;Processing...");
+          $.ajax({
+              type: "post", url: "/member/send_otp_receive_wallet_address", data: {
+                  type: el_id, receive_address: v
+              }, success: function (d) {
+                  debugger;
+                  if (d) {
+                      if (d.indexOf("success") > -1) {
+                          $("#span_" + el_id).attr("class", "text-success").html(d);
+                          //$(".div_" + el_id).removeClass("hidden"); otp_w
+                          $("#otp_w").css("display", "block");
+                          bt.html("Send OTP");
+                      } else {
+                          $("#span_" + el_id).attr("class", "text-danger").html(d);
+                      }
+                  }
+              },
+              error: function (er) {
+                  $("#span_" + el_id).attr("class", "text-danger").html("Something went wrong.");
+                  c.removeAttr("readonly");
+                  bt.removeAttr("disabled").html("Send OTP");
+              }
+          });
+
+      }
+  }
+
+  function otp_verify_withdrawal_address(el, el_id) {
+      debugger;
+      var c = $("#" + el_id + "_otp"), v = c.val(), bt = $(el);
+      if (v.length == 0) {
+          alert(c.attr("title"));
+      } else {
+          c.attr("readonly", "");
+          bt.attr("disabled", "").html("<i class='fa fa-spin fa-spinner'></i>&nbsp;&nbsp;Processing...");
+          $.ajax({
+              type: "post", url: "/member/verify_otp", data: {
+                  type: el_id, otp: v
+              }, success: function (d) {
+                  debugger;
+                  if (d) {
+                      if (d.indexOf("success") > -1) {
+                          $("#otp_" + el_id).attr("class", "text-success").html(d);
+                          //$(".div_" + el_id).removeClass("hidden");
+                          $("#otp_w").css("display", "none");
+                          bt.html("Verified");
+                          location.reload();
+                      } else {
+                          $("#otp_" + el_id).attr("class", "text-danger").html(d);
+                          c.removeAttr("readonly");
+                          bt.removeAttr("disabled").html("Verify OTP");
+                      }
+                  }
+              },
+              error: function (er) {
+                  $("#otp_" + el_id).attr("class", "text-danger").html("Something went wrong.");
+                  c.removeAttr("readonly");
+                  bt.removeAttr("disabled").html("Verify OTP");
+              }
+          });
+      }
+  }
+  
+  function changewithdrawaladd() {
+      if (confirm('Are you sure for change address')) {
+          var address = $("#withdrawal_coin_address").val();
+          $("#btnchange").text("Please wait...");
+          $("#btnchange").attr("disabled", "disabled");
+          if (address != "") {
+              $.ajax({
+                  type: "post",
+                  url: "/member/changewithdrwaladdress",
+                  data: {
+                      address_withdrl: address
+                  }, success: function (result) {
+                      debugger;
+                      var status = result.status;
+                      if (parseInt(status) == 1) {
+                          alert(result.message);
+                          location.reload();
+                      }
+                      else {
+                          alert(result.message);
+                      }
+                      $("#btnchange").text("Change");
+                      $("#btnchange").removeAttr("disabled");
+                  },
+                  error: function (er) {
+
+                      alert(er);
+                      $("#btnchange").text("Change");
+                      $("#btnchange").removeAttr("disabled");
+                  }
+              });
+          }
+          else {
+              alert("Please enter valid address");
+              $("#btnchange").text("Change");
+              $("#btnchange").removeAttr("disabled");
+          }
+      }
+  }
+
+  function withdrawal() {
+      // debugger;
+      $("#sucessmsg").text("");
+      var totalSBGcoin = $("#totalamnt").val();
+      var SBGcoin = $("#SBGcoin").val();
+      if (parseFloat(SBGcoin) > 0) {
+          if (parseFloat(SBGcoin) <= parseFloat(totalSBGcoin)) {
+              $.ajax({
+                  type: "post",
+                  url: "/Member/sendpayment_withdrawal",
+                  data: {
+                      coin_amnt: SBGcoin
+                  }, success: function (result) {
+                      // debugger;
+                      var status = result.status;
+                      if (parseInt(status) == 1) {
+                          alert(result.message);
+                          $("#sucessmsg").text(result.message);
+                          location.reload();
+                      }
+                      else {
+                          alert(result.message);
+                      }
+                  },
+                  error: function (er) {
+                      alert(er);
+                  }
+              });
+          }
+          else {
+              $("#SBGcoin").val('');
+              alert('Please enter valid SBG coin');
+          }
+      }
+      else {
+          $("#SBGcoin").val('');
+          alert('Please enter SBG coin more then 0');
+      }
+  }
+
+</script> {% endcomment %}
+
+{% comment %} <script>
+
+
+  document.getElementById('connectButton').onclick = async () => {
+      if (typeof window.ethereum !== 'undefined') {
+          try {
+              const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+              const account = accounts[0];'
+              console.log(account);
+              document.getElementById('account').innerText = 'Connected Account: ' + account;
+          } catch (error) {
+              console.error('User denied account access or error occurred', error);
+          }
+      } else {
+          alert('MetaMask is not installed. Please install it to use this feature.');
+      }
+  };
+
+
+
+</script> {% endcomment %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.6.1-rc.0/web3.min.js"></script>
+
+{% comment %} <script>
+
+  document.getElementById('connectButton').onclick = async () => {
+      if (typeof window.ethereum !== 'undefined') {
+          try {
+              const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+              const account = accounts[0];
+              console.log(accounts[0]);
+              document.getElementById('account').innerText = 'Connected Account: ' + account;
+          } catch (error) {
+              console.error('User denied account access or error occurred', error);
+          }
+      } else {
+          alert('MetaMask is not installed. Please install it to use this feature.');
+      }
+  };
+
+  document.getElementById('transactionForm').onsubmit = async (e) => {
+      e.preventDefault();
+      if (typeof window.ethereum !== 'undefined') {
+          const web3 = new Web3(window.ethereum);
+          const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+          const account = accounts[0];
+          const recipient = document.getElementById('recipient').value;
+          const amount = document.getElementById('amount').value;
+          
+          try {
+              web3.eth.sendTransaction({
+                  from: account,
+                  to: recipient,
+                  value: web3.utils.toWei(amount, 'ether')
+              })
+              .on('transactionHash', (hash) => {
+                  console.log('Transaction Hash:', hash);
+              })
+              .on('receipt', (receipt) => {
+                  console.log('Receipt:', receipt);
+              })
+              .on('error', (error, receipt) => {
+                  console.error('Error:', error);
+              });
+          } catch (error) {
+              console.error('Transaction failed', error);
+          }
+      } else {
+          alert('MetaMask is not installed. Please install it to use this feature.');
+      }
+  };
+
+</script> {% endcomment %}
+
+
+<script>
+  async function connectMetaMask() {
+      if (typeof window.ethereum !== 'undefined') {
+          try {
+              // Request account access
+              const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+              const account = accounts[0];
+              console.log(accounts[0]);
+              document.getElementById('account').innerText = 'Connected Account: ' + account;
+
+              // Switch to BSC Network
+              const chainId = '0x61'; // Chain ID for BSC Mainnet
+              try {
+                  await ethereum.request({
+                      method: 'wallet_switchEthereumChain',
+                      params: [{ chainId: chainId }],
+                  });
+              } catch (switchError) {
+                  // This error code indicates that the chain has not been added to MetaMask
+                  if (switchError.code === 4902) {
+                      await ethereum.request({
+                          method: 'wallet_addEthereumChain',
+                          params: [
+                              {
+                                  chainId: chainId,
+                                  chainName: 'BNB Chain Testnet',
+                                  nativeCurrency: {
+                                      name: 'tBNB',
+                                      symbol: 'tBNB',
+                                      decimals: 18,
+                                  },
+                                  rpcUrls: ['https://data-seed-prebsc-1-s1.binance.org:8545/'],
+                                  blockExplorerUrls: ['https://testnet.bscscan.com'],
+                              },
+                          ],
+                      });
+
+                      
+                  } else {
+                      console.error('Failed to switch to BSC', switchError);
+                  }
+                  
+                  
+                  
+
+
+              }
+            
+          } catch (error) {
+              console.error('User denied account access or error occurred', error);
+          }
+      } else {
+          alert('MetaMask is not installed. Please install it to use this feature.');
+      }
+  }
+
+  document.getElementById('connectButton').onclick = connectMetaMask;
+
+
+
+  document.getElementById('transactionForm').onsubmit = async (e) => {
+      e.preventDefault();
+      if (typeof window.ethereum !== 'undefined') {
+          const web3 = new Web3(window.ethereum);
+          const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+          const account = accounts[0];
+          const recipient = document.getElementById('recipient').value;
+          const amount = document.getElementById('amount').value;
+
+          try {
+              web3.eth.sendTransaction({
+                  from: account,
+                  to: recipient,
+                  value: web3.utils.toWei(amount, 'ether')
+              })
+              .on('transactionHash', (hash) => {
+                  console.log('Transaction Hash:', hash);
+              })
+              .on('receipt', (receipt) => {
+                  console.log('Receipt:', receipt);
+              })
+              .on('error', (error, receipt) => {
+                  console.error('Error:', error);
+              });
+          } catch (error) {
+              console.error('Transaction failed', error);
+          }
+      } else {
+          alert('MetaMask is not installed. Please install it to use this feature.');
+      }
+  };
+</script>
+
+
+
+{% endblock footerScripts %}
+  </body>
+
+  <!-- Mirrored from demo.dashboardpack.com/architectui-html-free/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 12 Feb 2024 08:08:54 GMT -->
+
+
+
+  </html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ID Activation</title>
+    <script>
+      // WebSocket connection
+      const socket = new WebSocket(
+        "ws://" + window.location.host + "/ws/activate/"
+      );
+
+      // Function to handle WebSocket message
+      socket.onmessage = function (event) {
+        const data = JSON.parse(event.data);
+        const status = data.status;
+        document.getElementById("status").innerText = status;
+      };
+    </script>
+  </head>
+  <body>
+    <h1>ID Activation Status</h1>
+    <p>Status: <span id="status">Waiting for updates...</span></p>
+  </body>
+</html>

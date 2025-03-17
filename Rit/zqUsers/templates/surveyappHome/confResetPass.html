@@ -1,0 +1,667 @@
+{% load static %}
+<!doctype html>
+<html>
+
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<head>
+	<!-- Meta Tags -->
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="author" content="ThemeMarch">
+	<!-- Page Title -->
+	<title>Ritcoin</title>
+    <!-- Favicon Icon -->
+  	<!-- <link rel="icon" href="assets/img/favicon.png"> -->
+	<!-- Stylesheets -->
+    <link rel="stylesheet" type="text/css" href="{% static 'homePage/assets/css/plugins.css' %}">
+    <link rel="stylesheet" href="{% static 'homePage/assets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'homePage/assets/css/animate.min.css' %}">
+    <link rel="stylesheet" href="{% static 'homePage/assets/css/icofont.css' %}">
+    <link rel="stylesheet" href="{% static 'homePage/assets/css/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'homePage/assets/css/fontawesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'homePage/assets/css/slick.min.css' %}">
+    <link rel="stylesheet" href="{% static 'homePage/assets/css/modal.video.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'homePage/assets/css/style.css' %}">
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="assets/vendor/backward/html5shiv.js"></script>
+    <script type="text/javascript" src="assets/vendor/backward/respond.min.js"></script>
+    <![endif]-->
+
+	<style>
+	
+		 #flash-messages {
+			position: fixed; 
+			top: 30px;
+			width: 25%; 
+			height:60px;
+			{% comment %} background-color:rgba(0, 217, 255, 0.693); {% endcomment %}
+			font-size: 17px;
+			font-weight: 700;
+		  
+			left:40%;
+			{% comment %} right:70px; {% endcomment %}
+			
+			z-index: 1000; 
+			text-align:center;
+		  
+		  }
+		  
+	
+@media (max-width: 575.98px),@media (max-width: 360.98px), @media (max-width: 430.98px){ 
+	.modal-content{
+		height:60vh !important;
+		width:60vw !important;
+	}
+	.tm-modal {
+	width: 375px;
+	padding: 45px 60px;
+}
+.close {
+	position: absolute;
+	right: 38px;
+	
+}
+@media screen and (max-width: 991px) {
+	.tm-mobile-logo {
+		max-height: 75px;
+		margin-top:-6px;
+}
+	}
+
+}
+	</style>
+
+</head>
+
+<body data-spy="scroll" data-target=".tm-section-active" class="tm-green-color">
+   
+    
+    <!-- Start Site Header Wrap -->
+    <header class="tm-site-header">
+        <div class="tm-header-menu">
+            <div class="container tm-header-menu-container">
+                <div class="tm-site-branding">
+                    <!-- For Image Logo -->
+                    <a href="{% url 'index' %}" class="tm-logo-link">
+                        <img src="{% static 'homePage/assets/img/rimnew.png' %}" alt="" class="tm-logo" style="height:18vh;">
+                        <img src="{% static 'homePage/assets/img/rimnew.png' %}" alt="" class="tm-mobile-logo" style="height:45vh;">
+                    </a>
+                    <!-- For Site Title -->
+                    <!-- <span class="tm-site-title">
+                    	<a href="index.html">Ocher</a>
+                    </span> -->
+                </div>
+                <nav class="tm-primary-nav tm-section-active">
+                   
+                   
+                  
+                </nav>
+            </div><!-- .tm-header-menu-container -->
+        </div><!-- .tm-header-menu -->
+    </header><!-- .tm-site-header -->
+
+	{% if messages %}
+
+          <div id="flash-messages"  style="display:block;">
+        {% for message in messages %}
+            <div class="alert alert-{{message.tags}}">
+                {{ message }}
+            </div>
+        {% endfor %}
+        </div>
+      {% endif %}
+    <!-- End Site Header Wrap -->
+	
+	<!-- Start Hero Section -->
+	<section class="tm-hero-section tm-style1 tm-bg" id="home" style="background-image: url({% static 'homePage/assets/img/hero-bg-v2.jpg' %});">
+		<div class="container">
+			<div class="row" style="margin-top:-83px;">
+				<div class="col-lg-3"></div>
+				<div class="col-lg-6">
+					<div class="" id="tm-signup">
+						
+								
+								<div class="tm-modal tm-color1">
+									<h2 class="tm-modal-title">Reset Passward</h2>
+									 <form  class="tm-modal-form" method="POST"  action="{% url 'changePassword' %}" > 
+										
+										{% csrf_token %}
+										
+										
+										<div class="tm-modal-input">
+											<input type="password" id="password" name="password"  placeholder="Enter new Password"  required>
+											<i class="flaticon-mail" style="margin-left: 10px;"></i>
+										  <!-- <small class="form-text text-danger">{{ form.email.errors }}</small> -->
+											
+										</div>
+										<div class="tm-modal-input">
+                                            <input type="hidden"  name="uIdentifier" value="{{uniqueIdentifier}}"   required>
+
+											<input type="password" id="conf_password" name="conf_password"  placeholder="Confirm new password"  required>
+											<i class="flaticon-mail" style="margin-left: 10px;"></i>
+										  <small class="form-text text-danger">{{ form.email.errors }}</small>
+											
+										</div>
+									
+										
+				
+				
+										<div class="empty-space col-md-b40 col-xs-b40"></div>
+										<button class="tm-btn tm-style1 w-100 "    type="submit" name="type" value="changePass">Change passowrd</button>
+									
+										<div class="empty-space col-md-b20 col-xs-b20"></div>
+									 </form> 
+									<div class="empty-space col-md-b55 col-xs-b55"></div>
+								</div>
+                            </form>
+								</div><!-- .tm-modal -->
+							
+					  </div>
+				</div>
+				<div class="col-lg-3"></div>
+			</div>
+		</div>
+	</section>
+	<!-- End Hero Section -->
+
+- 
+
+
+	<!-- Start Token Seciton -->
+	{% comment %} <div class="tm-token-wrap tm-bg" id="featured-company" style="background-image: url({% static 'homePage/assets/img/token-list-bg.jpg' %});">
+		<div class="empty-space col-md-b95 col-xs-b60"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="tm-token">
+						<h2 class="tm-token-heading tm-m0 tm-md-f28 tm-md-lh34 wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.25s">Token Listed</h2>
+						<div class="tm-token-list wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.15s">
+							<div class="tm-single-token wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.35s"><img src="{% static 'homePage/assets/img/token07.png' %}" alt=""></div>
+							<div class="tm-single-token wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.45s"><img src="{% static 'homePage/assets/img/token08.png' %}" alt=""></div>
+							<div class="tm-single-token wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.55s"><img src="{% static 'homePage/assets/img/token09.png' %}" alt=""></div>
+						</div>
+					</div><!-- .tm-token -->
+					<div class="tm-token-bar wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.35s">
+						<span class="tm-bar-circle"></span>
+						<span class="tm-bar-circle"></span>
+					</div>
+					<div class="tm-token">
+						<h2 class="tm-token-heading tm-m0 tm-md-f28 tm-md-lh34 wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.25s">Featured On</h2>
+						<div class="tm-token-list wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.15s">
+							<div class="tm-single-token  wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.35s"><img src="{% static 'homePage/assets/img/token10.png' %}" alt=""></div>
+							<div class="tm-single-token  wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.45s"><img src="{% static 'suveyapp/homePage/assets/img/token11.png' %}" alt=""></div>
+							<div class="tm-single-token  wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.55s"><img src="{% static 'homePage/assets/img/token12.png' %}" alt=""></div>
+						</div>
+					</div><!-- .tm-token -->
+				</div>
+			</div>
+		</div>
+		<div class="empty-space col-md-b95 col-xs-b60"></div>
+	</div> {% endcomment %}
+	<!-- End Token Seciton -->
+
+
+   
+    <!-- The Modal -->
+  	<div class="modal fade" id="tm-signup">
+    	<div class="modal-dialog">
+      		<div class="modal-content">
+			    <button type="button" class="close" data-dismiss="modal">x</button>
+			    <div class="tm-modal tm-color1">
+					<h2 class="tm-modal-title">REGISTER TO RITCOIN</h2>
+					<form  class="tm-modal-form" id="registerForm">
+						<div class="tm-modal-input">
+							<input type="text" id="uName" name="username" placeholder="Enter username"   value="{{form.cleaned_data.username}}" required>
+							<i class="flaticon-profile"></i>
+							<small class="form-text text-danger">{{ form.username.errors }}</small>
+						</div>
+						<div class="tm-modal-input">
+							<input type="email" id="uMail" placeholder="Email"name="email" value="{{form.cleaned_data.email}}" placeholder="Enter Email" required>
+							<i class="flaticon-mail"></i>
+							<small class="form-text text-danger">{{ form.email.errors }}</small>
+						</div>
+						<div class="tm-modal-input">
+							{% if refferalid   %}
+                          <input  type="text" id="uReffId" name="introducerid" placeholder="Enter Introducer id" id="user_id_input" style="color:green;"  value="{{refferalid}}" readonly >
+							<i class="flaticon-profile"></i>
+							<div id="refMsg"></div>
+                          
+                          {% else  %}
+                          <input type="text" name="introducerid" id="uReffId" value="{{form.cleaned_data.introducerid}}"  id="user_id_input"  placeholder="Enter Introducer id">
+						  <i class="flaticon-profile"></i>
+                          {% comment %} <small class="form-text text-danger"></small> {% endcomment %}
+                          <div id="refMsg"></div>
+                          {% endif  %}
+						</div>
+						
+						<div class="tm-modal-input">
+							
+							<select id="country" name="country" id="uCountry" style="background-color: #025422;color:white;height:47px;padding-left: 55px;border:1px solid #025422;">
+								<option >--choose country--</option>
+								{% for c in countries %}
+								<option value="{{ c }}" name="country">{{ c }}</option>
+								{% endfor %}
+							  </select>
+							
+							<i class="flaticon-money"></i>
+						</div>
+						
+						<div class="tm-modal-input">
+							<select id="local_currency" id="uLocalCurr" name="local_currency" style="background-color: #025422;color:white;height:47px;padding-left: 55px;border:1px solid #025422;">
+								<option >Local Currency</option>
+								{% for curr in currencies %}
+								<option value="{{ curr }}" name="local_currency">{{ curr }}</option>
+								{% endfor %}
+							  </select>
+							
+							<i class="flaticon-mail"></i>
+						</div>
+						
+						<div class="tm-modal-input">
+							<input type="password" id="uPass" name="password1"  placeholder="Enter Password"  required>
+							<i class="flaticon-lock"></i>
+                          <small class="form-text text-danger">{{ form.password1.errors }}</small>
+							
+						</div>
+						<div class="tm-modal-input">
+							<input type="password" id="uConfPass" name="password2" placeholder="Enter Confirm password"  required>
+							<i class="flaticon-lock"></i>
+							<small class="form-text text-danger">{{ form.password2.errors }}</small>
+						</div>
+						{% comment %} <div class="tm-modal-input"> {% endcomment %}
+							{% comment %} <input type="number" id="entOTP"  name="entOTP" placeholder="Enter OTP sent to entered email"  required style="display:none;"> {% endcomment %}
+							{% comment %} <small class="form-text text-danger" id="entOTPMessage" style="display:none;">enter email otp</small> {% endcomment %}
+							{% comment %} <div class="text-center"><span class="text-danger text-center"> </span></div> {% endcomment %}
+							{% comment %} <i class="flaticon-lock"></i> {% endcomment %}
+							{% comment %} <br> {% endcomment %}
+							{% comment %} <small class="form-text text-danger">{{ form.password2.errors }}</small> {% endcomment %}
+						{% comment %} </div> {% endcomment %}
+
+
+						<div class="empty-space col-md-b40 col-xs-b40"></div>
+						<button class="tm-btn tm-style1 w-100 " id="resetPass" type="button" name="signInBtn">Register</button>
+						{% comment %} <button class="tm-btn tm-style1 w-100 " id="uverifyAndRegister" onclick="authenticate()"  style="display:none;" type="submit" name="signInBtn">Verify OTP</button> {% endcomment %}
+						{% comment %} <div class="tm-modal-or">OR</div> {% endcomment %}
+						{% comment %} <button class="tm-btn tm-style1 w-100 tm-modal-fb-btn"><i class="fa fa-facebook"></i>LOG in with facebook</button> {% endcomment %}
+						<div class="empty-space col-md-b20 col-xs-b20"></div>
+						{% comment %} <button class="tm-btn tm-style1 w-100 tm-modal-goo-btn"><i class="fa fa-google-plus"></i>LOG in with GOOGle</button> {% endcomment %}
+					</form>
+					<div class="empty-space col-md-b55 col-xs-b55"></div>
+					<div class="tm-modal-footer">
+						{% comment %} <a href="#" class="tm-forgot-p">Forgot Password?</a> {% endcomment %}
+						{% comment %} <a href="#" class="tm-new-signup">New Here? Sign UP</a> {% endcomment %}
+					</div>
+				</div><!-- .tm-modal -->
+      		</div>
+    	</div>
+  	</div>
+  	<div class="modal fade" id="tm-login">
+    	<div class="modal-dialog">
+      		<div class="modal-content">
+			    <button type="button" class="close" data-dismiss="modal">x</button>
+			    <div class="tm-modal tm-color1">
+					<h2 class="tm-modal-title">Log In TO RITCOIN</h2>
+					<form id="loginForm" class="tm-modal-form">
+						{% csrf_token %}
+						<div class="tm-modal-input">
+							<input type="text" placeholder="enter email or username"  name="email_or_username" required>
+							<i class="flaticon-profile"></i>
+							<small class="form-text text-danger">{{ logForm.email.errors }}</small>
+						</div>
+						<div class="tm-modal-input">
+							<input type="password" name="password" placeholder="Enter Password"  required>
+							<i class="flaticon-lock"></i>
+							<small class="form-text text-danger">{{ logForm.password.errors }}</small>
+                          <ul class='list-style-type:none; text-decoration:none '>
+                            {% for field, error in form.errors.items %}
+                                <li class='text-danger'>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                          <input type="hidden" name="next" value="{{ request.GET.next }}">
+						</div>
+						<div class="empty-space col-md-b40 col-xs-b40"></div>
+						<button class="tm-btn tm-style1 w-100" id="logInBtn" type="submit" name="logIn">LOG IN</button>
+
+					</form>
+						<div class="tm-modal-or">OR</div>
+						{% comment %} <button class="tm-btn tm-style1 w-100 tm-modal-fb-btn"><i class="fa fa-facebook"></i>LOG in with facebook</button> {% endcomment %}
+						<div class="empty-space col-md-b20 col-xs-b20"></div>
+						{% comment %} <button class="tm-btn tm-style1 w-100 tm-modal-goo-btn"><i class="fa fa-google-plus"></i>LOG in with GOOGle</button> {% endcomment %}
+					
+					<div class="empty-space col-md-b55 col-xs-b55"></div>
+					<div class="tm-modal-footer">
+						<a href="{% url 'passwordReset' %}" class="tm-forgot-p">Forgot Password?</a>
+						<a href="#" class="tm-new-signup">New Here? Sign UP</a>
+					</div>
+				</div><!-- .tm-modal -->
+      		</div>
+    	</div>
+  	</div>
+
+	<!-- Scroll Up -->
+    <div id='scrollup'><i class="fa fa-angle-double-up"></i></div>
+
+	<!-- Scripts -->
+	<script src="{% static 'homePage/assets/js/vendor/modernizr-3.5.0.min.js' %}"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	{% comment %} <script src="{% static 'homePage/assets/js/vendor/jquery-1.12.4.min.js' %}"></script> {% endcomment %}
+    <script src="{% static 'homePage/assets/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'homePage/assets/js/smoothScroll.min.js' %}"></script>
+    <script src="{% static 'homePage/assets/js/jQuery.easing.min.js' %}"></script>
+    <script src="{% static 'homePage/assets/js/wow.min.js' %}"></script>
+    <script src="{% static 'homePage/assets/js/particles.min.js' %}"></script>
+    <script src="{% static 'homePage/assets/js/mailchimp.min.js' %}"></script>
+    <script src="{% static 'homePage/assets/js/slick.min.js' %}"></script>
+    <script src="{% static 'homePage/assets/js/modal.video.min.js' %}"></script>
+	<script src="{% static 'homePage/assets/js/main.js' %}"></script>
+
+
+	<script>
+
+
+function changePassword(){
+
+			
+				//console.log("came here");
+				
+
+				const entEmail = $("#entmail").val().trim(); 
+				const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+				if (!entEmail || !emailRegex.test(entEmail)) {
+					alert('Invalid email');
+					return;
+					}
+				
+
+				
+				const bt = $("#resetPass");
+				bt.attr("disabled", true).html("<i class='fa fa-spin fa-spinner'></i>&nbsp;&nbsp;please wait...");
+			
+
+				
+
+
+			
+				$.ajax({
+					url: '{% url 'changePassword' %}',
+					type:'post',
+					data: {
+					  email: entEmail,
+					  csrfmiddlewaretoken: '{{ csrf_token }}'
+					},
+					dataType: 'json',
+					success: function(data) {
+		
+					  if(data.status===1){
+		
+						console.log(data.memberName);
+						//const resmsg='<small class="form-text text-success">'+data.memberName +'</small>';
+					   
+						$('#refMsg').html(`<span class="form-text " id="inRefMsg" >Introducer is valid</span>`);
+		
+						//$('#refMsg').append(resmsg);
+		
+		
+					  }else{
+		
+						$('#refMsg').html('<span class="form-text text-danger">'+data.msg +'</span>');
+		
+					  }
+						
+					},
+					error: function(xhr, status, error) {
+						console.error('Error:', error);
+					}
+				});
+		
+
+
+
+		}
+
+
+
+
+
+		function loginUser(formData){
+
+			
+				//console.log("came here");
+				var bt = $("#logInBtn");
+				bt.attr("disabled", true).html("<i class='fa fa-spin fa-spinner'></i>&nbsp;&nbsp;please wait...");
+			
+
+
+				//console.log("came here");
+				console.log(formData);
+				//return
+				
+				const formObject = {};
+				formData.forEach((value, key) => {
+					formObject[key] = value;
+				});
+				//console.log(formObject);
+				
+				
+				if(formData){
+				
+			fetch('/accounts/login/', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					'X-CSRFToken': '{{ csrf_token }}'
+				},
+				body: JSON.stringify(formObject)
+			})
+			.then(response => {
+				if (!response.ok) {
+					throw new Error('Network response was not ok');
+				}
+				return response.json();
+			})
+			.then(data => {
+				if (data.success) {
+					//alert('Login successful. Redirecting...');
+					//console.log(data.redirect_url);
+					//return
+					//console.log(window.location.href);
+					//return
+					window.location.href = data.redirect_url; 
+					//console.log(window.location.href);
+				} else {
+					alert('Login failed: ' + (data.error || 'Unknown error.'));
+				}
+				//location.reload(); // Reload the page
+			})
+			.catch(error => {
+				console.error('Error:', error);
+				alert('An error occurred while logging in.');
+				location.reload(); // Reload the page
+			});
+
+			}
+
+
+
+		}
+
+		
+		$(document).ready(function(){
+			console.log("Acrive");
+			$('#loginForm').submit(function(e){
+	
+				e.preventDefault();
+				var formData = new FormData(this);
+				
+				loginUser(formData);
+			});
+		});
+
+
+
+		function authenticate(){
+				$("#uverifyAndRegister").attr("disabled", true).html("<i class='fa fa-spin fa-spinner'></i>&nbsp;&nbsp;please wait...");
+
+				
+				const enteredOTP=$("#entOTP").val();
+
+				if(!(enteredOTP && enteredOTP.length>0)){
+
+					$("#entOTPMessage").text("Please Enter correct OTP");
+
+				}
+
+				fetch('/authenticate/', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+						'X-CSRFToken': '{{ csrf_token }}'
+					},
+					body: JSON.stringify({enteredOTP:enteredOTP})
+				})
+				.then(response => {
+					if (!response.ok) {
+						throw new Error('Network response was not ok');
+					}
+					return response.json();
+				})
+				.then(data => {
+					if (data.success) {
+						//alert('Login successful. Redirecting...');
+						//console.log(data.redirect_url);
+						//return
+						//console.log(window.location.href);
+						//return
+	
+						//console.log("came here");
+						//alert('An otp send in your email')
+						$("#entOTP").css("display", "block");
+						$("#uverifyAndRegister").css("display", "block");
+						window.location.href = data.redirect_url; 
+						
+						//console.log(window.location.href);
+					} else {
+						$("#entOTPMessage").text(data.msg);
+					}
+					
+				})
+				.catch(error => {
+					console.error('Error:', error);
+					alert('An error occurred while registering.');
+					
+				});
+
+
+			}
+
+
+
+
+
+		
+
+		setTimeout(function() {
+			document.getElementById('flash-messages').style.display = 'none';
+		}, 5000);
+
+	</script>
+
+	<script>
+		function registration(formData){
+	
+			
+			var bt = $("#uRegister");
+			bt.attr("disabled", true).html("<i class='fa fa-spin fa-spinner'></i>&nbsp;&nbsp;please wait...");
+			$("#uName").prop("readonly", true);
+			$("#uMail").prop("readonly", true);
+			$("#uReffId").prop("readonly", true);
+			$("#uCountry").prop("disabled", true);
+			$("#uLocalCurr").prop("disabled", true);
+			$("#uPass").prop("readonly", true);
+			$("#uConfPass").prop("readonly", true);
+	
+	
+			//console.log("reg came here");
+			//console.log(formData);
+			//return
+			
+			const formObject = {};
+			formData.forEach((value, key) => {
+				formObject[key] = value;
+			});
+	
+			//formObject['referralId'] = value;
+			//console.log(formObject);
+			
+			
+			if(formData){
+			
+			fetch('/register/', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					'X-CSRFToken': '{{ csrf_token }}'
+				},
+				body: JSON.stringify(formObject)
+			})
+			.then(response => {
+				if (!response.ok) {
+					throw new Error('Network response was not ok');
+				}
+				return response.json();
+			})
+			.then(data => {
+				if (data.success) {
+					//alert('Login successful. Redirecting...');
+					//console.log(data.redirect_url);
+					//return
+					//console.log(window.location.href);
+					//return
+	
+					//console.log("came here");
+					//window.location.href = data.redirect_url; 
+					//alert('An otp send in your email')
+					//$("#entOTP").css("display", "block");
+					//$("#uverifyAndRegister").css("display", "block");
+					//console.log(window.location.href);
+
+					alert("mail sent successfully");
+				} else {
+					alert('Login failed: ' + (data.error || 'Unknown error.'));
+				}
+				//location.reload(); // Reload the page
+			})
+			.catch(error => {
+				console.error('Error:', error);
+				alert('An error occurred while registering.');
+				//location.reload(); // Reload the page
+			});
+	
+			}
+	
+	
+	
+			}
+	
+		
+		$(document).ready(function(){
+			//console.log("Acrive");
+			console.log("Document is ready");
+			$('#registerForm').submit(function(e){
+	
+				console.log("came here")
+				e.preventDefault();
+				var formData = new FormData(this);
+				
+				registration(formData);
+			});
+		});
+	</script>
+
+
+</body>
+
+</html>

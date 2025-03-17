@@ -1,0 +1,359 @@
+{% extends 'zqUsers/member/layout/main.html' %}
+
+{% comment %} {% load static %} 
+{% load customFilters %}
+
+{% block 'addHeaderScripts' %}
+<style>
+
+	.count{
+  color:#000000;
+  font-size:50px;
+  text-align:center !important;
+}
+</style>
+
+<script>
+	document.addEventListener('DOMContentLoaded', function() {
+		const form = document.getElementById('question-form');
+		
+		form.addEventListener('submit', function(event) {
+			event.preventDefault();
+			
+			const formData = new FormData(form);
+			console.log(formData.get('question_id'));
+			const csrfToken = formData.get('csrfmiddlewaretoken');
+			
+			fetch('', {
+				method: 'POST',
+				headers: {
+					'X-CSRFToken': csrfToken,
+					'Accept': 'application/json'
+				},
+				body: formData
+			})
+			.then(response => {
+				if (!response.ok) {
+					throw new Error('Network response was not ok ' + response.statusText);
+				}
+				return response.json();
+			})
+			.then(data => {
+				if (data.completed) {
+					window.location.href = '{% url "memberDashboard" %}';
+				} else if (data.error) {
+					alert('Error: ' + data.error);
+				} else {
+					document.getElementById('question-text').innerText = data.question;
+					const inputs = document.querySelectorAll('input[name="selected_choice"]');
+					inputs[0].value = data.choice1;
+					inputs[0].nextSibling.nodeValue = data.choice1;
+					inputs[1].value = data.choice2;
+					inputs[1].nextSibling.nodeValue = data.choice2;
+					inputs[2].value = data.choice3;
+					inputs[2].nextSibling.nodeValue = data.choice3;
+					inputs[3].value = data.choice4;
+					inputs[3].nextSibling.nodeValue = data.choice4;
+					document.querySelector('input[name="question_id"]').value = data.question_id;
+					document.querySelector('input[name="index"]').value = data.index;
+					console.log('New question ID:', data.question_id);
+				}
+			})
+			.catch(error => {
+				console.error('Error:', error);
+			});
+		});
+	});
+</script>
+
+
+{% endblock %}
+
+
+{% block 'content' %}
+
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-xxl-12">
+			<div class="card p-4">
+				<h4>Add Center</h4>
+				<div class="card-header flex-wrap">
+					
+					<!-- <div class="d-flex"> -->
+						<form id="question-form" method="POST"> 
+							{% csrf_token %}
+							<input type="hidden" name="question_id" id="question_id" value="{{ question.id }}">
+							<input type="hidden" name="index" value="{{ index }}">
+							<h5 id="question-text">{{ question.question }}</h5>
+							<label>
+								<input type="radio" name="selected_choice" value="{{ question.choice1 }}">
+								{{ question.choice1 }}
+							</label><br>
+							<label>
+								<input type="radio" name="selected_choice" value="{{ question.choice2 }}">
+								{{ question.choice2 }}
+							</label><br>
+							<label>
+								<input type="radio" name="selected_choice" value="{{ question.choice3 }}">
+								{{ question.choice3 }}
+							</label><br>
+							<label>
+								<input type="radio" name="selected_choice" value="{{ question.choice4 }}">
+								{{ question.choice4 }}
+							</label><br><br>
+							<button type="submit" class="btn btn-primary">Next</button>
+						</form>
+						
+				</div>
+				<div class="row mt-3">
+					<div class="col-lg-7"></div>
+					<div class="col-lg-4"> <button type="button" class="btn btn-primary">next</button></div>
+					<div class="col-lg-1"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xxl-12">
+			<div class="card p-3">
+				<div class="card-header flex-wrap">
+					<!-- <div class="d-flex"> -->
+						<div class="count"><span id="timer">10:00</span></div>
+						
+				</div>
+				<div class="row mt-3">
+					<div class="col-lg-4"></div>
+					<div class="col-lg-4"> <button type="button" class="btn btn-primary">Go to Ads Counter</button></div>
+					<div class="col-lg-4"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+{% endblock %}
+
+
+
+    <!--**********************************
+        Scripts
+    ***********************************-->
+    <!-- Required vendors -->
+{% block 'addFooterScripts' %}
+
+<script>
+	var timeLimitInMinutes = 10;
+var timeLimitInSeconds = timeLimitInMinutes * 60;
+var timerElement = document.getElementById('timer');
+
+function startTimer() {
+timeLimitInSeconds--;
+var minutes = Math.floor(timeLimitInSeconds / 60);
+var seconds = timeLimitInSeconds % 60;
+
+if (timeLimitInSeconds < 0) {
+timerElement.textContent = '00:00';
+clearInterval(timerInterval);
+return;
+}
+
+if (minutes < 10) {
+minutes = '0' + minutes;
+}
+if (seconds < 10) {
+seconds = '0' + seconds;
+}
+
+timerElement.textContent = minutes + ':' + seconds;
+}
+
+var timerInterval = setInterval(startTimer, 1000);
+
+</script>
+{% endblock %} {% endcomment %}
+
+
+
+
+
+
+{% comment %} {% extends 'zqUsers/member/layout/main.html' %} {% endcomment %}
+
+{% comment %} {% load static %} {% endcomment %}
+{% load customFilters %}
+
+{% block 'addHeaderScripts' %}
+<style>
+
+	.count{
+  color:#000000;
+  font-size:50px;
+  text-align:center !important;
+}
+</style>
+
+<script>
+	document.addEventListener('DOMContentLoaded', function() {
+		const form = document.getElementById('question-form');
+		
+		form.addEventListener('submit', function(event) {
+			event.preventDefault();
+			
+			const formData = new FormData(form);
+			console.log(formData.get('question_id'));
+			const csrfToken = formData.get('csrfmiddlewaretoken');
+			
+			fetch('', {
+				method: 'POST',
+				headers: {
+					'X-CSRFToken': csrfToken,
+					'Accept': 'application/json'
+				},
+				body: formData
+			})
+			.then(response => {
+				if (!response.ok) {
+					throw new Error('Network response was not ok ' + response.statusText);
+				}
+				return response.json();
+			})
+			.then(data => {
+				if (data.completed) {
+					window.location.href = '{% url "newmemberDashboard" %}';
+				} else if (data.error) {
+					alert('Error: ' + data.error);
+				} else {
+					document.getElementById('question-text').innerText = data.question;
+					const inputs = document.querySelectorAll('input[name="selected_choice"]');
+					inputs[0].value = data.choice1;
+					inputs[0].nextSibling.nodeValue = data.choice1;
+					inputs[1].value = data.choice2;
+					inputs[1].nextSibling.nodeValue = data.choice2;
+					inputs[2].value = data.choice3;
+					inputs[2].nextSibling.nodeValue = data.choice3;
+					inputs[3].value = data.choice4;
+					inputs[3].nextSibling.nodeValue = data.choice4;
+					document.querySelector('input[name="question_id"]').value = data.question_id;
+					document.querySelector('input[name="index"]').value = data.index;
+					console.log('New question ID:', data.question_id);
+				}
+			})
+			.catch(error => {
+				console.error('Error:', error);
+			});
+		});
+	});
+</script>
+
+{% endblock %}
+
+
+{% block 'content' %}
+
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-xxl-12">
+			<div class="card p-4">
+				<h4>Add Center</h4>
+				<div class="card-header flex-wrap">
+					<!-- <div class="d-flex"> -->
+						<div class="row">
+							<div class="col-lg-12">
+								<form id="question-form" method="POST"> 
+									{% csrf_token %}
+									<input type="hidden" name="question_id" id="question_id" value="{{ question.id }}">
+									<input type="hidden" name="index" value="{{ index }}">
+									<h5 id="question-text">{{ question.question }}</h5>
+									<label>
+										<input type="radio" name="selected_choice" value="{{ question.choice1 }}" >
+										{{ question.choice1 }}
+									</label><br>
+									<label>
+										<input type="radio" name="selected_choice" value="{{ question.choice2 }}">
+										{{ question.choice2 }}
+									</label><br>
+									<label>
+										<input type="radio" name="selected_choice" value="{{ question.choice3 }}">
+										{{ question.choice3 }}
+									</label><br>
+									<label>
+										<input type="radio" name="selected_choice" value="{{ question.choice4 }}">
+										{{ question.choice4 }}
+									</label><br><br>
+									<button type="submit" class="btn btn-primary">Next</button>
+								</form>
+						</div>
+						
+				</div>
+				<div class="row mt-3">
+					<div class="col-lg-7"></div>
+					<div class="col-lg-4"></div>
+					<div class="col-lg-1"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xxl-12">
+			<div class="card p-3">
+				<div class="card-header flex-wrap">
+					<!-- <div class="d-flex"> -->
+						<div class="count"><span id="timer">10:00</span></div>
+						
+				</div>
+				<div class="row mt-3">
+					<div class="col-lg-4"></div>
+					<div class="col-lg-4"> <button type="button" class="btn btn-primary">Go to Ads Counter</button></div>
+					<div class="col-lg-4"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+{% endblock %}
+
+
+
+    <!--**********************************
+        Scripts
+    ***********************************-->
+    <!-- Required vendors -->
+{% block 'addFooterScripts' %}
+
+<script>
+	var timeLimitInMinutes = 10;
+var timeLimitInSeconds = timeLimitInMinutes * 60;
+var timerElement = document.getElementById('timer');
+
+function startTimer() {
+timeLimitInSeconds--;
+var minutes = Math.floor(timeLimitInSeconds / 60);
+var seconds = timeLimitInSeconds % 60;
+
+if (timeLimitInSeconds < 0) {
+timerElement.textContent = '00:00';
+clearInterval(timerInterval);
+return;
+}
+
+if (minutes < 10) {
+minutes = '0' + minutes;
+}
+if (seconds < 10) {
+seconds = '0' + seconds;
+}
+
+timerElement.textContent = minutes + ':' + seconds;
+}
+
+var timerInterval = setInterval(startTimer, 1000);
+
+</script>
+{% endblock %}
